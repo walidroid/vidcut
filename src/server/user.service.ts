@@ -202,7 +202,7 @@ class UserService extends BasicService {
     if (err) {
       console.error('登录失效');
       // 退出登录
-      user.logout();
+      return [null, err];
       return [res, err];
     }
     console.log('resresres', res);

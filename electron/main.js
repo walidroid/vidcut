@@ -30,6 +30,8 @@ let mainWindow = null;
 
 function startLocalServer(distDir) {
   return new Promise((resolve, reject) => {
+    const resolvedDist = path.resolve(distDir);
+
     server = http.createServer((req, res) => {
       // Security headers: Enable SharedArrayBuffer & WebAssembly threads
       res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
@@ -41,10 +43,10 @@ function startLocalServer(distDir) {
         reqPath = '/index.html';
       }
 
-      let filePath = path.join(distDir, reqPath);
+      let filePath = path.resolve(resolvedDist, '.' + reqPath);
 
-      // Prevent directory traversal attacks
-      if (!filePath.startsWith(distDir)) {
+      // Prevent directory traversal attacks (case-insensitive on Windows)
+      if (!filePath.toLowerCase().startsWith(resolvedDist.toLowerCase())) {
         res.writeHead(403);
         res.end('Forbidden');
         return;
@@ -58,7 +60,7 @@ function startLocalServer(distDir) {
           fs.createReadStream(filePath).pipe(res);
         } else {
           // SPA Fallback: serve index.html for client-side routing
-          const indexPath = path.join(distDir, 'index.html');
+          const indexPath = path.join(resolvedDist, 'index.html');
           res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
           fs.createReadStream(indexPath).pipe(res);
         }
@@ -81,6 +83,7 @@ function createWindow(port) {
     height: 900,
     minWidth: 1024,
     minHeight: 680,
+    backgroundColor: '#141414',
     title: 'VidCut - Video Editor',
     icon: path.join(__dirname, '../build/icon.ico'),
     autoHideMenuBar: true,
@@ -94,6 +97,14 @@ function createWindow(port) {
   });
 
   mainWindow.setMenuBarVisibility(false);
+
+  // Toggle DevTools with F12 or Ctrl+Shift+I
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'F12' || (input.control && input.shift && input.key.toLowerCase() === 'i')) {
+      mainWindow.webContents.toggleDevTools();
+      event.preventDefault();
+    }
+  });
 
   // Open external links in default browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
@@ -135,4 +146,3 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-

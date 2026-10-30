@@ -15,7 +15,13 @@ export const globalOptions = {
  */
 class User {
   @observable token: string = crypto.encrypt(storage.local.get('token')) || ''; // 外部传入的参数
-  @observable info: any = null; // 外部传入的参数
+  @observable info: any = {
+    id: 'local_user',
+    name: 'VidCut User',
+    nickname: 'VidCut User',
+    avatar: '',
+    credits: 9999,
+  };
 
   // 云合成视频轮训状态
   lunXunStatus: string[] = [];
@@ -68,7 +74,13 @@ class User {
   @action
   clearUserInfo = () => {
     transaction(() => {
-      this.info = null;
+      this.info = {
+        id: 'local_user',
+        name: 'VidCut User',
+        nickname: 'VidCut User',
+        avatar: '',
+        credits: 9999,
+      };
       this.token = '';
     });
     storage.local.remove('token');

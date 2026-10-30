@@ -6,7 +6,7 @@ const routes = [
     ssr: false,
     exact: true,
     meta: {
-      auth: true,
+      auth: false,
     },
     component: Editor,
   },
@@ -15,7 +15,7 @@ const routes = [
     ssr: false,
     exact: true,
     meta: {
-      auth: true,
+      auth: false,
     },
     component: Editor,
   },

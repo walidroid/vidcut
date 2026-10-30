@@ -5,31 +5,31 @@ import Product from './product';
 const routes = [
   {
     path: '/workspace/draft',
-    meta: { auth: true },
+    meta: { auth: false },
     exact: true,
     component: Draft,
   },
   {
     path: '/workspace/draft/:cid',
-    meta: { auth: true },
+    meta: { auth: false },
     exact: true,
     component: Draft,
   },
   {
     path: '/workspace/material',
-    meta: { auth: true },
+    meta: { auth: false },
     exact: true,
     component: Material,
   },
   {
     path: '/workspace/material/:cid',
-    meta: { auth: true },
+    meta: { auth: false },
     exact: true,
     component: Material,
   },
   {
     path: '/workspace/product',
-    meta: { auth: true },
+    meta: { auth: false },
     exact: true,
     component: Product,
   },
