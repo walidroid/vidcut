@@ -2,6 +2,8 @@
   "name": "vidcut",
   "private": true,
   "version": "1.0.0",
+  "description": "Modern, open-source and AI-free browser & desktop video editor",
+  "author": "VidCut Team",
   "scripts": {
     "dev": "vite",
     "build": "yarn clean && yarn build:worker && vite build",
