@@ -1,8 +1,9 @@
+import { language } from '@language/index';
 import styles from './styles.module.less';
 import { useCallback, useState } from 'react';
 import { observer } from 'mobx-react';
 import { Button, InputNumber, Space, Upload, Toast, Modal } from '@douyinfe/semi-ui';
-import { language } from '@language/language';
+
 import JSZip from 'jszip';
 import ReactCrop, { type Crop, type PixelCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -39,7 +40,7 @@ function PictureSplit(props: IProps) {
 
   const splitAndDownload = useCallback(async () => {
     if (!imgURL) {
-      Toast.error('请先上传图片');
+      Toast.error('Please upload an image first');
       return;
     }
 
@@ -97,10 +98,10 @@ function PictureSplit(props: IProps) {
       document.body.removeChild(link);
       URL.revokeObjectURL(link.href);
 
-      Toast.success('图片分割完成，已开始下载');
+      Toast.success('Image split complete, download started');
     } catch (error) {
       console.error('分割图片失败:', error);
-      Toast.error('分割图片失败');
+      Toast.error('Image split failed');
     } finally {
       setLoading(false);
     }
@@ -154,7 +155,7 @@ function PictureSplit(props: IProps) {
 
   const downloadCroppedImage = useCallback(() => {
     if (!croppedImage) {
-      Toast.error('请先完成裁剪');
+      Toast.error('Please complete cropping first');
       return;
     }
 
@@ -223,12 +224,8 @@ function PictureSplit(props: IProps) {
             step={1}
             suffix="px"
           />
-          <Button onClick={splitAndDownload} loading={loading}>
-            分割图片
-          </Button>
-          <Button onClick={() => setShowCrop(true)} disabled={!imgURL}>
-            自由裁剪
-          </Button>
+          <Button onClick={splitAndDownload} loading={loading}>Split Image</Button>
+          <Button onClick={() => setShowCrop(true)} disabled={!imgURL}>Crop Image</Button>
         </Space>
       </div>
       {!!imgURL && (
@@ -257,16 +254,14 @@ function PictureSplit(props: IProps) {
           <img style={{ width: '100%' }} src={imgURL} alt="" />
         </div>
       )}
-      <Modal title="自由裁剪" visible={showCrop} onCancel={() => setShowCrop(false)} footer={null} width={1100}>
+      <Modal title="Crop Image" visible={showCrop} onCancel={() => setShowCrop(false)} footer={null} width={1100}>
         {imgURL && (
           <div style={{ paddingBottom: 20, textAlign: 'center' }}>
             <ReactCrop crop={crop} onChange={handleCropChange} onComplete={handleCropComplete} keepSelection>
               <img style={{ width: 1000 }} src={imgURL} alt="" />
             </ReactCrop>
             {croppedImage && (
-              <Button onClick={downloadCroppedImage} style={{ marginTop: 10 }}>
-                下载裁剪图片
-              </Button>
+              <Button onClick={downloadCroppedImage} style={{ marginTop: 10 }}>Download Cropped Image</Button>
             )}
           </div>
         )}

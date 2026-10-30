@@ -149,8 +149,11 @@ const Header = (props: IProps) => {
         {/* <a
           className={styles.space}
           onClick={() => {
-            if (language.getLanguage() === 'en-US') {
-              language.setLanguage('zh-CN');
+            const cur = language.getLanguage();
+            if (cur === 'en-US') {
+              language.setLanguage('fr-FR');
+            } else if (cur === 'fr-FR') {
+              language.setLanguage('ar-SA');
             } else {
               language.setLanguage('en-US');
             }

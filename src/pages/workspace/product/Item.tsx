@@ -1,3 +1,4 @@
+import { language } from '@language/index';
 import React, { useState, useEffect, useRef, useReducer } from 'react';
 import styles from './item.module.less';
 import { Calendar, More, Edit } from '@icon-park/react';
@@ -8,7 +9,7 @@ import ItemStatus from './ItemStatus';
 import ItemStatusBtn from './ItemStatusBtn';
 import { useHistory } from 'react-router';
 import { config } from '@config/index';
-import { language } from '@language/language';
+
 import { observer } from 'mobx-react';
 import { Dropdown, Popover, Space } from '@douyinfe/semi-ui';
 import { server } from './server';
@@ -54,7 +55,7 @@ function Item(props: Props) {
               <Dropdown.Item
                 onClick={() =>props.deleteItem(data)}
               >
-                删除
+                {language.val('common_delete')}
               </Dropdown.Item>
               {/* <Dropdown.Item>重新合成</Dropdown.Item> */}
             </Dropdown.Menu>

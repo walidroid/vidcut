@@ -89,25 +89,7 @@ function User(props: IProps) {
               </span>
             </li>
           </a>
-          {/* <li
-            onClick={() => {
-              if (language.getLanguage() === 'en-US') {
-                language.setLanguage('zh-CN');
-                editor.languageUpdateKey = 'zh-CN';
-              } else {
-                language.setLanguage('en-US');
-                editor.languageUpdateKey = 'en-US';
-              }
-            }}
-          >
-            <span>
-              <International theme="filled" size="16" fill="#333" />
-              <span>
-                <Intl name="user_language" />
-              </span>
-            </span>
-            <span className={styles.right}>{language.getLanguage() === 'en-US' ? 'English' : '中文'}</span>
-          </li> */}
+          
           <li
             onClick={() => {
               if (theme.getTheme() === 'dark') {
@@ -131,8 +113,11 @@ function User(props: IProps) {
           {editor.exConfig?.supportLanguage && (
             <li
               onClick={() => {
-                if (language.getLanguage() === 'en-US') {
-                  language.setLanguage('zh-CN');
+                const cur = language.getLanguage();
+                if (cur === 'en-US') {
+                  language.setLanguage('fr-FR');
+                } else if (cur === 'fr-FR') {
+                  language.setLanguage('ar-SA');
                 } else {
                   language.setLanguage('en-US');
                 }
@@ -144,7 +129,9 @@ function User(props: IProps) {
                   <Intl name="user_language" />
                 </span>
               </span>
-              {/* <span className={styles.right}>{theme.getTheme() === 'dark' ? '黑色主题' : '浅色主题'}</span> */}
+              <span className={styles.right}>
+                {language.getLanguage() === 'en-US' ? 'English' : (language.getLanguage() === 'fr-FR' ? 'Français' : 'العربية')}
+              </span>
             </li>
           )}
           <li>

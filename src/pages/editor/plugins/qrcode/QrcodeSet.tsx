@@ -16,15 +16,22 @@ function QrcodeSet(props: { editor: Record<string, any> }) {
 
   const languageData =
     {
-      'zh-CN': {
-        title: '二维码内容',
-        colorTitle: '二维码颜色',
+      'fr-FR': {
+        title: 'Contenu du code QR',
+        colorTitle: 'Couleur du code QR',
+      },
+      'ar-SA': {
+        title: 'محتوى رمز الاستجابة السريعة (QR)',
+        colorTitle: 'لون رمز الاستجابة السريعة (QR)',
       },
       'en-US': {
         title: 'QR Code Content',
         colorTitle: 'QR Code Color',
       },
-    }[languageType] || {};
+    }[languageType] || {
+      title: 'QR Code Content',
+      colorTitle: 'QR Code Color',
+    };
 
   return (
     <>

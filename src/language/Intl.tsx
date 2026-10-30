@@ -1,32 +1,31 @@
 import React from 'react';
 
-import { locals } from './language';
+import { locals, ValueType } from './language';
 import { storage } from '@utils/storage';
 
 interface IProps {
   name: string;
   data?: any;
-  type?: string;
+  type?: ValueType;
 }
 
 /**
  * <Intl name=""/>
- * @param {string} name 字段名称
- * @param {object} data 模板参数：默认是undefined
- * @param {string} type 语言类型，默认是undefined
+ * @param {string} name key
+ * @param {object} data template params
+ * @param {string} type language type
  */
 function Intl(props: IProps): JSX.Element {
   const { name, data, type } = props;
   const _window = window as any;
 
   if (!_window.language) {
-    _window.language = storage.local.get('language') || 'zh-CN';
+    const saved = storage.local.get('language');
+    _window.language = (saved === 'fr-FR' || saved === 'ar-SA' || saved === 'en-US') ? saved : 'en-US';
   }
-  if (!locals[_window.language][name]) {
-    console.error('name', name);
-    console.error('locals[window.language]', locals[_window.language]);
-  }
-  let str = locals[type || _window.language][name] || 'not found';
+  const currentLang = (type || _window.language || 'en-US') as ValueType;
+  const dict = locals[currentLang] || locals['en-US'];
+  let str = dict?.[name] || locals['en-US']?.[name] || name;
   if (data) {
     for (const key in data) {
       str = str.replaceAll(`{{${key}}}`, data[key]);

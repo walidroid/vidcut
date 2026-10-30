@@ -293,14 +293,14 @@ function Content(props: IProps, ref: any) {
                 size="large"
                 onClick={() => setShowImageSplit(true)}
               >
-                <span style={{ color: 'var(--theme-text)' }}>图片分割</span>
+                <span style={{ color: 'var(--theme-text)' }}>{language.val('tools_title')}</span>
               </Button>
               <Button
                 icon={<Scissors theme="outline" size="20" fill="#FFF" />}
                 size="large"
                 onClick={() => setShowVideoSplit(true)}
               >
-                <span style={{ color: 'var(--theme-text)' }}>视频分割</span>
+                <span style={{ color: 'var(--theme-text)' }}>{language.val('timeline_top_split')}</span>
               </Button>
             </>
           )}
@@ -607,7 +607,7 @@ function Content(props: IProps, ref: any) {
       )}
       <Modal
         visible={showVideoSplit}
-        title="视频分割"
+        title={language.val('timeline_top_split')}
         footer={null}
         onCancel={() => setShowVideoSplit(false)}
         onOk={() => setShowVideoSplit(false)}
@@ -617,7 +617,7 @@ function Content(props: IProps, ref: any) {
       </Modal>
       <Modal
         visible={showImageSplit}
-        title="图片分割"
+        title={language.val('tools_title')}
         footer={null}
         onCancel={() => setShowImageSplit(false)}
         onOk={() => setShowImageSplit(false)}

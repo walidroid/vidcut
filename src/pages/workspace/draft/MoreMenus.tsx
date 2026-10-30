@@ -1,3 +1,4 @@
+import { language } from '@language/index';
 import styles from './more.module.less';
 import { server } from './server';
 import { useRef } from 'react';
@@ -20,8 +21,8 @@ export default function MoreMenus(props: IProps) {
       <li
         onClick={() => {
           Modal.confirm({
-            title: '确定删除？',
-            content: '删除后无法恢复，请谨慎操作',
+            title: language.val('confirm_delete'),
+            content: language.val('source_delete_confirm_tips'),
             onOk: async () => {
               await server.deleteDraft(item.id);
               // 更新当前列表
@@ -31,7 +32,7 @@ export default function MoreMenus(props: IProps) {
         }}
       >
         <Delete theme="outline" size="16" fill="var(--theme-icon)" />
-        删除
+        {language.val('common_delete')}
       </li>
       <Popover
         position="right"
@@ -53,7 +54,7 @@ export default function MoreMenus(props: IProps) {
                     pubsub.publish('pageLoading', {
                       end: true,
                     });
-                    Toast.success('移动成功');
+                    Toast.success(language.val('common_toast_success'));
                   }}
                   key={d.id}
                 >
@@ -66,7 +67,7 @@ export default function MoreMenus(props: IProps) {
       >
         <li>
           <AfferentThree theme="outline" size="16" fill="var(--theme-icon)" />
-          移动
+          {language.val('common_move')}
         </li>
       </Popover>
     </ul>

@@ -247,14 +247,17 @@ function Header(props: IProps) {
             <a
               className={styles.languagebtn}
               onClick={() => {
-                if (language.getLanguage() === 'en-US') {
+                const cur = language.getLanguage();
+                if (cur === 'en-US') {
                   language.setLanguage('fr-FR');
+                } else if (cur === 'fr-FR') {
+                  language.setLanguage('ar-SA');
                 } else {
                   language.setLanguage('en-US');
                 }
               }}
             >
-              <Intl name="user_language" />
+              {language.getLanguage() === 'en-US' ? '🇬🇧 English' : (language.getLanguage() === 'fr-FR' ? '🇫🇷 Français' : '🇸🇦 العربية')}
             </a>
           ) : null}
           {/* <RadioGroup

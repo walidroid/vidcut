@@ -37,7 +37,8 @@ import { createLocalUploadBase64 } from '@services/localStorageService';
 import { plugins } from '@plugins/index';
 import axios from 'axios';
 import ContextMenus from './components/canvas/ContextMenus';
-// zh_CN removed
+import fr from '@douyinfe/semi-ui/lib/es/locale/source/fr';
+import ar from '@douyinfe/semi-ui/lib/es/locale/source/ar';
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
 import { LocaleProvider } from '@douyinfe/semi-ui';
 import { language } from '@language/language';
@@ -403,8 +404,9 @@ function EditorPage(props: IProps) {
   }
 
   const locale = {
-    'fr-FR': en_US,
+    'fr-FR': fr,
     'en-US': en_US,
+    'ar-SA': ar,
   }[language.getLanguage()];
 
   return (

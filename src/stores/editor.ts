@@ -151,7 +151,7 @@ export class Editor {
     // 最大媒体轨道数量
     maxMediaTrackNum: 30,
     // 支持多语言
-    supportLanguage: false,
+    supportLanguage: true,
     // 显示项目按钮
     showProjectButton: true,
     // 自定义logo
@@ -185,7 +185,7 @@ export class Editor {
   };
 
   // 修改语言
-  public setLanguage = (lang: 'en-US' | 'fr-FR') => {
+  public setLanguage = (lang: 'en-US' | 'fr-FR' | 'ar-SA') => {
     language.setLanguage(lang);
   };
 
@@ -260,7 +260,7 @@ export class Editor {
   @observable themeUpdateKey: 'dark' | 'light' = theme.getTheme();
 
   // 多语言
-  @observable languageUpdateKey: 'zh-CN' | 'en-US' = language.getLanguage();
+  @observable languageUpdateKey: 'en-US' | 'fr-FR' | 'ar-SA' = language.getLanguage();
 
   // 历史记录测试用
   @observable recordUpdateTestKey: number = 1;

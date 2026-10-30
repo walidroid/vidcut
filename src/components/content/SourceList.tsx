@@ -1,3 +1,4 @@
+import { language } from '@language/index';
 import { IconSpin } from '@douyinfe/semi-icons';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './sourceList.module.less';
@@ -8,7 +9,7 @@ import { userService } from '@server/user.service';
 import { observer } from 'mobx-react';
 import { layout } from '@stores/layout';
 import { useReducer } from 'react';
-import { language } from '@language/language';
+
 import {
   IllustrationConstruction,
   IllustrationConstructionDark,
@@ -62,8 +63,8 @@ function SourceList(props: IProps) {
         <Empty
           image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
           darkModeImage={<IllustrationNoResultDark style={{ width: 150, height: 150 }} />}
-          title={'暂无作品'}
-          description="暂无任何作品，点击上方「创建项目」开始创作"
+          title={language.val('draft_start')}
+          description={language.val('create_project_desc')}
         />
       );
     }
@@ -72,8 +73,8 @@ function SourceList(props: IProps) {
       <Empty
         image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
         darkModeImage={<IllustrationNoResultDark style={{ width: 150, height: 150 }} />}
-        title={'暂无素材'}
-        description="暂无任何素材去选择"
+        title={language.val('common_no_source')}
+        description={language.val('common_no_source_desc')}
       />
     );
   }

@@ -97,7 +97,7 @@ function BlendMode(props: IProps) {
         {arr.map(d => {
           return (
             <Select.Option key={d.val} value={d.val}>
-              {languageType === 'zh-CN' ? d.name : d.ename}
+              {d.ename}
             </Select.Option>
           );
         })}

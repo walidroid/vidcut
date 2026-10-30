@@ -61,7 +61,7 @@ export default function More() {
                 {d.icon}
                 <p>
                   {d.vip && <VipOne theme="filled" size="14" fill="#FFA24D" />}
-                  {languageType === 'zh-CN' ? d.name : d.ename}
+                  {d.ename}
                 </p>
               </span>
             </div>

@@ -1,23 +1,24 @@
 import * as sdk from 'video-core-sdk';
 import '@less/initialize.less';
-// import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'mobx-react';
 import { stores } from './stores';
-import { BrowserRouter } from 'react-router-dom'; // 路由
+import { BrowserRouter } from 'react-router-dom';
 import { routes } from './routes.config';
 import { LocaleProvider } from '@douyinfe/semi-ui';
 import { language } from '@language/language';
-import zh_CN from '@douyinfe/semi-ui/lib/es/locale/source/zh_CN';
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
+import fr from '@douyinfe/semi-ui/lib/es/locale/source/fr';
+import ar from '@douyinfe/semi-ui/lib/es/locale/source/ar';
 
-console.log('xxxxxxxxxxx',sdk);
+console.log('VidCut initialized', sdk);
 
 const locale = {
-  'zh-CN': zh_CN,
   'en-US': en_US,
-}[language.getLanguage()];
+  'fr-FR': fr,
+  'ar-SA': ar,
+}[language.getLanguage()] || en_US;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <LocaleProvider locale={locale}>

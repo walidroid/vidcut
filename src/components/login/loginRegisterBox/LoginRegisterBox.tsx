@@ -12,7 +12,7 @@ import { language } from '@language/language';
 import classNames from 'classnames';
 
 function LoginRegisterBox() {
-  const [show, setShow] = useState(language.getLanguage() === 'zh-CN' ? 'loginQrcode' : 'loginEmail');
+  const [show, setShow] = useState('loginEmail');
 
   // const showOAuthWindow = () => {
   //   let url = `${config.apiHost}/account/login/provider/qq?type=login`;

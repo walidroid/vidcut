@@ -25,7 +25,7 @@ const VideoSplit = (props: Props) => {
 
   const downCapture = async () => {
     if (markers.length === 0) {
-      Toast.error('请先添加分割标记');
+      Toast.error('Please add split markers first');
       return;
     }
 
@@ -123,10 +123,10 @@ const VideoSplit = (props: Props) => {
       ffmpeg.deleteFile('input.mp4');
 
       // 显示成功提示
-      Toast.success(`视频已分割为 ${segments.length} 个片段，已打包成zip文件`);
+      Toast.success(`Video split into ${segments.length} segments and packaged into ZIP`);
     } catch (error) {
       console.error('分割视频失败:', error);
-      Toast.error('分割视频失败');
+      Toast.error('Video split failed');
     } finally {
       setLoading(false);
     }
@@ -270,23 +270,21 @@ const VideoSplit = (props: Props) => {
               duration &&
               markers
                 .sort((a, b) => a - b)
-                .map(x => `${((x / frameRef.current.width) * duration).toFixed(2)}秒`)
+                .map(x => `${((x / frameRef.current.width) * duration).toFixed(2)}s`)
                 .join('、')}
           </div>
           <Space>
             <InputNumber
-              insetLabel="间隙"
+              insetLabel="Gap"
               value={paddingTime}
               onChange={value => setPaddingTime(Number(value))}
               min={0}
               max={duration}
               style={{ width: 160 }}
               step={0.01}
-              suffix="秒"
+              suffix="s"
             />
-            <Button onClick={downCapture} loading={loading}>
-              开始分割
-            </Button>
+            <Button onClick={downCapture} loading={loading}>Start Split</Button>
           </Space>
         </div>
       </div>

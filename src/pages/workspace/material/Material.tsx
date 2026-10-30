@@ -26,15 +26,15 @@ export default function Material(props: IProps) {
         <div data-id={item.id} className={styles.item}>
           {['ready', 'uploadStart', 'uploading', 'decoding'].includes(item.status) && (
             <span className={styles.progress}>
-              {item.status === 'ready' && <span className={styles.tips}>上传准备</span>}
+              {item.status === 'ready' && <span className={styles.tips}>{language.val('upload_ready')}</span>}
               {['uploadStart', 'uploading'].includes(item.status) && (
                 <Progress percent={item.progress} strokeWidth={2} showInfo type="circle" width={50} />
               )}
-              {item.status === 'decoding' && <span className={styles.tips}>编码中...</span>}
+              {item.status === 'decoding' && <span className={styles.tips}>{language.val('source_encoding')}</span>}
               {/* {item.status === 'uploaded' && <span className={styles.tips}>上传完成</span>} */}
               {item.status === 'error' && (
                 <span className={styles.tips} style={{ color: 'red' }}>
-                  转码失败
+                  {language.val('decode_error')}
                 </span>
               )}
             </span>
@@ -112,10 +112,10 @@ export default function Material(props: IProps) {
         onOk={async () => {
           await server.updateUserMaterial({ id: item0.id, name });
           document.querySelector(`.${styles.name}[data-itemid="${item0.id}"]`).innerHTML = name;
-          Toast.success('修改成功!');
+          Toast.success(language.val('common_save_success'));
           setItem0(null);
         }}
-        title="修改文件名称"
+        title={language.val('draft_name_input')}
         width={400}
         onCancel={() => setItem0(null)}
         visible={!!item0}

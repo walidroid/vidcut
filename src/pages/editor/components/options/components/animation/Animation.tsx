@@ -400,7 +400,7 @@ function Animation(props: IProps) {
           title={language.val('option_animation_ease')}
           className={styles.duration}
           extra={
-            <a href="https://easings.net/zh-cn" target="_blank">
+            <a href="https://easings.net/en" target="_blank">
               <Help theme="outline" size="18" fill="var(--theme-icon)" strokeWidth={3} />
             </a>
           }
@@ -460,7 +460,7 @@ function Animation(props: IProps) {
                   })(),
                 })}
               >
-                <h5 className={styles.name}>{languageType === 'zh-CN' ? item.name : item.ename}</h5>
+                <h5 className={styles.name}>{item.ename || item.name}</h5>
                 <AnimateItem item={item} />
               </div>
             )}
