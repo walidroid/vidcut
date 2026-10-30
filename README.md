@@ -91,7 +91,12 @@ yarn build
 
 # Preview production build locally
 yarn preview
+
+# Package standalone Windows Installer (.exe)
+yarn dist:win
 ```
+
+> **Note**: Windows `.exe` installers are also automatically built and available for download in **GitHub Actions** artifacts and Releases.
 
 ---
 
@@ -159,7 +164,12 @@ yarn build
 
 # Prévisualiser la version de production
 yarn preview
+
+# Créer l'exécutable d'installation Windows (.exe)
+yarn dist:win
 ```
+
+> **Note** : Les installeurs Windows `.exe` sont également générés et téléchargeables automatiquement via **GitHub Actions** (Artéfacts et Releases).
 
 ---
 
@@ -229,7 +239,12 @@ yarn build
 
 # معاينة النسخة الإنتاجية محلياً
 yarn preview
+
+# بناء برنامج التثبيت لنظام ويندوز (.exe)
+yarn dist:win
 ```
+
+> **ملاحظة**: يتم أيضاً إنشاء ملفات التثبيت لنظام ويندوز (`.exe`) تلقائياً وتوفيرها للتنزيل المباشر عبر **GitHub Actions**.
 
 </div>
 
