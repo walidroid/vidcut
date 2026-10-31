@@ -6,13 +6,13 @@
   "author": "VidCut Team",
   "scripts": {
     "dev": "vite",
-    "build": "yarn clean && yarn build:worker && vite build",
+    "build": "rimraf dist && node worker.config.js && vite build",
     "build:worker": "node worker.config.js",
     "preview": "vite preview --port 8080",
     "lint": "eslint src --fix",
     "clean": "rimraf dist",
     "electron": "electron .",
-    "dist:win": "yarn build && electron-builder --win --config electron-builder.json"
+    "dist:win": "npm run build && electron-builder --win --config electron-builder.json"
   },
   "dependencies": {
     "@douyinfe/semi-ui": "^2.89.1",

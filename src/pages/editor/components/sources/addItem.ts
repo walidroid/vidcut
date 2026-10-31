@@ -287,7 +287,7 @@ export const addFilterItem = async (item: any, insertTime?: number, trackIndex?:
 export const addTextItem = async (item: any, insertTime?: number, trackIndex?: number) => {
   const { editor } = stores;
   console.log('添加元素', item);
-  item.text = '文字内容';
+  item.text = item.text || 'VidCut Title';
   const elementData = await editor.movie.addElementNoSource(item, {
     time: insertTime || editor.currentTime,
     trackIndex,

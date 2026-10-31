@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="110" viewBox="0 0 160 110">
+    <rect width="160" height="110" rx="8" fill="#1c1917" />
+    
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f43f5e" />
+          <stop offset="50%" stop-color="#fb923c" />
+          <stop offset="100%" stop-color="#facc15" />
+        </linearGradient>
+      </defs>
+      <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="url(#grad)" letter-spacing="2">RETRO</text>
+    
+  </svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="110" viewBox="0 0 160 110">
+    <rect width="160" height="110" rx="8" fill="#18181b" />
+    
+      <line x1="35" y1="42" x2="125" y2="42" stroke="#ec4899" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+      <line x1="45" y1="50" x2="115" y2="50" stroke="#ec4899" stroke-width="5" stroke-linecap="round"/>
+      <line x1="35" y1="58" x2="125" y2="58" stroke="#ec4899" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    
+    <text x="50%" y="96" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa">Motion Blur</text>
+  </svg>

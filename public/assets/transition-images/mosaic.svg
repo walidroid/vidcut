@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="110" viewBox="0 0 160 110">
+    <rect width="160" height="110" rx="8" fill="#18181b" />
+    
+      <rect x="50" y="28" width="16" height="16" rx="2" fill="#3b82f6" opacity="0.8" />
+      <rect x="72" y="28" width="16" height="16" rx="2" fill="#60a5fa" opacity="0.6" />
+      <rect x="94" y="28" width="16" height="16" rx="2" fill="#93c5fd" opacity="0.4" />
+      <rect x="50" y="50" width="16" height="16" rx="2" fill="#60a5fa" opacity="0.6" />
+      <rect x="72" y="50" width="16" height="16" rx="2" fill="#3b82f6" opacity="0.9" />
+      <rect x="94" y="50" width="16" height="16" rx="2" fill="#60a5fa" opacity="0.7" />
+    
+    <text x="50%" y="96" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa">Mosaic</text>
+  </svg>

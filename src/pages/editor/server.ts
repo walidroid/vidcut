@@ -2,6 +2,7 @@ import BasicService from '@server/BasicService';
 import type { MaterialTypes } from '@stores/editor';
 import type * as st from '@config/sdk.d';
 import { localDB } from '@database/localDB';
+import { queryLocalMaterials, LOCAL_MATERIAL_TYPES } from './localResources';
 
 const genId = () => `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -125,77 +126,67 @@ class Server extends BasicService {
   // };
 
   /**
-   * 获取分类列表
+   * 获取分类列表 (本地离线模式)
    */
-  getMaterialTypes = (type: MaterialTypes) => {
-    const typeMap = {
-      text: 311,
-      image: 312,
-      audio: 313,
-      video: 314,
-      sticker: 315,
-      effect: 316,
-      filter: 317,
-      transition: 318,
-    };
-    return this.get(`/common/type-items/page`, {
-      params: { type_id: typeMap[type] || '', page_size: 999 },
-    }).then(res => {
-      const [re, err] = res;
-      return [re.data, err];
-    });
+  getMaterialTypes = async (type: MaterialTypes): Promise<[any, null]> => {
+    const list = LOCAL_MATERIAL_TYPES[type] || [{ id: 'all', name: 'All' }];
+    return [list, null];
   };
 
   /**
-   * 获取模版的分�?
-   * @returns
+   * 获取模版的分类 (本地离线模式)
    */
-  getTemplateTypes = () => {
-    return this.get(`/template/categories/tree`, { params: { page_size: 99 } });
+  getTemplateTypes = async (): Promise<[any, null]> => {
+    return [[{ id: 'all', name: 'All' }], null];
   };
 
   /**
-   * 获取素材
+   * 获取素材 (本地离线资源库：Audio, Filter, Effect, Transition, Text, Font)
    */
-  getMaterials = (params: st.MaterialParams) => {
-    // if (params.type === 'video') {
-    //   params.convert_status = 2;
-    // }
-    return this.get('/materials/page', { params });
+  getMaterials = async (params: st.MaterialParams): Promise<[any, null]> => {
+    const result = queryLocalMaterials(params.type, params);
+    return [result, null];
   };
 
   /**
-   * 搜索模版
-   * @param params
-   * @returns
+   * 搜索模版 (本地离线模式)
    */
-  getTemplates = (params: st.TemplateParams) => {
-    return this.get('/templates/page', {
-      params: {
-        ...params,
-      },
-    }).then(arg => {
-      const [res, err] = arg;
-      res.data.forEach(d => {
-        d.type = 'template';
+  getTemplates = async (params: st.TemplateParams): Promise<[any, null]> => {
+    return [{ data: [], total: 0 }, null];
+  };
+
+  // 收藏元素 (本地持久化)
+  collect = async (params: { source_id: string; type: string }): Promise<[any, null]> => {
+    try {
+      localStorage.setItem(`collected_${params.type}_${params.source_id}`, 'true');
+      return [{ success: true }, null];
+    } catch (err: any) {
+      return [{ success: true }, null];
+    }
+  };
+
+  // 取消收藏 (本地持久化)
+  cancelCollect = async (source_id: Array<string>, type: string): Promise<[any, null]> => {
+    try {
+      source_id.forEach(id => {
+        localStorage.removeItem(`collected_${type}_${id}`);
       });
-      return [res, err];
-    });
+      return [{ success: true }, null];
+    } catch (err: any) {
+      return [{ success: true }, null];
+    }
   };
 
-  // 搜藏元素
-  collect = (params: { source_id: string; type: string }) => {
-    return this.post(`/user/collects/create`, { ...params });
-  };
-
-  // 取消收藏
-  cancelCollect = (source_id: Array<string>, type: string) => {
-    return this.post(`/user/collects/cancel`, { source_id, type });
-  };
-
-  // 获取收藏列表
-  getCollects = (params: st.CollectParams) => {
-    return this.get(`/user/collects/page`, { params });
+  // 获取收藏列表 (本地持久化)
+  getCollects = async (params: st.CollectParams): Promise<[any, null]> => {
+    try {
+      const type = params.type;
+      const allMaterials = queryLocalMaterials(type, { page: 1, page_size: 999 }).data;
+      const collected = allMaterials.filter(item => localStorage.getItem(`collected_${type}_${item.id}`) === 'true');
+      return [{ data: collected, total: collected.length }, null];
+    } catch (err: any) {
+      return [{ data: [], total: 0 }, null];
+    }
   };
 
   // 表单上传（IndexedDB）

@@ -21,9 +21,7 @@ export default function Footer(props: IProps) {
             <li>
               <a href="#">{<Intl name="common_home" />}</a>
             </li>
-            <li>
-              <a href="/article/about">{<Intl name="common_about_us" />}</a>
-            </li>
+            
             {/* <li>
               <a href="#">VIP特权</a>
             </li> */}
@@ -52,10 +50,10 @@ export default function Footer(props: IProps) {
             <p>
               <Intl name="common_private_deployment_saas_consultation" />
               <br />
-              <Intl name="common_phone" />: 13551301693
+              <Intl name="common_phone" />: 
             </p>
             <span className={styles.span}>
-              <img src="/assets/images/qrcode.png" alt="" />
+              
             </span>
             {/* <span className={styles.span}>
               <i>董经理</i>

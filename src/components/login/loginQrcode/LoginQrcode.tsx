@@ -77,7 +77,7 @@ class LoginQrcode extends Component<IProps, IState> {
           <Wechat theme="filled" size="28" fill="#4ab70f" />
           <span className={styles.text}>{language.val('login_wechat_login')}</span>
         </p>
-        <img style={{ width: 160 }} src={url || 'https://cdn.h5ds.com/static/images/qrcode-loading.png'} alt="" />
+        <img style={{ width: 160 }} src={url || '/assets/images/img-null.png'} alt="" />
       </div>
     );
   }

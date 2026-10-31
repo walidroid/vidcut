@@ -271,43 +271,16 @@ function EditorPage(props: IProps) {
     if (appid) {
       editor.appid = appid;
 
-      if (appid === 'test') {
-        // https://cdn.h5ds.com/video/669770283775954944/apps/837523312766513152.json
-        const jdata = (await $.get(
-          'https://cdn.h5ds.com/video-mix/u/9715/apps/960593364739022848.json?t=' + +new Date(),
-          // 'https://video.h5ds.com/video/u/728621315758907392/apps/857880744023654400.json?t=' + +new Date(),
-        )) as string;
-        editor.data = util.reJSON(jdata) as MovieData;
-      } else if (appid === 'template') {
-        const templateId: any = util.getUrlQuery('templateId');
-        const adminToken = util.getUrlQuery('adminToken');
-        // 通过templateId 获取json
-        //@ts-ignore
-        const { data: res } = await axios({
-          withCredentials: true,
-          method: 'get',
-          url: `/api/v1/admin/templates/info?id=${templateId}`,
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            Accept: 'application/json',
-            Authorization: adminToken,
-          },
-        });
-        console.log('res', res);
-        const jdata = (await $.get(`https://cdn.h5ds.com/${res.data.url}?t=` + +new Date())) as string;
-        editor.data = util.reJSON(jdata) as MovieData;
-      } else {
-        if (!props.movieData) {
-          const [res, err] = await editor.apiServer.getAppData(appid);
-          editor.cacheAppDetailRes = res;
-          if (err) {
-            Toast.error(err);
-          } else if (res.data) {
-            editor.data = res.data as MovieData;
-          }
-        } else {
-          editor.data = props.movieData;
+      if (!props.movieData) {
+        const [res, err] = await editor.apiServer.getAppData(appid);
+        editor.cacheAppDetailRes = res;
+        if (err) {
+          Toast.error(err);
+        } else if (res?.data) {
+          editor.data = res.data as MovieData;
         }
+      } else {
+        editor.data = props.movieData;
       }
     }
     if (!editor.data) {

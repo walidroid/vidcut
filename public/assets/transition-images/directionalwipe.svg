@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="110" viewBox="0 0 160 110">
+    <rect width="160" height="110" rx="8" fill="#18181b" />
+    <path d="M 120,55 H 40 M 65,35 L 40,55 L 65,75" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="50%" y="96" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#a1a1aa">Wipe Left</text>
+  </svg>

@@ -1,5 +1,4 @@
 import { routes as homeRoutes } from '@pages/home';
-import { routes as aboutusRoutes } from '@pages/aboutus';
 import { routes as userRouter } from './pages/user';
 import { routes as workspaceRouter } from './pages/workspace';
 import { routes as agreementRouter } from './pages/agreement';
@@ -56,12 +55,6 @@ const routes = [
     meta: { auth: false },
     component: IndexLayout,
     routes: [...editorRouter],
-  },
-  {
-    path: '/article',
-    exact: false,
-    component: IndexLayout,
-    routes: [...aboutusRoutes],
   },
   {
     path: '/',
