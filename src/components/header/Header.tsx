@@ -84,9 +84,7 @@ const Header = (props: IProps) => {
             className={styles.text}
             activeClassName={styles.active}
             isActive={(match, location) => {
-              if (location.pathname === '/') {
-                return true;
-              }
+              return location.pathname === '/' || location.pathname === '/home' || location.pathname.startsWith('/workspace/draft');
             }}
           >
             <Intl name="common_home" />
@@ -132,12 +130,12 @@ const Header = (props: IProps) => {
             <Link to="/workspace/material" className={styles.space}>
               {/* <Intl name="user_workspace" /> */}
               <Box theme="outline" size="20" fill="var(--theme-icon)" />
-              素材
+              <Intl name="material" />
             </Link>
             <Link to="/workspace/draft" className={styles.space + ' ' + styles.active2}>
               {/* <Intl name="user_workspace" /> */}
               <AllApplication theme="outline" size="20" fill="var(--theme-icon)" />
-              项目
+              <Intl name="project" />
             </Link>
           </>
         )}
@@ -160,9 +158,7 @@ const Header = (props: IProps) => {
           </Login>
         )}
       </Space>
-      <VipRecharge visible={vipRechargeVisible} onCancel={() => setVipRechargeVisible(false)} />
-      <CreditRecharge visible={creditRechargeVisible} onCancel={() => setCreditRechargeVisible(false)} />
-    </div>
+                </div>
   );
 };
 

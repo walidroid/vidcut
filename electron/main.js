@@ -78,14 +78,14 @@ function startLocalServer(distDir) {
 }
 
 function createWindow(port) {
-  mainWindow = new BrowserWindow({
+  const iconPath = path.join(__dirname, '../build/icon.ico');
+  const windowOpts = {
     width: 1440,
     height: 900,
     minWidth: 1024,
     minHeight: 680,
     backgroundColor: '#141414',
     title: 'VidCut - Video Editor',
-    icon: path.join(__dirname, '../build/icon.ico'),
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
@@ -94,15 +94,19 @@ function createWindow(port) {
       webSecurity: true,
       allowRunningInsecureContent: false,
     },
-  });
+  };
 
+  if (fs.existsSync(iconPath)) {
+    windowOpts.icon = iconPath;
+  }
+
+  mainWindow = new BrowserWindow(windowOpts);
   mainWindow.setMenuBarVisibility(false);
 
   // Configure session permission handlers for File System Access API
   const ses = mainWindow.webContents.session;
 
   ses.setPermissionRequestHandler((webContents, permission, callback) => {
-    // Automatically approve file-system, media, and storage permissions
     callback(true);
   });
 
@@ -110,10 +114,13 @@ function createWindow(port) {
     return true;
   });
 
-  // Handle restricted directories in Chromium File System Access API
-  ses.on('file-system-access-restricted', (event, details, callback) => {
-    callback('allow');
-  });
+  try {
+    ses.on('file-system-access-restricted', (event, details, callback) => {
+      if (typeof callback === 'function') callback('allow');
+    });
+  } catch (e) {
+    /* safely ignore if unsupported event */
+  }
 
   // Toggle DevTools with F12 or Ctrl+Shift+I
   mainWindow.webContents.on('before-input-event', (event, input) => {

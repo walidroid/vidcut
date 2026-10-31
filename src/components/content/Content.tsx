@@ -72,8 +72,7 @@ export interface UploadItem {
 function Content(props: IProps, ref: any) {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const [cates, setCates] = useState([]);
-  const [useLocal, setUseLocal] = useState(false);
-  const timer = useRef(null);
+    const timer = useRef(null);
   const totalRef = useRef(0);
   const [showVideoSplit, setShowVideoSplit] = useState(false);
   const [showImageSplit, setShowImageSplit] = useState(false);
@@ -180,38 +179,24 @@ function Content(props: IProps, ref: any) {
     }
   };
 
-  // 检测本地存储模式
-  useEffect(() => {
-    if (isFSApiSupported()) {
-      getRootHandle().then(handle => setUseLocal(!!handle));
-    }
-  }, []);
-
+  
   // 获取全部分类
   const getCategoryList = useCallback(() => {
     const t = props.type === 'draft' ? 'project' : 'material';
-    if (useLocal) {
-      getLocalCategoryList(t as 'project' | 'material').then(resp => {
-        const [res, err] = resp;
+    getLocalCategoryList(t as 'project' | 'material')
+      .then(resp => {
+        const [res, err] = resp || [];
         if (err) {
-          return Toast.error(err);
-        } else {
+          console.warn('getLocalCategoryList error:', err);
+        } else if (res?.data) {
           setCates(res.data);
           props.catesCallback(res.data);
         }
+      })
+      .catch(err => {
+        console.warn('getLocalCategoryList catch:', err);
       });
-    } else {
-      userService.getCategoryList({ type: t, page: 1, page_size: 100 }).then(resp => {
-        const [res, err] = resp;
-        if (err) {
-          return Toast.error(err);
-        } else {
-          setCates(res.data);
-          props.catesCallback(res.data);
-        }
-      });
-    }
-  }, [useLocal]);
+  }, [props.type]);
 
   useEffect(() => {
     getCategoryList();
@@ -507,24 +492,13 @@ function Content(props: IProps, ref: any) {
                   material: 'material',
                 }[props.type] as 'project' | 'material';
                 const name = 'Untitled_' + util.randomID(4);
-                if (useLocal) {
-                  const [res, err] = await createLocalCategory(type, name);
-                  if (!err) {
-                    getCategoryList();
-                    Toast.success(language.val('common_create_success'));
-                    pubsub.publish('updateFolders');
-                  } else {
-                    Toast.error(err);
-                  }
+                const [res, err] = await createLocalCategory(type, name);
+                if (!err) {
+                  getCategoryList();
+                  Toast.success(language.val('common_create_success'));
+                  pubsub.publish('updateFolders');
                 } else {
-                  const [res, err] = await userService.saveCategory({ type, name });
-                  if (!err) {
-                    getCategoryList();
-                    Toast.success(language.val('common_create_success'));
-                    pubsub.publish('updateFolders');
-                  } else {
-                    Toast.error(err);
-                  }
+                  Toast.error(err);
                 }
               }}
               size="large"

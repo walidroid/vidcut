@@ -604,6 +604,16 @@ export async function updateLocalCategory(id: string, data: { name?: string }): 
   return [record, null];
 }
 
+/** 删除分类 */
+export async function deleteLocalCategory(ids: string[]): Promise<[any, string | null]> {
+  try {
+    await localDB.categories.bulkDelete(ids);
+    return [true, null];
+  } catch (err: any) {
+    return [null, err?.message || 'Error deleting category'];
+  }
+}
+
 /** 获取所有项目列表 */
 export async function getAllProjects(): Promise<{ id: string; updatedAt: number }[]> {
   return localDB.projects

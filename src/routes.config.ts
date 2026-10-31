@@ -1,19 +1,30 @@
-import { routes as homeRoutes } from '@pages/home';
 import { routes as userRouter } from './pages/user';
 import { routes as workspaceRouter } from './pages/workspace';
 import { routes as agreementRouter } from './pages/agreement';
 import { routes as editorRouter } from './pages/editor';
 
-
-// 管理页面
+// Layout components
 import NotFound from '@components/not-found';
 import IndexLayout from '@layout/index-layout';
-import HomeLayout from '@layout/home-layout';
 import UserLayout from '@layout/user-layout';
 import WorkspaceLayout from '@layout/workspace-layout';
 import AgreementLayout from '@layout/agreement-layout';
 
 const routes = [
+  {
+    path: '/editor/:appId',
+    exact: false,
+    meta: { auth: false },
+    component: IndexLayout,
+    routes: [...editorRouter],
+  },
+  {
+    path: '/workspace',
+    exact: false,
+    meta: { auth: false },
+    component: WorkspaceLayout,
+    routes: [...workspaceRouter],
+  },
   {
     path: '/user/agreement',
     exact: false,
@@ -43,25 +54,11 @@ const routes = [
     routes: [...userRouter],
   },
   {
-    path: '/workspace',
-    exact: false,
-    meta: { auth: false },
-    component: WorkspaceLayout,
-    routes: [...workspaceRouter],
-  },
-  {
-    path: '/editor/:appId',
-    exact: false,
-    meta: { auth: false },
-    component: IndexLayout,
-    routes: [...editorRouter],
-  },
-  {
     path: '/',
     exact: false,
-    component: HomeLayout,
+    component: WorkspaceLayout,
     meta: { auth: false },
-    routes: [...homeRoutes, { path: '*', exact: false, component: NotFound }],
+    routes: [...workspaceRouter, { path: '*', exact: false, component: NotFound }],
   },
 ];
 

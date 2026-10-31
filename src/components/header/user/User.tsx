@@ -39,32 +39,7 @@ function User(props: IProps) {
       </div>
       <div className={styles.menus}>
         <ul>
-          <li
-            className={styles.vipMenu}
-            onClick={e => {
-              e.stopPropagation();
-              pubsub.publish('showVipRecharge');
-            }}
-          >
-            <span>
-              <VipOne theme="filled" size="16" fill="#ff7a1a" />
-              <span>{isVip ? '会员用户' : '开通会员'}</span>
-            </span>
-            <span className={styles.vipRight}>{isVip ? `有效期至 ${vipExpire}` : '普通用户'}</span>
-          </li>
-          <li
-            onClick={e => {
-              e.stopPropagation();
-              pubsub.publish('showCreditRecharge');
-            }}
-          >
-            <span>
-              <VipOne theme="filled" size="16" fill="var(--theme-icon)" />
-              <span>积分充值</span>
-            </span>
-            <span className={styles.right}>{user.info?.credits || 0}</span>
-          </li>
-          <Link to="/workspace/draft">
+                              <Link to="/workspace/draft">
             <li>
               <span>
                 <Workbench theme="filled" size="16" fill="var(--theme-icon)" />
@@ -100,7 +75,7 @@ function User(props: IProps) {
                 <Intl name="user_theme" />
               </span>
             </span>
-            <span className={styles.right}>{layout.themeUpdateKey === 'dark' ? 'Black' : 'Light'}</span>
+            <span className={styles.right}>{layout.themeUpdateKey === 'dark' ? 'Dark' : 'Light'}</span>
           </li>
           <li
             onClick={() => {

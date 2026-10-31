@@ -4,7 +4,7 @@ import { server as materialServer } from '@pages/workspace/material/server';
 import { Button, Space, Checkbox, Modal, Toast, Popover } from '@douyinfe/semi-ui';
 import { observer } from 'mobx-react';
 import { layout } from '@stores/layout';
-import { userService } from '@server/user.service';
+import { deleteLocalCategory } from '@services/localStorageService';
 import { pubsub } from '@utils/pubsub';
 import _remove from 'lodash/remove';
 import { language, Intl } from '@language/index';
@@ -64,7 +64,7 @@ function SelectedSet(props: IProps) {
               // 删除分类
               const ids = layout.selects.filter(d => d.type === 'folder').map(d => d.id);
               if (ids.length) {
-                const [res, err] = await userService.deleteCategory(ids);
+                const [res, err] = await deleteLocalCategory(ids);
                 if (err) {
                   Toast.error(err);
                   return;

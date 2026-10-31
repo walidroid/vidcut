@@ -4,6 +4,24 @@ import Product from './product';
 
 const routes = [
   {
+    path: '/',
+    meta: { auth: false },
+    exact: true,
+    component: Draft,
+  },
+  {
+    path: '/home',
+    meta: { auth: false },
+    exact: true,
+    component: Draft,
+  },
+  {
+    path: '/workspace',
+    meta: { auth: false },
+    exact: true,
+    component: Draft,
+  },
+  {
     path: '/workspace/draft',
     meta: { auth: false },
     exact: true,

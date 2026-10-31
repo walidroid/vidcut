@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import vitePluginImp from 'vite-plugin-imp';
-import mkcert from 'vite-plugin-mkcert';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { terser } from 'rollup-plugin-terser';
 
@@ -41,11 +40,7 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true,
     }),
-    mkcert({
-      source: 'coding',
-      savePath: './ssh',
-    }),
-    react({
+        react({
       babel: {
         plugins: [
           ['@babel/plugin-proposal-decorators', { legacy: true }],
