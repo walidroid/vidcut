@@ -268,56 +268,60 @@ function EditorPage(props: IProps) {
   }, [show]);
 
   const initAppData = useCallback(async () => {
-    if (appid) {
-      editor.appid = appid;
+    try {
+      if (appid) {
+        editor.appid = appid;
 
-      if (!props.movieData) {
-        const [res, err] = await editor.apiServer.getAppData(appid);
-        editor.cacheAppDetailRes = res;
-        if (err) {
-          Toast.error(err);
-        } else if (res?.data) {
-          editor.data = res.data as MovieData;
-        }
-      } else {
-        editor.data = props.movieData;
-      }
-    }
-    if (!editor.data) {
-      editor.data = tdata;
-    }
-
-    // 老数据兼容新数据结构
-    console.log('editor.data', editor.data);
-
-    // 清晰数据
-    await util.clearData(editor.data);
-
-    editor.lastUpdateAppData = JSON.stringify(editor.data);
-
-    // 如果resouces的类型是image,且url 和 thumb 一样，需要重新设置thumb
-    const imageResources = editor.data.resouces?.filter(r => r.type === 'image' && r.url && r.thumb === r.url);
-    if (imageResources?.length) {
-      console.log('imageResources', imageResources);
-      for (const resource of imageResources) {
-        try {
-          const url = utils.reURL(resource.url, config.resourcesHost);
-          const thumbBase64 = await util.resizeBase64Image(url, 120);
-          const [thumbRes] = await editor.apiServer.uploadBase64({
-            content: thumbBase64,
-            name: `${resource.name || 'image'}_thumb.png`,
-            file_type: 'image',
-          });
-          if (thumbRes) {
-            resource.thumb = thumbRes.storage_path;
+        if (!props.movieData) {
+          const [res, err] = await editor.apiServer.getAppData(appid);
+          editor.cacheAppDetailRes = res;
+          if (err) {
+            Toast.error(err);
+          } else if (res?.data) {
+            editor.data = res.data as MovieData;
           }
-        } catch (err) {
-          console.warn('缩略图生成失败', resource.name, err);
+        } else {
+          editor.data = props.movieData;
         }
       }
-    }
+      if (!editor.data) {
+        editor.data = tdata;
+      }
 
-    setLoading(false);
+      // 老数据兼容新数据结构
+      console.log('editor.data', editor.data);
+
+      // 清晰数据
+      await util.clearData(editor.data);
+
+      editor.lastUpdateAppData = JSON.stringify(editor.data);
+
+      // 如果resouces的类型是image,且url 和 thumb 一样，需要重新设置thumb
+      const imageResources = editor.data.resouces?.filter(r => r.type === 'image' && r.url && r.thumb === r.url);
+      if (imageResources?.length) {
+        console.log('imageResources', imageResources);
+        for (const resource of imageResources) {
+          try {
+            const url = utils.reURL(resource.url, config.resourcesHost);
+            const thumbBase64 = await util.resizeBase64Image(url, 120);
+            const [thumbRes] = await editor.apiServer.uploadBase64({
+              content: thumbBase64,
+              name: `${resource.name || 'image'}_thumb.png`,
+              file_type: 'image',
+            });
+            if (thumbRes) {
+              resource.thumb = thumbRes.storage_path;
+            }
+          } catch (err) {
+            console.warn('缩略图生成失败', resource.name, err);
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('initAppData error:', err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   // useEffect(() => {

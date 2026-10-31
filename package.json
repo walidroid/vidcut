@@ -5,12 +5,13 @@
   "description": "Modern, open-source and AI-free browser & desktop video editor",
   "author": "VidCut Team",
   "scripts": {
-    "dev": "vite",
-    "build": "rimraf dist && node worker.config.js && vite build",
+    "postinstall": "node scripts/patch-sdk.js",
+    "dev": "node scripts/patch-sdk.js && vite",
+    "build": "node scripts/patch-sdk.js && node -e \"fs.rmSync('dist',{recursive:true,force:true})\" && node worker.config.js && npx vite build",
     "build:worker": "node worker.config.js",
     "preview": "vite preview --port 8080",
     "lint": "eslint src --fix",
-    "clean": "rimraf dist",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\"",
     "electron": "electron .",
     "dist:win": "npm run build && electron-builder --win --config electron-builder.json"
   },
