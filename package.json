@@ -6,7 +6,7 @@
   "author": "VidCut Team",
   "scripts": {
     "postinstall": "node scripts/patch-sdk.js",
-    "dev": "node scripts/patch-sdk.js && vite",
+    "dev": "node scripts/patch-sdk.js && vite --force",
     "build": "node scripts/patch-sdk.js && node -e \"fs.rmSync('dist',{recursive:true,force:true})\" && node worker.config.js && npx vite build",
     "build:worker": "node worker.config.js",
     "preview": "vite preview --port 8080",

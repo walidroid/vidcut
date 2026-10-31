@@ -1,7 +1,7 @@
 # Graph Report - unicut  (2026-10-31)
 
 ## Corpus Check
-- 448 files · ~237,281 words
+- 448 files · ~237,641 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 153 file(s) not represented in the graph (top: .less 144, (none) 3, .wasm 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `44f69a9b`
+- Built from commit: `f11ed5c0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -745,10 +745,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Editor Effects & Options` be split into smaller, more focused modules?**
   _Cohesion score 0.041212121212121214 - nodes in this community are weakly interconnected._
 - **Why does `react` connect `react` to `Editor Effects & Options`, `Home.tsx`, `editor/components/header/Header.tsx`, `Build & Configuration`, `ImageOptions.tsx`, `components/index.ts`, `User`, `jquery`, `routes.config.ts`, `Audio Tracks & Processing`, `video-core-sdk`, `Local Storage & Persistence`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `content/SourceList.tsx`, `Workspace Draft Management`, `Build & Configuration #4`, `package.json`, `WorkspaceLayout.tsx`, `User Profile & Account #4`, `Player Canvas & Rendering #2`, `language`, `Animation.tsx`, `Authentication UI`, `Message.tsx`, `TextStyle.tsx`, `TrackBodys.tsx`, `Build & Configuration #6`, `Account.tsx`, `AgreementLayout.tsx`, `LoginRegisterBox.tsx`, `theme`, `NotFound`, `mobx-react`, `Tracks.tsx`, `Verticalsortablelist Module`, `src/components/header/Header.tsx`, `CurveSpeed.tsx`, `agreement/index.ts`, `language/index.ts`, `jquery`, `controlHelper.ts`, `Mask.tsx`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Should `Home.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.13157894736842105 - nodes in this community are weakly interconnected._
 - **Why does `@douyinfe/semi-ui` connect `react` to `Editor Effects & Options`, `Home.tsx`, `editor/components/header/Header.tsx`, `Build & Configuration`, `ImageOptions.tsx`, `components/index.ts`, `User`, `Audio Tracks & Processing`, `video-core-sdk`, `Local Storage & Persistence`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `content/SourceList.tsx`, `Workspace Draft Management`, `Build & Configuration #4`, `package.json`, `WorkspaceLayout.tsx`, `User Profile & Account #4`, `Player Canvas & Rendering #2`, `language`, `Animation.tsx`, `Local Storage & Persistence #6`, `Message.tsx`, `TextStyle.tsx`, `Account.tsx`, `Build & Configuration #6`, `LoginRegisterBox.tsx`, `theme`, `mobx-react`, `Tracks.tsx`, `src/components/header/Header.tsx`, `CurveSpeed.tsx`, `language/index.ts`, `Mask.tsx`, `Custom Module`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **Should `editor/components/header/Header.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.1368421052631579 - nodes in this community are weakly interconnected._

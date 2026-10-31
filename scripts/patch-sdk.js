@@ -102,9 +102,98 @@ if (code.includes(s7)) {
   console.warn('[patch-sdk] Warning: could not find getMaterialFileUrl pattern.');
 }
 
+// 8. Safe default in Store constructor: this.data is never undefined
+const s8 = 'this.captionContainer=void 0,this.onPause=null,this.data=void 0';
+const r8 = 'this.captionContainer=void 0,this.onPause=null,this.data={width:1920,height:1080,elements:[],captions:[],resouces:[],transitions:[],cameras:[]}';
+if (code.includes(s8)) {
+  code = code.replace(s8, r8);
+  modified = true;
+  console.log('[patch-sdk] Successfully initialized Store this.data in constructor.');
+} else if (code.includes(r8)) {
+  console.log('[patch-sdk] Store this.data constructor initialization already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find Store constructor this.data pattern.');
+}
+
+// 9. Safe default in Store.destroy(): reset to empty movie object instead of null
+const s9 = 'this._exportFrameOverlayText=null,this.exportFrameOverlay=null,this.data=null,this.app=null,console.log("销毁",this)';
+const r9 = 'this._exportFrameOverlayText=null,this.exportFrameOverlay=null,this.data={width:1920,height:1080,elements:[],captions:[],resouces:[],transitions:[],cameras:[]},this.app=null,console.log("销毁",this)';
+if (code.includes(s9)) {
+  code = code.replace(s9, r9);
+  modified = true;
+  console.log('[patch-sdk] Successfully patched Store.destroy() to keep safe default data.');
+} else if (code.includes(r9)) {
+  console.log('[patch-sdk] Store.destroy() safe data already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find Store.destroy() pattern.');
+}
+
+// 10. Defensive check in removeInvalidTransition
+const s10 = 'removeInvalidTransition(){const E=groupByTrackIndex(this.data.elements),Z=this.data.transitions;';
+const r10 = 'removeInvalidTransition(){if(!this.data||!this.data.elements)return;const E=groupByTrackIndex(this.data.elements),Z=this.data.transitions||[];';
+if (code.includes(s10)) {
+  code = code.replace(s10, r10);
+  modified = true;
+  console.log('[patch-sdk] Successfully added null-safe guard in removeInvalidTransition.');
+} else if (code.includes(r10)) {
+  console.log('[patch-sdk] removeInvalidTransition null-safe guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find removeInvalidTransition pattern.');
+}
+
+// 11. Defensive check in checkSupportTransition
+const s11 = 'checkSupportTransition(E){const Z=groupByTrackIndex(this.data.elements);';
+const r11 = 'checkSupportTransition(E){if(!this.data||!this.data.elements)return!1;const Z=groupByTrackIndex(this.data.elements);';
+if (code.includes(s11)) {
+  code = code.replace(s11, r11);
+  modified = true;
+  console.log('[patch-sdk] Successfully added null-safe guard in checkSupportTransition.');
+} else if (code.includes(r11)) {
+  console.log('[patch-sdk] checkSupportTransition null-safe guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find checkSupportTransition pattern.');
+}
+
+// 12. Defensive check in getMediaTrackNum
+const s12 = 'getMediaTrackNum(){const E=groupByTrackIndex(this.data.elements);';
+const r12 = 'getMediaTrackNum(){if(!this.data||!this.data.elements)return 0;const E=groupByTrackIndex(this.data.elements);';
+if (code.includes(s12)) {
+  code = code.replace(s12, r12);
+  modified = true;
+  console.log('[patch-sdk] Successfully added null-safe guard in getMediaTrackNum.');
+} else if (code.includes(r12)) {
+  console.log('[patch-sdk] getMediaTrackNum null-safe guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find getMediaTrackNum pattern.');
+}
+
+// 13. Defensive check in groupByTrackIndex
+const s13 = 'function groupByTrackIndex(E){const Z=groupBy$2(E,"trackIndex"),J=values$1(Z);';
+const r13 = 'function groupByTrackIndex(E){if(!E||!Array.isArray(E))return[];const Z=groupBy$2(E,"trackIndex"),J=values$1(Z);';
+if (code.includes(s13)) {
+  code = code.replace(s13, r13);
+  modified = true;
+  console.log('[patch-sdk] Successfully added null-safe guard in groupByTrackIndex.');
+} else if (code.includes(r13)) {
+  console.log('[patch-sdk] groupByTrackIndex null-safe guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find groupByTrackIndex pattern.');
+}
+
 if (modified) {
   fs.writeFileSync(targetPath, code, 'utf8');
   console.log('[patch-sdk] All patches successfully applied to video-core-sdk.js.');
 } else {
   console.log('[patch-sdk] No changes needed (already up to date).');
+}
+
+// 14. Always clear Vite cache in node_modules/.vite to prevent stale pre-bundled deps
+const viteCacheDir = path.resolve(__dirname, '../node_modules/.vite');
+if (fs.existsSync(viteCacheDir)) {
+  try {
+    fs.rmSync(viteCacheDir, { recursive: true, force: true });
+    console.log('[patch-sdk] Successfully cleared stale Vite pre-bundle cache in node_modules/.vite');
+  } catch (err) {
+    console.warn('[patch-sdk] Notice: could not remove .vite cache folder:', err.message);
+  }
 }
