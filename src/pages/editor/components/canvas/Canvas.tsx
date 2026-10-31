@@ -27,7 +27,7 @@ function Canvas(props: IProps) {
   const [dragLock, setDragLock] = useState('1');
   const [mv, setMv] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(
-    Math.min((width - paddingLeftRight) / editor.data.width, (height - paddingTopBottom) / editor.data.height) || 0.1,
+    Math.min((width - paddingLeftRight) / (editor.data?.width || 1920), (height - paddingTopBottom) / (editor.data?.height || 1080)) || 0.1,
   );
   const setScaleDo = (s: number) => {
     editor.scale = s;
@@ -48,7 +48,7 @@ function Canvas(props: IProps) {
     setMv({ x: 0, y: 0 });
     setDragLock(utils.createID());
     setScaleDo(
-      Math.min((width - paddingLeftRight) / editor.data.width, (height - paddingTopBottom) / editor.data.height) || 0.1,
+      Math.min((width - paddingLeftRight) / (editor.data?.width || 1920), (height - paddingTopBottom) / (editor.data?.height || 1080)) || 0.1,
     );
   };
 
@@ -182,7 +182,7 @@ function Canvas(props: IProps) {
           id="h5dsCanvas"
         >
           {/* {!!editor.customAnimationId && <CustomAnimationPath scale={scale} />} */}
-          {target && (
+          {target && editor.data && (
             <Movie
               scale={scale}
               movieId={'editorMovie'}

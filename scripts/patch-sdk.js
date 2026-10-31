@@ -50,10 +50,61 @@ if (code.includes(s3)) {
   console.warn('[patch-sdk] Warning: could not find loading overlay pattern.');
 }
 
+// 4. Synchronously assign Je.data = _e on Movie component render
+const s4 = 'const Je=Ze.current;"export"!==J&&(Je.currentTime=Te)';
+const r4 = 'const Je=Ze.current;Je.data=_e;"export"!==J&&(Je.currentTime=Te)';
+if (code.includes(s4)) {
+  code = code.replace(s4, r4);
+  modified = true;
+  console.log('[patch-sdk] Successfully added synchronous Je.data = _e in Movie.');
+} else if (code.includes(r4)) {
+  console.log('[patch-sdk] Movie synchronous Je.data assignment already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find Movie Je definition pattern.');
+}
+
+// 5. Defensive check in Store2.updateGroup() for undefined data or elements
+const s5 = 'updateGroup(){const E=groupByTrackIndex(this.data.elements);';
+const r5 = 'updateGroup(){if(!this.data||!this.data.elements)return;const E=groupByTrackIndex(this.data.elements);';
+if (code.includes(s5)) {
+  code = code.replace(s5, r5);
+  modified = true;
+  console.log('[patch-sdk] Successfully added null-safe guard in Store2.updateGroup().');
+} else if (code.includes(r5)) {
+  console.log('[patch-sdk] Store2.updateGroup() null-safe guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find Store2.updateGroup() pattern.');
+}
+
+// 6. Guarantee fetchBlob never hangs on offline/missing files
+const s6 = 'pump()}else console.error("资源加载失败")})).catch((E=>{console.error(E)}))';
+const r6 = 'pump()}else{console.error("资源加载失败");J(E);}})).catch((E=>{console.error(E);J(E);}))';
+if (code.includes(s6)) {
+  code = code.replace(s6, r6);
+  modified = true;
+  console.log('[patch-sdk] Successfully made fetchBlob resolve on fetch failure.');
+} else if (code.includes(r6)) {
+  console.log('[patch-sdk] fetchBlob failure handler already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find fetchBlob failure pattern.');
+}
+
+// 7. Guarantee getMaterialFileUrl never hangs on missing material
+const s7 = 'if(E.startsWith("materials/"))return this.getMaterialFileUrl?(this.getMaterialFileUrl(E).then((Z=>{this._cacheBolbURL[E]=Z,J(Z)})),void 0):(console.error("getMaterialFileUrl 未实现"),void 0);';
+const r7 = 'if(E.startsWith("materials/"))return this.getMaterialFileUrl?(this.getMaterialFileUrl(E).then((Z=>{this._cacheBolbURL[E]=Z,J(Z)})).catch(()=>J(E)),void 0):(console.error("getMaterialFileUrl 未实现"),J(E),void 0);';
+if (code.includes(s7)) {
+  code = code.replace(s7, r7);
+  modified = true;
+  console.log('[patch-sdk] Successfully made getMaterialFileUrl resolve on failure.');
+} else if (code.includes(r7)) {
+  console.log('[patch-sdk] getMaterialFileUrl failure handler already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find getMaterialFileUrl pattern.');
+}
+
 if (modified) {
   fs.writeFileSync(targetPath, code, 'utf8');
   console.log('[patch-sdk] All patches successfully applied to video-core-sdk.js.');
 } else {
   console.log('[patch-sdk] No changes needed (already up to date).');
 }
-

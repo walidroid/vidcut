@@ -196,7 +196,20 @@ export class Editor {
 
   public pluginsConfig: types.PluginConfig[] = null;
 
-  public data!: types.MovieData;
+  public data: types.MovieData = {
+    title: '',
+    createTime: 0,
+    updateTime: 0,
+    poster: '',
+    width: 1920,
+    height: 1080,
+    background: {},
+    transitions: [],
+    cameras: [],
+    captions: [],
+    elements: [],
+    resouces: [],
+  } as any;
 
   public callback?: (params: { editor: Editor }) => void;
 
@@ -910,7 +923,7 @@ export class Editor {
 
     // 清理所有observable属性
     transaction(() => {
-      this.data = null;
+      this.data = { title: '', createTime: 0, updateTime: 0, poster: '', width: 1920, height: 1080, background: {}, transitions: [], cameras: [], captions: [], elements: [], resouces: [] } as any;
       this.movie = null;
       this.copyTempData = null;
       this.copyTempFrameData = null;

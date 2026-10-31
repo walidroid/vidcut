@@ -285,7 +285,13 @@ function EditorPage(props: IProps) {
         }
       }
       if (!editor.data) {
-        editor.data = tdata;
+        editor.data = JSON.parse(JSON.stringify(tdata));
+      } else {
+        if (!editor.data.elements) editor.data.elements = [];
+        if (!editor.data.captions) editor.data.captions = [];
+        if (!editor.data.resouces) editor.data.resouces = [];
+        if (!editor.data.width) editor.data.width = 1920;
+        if (!editor.data.height) editor.data.height = 1080;
       }
 
       // 老数据兼容新数据结构
