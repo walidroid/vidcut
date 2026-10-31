@@ -10,6 +10,10 @@ export function isFSApiSupported(): boolean {
   if (typeof window === 'undefined') return false;
   return 'showDirectoryPicker' in window || (typeof navigator !== 'undefined' && !!navigator.storage?.getDirectory);
 }
+export function _unused_old_isFSApiSupported(): boolean {
+  if (typeof window === 'undefined') return false;
+  return 'showDirectoryPicker' in window || (typeof navigator !== 'undefined' && !!navigator.storage?.getDirectory);
+}
 /** 获取持久化的文件夹句柄 (优先已选文件夹，默认使用沙箱 OPFS 自动持久化存储) */
 async function getStoredHandle(): Promise<FileSystemDirectoryHandle | null> {
   try {
