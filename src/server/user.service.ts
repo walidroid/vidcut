@@ -198,17 +198,18 @@ class UserService extends BasicService {
    * 获取用户信息
    */
   getUserDetail = async () => {
-    const [res, err] = await this.get('/account/info');
-    if (err) {
-      console.error('登录失效');
-      // 退出登录
-      return [null, err];
-      return [res, err];
+    try {
+      const [res, err] = await this.get('/account/info');
+      if (err || !res) {
+        return [user.info, null];
+      }
+      user.setUserInfo(res);
+      return [res, null];
+    } catch {
+      return [user.info, null];
     }
-    console.log('resresres', res);
-    user.setUserInfo(res);
-    return [res, err];
   };
+
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /**

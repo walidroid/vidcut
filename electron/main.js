@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell } = require('electron');
+const { app, BrowserWindow, shell, session, ipcMain, dialog } = require('electron');
 const path = require('path');
 const http = require('http');
 const fs = require('fs');
@@ -98,6 +98,23 @@ function createWindow(port) {
 
   mainWindow.setMenuBarVisibility(false);
 
+  // Configure session permission handlers for File System Access API
+  const ses = mainWindow.webContents.session;
+
+  ses.setPermissionRequestHandler((webContents, permission, callback) => {
+    // Automatically approve file-system, media, and storage permissions
+    callback(true);
+  });
+
+  ses.setPermissionCheckHandler((webContents, permission) => {
+    return true;
+  });
+
+  // Handle restricted directories in Chromium File System Access API
+  ses.on('file-system-access-restricted', (event, details, callback) => {
+    callback('allow');
+  });
+
   // Toggle DevTools with F12 or Ctrl+Shift+I
   mainWindow.webContents.on('before-input-event', (event, input) => {
     if (input.key === 'F12' || (input.control && input.shift && input.key.toLowerCase() === 'i')) {
@@ -120,6 +137,19 @@ function createWindow(port) {
     mainWindow = null;
   });
 }
+
+// IPC handler for native directory selection
+ipcMain.handle('dialog:openDirectory', async () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  const result = await dialog.showOpenDialog(win, {
+    properties: ['openDirectory', 'createDirectory'],
+    title: 'Select Storage Folder',
+  });
+  if (result.canceled || !result.filePaths.length) {
+    return null;
+  }
+  return result.filePaths[0];
+});
 
 app.whenReady().then(async () => {
   const distDir = path.resolve(__dirname, '../dist');

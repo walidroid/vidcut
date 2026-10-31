@@ -10,32 +10,41 @@ interface FolderGuardProps {
 
 const FolderGuard: React.FC<FolderGuardProps> = ({ children }) => {
   const supported = isFSApiSupported();
-  const [folderReady, setFolderReady] = useState(!supported);
+  const [folderReady, setFolderReady] = useState(false);
   const [folderLoading, setFolderLoading] = useState(false);
 
   useEffect(() => {
-    if (supported) {
-      getRootHandle().then(handle => {
-        if (handle) {
+    let mounted = true;
+    getRootHandle()
+      .then(handle => {
+        if (mounted) {
+          // OPFS or selected folder is ready
+          setFolderReady(true);
+        }
+      })
+      .catch(() => {
+        if (mounted) {
           setFolderReady(true);
         }
       });
-    }
-  }, [supported]);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleInitFolder = useCallback(async () => {
     setFolderLoading(true);
     try {
-      const handle = await initLocalFolder();
-      if (handle) {
-        setFolderReady(true);
-      }
+      await initLocalFolder();
+    } catch (e) {
+      console.warn('Init local folder:', e);
     } finally {
       setFolderLoading(false);
+      setFolderReady(true);
     }
   }, []);
 
-  if (!supported) {
+  if (folderReady || !supported) {
     return <>{children}</>;
   }
 
@@ -63,39 +72,35 @@ const FolderGuard: React.FC<FolderGuardProps> = ({ children }) => {
     btn: 'Choose Folder',
   };
 
-  if (!folderReady) {
-    return (
-      <Modal
-        visible={true}
-        closable={false}
-        maskClosable={false}
-        footer={null}
-        title={null}
-        style={{ maxWidth: 480 }}
-        bodyStyle={{ textAlign: 'center', padding: '40px 32px' }}
+  return (
+    <Modal
+      visible={true}
+      closable={false}
+      maskClosable={false}
+      footer={null}
+      title={null}
+      style={{ maxWidth: 480 }}
+      bodyStyle={{ textAlign: 'center', padding: '40px 32px' }}
+    >
+      <FolderOpen size={64} fill="#1677ff" style={{ marginBottom: 24 }} />
+      <Typography.Title heading={4} style={{ marginBottom: 12 }}>
+        {labels.title}
+      </Typography.Title>
+      <Typography.Text type="tertiary" style={{ marginBottom: 24, display: 'block' }}>
+        {labels.desc}
+      </Typography.Text>
+      <Button
+        theme="solid"
+        type="primary"
+        size="large"
+        loading={folderLoading}
+        onClick={handleInitFolder}
+        block
       >
-        <FolderOpen size={64} fill="#1677ff" style={{ marginBottom: 24 }} />
-        <Typography.Title heading={4} style={{ marginBottom: 12 }}>
-          {labels.title}
-        </Typography.Title>
-        <Typography.Text type="tertiary" style={{ marginBottom: 24, display: 'block' }}>
-          {labels.desc}
-        </Typography.Text>
-        <Button
-          theme="solid"
-          type="primary"
-          size="large"
-          loading={folderLoading}
-          onClick={handleInitFolder}
-          block
-        >
-          {labels.btn}
-        </Button>
-      </Modal>
-    );
-  }
-
-  return <>{children}</>;
+        {labels.btn}
+      </Button>
+    </Modal>
+  );
 };
 
 export default FolderGuard;

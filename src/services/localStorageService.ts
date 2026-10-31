@@ -7,61 +7,58 @@ const ROOT_HANDLE_KEY = 'root';
 
 /** 检查 File System Access API 是否可用 */
 export function isFSApiSupported(): boolean {
-  return typeof window !== 'undefined' && 'showDirectoryPicker' in window;
+  if (typeof window === 'undefined') return false;
+  return 'showDirectoryPicker' in window || (typeof navigator !== 'undefined' && !!navigator.storage?.getDirectory);
 }
-
-/** 获取持久化的文件夹句柄 */
+/** 获取持久化的文件夹句柄 (优先已选文件夹，默认使用沙箱 OPFS 自动持久化存储) */
 async function getStoredHandle(): Promise<FileSystemDirectoryHandle | null> {
-  const record = await localDB.folderHandles.get(ROOT_HANDLE_KEY);
-  if (!record?.handle) return null;
-
-  // 验证权限
-  const opts: FileSystemHandlePermissionDescriptor = { mode: 'readwrite' };
-  const permission = await record.handle.queryPermission(opts);
-  if (permission === 'granted') return record.handle;
-
-  // 重新请求权限（必须在用户交互上下文中调用，否则会抛出 SecurityError）
   try {
-    const newPermission = await record.handle.requestPermission(opts);
-    if (newPermission === 'granted') return record.handle;
-  } catch (err: any) {
-    // SecurityError: User activation is required - 需要用户交互才能请求权限
-    // 清除缓存的句柄，让后续代码重新触发文件夹选择器
-    console.warn('文件系统权限请求需要用户交互，将清除缓存句柄:', err.message);
-    await localDB.folderHandles.delete(ROOT_HANDLE_KEY);
-    return null;
+    const record = await localDB.folderHandles.get(ROOT_HANDLE_KEY);
+    if (record?.handle) {
+      const opts: FileSystemHandlePermissionDescriptor = { mode: 'readwrite' };
+      try {
+        const permission = await record.handle.queryPermission(opts);
+        if (permission === 'granted') return record.handle;
+        const newPermission = await record.handle.requestPermission(opts);
+        if (newPermission === 'granted') return record.handle;
+      } catch (err) {
+        console.warn('文件系统权限请求警告:', err);
+      }
+    }
+  } catch (err) {
+    console.warn('读取本地句柄警告:', err);
   }
 
-  // 权限被拒，清除句柄
-  await localDB.folderHandles.delete(ROOT_HANDLE_KEY);
+  // 默认使用 Origin Private File System (OPFS)，Chromium 和 Electron 原生支持，免授权弹窗且永久持久化
+  if (typeof navigator !== 'undefined' && navigator.storage && typeof navigator.storage.getDirectory === 'function') {
+    try {
+      const opfsRoot = await navigator.storage.getDirectory();
+      return await opfsRoot.getDirectoryHandle('vidcut_workspace', { create: true });
+    } catch (err) {
+      console.warn('OPFS 初始化失败:', err);
+    }
+  }
+
   return null;
 }
 
-/** 初始化本地存储文件夹（首次使用或句柄失效时弹出选择器） */
+/** 初始化本地存储文件夹（首次使用或用户更换文件夹时调用） */
 export async function initLocalFolder(): Promise<FileSystemDirectoryHandle | null> {
-  if (!isFSApiSupported()) {
-    Toast.warning('当前浏览器不支持本地文件系统 API，请使用 Chrome 或 Edge');
-    return null;
-  }
-
-  // 尝试获取已存储的句柄
-  const stored = await getStoredHandle();
-  if (stored) return stored;
-
-  // 弹出文件夹选择器
-  try {
-    const handle = await showDirectoryPicker({ mode: 'readwrite' });
-    if (handle) {
-      await localDB.folderHandles.put({ id: ROOT_HANDLE_KEY, handle });
-      return handle;
-    }
-  } catch (err: any) {
-    if (err.name !== 'AbortError') {
-      console.error('选择文件夹失败:', err);
-      Toast.error('选择文件夹失败，请重试');
+  // 1. 如果支持原生 showDirectoryPicker，尝试弹出选择器
+  if (typeof window !== 'undefined' && 'showDirectoryPicker' in window) {
+    try {
+      const handle = await showDirectoryPicker({ mode: 'readwrite' });
+      if (handle) {
+        await localDB.folderHandles.put({ id: ROOT_HANDLE_KEY, handle });
+        return handle;
+      }
+    } catch (err) {
+      console.warn('showDirectoryPicker canceled or error:', err);
     }
   }
-  return null;
+
+  // 2. 取消选择或不可用时，返回默认 OPFS 存储
+  return getStoredHandle();
 }
 
 /** 获取当前的根文件夹句柄 */

@@ -1,4 +1,3 @@
-import type { MovieData } from 'video-core-sdk';
 import BasicService from '@server/BasicService';
 import {
   createLocalProject,
@@ -7,114 +6,67 @@ import {
   copyLocalProject,
   getLocalProjectList,
   deleteAllMaterialsByAppId,
-  isFSApiSupported,
-  getRootHandle,
+  getProject,
 } from '@services/localStorageService';
 
 class Server extends BasicService {
-  // 本地存储模式是否已初始化
-  private _useLocal: boolean | null = null;
-  private _initPromise: Promise<void> | null = null;
-
-  /** 初始化并检测本地存储模式 */
+  /** 初始化并检测本地存储模式 (纯本地离线模式始终为 true) */
   private async _ensureInit(): Promise<boolean> {
-    if (this._useLocal !== null) return this._useLocal;
-    if (this._initPromise) {
-      await this._initPromise;
-      return this._useLocal!;
-    }
-    this._initPromise = (async () => {
-      if (isFSApiSupported()) {
-        const handle = await getRootHandle();
-        this._useLocal = !!handle;
-      } else {
-        this._useLocal = false;
-      }
-    })();
-    await this._initPromise;
-    return this._useLocal!;
+    return true;
   }
 
-  // 获取系统素材列表（仍走服务器）
+  // 获取系统素材列表
   getSysMaterialList = async (params: any) => {
-    return this.get(`/materials/page`, { params });
+    return [{ data: [], total: 0 }, null];
   };
 
   /** 创建项目 */
   createDraft = async (data: any) => {
-    if (await this._ensureInit()) {
-      return createLocalProject(data);
-    }
-    return this.post('/user/apps/create', data);
+    return createLocalProject(data);
   };
 
-  /** 获取作品最大数量信息（本地模式直接返回） */
+  /** 获取作品最大数量信息（本地模式无限制） */
   getAppCountInfo = async () => {
-    if (await this._ensureInit()) {
-      return [{ max: 999 }, null];
-    }
-    return this.get('/user/apps/count-info');
+    return [{ max: 999 }, null];
   };
 
   /** 获取项目列表 */
   getDraftList = async (params: any) => {
-    if (await this._ensureInit()) {
-      return getLocalProjectList(params);
-    }
-    return this.get('/user/apps/page', { params });
+    return getLocalProjectList(params);
   };
 
   /** 获取作品详情 */
   getAppsDetail = async (id: string) => {
-    if (await this._ensureInit()) {
-      const { getProject } = await import('@services/localStorageService');
-      const data = await getProject(id);
-      return [data ? { id, data } : null, null];
-    }
-    return this.get('/user/apps/info', { params: { id } });
+    const data = await getProject(id);
+    return [data ? { id, data } : null, null];
   };
 
   /** 发布作品（本地模式不需要） */
   publishApps = async (params: any) => {
-    if (await this._ensureInit()) {
-      return [{}, null];
-    }
-    return this.post('/user/apps/publish', params);
+    return [{}, null];
   };
 
   /** 删除项目 */
   deleteDraft = async (id: string) => {
-    if (await this._ensureInit()) {
-      // 同时删除关联的素材
-      deleteAllMaterialsByAppId(id).catch(() => {});
-      return deleteLocalProject(id);
-    }
-    return this.post('/user/apps/delete', { id });
+    // 同时删除关联的素材
+    deleteAllMaterialsByAppId(id).catch(() => {});
+    return deleteLocalProject(id);
   };
 
   /** 更新项目 */
   updateDraft = async (params: any) => {
-    if (await this._ensureInit()) {
-      return updateLocalProjectMeta(params.id, params);
-    }
-    return this.post('/user/apps/update', params);
+    return updateLocalProjectMeta(params.id, params);
   };
 
   /** 移动项目 */
   moveDraft = async (params: { ids: string[]; category_id: string }) => {
-    if (await this._ensureInit()) {
-      await Promise.all(params.ids.map((id: string) => updateLocalProjectMeta(id, { category_id: params.category_id })));
-      return [{}, null];
-    }
-    return this.post('/user/apps/move', params);
+    await Promise.all(params.ids.map((id: string) => updateLocalProjectMeta(id, { category_id: params.category_id })));
+    return [{}, null];
   };
 
   /** 复制项目 */
   copyDraft = async (params: any) => {
-    if (await this._ensureInit()) {
-      return copyLocalProject(params.id ?? params);
-    }
-    return this.post('/user/apps/copy', params);
+    return copyLocalProject(params.id ?? params);
   };
 }
 

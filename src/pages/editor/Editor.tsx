@@ -152,7 +152,7 @@ function EditorPage(props: IProps) {
   // SDK回调函数
   editor.callback = props.callback;
   // 本地存储模式
-  editor.useLocalStorage = props.useLocalStorage || false;
+  editor.useLocalStorage = props.useLocalStorage !== undefined ? props.useLocalStorage : true;
 
   // 本地存储模式：重写 uploadBase64，所有编辑操作中生成的文件直接存本地
   if (editor.useLocalStorage) {
