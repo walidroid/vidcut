@@ -26,3 +26,4 @@ ut = ut.replace("reject(new Error('无法获取Canvas上下文'));", "reject(new
 fs.writeFileSync('src/utils/util.ts', ut, 'utf8');
 
 console.log('[service-cleanup] Done.');
+

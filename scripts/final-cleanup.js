@@ -48,3 +48,4 @@ sp2 = sp2.replace(/\{\/\*\s*<Item title="曲线变速">[\s\S]*?<\/Item>\s*\*\/\}
 fs.writeFileSync('src/pages/editor/components/options/components/apng-speed/Speed.tsx', sp2, 'utf8');
 
 console.log('[final-cleanup] Successfully finished.');
+
