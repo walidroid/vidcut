@@ -60,7 +60,7 @@ const FrameSync = (props: Props) => {
         content={
           <div className={styles.frameSyncContent}>
             <div className={styles.frameItem}>
-              <span style={{ marginRight: 8, fontSize: 12 }}>XY帧同步</span>
+              <span style={{ marginRight: 8, fontSize: 12 }}>XY Frame Sync</span>
               <Switch
                 checked={editor.frameControlSync.xy}
                 onChange={e => {
@@ -70,7 +70,7 @@ const FrameSync = (props: Props) => {
               />
             </div>
             <div className={styles.frameItem}>
-              <span style={{ marginRight: 8, fontSize: 12 }}>Rotation帧同步</span>
+              <span style={{ marginRight: 8, fontSize: 12 }}>Rotation Frame Sync</span>
               <Switch
                 checked={editor.frameControlSync.rotation}
                 onChange={e => {
@@ -80,7 +80,7 @@ const FrameSync = (props: Props) => {
               />
             </div>
             <div className={styles.frameItem}>
-              <span style={{ marginRight: 8, fontSize: 12 }}>Size帧同步</span>
+              <span style={{ marginRight: 8, fontSize: 12 }}>Size Frame Sync</span>
               <Switch
                 checked={editor.frameControlSync.width_height}
                 onChange={e => {

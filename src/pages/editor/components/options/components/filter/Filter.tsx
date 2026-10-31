@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 export interface IProps {}
 export default function Filter(props: IProps) {
   return (
-    <Item title="滤镜">
+    <Item title={language.val('option_tab_filter') || 'Filter'}>
       <div className={styles.opacity}>Filter</div>
     </Item>
   );

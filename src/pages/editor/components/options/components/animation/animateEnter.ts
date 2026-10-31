@@ -6,7 +6,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'fadeIn',
     id: 'fadeIn',
     ename: 'fadeIn',
-    tips: '渐显',
+    tips: 'Fade In',
     frames: [
       { progress: 0, alpha: 0 },
       { progress: 1, alpha: 1 },
@@ -17,7 +17,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'fadeInDown',
     id: 'fadeInDown',
     ename: 'fadeInDown',
-    tips: '上渐显',
+    tips: 'Fade In Up',
     frames: [
       { progress: 0, alpha: 0, transform: { translateY: -100 } },
       { progress: 1, alpha: 1, transform: { translateY: 0 } },
@@ -28,7 +28,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'fadeInUp',
     id: 'fadeInUp',
     ename: 'fadeInUp',
-    tips: '下渐入',
+    tips: 'Fade In Down',
     frames: [
       { progress: 0, alpha: 0, transform: { translateY: 100 } },
       { progress: 1, alpha: 1, transform: { translateY: 0 } },
@@ -39,7 +39,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'fadeInLeft',
     id: 'fadeInLeft',
     ename: 'fadeInLeft',
-    tips: '左渐显',
+    tips: 'Fade In Left',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: -100 } },
       { progress: 1, alpha: 1, transform: { translateX: 0 } },
@@ -50,7 +50,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'fadeInRight',
     id: 'fadeInRight',
     ename: 'fadeInRight',
-    tips: '右渐入',
+    tips: 'Fade In Right',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: 100 } },
       { progress: 1, alpha: 1, transform: { translateX: 0 } },
@@ -61,7 +61,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'rotateIn',
     id: 'rotateIn',
     ename: 'rotateIn',
-    tips: '滚入',
+    tips: 'Roll In',
     frames: [
       { progress: 0, alpha: 0, transform: { rotation: 0 } },
       { progress: 1, alpha: 1, transform: { rotation: 6.283185307179586 } },
@@ -72,7 +72,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'rollIn',
     id: 'rollIn',
     ename: 'rollIn',
-    tips: '左滚入',
+    tips: 'Roll In Left',
     frames: [
       { progress: 0, alpha: 0, transform: { rotation: 2.356194490192345, translateX: -100 } },
       { progress: 1, alpha: 1, transform: { rotation: 0, translateX: 0 } },
@@ -83,7 +83,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'rotateInDownLeft',
     id: 'rotateInDownLeft',
     ename: 'rotateInDownLeft',
-    tips: '左上滚入',
+    tips: 'Roll In Top Left',
     frames: [
       { progress: 0, alpha: 0, transform: { rotation: -0.7853981633974483 } },
       { progress: 1, alpha: 1, transform: { rotation: 0 } },
@@ -94,7 +94,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'rotateInDownRight',
     id: 'rotateInDownRight',
     ename: 'rotateInDownRight',
-    tips: '右上滚入',
+    tips: 'Roll In Top Right',
     frames: [
       { progress: 0, alpha: 0, transform: { rotation: 0.7853981633974483 } },
       { progress: 1, alpha: 1, transform: { rotation: 0 } },
@@ -105,7 +105,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'bounceIn',
     id: 'bounceIn',
     ename: 'bounceIn',
-    tips: '弹入',
+    tips: 'Bounce In',
     frames: [
       { progress: 0, alpha: 0, transform: { scaleX: 0.3, scaleY: 0.3 } },
       { progress: 0.2, alpha: 1, transform: { scaleX: 1.1, scaleY: 1.1 } },
@@ -120,7 +120,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'bounceInDown',
     id: 'bounceInDown',
     ename: 'bounceInDown',
-    tips: '上弹入',
+    tips: 'Bounce In Up',
     frames: [
       { progress: 0, alpha: 0, transform: { translateY: -1000 } },
       { progress: 0.6, alpha: 1, transform: { translateY: 25 } },
@@ -134,7 +134,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'bounceInLeft',
     id: 'bounceInLeft',
     ename: 'bounceInLeft',
-    tips: '左弹入',
+    tips: 'Bounce In Left',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: -3000, scaleX: 3 } },
       { progress: 0.6, alpha: 1, transform: { translateX: 25, scaleX: 1 } },
@@ -148,7 +148,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'bounceInRight',
     id: 'bounceInRight',
     ename: 'bounceInRight',
-    tips: '右弹入',
+    tips: 'Bounce In Right',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: 3000, scaleX: 3 } },
       { progress: 0.6, alpha: 1, transform: { translateX: -25, scaleX: 1 } },
@@ -162,7 +162,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'backInLeft',
     id: 'backInLeft',
     ename: 'backInLeft',
-    tips: '左后弹入',
+    tips: 'Bounce In Left Back',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: -3000 } },
       { progress: 0.6, alpha: 1, transform: { translateX: 100 } },
@@ -176,7 +176,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'backInRight',
     id: 'backInRight',
     ename: 'backInRight',
-    tips: '右后弹入',
+    tips: 'Bounce In Right Back',
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: 3000 } },
       { progress: 0.6, alpha: 1, transform: { translateX: -100 } },
@@ -190,7 +190,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'backInDown',
     id: 'backInDown',
     ename: 'backInDown',
-    tips: '向下放大',
+    tips: 'Zoom Down',
     frames: [
       { progress: 0, alpha: 0.7, transform: { translateY: -1200, scaleX: 0.7, scaleY: 0.7 } },
       { progress: 0.8, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -202,7 +202,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'backInUp',
     id: 'backInUp',
     ename: 'backInUp',
-    tips: '向上放大',
+    tips: 'Zoom Up',
     frames: [
       { progress: 0, alpha: 0.7, transform: { translateY: 1200, scaleX: 0.7, scaleY: 0.7 } },
       { progress: 0.8, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -214,7 +214,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'zoomIn',
     id: 'zoomIn',
     ename: 'zoomIn',
-    tips: '放大',
+    tips: 'Zoom In',
     frames: [
       { progress: 0, alpha: 0, transform: { scaleX: 0.3, scaleY: 0.3 } },
       { progress: 0.5, alpha: 0.5, transform: { scaleX: 0.5, scaleY: 0.5 } },
@@ -226,7 +226,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'zoomRotateIn',
     id: 'zoomRotateIn',
     ename: 'zoomRotateIn',
-    tips: '放大旋转',
+    tips: 'Rotate Zoom In',
     frames: [
       { progress: 0, alpha: 0, transform: { scaleX: 1, rotation: 0, scaleY: 1 } },
       { progress: 1, alpha: 1, transform: { scaleX: 1.3, rotation: Math.PI / 4, scaleY: 1.3 } },
@@ -237,7 +237,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'jackInTheBox',
     id: 'jackInTheBox',
     ename: 'jackInTheBox',
-    tips: '摆动放大',
+    tips: 'Swing Zoom',
     noText: true,
     frames: [
       { progress: 0, alpha: 0, transform: { rotation: 0.5235987755982988, scaleX: 0.1, scaleY: 0.1 } },
@@ -251,7 +251,7 @@ export const animateEnter: AnimationItem[] = [
     name: 'lightSpeedInRight',
     id: 'lightSpeedInRight',
     ename: 'lightSpeedInRight',
-    tips: '右摆入',
+    tips: 'Swing Right In',
     noText: true,
     frames: [
       { progress: 0, alpha: 0, transform: { translateX: 100, skewX: -0.5235987755982988 } },

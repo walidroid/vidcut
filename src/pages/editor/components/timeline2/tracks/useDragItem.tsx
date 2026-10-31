@@ -173,7 +173,7 @@ export default function useDragItem(params: Params) {
             editor.record({
               type: 'elements_update',
               data: [element],
-              desc: '更新元素startTime',
+              desc: 'Update element start time',
             });
             const scrollTop = $tracksBody.scrollTop();
             setTimeout(() => {
@@ -419,7 +419,7 @@ export default function useDragItem(params: Params) {
           editor.record({
             type: 'elements_update',
             data: [element],
-            desc: '更新元素startTime',
+            desc: 'Update element start time',
           });
         });
     },

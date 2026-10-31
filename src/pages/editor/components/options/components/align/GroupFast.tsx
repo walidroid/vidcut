@@ -29,10 +29,10 @@ function GroupFast(props: IProps) {
   console.log('isSameType--->', isSameType);
 
   return (
-    <Item title="快捷操作">
+    <Item title="Quick Actions">
       {/* <div>边框，阴影，裁剪、图层、下移、上移、置顶、置底</div> */}
       <Space>
-        <Tooltip content={isGroup ? '打散组' : '合并组'}>
+        <Tooltip content={isGroup ? 'Ungroup' : 'Group'}>
           <a
             onClick={() => {
               const elements = editor.getGroupElementData() as ImageElement[];
@@ -63,7 +63,7 @@ function GroupFast(props: IProps) {
             )}
           </a>
         </Tooltip>
-        <Tooltip content="删除">
+        <Tooltip content="Delete">
           <a
             onClick={() => {
               pubsub.publish('keyboardDelete');
@@ -73,7 +73,7 @@ function GroupFast(props: IProps) {
           </a>
         </Tooltip>
         {isSameType && (
-          <Tooltip content="优化轨道，尽可能将相同类型的元素放到一个轨道上">
+          <Tooltip content="Optimize tracks to align same type elements">
             <a
               onClick={async () => {
                 editor.globalLoading = true;

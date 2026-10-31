@@ -27,7 +27,7 @@ const FrameData = (props: Props) => {
   return (
     <>
       <Item
-        title="帧数据"
+        title="Frame Data"
         extra={
           <Space>
             <a onClick={() => setVisible(true)}>
@@ -36,7 +36,7 @@ const FrameData = (props: Props) => {
           </Space>
         }
       ></Item>
-      <Modal title="帧数据" visible={visible} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
+      <Modal title="Frame Data" visible={visible} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
         <TextArea
           rows={8}
           onBlur={() => {
@@ -69,7 +69,7 @@ const FrameData = (props: Props) => {
               applyToElement(arr);
             }}
           >
-            抖↘
+            Shake ↘
           </a>
           <a
             onClick={() => {
@@ -90,7 +90,7 @@ const FrameData = (props: Props) => {
               applyToElement(arr);
             }}
           >
-            抖↓
+            Shake ↓
           </a>
           <a
             onClick={() => {
@@ -111,7 +111,7 @@ const FrameData = (props: Props) => {
               applyToElement(arr);
             }}
           >
-            抖↙
+            Shake ↙
           </a>
           <a
             onClick={() => {
@@ -132,16 +132,16 @@ const FrameData = (props: Props) => {
               applyToElement(arr);
             }}
           >
-            抖↔
+            Shake ↔
           </a>
           <a
             onClick={() => {
               applyToElement([]);
             }}
           >
-            清空
+            Clear
           </a>
-          <a onClick={() => setCustomVisible(true)}>自定义</a>
+          <a onClick={() => setCustomVisible(true)}>Custom</a>
         </Space>
       </Modal>
 

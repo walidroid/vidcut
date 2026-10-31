@@ -192,7 +192,7 @@ function CustomAnimation(props: IProps) {
           const { prev, next } = getPrevNext(selectFrame);
           return (
             <div className={styles.options}>
-              <Item title="进度" className={styles.item}>
+              <Item title="Progress" className={styles.item}>
                 <div className={styles.position}>
                   <InputNumber
                     innerButtons
@@ -223,11 +223,11 @@ function CustomAnimation(props: IProps) {
                     type="danger"
                     style={{ width: 'calc(50% - 3px)' }}
                   >
-                    删除此帧
+                    Delete Frame
                   </Button>
                 </div>
               </Item>
-              <Item title="位置" className={styles.item}>
+              <Item title="Position" className={styles.item}>
                 <div className={styles.position}>
                   <InputNumber
                     innerButtons
@@ -251,7 +251,7 @@ function CustomAnimation(props: IProps) {
                   />
                 </div>
               </Item>
-              <Item title="缩放" className={styles.item}>
+              <Item title="Scale" className={styles.item}>
                 <div className={styles.position}>
                   <InputNumber
                     innerButtons
@@ -279,7 +279,7 @@ function CustomAnimation(props: IProps) {
                   />
                 </div>
               </Item>
-              <Item title="倾斜" className={styles.item}>
+              <Item title="Skew" className={styles.item}>
                 <div className={styles.position}>
                   <InputNumber
                     innerButtons
@@ -305,11 +305,11 @@ function CustomAnimation(props: IProps) {
                   />
                 </div>
               </Item>
-              <Item title="旋转" className={styles.item}>
+              <Item title="Rotation" className={styles.item}>
                 <div className={styles.rotation}>
                   <InputNumber
                     innerButtons
-                    prefix="圈数"
+                    prefix="Turns"
                     min={0}
                     value={~~(rotation / (Math.PI * 2))}
                     onChange={(v: number) => {
@@ -323,7 +323,7 @@ function CustomAnimation(props: IProps) {
                   />
                   <InputNumber
                     innerButtons
-                    prefix="角度"
+                    prefix="Angle"
                     suffix="°"
                     min={0}
                     max={360}
@@ -339,7 +339,7 @@ function CustomAnimation(props: IProps) {
                   />
                 </div>
               </Item>
-              <Item title="透明度" className={styles.item}>
+              <Item title="Opacity" className={styles.item}>
                 <SliderInput
                   // suffix="%"
                   min={0}

@@ -43,7 +43,7 @@ const AddCamera = (props: Props) => {
   };
 
   return (
-    <Tooltip content={'添加镜头'}>
+    <Tooltip content={language.val('timeline_top_add_camera') || 'Add Camera'}>
       <a
         onClick={addCameraFun}
         className={classNames({

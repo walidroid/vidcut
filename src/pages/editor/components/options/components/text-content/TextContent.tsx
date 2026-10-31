@@ -43,7 +43,7 @@ function TextContent(props: IProps) {
             editor.updateOption();
             editor.record({
               type: 'elements_update',
-              desc: '修改文本内容',
+              desc: 'Edit Text Content',
               data: [elementData],
             });
           }}

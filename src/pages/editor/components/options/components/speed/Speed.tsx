@@ -43,15 +43,13 @@ function Speed(props: IProps) {
             editor.updateMovie();
             editor.record({
               type: 'elements_update',
-              desc: '修改播放速度',
+              desc: 'Change Playback Speed',
               data: [elementData],
             });
           }}
         />
       </Item>
-      {/* <Item title="曲线变速">
-        <CurveSpeed />
-      </Item> */}
+      
     </>
   );
 }

@@ -94,9 +94,7 @@ const Header = (props: IProps) => {
               {item.name}
             </a>
           ))}
-          {/* <NavLink to="/article/vip" className={styles.text} activeClassName={styles.active}>
-            会员中心
-          </NavLink> */}
+          
           {/* <NavLink to="/tools" className={styles.text} activeClassName={styles.active}>
             <Intl name="common_tools" />
           </NavLink> */}

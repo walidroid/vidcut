@@ -12,11 +12,11 @@ interface IProps {
 }
 
 const statusMap: Record<number, string> = {
-  0: '待支付',
-  1: '已支付，正在发放',
-  2: '充值成功',
-  3: '已关闭',
-  4: '发放失败，请联系管理员',
+  0: 'Pending Payment',
+  1: 'Processing...',
+  2: 'Successful',
+  3: 'Closed',
+  4: 'Failed',
 };
 
 const CreditRecharge = (props: IProps) => {
@@ -74,7 +74,7 @@ const CreditRecharge = (props: IProps) => {
   const handlePaymentSuccess = async () => {
     clearAllTimers();
     orderCacheRef.current = {};
-    Toast.success('充值成功');
+    Toast.success('Recharge successful');
     await userService.getUserDetail();
     props.onCancel();
   };
@@ -188,8 +188,8 @@ const CreditRecharge = (props: IProps) => {
     >
       <div className={styles.recharge}>
         <h2 className={styles.header}>
-          积分充值
-          <span className={styles.subtitle}>当前积分：{user?.info?.credits || 0}，积分可用于视频生成、智能工具、素材处理等场景</span>
+          Recharge Credits
+          <span className={styles.subtitle}>Current Credits: {user?.info?.credits || 0}，Credits can be used for rendering and smart tools.</span>
         </h2>
 
         <div className={styles.packages}>
@@ -204,7 +204,7 @@ const CreditRecharge = (props: IProps) => {
                 <i>¥</i>
                 {Number(item.price || 0)}
               </em>
-              <span>{item.credits} 积分</span>
+              <span>{item.credits} Credits</span>
               {item.description && <small>{item.description}</small>}
               <b>
                 <CheckOne theme="outline" size="22" fill="#fff" />
@@ -219,21 +219,21 @@ const CreditRecharge = (props: IProps) => {
               {loading || !order?.pay_url_base64 ? <Spin /> : <img src={order.pay_url_base64} />}
             </div>
             <p className={styles.qrCountdown}>
-              {remainingSeconds > 0 ? `过期倒计时：${formatRemaining(remainingSeconds)}` : '二维码已过期'}
+              {remainingSeconds > 0 ? `Expires in: ${formatRemaining(remainingSeconds)}` : 'QR code expired'}
             </p>
           </div>
           <div className={styles.payInfo}>
             <p>
-              应付金额：<strong>¥{Number(selected?.price || 0)}</strong>
+              Total: <strong>¥{Number(selected?.price || 0)}</strong>
             </p>
             <div className={styles.channels}>
-              <span className={styles.wechat}>微</span>
-              <span className={styles.alipay}>支</span>
-              <em>使用微信、支付宝扫码支付</em>
+              <span className={styles.wechat}>Pay</span>
+              
+              <em>Scan QR code to pay</em>
             </div>
-            <p className={styles.status}>{statusMap[status] || '等待支付'}</p>
+            <p className={styles.status}>{statusMap[status] || 'Waiting for payment'}</p>
             <Button onClick={refreshStatus} disabled={!order?.id}>
-              刷新状态
+              Refresh Status
             </Button>
           </div>
         </div>

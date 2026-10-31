@@ -53,7 +53,7 @@ function Strength(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '修改滤镜强度',
+              desc: 'Change Filter Strength',
               data: [elementData],
             });
           }}

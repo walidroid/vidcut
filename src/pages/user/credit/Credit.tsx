@@ -9,49 +9,49 @@ import { pubsub, util } from '@utils/index';
 import server from './server';
 import styles from './styles.module.less';
 
-const creditStatusMap = {
-  0: { text: '无效', type: 'tertiary' },
-  1: { text: '可用', type: 'success' },
-  2: { text: '已用完', type: 'warning' },
-  3: { text: '已过期', type: 'danger' },
+const creditStatusMap: Record<number, { text: string; type: any }> = {
+  0: { text: 'Invalid', type: 'tertiary' },
+  1: { text: 'Active', type: 'success' },
+  2: { text: 'Depleted', type: 'warning' },
+  3: { text: 'Expired', type: 'danger' },
 };
 
-const actionMap = {
-  vip: '充值会员赠送',
-  vip_month: '会员月度赠送',
-  purchase: '购买积分',
-  purchase_refund: '购买积分退款扣回',
-  admin: '后台发放',
-  reward: '奖励积分',
-  consume: '用户消费',
-  deduct: '后台扣减',
-  expire: '积分过期',
+const actionMap: Record<string, string> = {
+  vip: 'VIP Subscription Bonus',
+  vip_month: 'VIP Monthly Allowance',
+  purchase: 'Purchase Credits',
+  purchase_refund: 'Refund Deduction',
+  admin: 'Admin Grant',
+  reward: 'Reward Credits',
+  consume: 'Usage Consumption',
+  deduct: 'Admin Deduction',
+  expire: 'Expired Credits',
 };
 
-const sourceMap = {
-  vip: '充值会员赠送',
-  vip_month: '会员月度赠送',
-  daily: '每日赠送',
-  reward: '奖励积分',
-  purchase: '购买积分',
-  purchase_refund: '购买积分退款',
-  admin: '后台发放',
-  consume: '消费扣减',
-  deduct: '后台扣减',
-  expire: '积分过期',
+const sourceMap: Record<string, string> = {
+  vip: 'VIP Subscription Bonus',
+  vip_month: 'VIP Monthly Allowance',
+  daily: 'Daily Bonus',
+  reward: 'Reward Credits',
+  purchase: 'Purchase Credits',
+  purchase_refund: 'Refund',
+  admin: 'Admin Grant',
+  consume: 'Usage Deduction',
+  deduct: 'Admin Deduction',
+  expire: 'Expired Credits',
 };
 
-const sceneMap = {
-  tts: '语音合成',
-  auc: '音频转录字幕',
-  video: '视频生成',
-  image: '图片生成',
-  cv: '视觉智能',
-  openai: '大语言模型',
+const sceneMap: Record<string, string> = {
+  tts: 'Text-to-Speech',
+  auc: 'Audio Transcription',
+  video: 'Video Generation',
+  image: 'Image Generation',
+  cv: 'Computer Vision',
+  openai: 'AI Model',
 };
 
-const formatTime = value => (value ? util.formatDate(value, 'YYYY-MM-DD HH:mm:ss') : '-');
-const formatDate = value => (value ? util.formatDate(value, 'YYYY-MM-DD') : '永久');
+const formatTime = (value: any) => (value ? util.formatDate(value, 'YYYY-MM-DD HH:mm:ss') : '-');
+const formatDate = (value: any) => (value ? util.formatDate(value, 'YYYY-MM-DD') : 'Permanent');
 
 function Credit() {
   const [orders, setOrders] = useState([]);
@@ -62,47 +62,48 @@ function Credit() {
   const [logsLoading, setLogsLoading] = useState(false);
   const [balanceLoading, setBalanceLoading] = useState(false);
   const [logsVisible, setLogsVisible] = useState(false);
+
   const orderPage = useRef({ page: 1, page_size: 10, total: 0 });
   const logPage = useRef({ page: 1, page_size: 10, total: 0 });
 
-  const loadOrders = async (filters = orderFilters) => {
+  useEffect(() => {
+    loadOrders();
+  }, []);
+
+  const loadOrders = async () => {
     setOrdersLoading(true);
-    const [res, err] = await server.getUserCredits({ ...orderPage.current, ...filters });
+    const [res, err] = await server.getOrders({
+      page: orderPage.current.page,
+      page_size: orderPage.current.page_size,
+      keyword: orderFilters.keyword || undefined,
+      status: orderFilters.status === '' ? undefined : Number(orderFilters.status),
+      source_type: orderFilters.source_type || undefined,
+    });
     setOrdersLoading(false);
     if (err) {
       Toast.error(err);
       return;
     }
-    orderPage.current.total = res?.total || 0;
-    setOrders(res?.data || []);
+    setOrders(res.list || []);
+    orderPage.current.total = res.total || 0;
   };
 
-  const loadLogs = async (filters = logFilters) => {
+  const loadLogs = async () => {
     setLogsLoading(true);
-    const { source_type, ...queryFilters } = filters;
-    const [res, err] = await server.getCreditLogs({
-      ...logPage.current,
-      ...queryFilters,
-      type: queryFilters.type || source_type || '',
+    const [res, err] = await server.getLogs({
+      page: logPage.current.page,
+      page_size: logPage.current.page_size,
+      keyword: logFilters.keyword || undefined,
+      type: logFilters.type || undefined,
+      source_type: logFilters.source_type || undefined,
     });
     setLogsLoading(false);
     if (err) {
       Toast.error(err);
       return;
     }
-    logPage.current.total = res?.total || 0;
-    setLogs(res?.data || []);
-  };
-
-  useEffect(() => {
-    userService.getUserDetail();
-    loadOrders();
-  }, []);
-
-  const openLogs = () => {
-    setLogsVisible(true);
-    logPage.current.page = 1;
-    loadLogs();
+    setLogs(res.list || []);
+    logPage.current.total = res.total || 0;
   };
 
   const searchOrders = () => {
@@ -111,10 +112,9 @@ function Credit() {
   };
 
   const resetOrders = () => {
+    setOrderFilters({ keyword: '', status: '', source_type: '' });
     orderPage.current.page = 1;
-    const filters = { keyword: '', status: '', source_type: '' };
-    setOrderFilters(filters);
-    loadOrders(filters);
+    loadOrders();
   };
 
   const searchLogs = () => {
@@ -123,10 +123,15 @@ function Credit() {
   };
 
   const resetLogs = () => {
+    setLogFilters({ keyword: '', type: '', source_type: '' });
     logPage.current.page = 1;
-    const filters = { keyword: '', type: '', source_type: '' };
-    setLogFilters(filters);
-    loadLogs(filters);
+    loadLogs();
+  };
+
+  const openLogs = () => {
+    setLogsVisible(true);
+    logPage.current.page = 1;
+    loadLogs();
   };
 
   const refreshBalance = async () => {
@@ -138,56 +143,56 @@ function Credit() {
       Toast.error(err);
       return;
     }
-    Toast.success('刷新成功');
+    Toast.success('Refreshed successfully');
   };
 
   const creditColumns = [
-    { title: '记录ID', dataIndex: 'id', width: 100 },
-    { title: '来源', dataIndex: 'source_type', width: 120, render: value => sourceMap[value] || value || '-' },
+    { title: 'Record ID', dataIndex: 'id', width: 100 },
+    { title: 'Source', dataIndex: 'source_type', width: 140, render: (value: any) => sourceMap[value] || value || '-' },
     {
-      title: '入账积分',
+      title: 'Credits',
       dataIndex: 'credits',
       width: 120,
-      render: value => <span className={styles.amountPositive}>+{Number(value || 0)}</span>,
+      render: (value: any) => <span className={styles.amountPositive}>+{Number(value || 0)}</span>,
     },
     {
-      title: '剩余积分',
+      title: 'Remaining',
       dataIndex: 'balance',
       width: 120,
-      render: value => value ?? '-',
+      render: (value: any) => value ?? '-',
     },
     {
-      title: '状态',
+      title: 'Status',
       dataIndex: 'status',
       width: 130,
-      render: value => {
+      render: (value: any) => {
         const item = creditStatusMap[value] || { text: value || '-', type: 'tertiary' };
         return <Tag type={item.type}>{item.text}</Tag>;
       },
     },
-    { title: '有效期', dataIndex: 'expire_at', width: 170, render: formatDate },
-    { title: '来源对象', dataIndex: 'source_ref_id', width: 180, render: (value, record) => value || record.source_ref_type || '-' },
-    { title: '创建时间', dataIndex: 'createdAt', width: 170, render: formatTime },
+    { title: 'Expires', dataIndex: 'expire_at', width: 170, render: formatDate },
+    { title: 'Ref ID', dataIndex: 'source_ref_id', width: 180, render: (value: any, record: any) => value || record.source_ref_type || '-' },
+    { title: 'Created At', dataIndex: 'createdAt', width: 170, render: formatTime },
   ];
 
   const logColumns = [
-    { title: '时间', dataIndex: 'createdAt', width: 170, render: formatTime },
-    { title: '类型', dataIndex: 'type', width: 140, render: value => actionMap[value] || value || '-' },
-    { title: '来源', dataIndex: 'source_type', width: 140, render: (value, record) => sourceMap[value || record.type] || value || record.type || '-' },
+    { title: 'Time', dataIndex: 'createdAt', width: 170, render: formatTime },
+    { title: 'Type', dataIndex: 'type', width: 140, render: (value: any) => actionMap[value] || value || '-' },
+    { title: 'Source', dataIndex: 'source_type', width: 140, render: (value: any, record: any) => sourceMap[value || record.type] || value || record.type || '-' },
     {
-      title: '积分变动',
+      title: 'Credit Change',
       dataIndex: 'credits',
-      width: 110,
-      render: value => {
+      width: 130,
+      render: (value: any) => {
         const num = Number(value || 0);
         return <span className={num >= 0 ? styles.amountPositive : styles.amountNegative}>{num > 0 ? `+${num}` : num}</span>;
       },
     },
-    { title: '余额', dataIndex: 'balance', width: 100, render: value => value ?? '-' },
+    { title: 'Balance', dataIndex: 'balance', width: 100, render: (value: any) => value ?? '-' },
     {
-      title: '场景',
+      title: 'Scene',
       dataIndex: 'task_type',
-      render: (value, record) => {
+      render: (value: any, record: any) => {
         const scene = value || record.scene || record.details?.scene || record.details?.source_type || record.model || '';
         return sceneMap[scene] || scene || '-';
       },
@@ -199,39 +204,39 @@ function Credit() {
   }
 
   return (
-    <ContentUser title="我的积分">
+    <ContentUser title="My Credits">
       <div className={styles.credit}>
         <div className={styles.balance}>
-          <div className={styles.label}>当前积分余额</div>
+          <div className={styles.label}>Current Credit Balance</div>
           <div className={styles.value}>{user.info.credits || 0}</div>
           <div className={styles.balanceActions}>
             <Button icon={<Refresh theme="outline" size="16" />} loading={balanceLoading} onClick={refreshBalance}>
-              刷新
+              Refresh
             </Button>
             <Button type="primary" icon={<VipOne theme="outline" size="16" />} onClick={() => {
               pubsub.publish('showCreditRecharge');
             }}>
-              充值积分
+              Recharge Credits
             </Button>
             <Button icon={<VipOne theme="outline" size="16" />} onClick={openLogs}>
-              积分明细
+              Credit Details
             </Button>
           </div>
         </div>
 
         <div className={styles.section}>
-          <div className={styles.sectionTitle}>积分记录</div>
+          <div className={styles.sectionTitle}>Credit Records</div>
           <div className={styles.filters}>
             <Input
               value={orderFilters.keyword}
-              placeholder="记录ID / 来源对象"
+              placeholder="Record ID / Ref ID"
               showClear
               onChange={keyword => setOrderFilters({ ...orderFilters, keyword })}
               onEnterPress={searchOrders}
             />
             <Select
               value={orderFilters.status}
-              placeholder="记录状态"
+              placeholder="Status"
               showClear
               onChange={status => setOrderFilters({ ...orderFilters, status: status as string })}
             >
@@ -243,7 +248,7 @@ function Credit() {
             </Select>
             <Select
               value={orderFilters.source_type}
-              placeholder="积分来源"
+              placeholder="Source"
               showClear
               onChange={source_type => setOrderFilters({ ...orderFilters, source_type: source_type as string })}
             >
@@ -254,9 +259,9 @@ function Credit() {
               ))}
             </Select>
             <Button type="primary" onClick={searchOrders}>
-              查询
+              Search
             </Button>
-            <Button onClick={resetOrders}>重置</Button>
+            <Button onClick={resetOrders}>Reset</Button>
           </div>
           <Table
             rowKey="id"
@@ -264,7 +269,7 @@ function Credit() {
             dataSource={orders}
             loading={ordersLoading}
             pagination={false}
-            empty={<Empty description="暂无积分记录" />}
+            empty={<Empty description="No credit records found" />}
           />
           <div className={styles.pagination}>
             <Pagination
@@ -279,19 +284,19 @@ function Credit() {
           </div>
         </div>
 
-        <Modal title="积分明细" visible={logsVisible} footer={null} width={860} onCancel={() => setLogsVisible(false)}>
+        <Modal title="Credit Details" visible={logsVisible} footer={null} width={860} onCancel={() => setLogsVisible(false)}>
           <Spin spinning={logsLoading}>
             <div className={styles.filters}>
               <Input
                 value={logFilters.keyword}
-                placeholder="流水ID / 订单ID"
+                placeholder="Transaction ID / Order ID"
                 showClear
                 onChange={keyword => setLogFilters({ ...logFilters, keyword })}
                 onEnterPress={searchLogs}
               />
               <Select
                 value={logFilters.type}
-                placeholder="变动类型"
+                placeholder="Change Type"
                 showClear
                 onChange={type => setLogFilters({ ...logFilters, type: type as string })}
               >
@@ -303,7 +308,7 @@ function Credit() {
               </Select>
               <Select
                 value={logFilters.source_type}
-                placeholder="积分来源"
+                placeholder="Source"
                 showClear
                 onChange={source_type => setLogFilters({ ...logFilters, source_type: source_type as string })}
               >
@@ -314,11 +319,11 @@ function Credit() {
                 ))}
               </Select>
               <Button type="primary" onClick={searchLogs}>
-                查询
+                Search
               </Button>
-              <Button onClick={resetLogs}>重置</Button>
+              <Button onClick={resetLogs}>Reset</Button>
             </div>
-            <Table rowKey="id" columns={logColumns} dataSource={logs} pagination={false} empty={<Empty description="暂无积分明细" />} />
+            <Table rowKey="id" columns={logColumns} dataSource={logs} pagination={false} empty={<Empty description="No credit details found" />} />
             <div className={styles.pagination}>
               <Pagination
                 currentPage={logPage.current.page}

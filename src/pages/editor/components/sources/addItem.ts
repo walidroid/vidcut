@@ -78,7 +78,7 @@ export const addImageVideoAudioItem = async (
   console.log('resource---noAudioTracks', resource.noAudioTracks);
   editor.record({
     type: 'elements_create',
-    desc: '添加元素' + elementData.id,
+    desc: 'Add element ' + elementData.id,
     data: [elementData],
   });
 
@@ -142,7 +142,7 @@ export const addLottieItem = async (item: any, insertTime?: number, trackIndex?:
   // 保存历史记录
   editor.record({
     type: 'elements_create',
-    desc: '添加元素' + elementData.id,
+    desc: 'Add element ' + elementData.id,
     data: [elementData],
   });
   editor.updateMovie();
@@ -226,7 +226,7 @@ export const addEffectItem = async (item: any, insertTime?: number, trackIndex?:
   // 保存历史记录
   editor.record({
     type: 'elements_create',
-    desc: '添加元素' + elementData.id,
+    desc: 'Add element ' + elementData.id,
     data: [elementData],
   });
   editor.updateMovie();
@@ -272,7 +272,7 @@ export const addFilterItem = async (item: any, insertTime?: number, trackIndex?:
   // 保存历史记录
   editor.record({
     type: 'elements_create',
-    desc: '添加元素' + elementData.id,
+    desc: 'Add element ' + elementData.id,
     data: [elementData],
   });
   editor.updateMovie();
@@ -297,7 +297,7 @@ export const addTextItem = async (item: any, insertTime?: number, trackIndex?: n
   // 保存历史记录
   editor.record({
     type: 'elements_create',
-    desc: '添加元素' + elementData.id,
+    desc: 'Add element ' + elementData.id,
     data: [elementData],
   });
   editor.updateMovie();
@@ -433,7 +433,7 @@ async function addEChartItem(item: any, insertTime?: number, trackIndex?: number
   // // 保存历史记录
   // editor.record({
   //   type: 'elements_create',
-  //   desc: '添加元素' + elementData.id,
+  //   desc: 'Add element ' + elementData.id,
   //   data: [elementData],
   // });
   // editor.updateMovie();
@@ -470,7 +470,7 @@ async function addModel3DItem(item: any, insertTime?: number, trackIndex?: numbe
   // // 保存历史记录
   // editor.record({
   //   type: 'elements_create',
-  //   desc: '添加元素' + elementData.id,
+  //   desc: 'Add element ' + elementData.id,
   //   data: [elementData],
   // });
   // editor.updateMovie();
@@ -511,13 +511,13 @@ export async function addItem(item: any, insertTime: number, trackIndex: number)
   const { editor } = stores;
 
   if (editor.globalLoading) {
-    Toast.warning('操作太频繁了');
+    Toast.warning(language.val('common_operation_frequent') || 'Operation too frequent');
     return;
   }
 
   // 转码任务状态(-1-不处理 0-待处理1-处理中 2-处理成功3-处理失败)
   if ([0, 1, 3].includes(item.convert_status)) {
-    Toast.warning('素材不可用');
+    Toast.warning(language.val('common_material_unavailable') || 'Material unavailable');
     return;
   }
 
@@ -525,7 +525,7 @@ export async function addItem(item: any, insertTime: number, trackIndex: number)
 
   const mediaTrackNum = editor.movie.getMediaTrackNum();
   if (mediaTrackNum >= editor.exConfig.maxMediaTrackNum) {
-    Toast.error(`最多只能添加${editor.exConfig.maxMediaTrackNum}条媒体(视频&图片)轨道`);
+    Toast.error(`Maximum ${editor.exConfig.maxMediaTrackNum} media tracks allowed`);
     editor.globalLoading = false;
     return;
   }

@@ -180,6 +180,19 @@ if (code.includes(s13)) {
   console.warn('[patch-sdk] Warning: could not find groupByTrackIndex pattern.');
 }
 
+// 14. Bypass registration ID check in Movie
+const s14 = '!Re)return jsx("div",{style:{color:"red"},children:"必须填写注册ID，注册ID可通过https://video.h5ds.com进行申请"});';
+const r14 = 'false&&!Re)return jsx("div",{style:{color:"red"},children:""});';
+if (code.includes(s14)) {
+  code = code.replace(s14, r14);
+  modified = true;
+  console.log('[patch-sdk] Successfully bypassed registration ID check.');
+} else if (code.includes(r14)) {
+  console.log('[patch-sdk] Registration ID check already bypassed.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find registration ID pattern.');
+}
+
 if (modified) {
   fs.writeFileSync(targetPath, code, 'utf8');
   console.log('[patch-sdk] All patches successfully applied to video-core-sdk.js.');

@@ -36,7 +36,7 @@ function Transition(props: IProps) {
             editor.updateTimeline();
             editor.record({
               type: 'elements_update',
-              desc: '修改转场时长',
+              desc: 'Change Transition Duration',
               data: [elementData as any],
             });
           }}

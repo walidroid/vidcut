@@ -68,7 +68,7 @@ function Audio(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '设置音量',
+              desc: 'Set Volume',
               data: [elementData],
             });
           }}
@@ -89,7 +89,7 @@ function Audio(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '淡入声音',
+              desc: 'Fade In Audio',
               data: [elementData],
             });
           }}
@@ -110,7 +110,7 @@ function Audio(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '淡出声音',
+              desc: 'Fade Out Audio',
               data: [elementData],
             });
           }}

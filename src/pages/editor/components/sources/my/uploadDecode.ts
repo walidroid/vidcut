@@ -239,19 +239,19 @@ export async function checkAndConvert(url: string, options: ConvertOptions): Pro
   }
 
   // 探测元数据（用独立实例，用完即销毁）
-  onLog?.('正在分析视频信息...');
+  onLog?.('Analyzing video information...');
   const metadata = await mediaInfo(options.file);
 
   // 判断是否需要转码
   const check = needConvert(metadata, type);
 
   if (!check.convert) {
-    onLog?.('视频无需转码，直接使用原文件');
+    onLog?.('Video does not need transcoding, using original file.');
     return { url, converted: false, metadata };
   }
 
   // 执行转码：用独立实例，确保干净的 FS
-  onLog?.('开始转码...');
+  onLog?.('Starting transcoding...');
   onProgress?.({ percent: 0 });
 
   const suffix = Date.now();
@@ -293,7 +293,7 @@ export async function checkAndConvert(url: string, options: ConvertOptions): Pro
   win._ffmpegWASMInstance = null;
 
   onProgress?.({ percent: 100 });
-  onLog?.('转码完成');
+  onLog?.('Transcoding completed.');
 
   return { url: blobUrl, converted: true, metadata };
 }
@@ -307,7 +307,7 @@ export async function forceConvert(url: string, options: ConvertOptions): Promis
   const urlPath = url.split('?')[0];
   const ext = options.ext || urlPath.split('.').pop()?.toLowerCase() || 'mp4';
 
-  onLog?.('开始强制转码...');
+  onLog?.('Starting force transcoding...');
   onProgress?.({ percent: 0 });
 
   const suffix = Date.now();
@@ -347,7 +347,7 @@ export async function forceConvert(url: string, options: ConvertOptions): Promis
   win._ffmpegWASMInstance = null;
 
   onProgress?.({ percent: 100 });
-  onLog?.('强制转码完成');
+  onLog?.('Force transcoding completed.');
 
   return {
     url: blobUrl,

@@ -15,17 +15,17 @@ interface IProps {
 }
 
 const statusMap: Record<number, string> = {
-  0: '待支付',
-  1: '已支付，正在开通',
-  2: '会员开通成功',
-  3: '已关闭',
-  4: '发放失败，请联系管理员',
+  0: 'Pending Payment',
+  1: 'Activating...',
+  2: 'VIP Activated',
+  3: 'Closed',
+  4: 'Failed',
 };
 
 const unitMap: Record<string, string> = {
-  day: '天',
-  month: '个月',
-  year: '年',
+  day: ' days',
+  month: ' months',
+  year: ' years',
 };
 
 const VipRecharge = (props: IProps) => {
@@ -99,7 +99,7 @@ const VipRecharge = (props: IProps) => {
   const handlePaymentSuccess = async () => {
     clearAllTimers();
     orderCacheRef.current = {};
-    Toast.success('会员开通成功');
+    Toast.success('VIP activated successfully');
     await userService.getUserDetail();
     closeModal();
   };
@@ -228,8 +228,8 @@ const VipRecharge = (props: IProps) => {
     >
       <div className={styles.recharge}>
         <h2 className={styles.header}>
-          开通会员
-          <span className={styles.subtitle}>会员权益自动叠加，未过期将自动顺延</span>
+          Subscribe VIP
+          <span className={styles.subtitle}>VIP benefits accumulate and renew automatically.</span>
         </h2>
 
         <div className={styles.packages}>
@@ -248,7 +248,7 @@ const VipRecharge = (props: IProps) => {
                 {Number(item.current_price || 0)}
               </em>
               {Number(item.original_price || 0) > Number(item.current_price || 0) && (
-                <del>原价 ￥{Number(item.original_price || 0)}</del>
+                <del>Regular ￥{Number(item.original_price || 0)}</del>
               )}
               <span>{formatDuration(item)}</span>
               {item.description && <small>{item.description}</small>}
@@ -266,9 +266,9 @@ const VipRecharge = (props: IProps) => {
                   marginTop: '6px'
                 }}>
                   <Gift size="12" fill="#ff6a32" />
-                  赠送 {item.first_credit} 积分
+                  Bonus {item.first_credit} Credits
                   {item.first_credit_expire && (
-                    <> · 有效期 {formatDuration(item.first_credit_expire)}</>
+                    <> · Valid for {formatDuration(item.first_credit_expire)}</>
                   )}
                 </span>
               )}
@@ -285,21 +285,21 @@ const VipRecharge = (props: IProps) => {
               {loading || !order?.pay_url_base64 ? <Spin /> : <img src={order.pay_url_base64} />}
             </div>
             <p className={styles.qrCountdown}>
-              {remainingSeconds > 0 ? `过期倒计时：${formatRemaining(remainingSeconds)}` : '二维码已过期'}
+              {remainingSeconds > 0 ? `Expires in: ${formatRemaining(remainingSeconds)}` : 'QR code expired'}
             </p>
           </div>
           <div className={styles.payInfo}>
             <p>
-              应付金额：<strong>￥{Number(selected?.current_price || 0)}</strong>
+              Total: <strong>￥{Number(selected?.current_price || 0)}</strong>
             </p>
             <div className={styles.channels}>
-              <span className={styles.wechat}>微</span>
-              <span className={styles.alipay}>支</span>
-              <em>使用微信、支付宝扫码支付</em>
+              <span className={styles.wechat}>Pay</span>
+              
+              <em>Scan QR code to pay</em>
             </div>
-            <p className={styles.status}>{statusMap[status] || '等待支付'}</p>
+            <p className={styles.status}>{statusMap[status] || 'Waiting for payment'}</p>
             <Button onClick={refreshStatus} disabled={!order?.id}>
-              刷新状态
+              Refresh Status
             </Button>
           </div>
         </div>

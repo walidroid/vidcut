@@ -25,7 +25,7 @@ function StartFrameNumber(props: IProps) {
         <Item
           title={
             <>
-              循环
+              Loop
               <span
                 style={{ fontSize: 12, marginLeft: 5, opacity: 0.6, fontWeight: 'normal' }}
               >{`${elementData.startFrameDuration || 0}~${(elementData.playFrameDuration || resource.duration || 0).toFixed(1)}s 

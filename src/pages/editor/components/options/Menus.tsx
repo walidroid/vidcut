@@ -26,23 +26,23 @@ function Menus(props: IProps) {
   const staticNavs: NavItem[] = [
     {
       id: 'basic',
-      name: '基础',
+      name: language.val('option_tab_base') || 'Basic',
     },
     {
       id: 'audio',
-      name: '音频',
+      name: language.val('option_tab_audio') || 'Audio',
     },
     {
       id: 'speed',
-      name: '变速',
+      name: language.val('option_speed') || 'Speed',
     },
     {
       id: 'animation',
-      name: '动画',
+      name: language.val('option_tab_animation') || 'Animation',
     },
     {
       id: 'colour',
-      name: '调节',
+      name: language.val('option_adjust') || 'Adjust',
     },
   ];
 
@@ -65,7 +65,7 @@ function Menus(props: IProps) {
       navTypes = ['basic'];
       break;
     default:
-      return <div style={{ color: '#ccc', padding: 10 }}>未配置:{element.type}组件</div>;
+      return <div style={{ color: '#ccc', padding: 10 }}>Not configured: {element.type}</div>;
   }
   const navs: NavItem[] = staticNavs.filter(d => navTypes.includes(d.id));
 

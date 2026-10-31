@@ -155,13 +155,13 @@ const CurveSpeed = (props: Props) => {
           forceUpdate();
           editor.record({
             type: 'elements_update',
-            desc: '修改曲线变速',
+            desc: 'Change Speed Curve',
             data: [elementData],
           });
         }}
       />
       <div className={styles.duration}>
-        <i>时长：</i>
+        <i>{language.val('transition_duration') || 'Duration'}: </i>
         {elementData.duration.toFixed(2)}s → <em>{(elementData.duration / avgSpeed).toFixed(2)}s</em>
       </div>
       <div className={styles.curveSpeed}>
@@ -224,7 +224,7 @@ const CurveSpeed = (props: Props) => {
         </div>
       </div>
       <div className={styles.btns}>
-        <Tooltip content="恢复">
+        <Tooltip content="Reset">
           <a
             className={styles.btn}
             onClick={() => {
@@ -236,7 +236,7 @@ const CurveSpeed = (props: Props) => {
             <Redo theme="outline" size="14" fill={theme.findColor('--theme-icon')} strokeWidth={4} />
           </a>
         </Tooltip>
-        <Tooltip content="新增/删除">
+        <Tooltip content="Add / Delete">
           <a
             onClick={() => {
               if (btnType === 'add') {

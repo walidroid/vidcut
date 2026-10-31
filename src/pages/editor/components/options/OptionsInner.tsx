@@ -71,7 +71,7 @@ function OptionsInner(props: IProps) {
       <Empty
         image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
         darkModeImage={<IllustrationNoResultDark style={{ width: 150, height: 150 }} />}
-        description={'类型错误'}
+        description={'Invalid Element'}
       />
     </div>
   );

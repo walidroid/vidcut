@@ -5,15 +5,15 @@ import styles from "./sidebar.module.less";
 const Sidebar = () => {
   const navList = [
     {
-      name: "用户协议",
+      name: "User Agreement",
       path: "/user/agreement",
     },
     {
-      name: "隐私政策",
+      name: "Privacy Policy",
       path: "/user/privacy",
     },
     {
-      name: "会员服务协议",
+      name: "VIP Agreement",
       path: "/user/vipService",
     },
   ];

@@ -265,13 +265,13 @@ const VideoSplit = (props: Props) => {
         </div>
         <div className={styles.markerBox}>
           <div className={styles.markerTime}>
-            分割时间点：
+            Split points: 
             {frameRef.current &&
               duration &&
               markers
                 .sort((a, b) => a - b)
                 .map(x => `${((x / frameRef.current.width) * duration).toFixed(2)}s`)
-                .join('、')}
+                .join(', ')}
           </div>
           <Space>
             <InputNumber

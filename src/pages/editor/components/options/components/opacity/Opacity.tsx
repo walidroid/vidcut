@@ -57,7 +57,7 @@ function Opacity(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '设置透明度',
+              desc: 'Set Opacity',
               data: [elementData],
             });
           }}

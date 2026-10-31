@@ -22,9 +22,7 @@ export default function Footer(props: IProps) {
               <a href="#">{<Intl name="common_home" />}</a>
             </li>
             
-            {/* <li>
-              <a href="#">VIP特权</a>
-            </li> */}
+            
           </ul>
         </section>
         <section className={styles.item}>
@@ -55,10 +53,7 @@ export default function Footer(props: IProps) {
             <span className={styles.span}>
               
             </span>
-            {/* <span className={styles.span}>
-              <i>董经理</i>
-              <em>13551301693</em>
-            </span> */}
+            
           </div>
         </section>
       </div>
@@ -66,9 +61,7 @@ export default function Footer(props: IProps) {
         <span className={styles.copyRight}>
           <Intl name="common_copyright" />
         </span>
-        {/* <span className={styles.cookie}>
-          开启cookie提供更好的服务 <a>接受</a>
-        </span> */}
+        
       </div>
     </div>
   );

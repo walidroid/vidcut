@@ -44,7 +44,7 @@ function Captions(props: IProps) {
     <>
       <div className={styles.header}>
         <Space style={{ width: '100%' }}>
-          <SplitButtonGroup style={{ width: '100%' }} aria-label="项目操作按钮组">
+          <SplitButtonGroup style={{ width: '100%' }} aria-label="Actions">
             <Button
               // theme="solid"
               // type="primary"
@@ -75,12 +75,12 @@ function Captions(props: IProps) {
                   onClick: () => {
                     Modal.confirm({
                       maskClosable: false,
-                      title: '自动计算字幕时长',
+                      title: 'Auto Calculate Duration',
                       content: (
                         <Space style={{ padding: 20 }}>
                           <InputNumber
                             ref={speedRef}
-                            placeholder="每秒说几个字"
+                            placeholder="Characters per second"
                             min={0}
                             style={{ width: '200px' }}
                             max={20}
@@ -101,14 +101,12 @@ function Captions(props: IProps) {
                               });
                               editor.record({
                                 type: 'update',
-                                desc: '自动计算字幕时长',
+                                desc: 'Auto calculate caption duration',
                               });
                               editor.updateMovie();
                               editor.updateTimeline();
                             }}
-                          >
-                            确定
-                          </Button>
+                          >{language.val("common_confirm") || "Confirm"}</Button>
                         </Space>
                       ),
                       footer: null,
@@ -131,7 +129,7 @@ function Captions(props: IProps) {
             image={<IllustrationNoContent style={{ width: 150, height: 150 }} />}
             darkModeImage={<IllustrationNoContentDark style={{ width: 150, height: 150 }} />}
             // title="未选中任何元素"
-            description="没有字幕"
+            description="No subtitles"
           />
         </div>
       )}
@@ -156,7 +154,7 @@ function Captions(props: IProps) {
                     {util.secToTime(d.startTime + d.duration, 'hhmmss', 0)}
                   </span>
                   &nbsp;&nbsp;
-                  <Tooltip content="删除">
+                  <Tooltip content="Delete">
                     <a
                       onClick={e => {
                         e.stopPropagation();
@@ -169,18 +167,18 @@ function Captions(props: IProps) {
                 </div>
                 {captions.length === i + 1 ? null : (
                   <div className={styles.btns}>
-                    <Tooltip content="插入字幕">
+                    <Tooltip content="Insert Caption">
                       <Button
                         onClick={e => {
                           e.stopPropagation();
                           // 插入
-                          editor.addCaption('字幕内容', i);
+                          editor.addCaption('Subtitle text', i);
                         }}
                       >
                         <Plus theme="outline" size="14" fill="var(--theme-icon)" />
                       </Button>
                     </Tooltip>
-                    <Tooltip content="合并上下两个字幕">
+                    <Tooltip content="Merge Captions">
                       <Button
                         onClick={e => {
                           e.stopPropagation();
@@ -233,7 +231,7 @@ function Captions(props: IProps) {
                       });
                       editor.record({
                         type: 'add',
-                        desc: '添加字幕',
+                        desc: 'Add caption',
                       });
                       editor.updateMovie();
                       editor.updateTimeline();
@@ -258,16 +256,16 @@ function Captions(props: IProps) {
       )}
       <Modal
         width={800}
-        title="批量添加字幕"
+        title="Batch Add Subtitles"
         visible={visible}
         maskClosable={false}
         onCancel={() => setVisible(false)}
         onOk={async () => {
           Modal.confirm({
-            title: '确认修改吗？',
-            content: '确认后，所有字幕将被替换为新的字幕内容，原来的字幕时间将会被重新设置',
-            cancelText: '取消',
-            okText: '确认',
+            title: 'Confirm Changes?',
+            content: 'All subtitles will be replaced with new text and timings reset.',
+            cancelText: 'Cancel',
+            okText: 'Confirm',
             okType: 'danger',
             onOk: async () => {
               editor.globalLoading = true;
@@ -290,7 +288,7 @@ function Captions(props: IProps) {
               editor.globalLoading = false;
               editor.record({
                 type: 'add',
-                desc: `批量添加字幕 × ${lines.length}`,
+                desc: `Batch add captions × ${lines.length}`,
               });
               editor.updateMovie();
               editor.updateTimeline();
@@ -301,7 +299,7 @@ function Captions(props: IProps) {
       >
         {visible && (
           <div>
-            <TextArea placeholder="每行代表一段字幕" value={texts} onChange={e => setTexts(e)} rows={10} />
+            <TextArea placeholder="Enter one caption per line" value={texts} onChange={e => setTexts(e)} rows={10} />
           </div>
         )}
       </Modal>

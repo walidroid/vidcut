@@ -108,12 +108,7 @@ const ContextMenus = (props: Props) => {
           </Item>
         </>
       )}
-      {/* <Item id="cut" onClick={handleItemClick}>
-        打散
-      </Item>
-      <Item id="cut" onClick={handleItemClick}>
-        合并
-      </Item> */}
+      
       <Item className={styles.item} id="copy" onClick={handleItemClick}>
         <Copy theme="outline" size="20" fill={iconcolor} strokeWidth={3} />
         <span className={styles.name}>{language.val('cm_copy')}</span>

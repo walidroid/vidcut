@@ -307,7 +307,7 @@ function Canvas(props: IProps) {
                 // forceUpdate();
                 // 历史记录
                 editor.record({
-                  desc: '原始数据',
+                  desc: 'Original Data',
                   type: 'global',
                   data: editor.data,
                   selecteds: [],
@@ -320,7 +320,7 @@ function Canvas(props: IProps) {
         </div>
       </div>
       <Space className={styles.move}>
-        <Tooltip content={!editor.canvasDragEnable ? '拖动画布' : '元素选择'}>
+        <Tooltip content={!editor.canvasDragEnable ? (language.val('canvas_drag') || 'Pan Canvas') : (language.val('canvas_select') || 'Select Element')}>
           <a
             onClick={() => {
               if (!editor.canvasDragEnable) {
@@ -355,7 +355,7 @@ function Canvas(props: IProps) {
         >
           <Plus theme="outline" size="20" fill="var(--theme-icon)" strokeWidth={3} />
         </a>
-        <Tooltip content="自适应">
+        <Tooltip content={language.val('canvas_fit') || 'Fit to Screen'}>
           <a
             onClick={() => {
               fit();

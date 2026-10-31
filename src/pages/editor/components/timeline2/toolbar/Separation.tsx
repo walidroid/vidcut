@@ -45,7 +45,7 @@ function Separation(props: IProps) {
       const videoURL = editor.movie.resourceManage.reURL(resource.url);
       const hasAudio = await checkVideoUrlHasAudio(videoURL, resource.type);
       if (!hasAudio) {
-        Toast.warning('该视频没有音频轨道');
+        Toast.warning(language.val('timeline_no_audio') || 'Video has no audio track');
         return;
       }
 

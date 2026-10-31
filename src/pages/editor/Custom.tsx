@@ -17,9 +17,7 @@ const Custom = (props: Props) => {
             const totalTime = editor.movie.getTotalTime();
             alert(totalTime);
           }}
-        >
-          视频时长
-        </Button>
+        >Video Duration</Button>
         <Button
           onClick={async () => {
             // 创建一个图片元素
@@ -55,9 +53,7 @@ const Custom = (props: Props) => {
             editor.setContorlAndSelectedElemenent([elementData.id]);
             editor.updateTimeline();
           }}
-        >
-          添加图片
-        </Button>
+        >Add Image</Button>
         <Button
           onClick={async () => {
             try {
@@ -91,9 +87,7 @@ const Custom = (props: Props) => {
               console.error('导入媒体失败:', error);
             }
           }}
-        >
-          添加视频
-        </Button>
+        >Add Video</Button>
         <Button
           onClick={() => {
             history.push('/upload');

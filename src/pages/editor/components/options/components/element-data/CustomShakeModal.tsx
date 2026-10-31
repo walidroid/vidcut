@@ -92,18 +92,18 @@ const CustomShakeModal: React.FC<Props> = ({ visible, elementData, onCancel, onA
 
   return (
     <Modal
-      title="自定义抖动"
+      title="Custom Shake"
       visible={visible}
       onCancel={onCancel}
       onOk={handleOk}
       afterOpen={handleOpen}
-      okText="生成并应用"
+      okText="Generate & Apply"
       width={520}
     >
       <style>{keyframesCSS}</style>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div className={styles.frameItem}>
-          <span>X轴范围</span>
+          <span>X Range</span>
           <InputNumber
             value={rangeX}
             min={0}
@@ -112,10 +112,10 @@ const CustomShakeModal: React.FC<Props> = ({ visible, elementData, onCancel, onA
             onChange={v => setRangeX(v as number)}
             style={{ width: 120 }}
           />
-          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>像素（±范围）</span>
+          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>Pixels (± range)</span>
         </div>
         <div className={styles.frameItem}>
-          <span>Y轴范围</span>
+          <span>Y Range</span>
           <InputNumber
             value={rangeY}
             min={0}
@@ -124,10 +124,10 @@ const CustomShakeModal: React.FC<Props> = ({ visible, elementData, onCancel, onA
             onChange={v => setRangeY(v as number)}
             style={{ width: 120 }}
           />
-          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>像素（±范围）</span>
+          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>Pixels (± range)</span>
         </div>
         <div className={styles.frameItem}>
-          <span>时间间隔</span>
+          <span>Interval</span>
           <InputNumber
             value={interval}
             min={0.05}
@@ -136,13 +136,13 @@ const CustomShakeModal: React.FC<Props> = ({ visible, elementData, onCancel, onA
             onChange={v => setInterval(v as number)}
             style={{ width: 120 }}
           />
-          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>每次波动时长（秒）</span>
+          <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>Duration per wave (sec)</span>
         </div>
         <div className={styles.frameItem}>
-          <span>随机</span>
+          <span>Random</span>
           <Switch checked={isRandom} onChange={v => setIsRandom(v)} />
           <span style={{ marginLeft: 8, opacity: 0.5, fontSize: 12 }}>
-            {isRandom ? '随机偏移' : '正弦往复'}
+            {isRandom ? 'Random Offset' : 'Sine Wave'}
           </span>
         </div>
       </div>
@@ -185,15 +185,13 @@ const CustomShakeModal: React.FC<Props> = ({ visible, elementData, onCancel, onA
               fontSize: 12,
             }}
           >
-            点击"预览"查看动画效果
+            Click "Preview" to inspect animation
           </span>
         )}
       </div>
 
       <div style={{ marginTop: 12, textAlign: 'right' }}>
-        <Button theme="light" onClick={handlePreview}>
-          预览
-        </Button>
+        <Button theme="light" onClick={handlePreview}>Preview</Button>
       </div>
     </Modal>
   );

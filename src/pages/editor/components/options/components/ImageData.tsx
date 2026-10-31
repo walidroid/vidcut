@@ -14,19 +14,19 @@ const ImageData = (props: Props) => {
 
   return (
     <Item
-      title="原始数据"
+      title="Raw Data"
       extra={
         <Space>
-          <Tooltip content="显示参数">
+          <Tooltip content="Show Parameters">
             <a
               onClick={() => {
                 // 获取参数
                 console.log('elements', editor.scale);
-                Toast.success('console查看');
+                Toast.success('Inspect data in console');
                 const resources = editor.data.resouces.filter(item => element.resourceId === item.id);
 
                 Modal.confirm({
-                  title: '数据',
+                  title: 'Element Data',
                   content: (
                     <>
                       <TextArea
@@ -50,12 +50,12 @@ const ImageData = (props: Props) => {
               <CodeDownload size={20} color="var(--theme-icon)" />
             </a>
           </Tooltip>
-          <Tooltip content="下载原图">
+          <Tooltip content="Download Original">
             <a
               onClick={async () => {
                 const resource = editor.data.resouces.find(item => element.resourceId === item.id);
                 if (!resource?.url) {
-                  Toast.error('资源地址无效');
+                  Toast.error('Invalid resource URL');
                   return;
                 }
                 const url = editor.movie.reURL(resource.url);
@@ -69,7 +69,7 @@ const ImageData = (props: Props) => {
                   a.click();
                   URL.revokeObjectURL(blobUrl);
                 } catch {
-                  Toast.error('下载失败');
+                  Toast.error('Download failed');
                 }
               }}
             >

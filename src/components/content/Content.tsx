@@ -397,8 +397,8 @@ function Content(props: IProps, ref: any) {
                               type: 'text',
                               text:
                                 ftype === 'video'
-                                  ? '这是一组1秒/帧的视频帧图，请一句话描述一下视频内容：视频展示了...'
-                                  : '这是一张图片，请一句话描述一下图片内容',
+                                  ? 'This is a set of video frames at 1 frame/sec. Please summarize the video in one sentence: The video shows...'
+                                  : 'This is an image. Please describe the image content in one sentence.',
                             },
                           ],
                         },
@@ -639,7 +639,7 @@ export async function getItems(
           };
         }
       } else {
-        throw new Error('类型不支持', type);
+        throw new Error('Unsupported type: ' + type);
       }
     });
 

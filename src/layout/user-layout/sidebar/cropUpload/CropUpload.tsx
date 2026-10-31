@@ -30,7 +30,7 @@ const CropUpload = () => {
     const isJpgOrPng =
       fileInstance.type === 'image/jpeg' || fileInstance.type === 'image/png' || fileInstance.type === 'image/jpg';
     if (!isJpgOrPng) {
-      Toast.error('只能上传png/jpeg/jpg格式');
+      Toast.error('Only PNG, JPEG, or JPG formats are supported');
     }
     return isJpgOrPng;
   };
@@ -73,7 +73,7 @@ const CropUpload = () => {
     const [uploadRes, uploadErr] = await server.uploadBase64({ content: croppedImage });
 
     if (uploadErr) {
-      Toast.success('头像上传失败');
+      Toast.error('Avatar upload failed');
       return;
     }
 
@@ -82,12 +82,12 @@ const CropUpload = () => {
     });
 
     if (updateErr) {
-      Toast.success('头像更新失败');
+      Toast.error('Avatar update failed');
       return;
     }
 
     user.info.avatar = uploadRes.storage_path;
-    Toast.success('头像修改成功');
+    Toast.success('Avatar updated successfully');
     setSelectedImage(null);
   };
 

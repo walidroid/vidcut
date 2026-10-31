@@ -158,7 +158,7 @@ export function createLocalUploadBase64(relativeDir: string) {
     file_type?: 'image' | 'video' | 'audio' | 'json' | 'txt' | 'font';
   }): Promise<[{ storage_path: string }, null]> => {
     const root = await getRootHandle();
-    if (!root) throw new Error('未选择本地存储文件夹');
+    if (!root) throw new Error('Local storage folder not selected');
 
     const mimeMap: Record<string, string> = {
       json: 'application/json',
@@ -193,7 +193,7 @@ export async function addMaterial(params: {
 }): Promise<MaterialRecord | null> {
   const root = await getRootHandle();
   if (!root) {
-    Toast.error('未选择本地存储文件夹，请刷新页面重试');
+    Toast.error('Local storage folder not selected. Please reload and try again.');
     return null;
   }
 
@@ -540,7 +540,7 @@ export async function getMaterialFileUrl(relativePath: string): Promise<string |
   } catch (err) {
     console.error(err);
     console.error('读取素材文件失败:', relativePath);
-    Toast.error('读取素材文件失败:' + relativePath);
+    Toast.error('Failed to read material file: ' + relativePath);
     return null;
   }
 }
@@ -597,7 +597,7 @@ export async function createLocalCategory(type: 'project' | 'material', name: st
 /** 更新分类 */
 export async function updateLocalCategory(id: string, data: { name?: string }): Promise<[any, string | null]> {
   const record = await localDB.categories.get(id);
-  if (!record) return [null, '分类不存在'];
+  if (!record) return [null, 'Category does not exist'];
   if (data.name !== undefined) record.name = data.name;
   record.updatedAt = Date.now();
   await localDB.categories.put(record);
@@ -665,7 +665,7 @@ export async function updateLocalProjectMeta(
   params: { name?: string; category_id?: string | number; thumb?: string; description?: string },
 ): Promise<[any, string | null]> {
   const record = await localDB.projects.get(id);
-  if (!record) return [null, '项目不存在'];
+  if (!record) return [null, 'Project does not exist'];
   if (params.name !== undefined) record.name = params.name;
   if (params.category_id !== undefined) record.categoryId = String(params.category_id);
   if (params.thumb !== undefined) record.thumb = params.thumb;
@@ -684,13 +684,13 @@ export async function deleteLocalProject(id: string): Promise<[any, string | nul
 /** 复制项目 */
 export async function copyLocalProject(id: string): Promise<[any, string | null]> {
   const record = await localDB.projects.get(id);
-  if (!record) return [null, '项目不存在'];
+  if (!record) return [null, 'Project does not exist'];
   const newId = 'local_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
   const now = Date.now();
   await localDB.projects.put({
     ...record,
     id: newId,
-    name: (record.name || 'Untitled') + ' - 副本',
+    name: (record.name || 'Untitled') + ' - Copy',
     createdAt: now,
     updatedAt: now,
   });

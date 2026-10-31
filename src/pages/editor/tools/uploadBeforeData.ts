@@ -97,7 +97,7 @@ export async function getUploadBeforeData(params: {
     type = getFileTypeByURL(url) as any;
   }
   if (!type) {
-    throw new Error('文件类型未知，请传入type参数');
+    throw new Error('Unknown file type, please pass type parameter');
   }
 
   // 如果是.png结尾的文件，解析为apng格式
@@ -396,7 +396,7 @@ export async function getUploadBeforeData(params: {
       };
     }
     default:
-      throw new Error('未知文件类型' + url);
+      throw new Error('Unknown file type: ' + url);
   }
 }
 

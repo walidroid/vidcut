@@ -12,7 +12,7 @@ interface Params {
 export class QrcodeElement implements BaseElement {
   id: string = null;
   _dirty: string = '1';
-  name: string = '未命名';
+  name: string = 'Untitled';
   duration: number = 5;
   startTime: number = 0;
   scale: number = 1;

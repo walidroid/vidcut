@@ -67,8 +67,8 @@ function Colour(props: IProps) {
           onChange={e => setFilterType(e.target.value)}
           style={{ justifyContent: 'center', marginBottom: 8 }}
         >
-          <Radio value="basic">基础滤镜</Radio>
-          <Radio value="lut">lut滤镜</Radio>
+          <Radio value="basic">{language.val('option_filter_basic') || 'Basic Filter'}</Radio>
+          <Radio value="lut">{language.val('option_filter_lut') || 'LUT Filter'}</Radio>
         </RadioGroup>
       </div>
       {filterType === 'basic' ? (

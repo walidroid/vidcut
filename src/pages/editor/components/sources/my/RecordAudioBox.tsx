@@ -24,7 +24,7 @@ export default function RecordAudioBox(props: IProps) {
   const { editor } = stores;
   const ref = useRef<HTMLCanvasElement>();
   const drawWaveRef = useRef<() => void>();
-  const [status, setStatus] = useState(0); // 0 准备，1录制中，2 暂停 3 完成
+  const [status, setStatus] = useState(0); // 0 准备，1录制中，2 暂停 3 Complete
   const animationLockRef = useRef(false);
   const [restartKey, setRestartKey] = useState(1);
   const [audioInfo, setAudioInfo] = useState(null);
@@ -168,7 +168,7 @@ export default function RecordAudioBox(props: IProps) {
             }}
           >
             {/* <CheckSmall theme="outline" size="30" fill="var(--theme-icon)" /> */}
-            完成
+            Complete
           </a>
         )}
       </Space>
@@ -212,7 +212,7 @@ export default function RecordAudioBox(props: IProps) {
                   props.onCancel();
                 }}
               >
-                上传
+                Upload
               </Button>
             </div>
           </>

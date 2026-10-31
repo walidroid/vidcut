@@ -194,7 +194,7 @@ function CopyElem(props: IProps) {
 
         // 如果是scene，不复制
         if (elem.type === 'camera') {
-          Toast.error('镜头轨道不支持手动粘贴');
+          Toast.error('Camera track does not support manual pasting');
           continue;
         }
 

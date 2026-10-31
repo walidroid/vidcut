@@ -23,7 +23,7 @@ function Background(props: IProps) {
   return (
     <div className={styles.background + ' scroll'}>
       <h1>
-        背景颜色
+        {language.val('timeline_top_background_color') || 'Background Color'}
         <a
           onClick={() => {
             editor.optionPanelCustom = '';

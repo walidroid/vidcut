@@ -1,6 +1,6 @@
 export const curveSpeedMock = [
   {
-    name: '自定义',
+    name: 'Custom',
     points: [
       { x: 0, y: 0.5, id: 1 },
       { x: 0.25, y: 0.5, id: 2 },
@@ -10,7 +10,7 @@ export const curveSpeedMock = [
     ],
   },
   {
-    name: '蒙太奇',
+    name: 'Montage',
     points: [
       { x: 0, y: 0.5, id: 1 },
       { x: 0.1, y: 0.5, id: 2 },

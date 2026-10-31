@@ -165,7 +165,7 @@ function Size(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改W',
+                desc: 'Resize Width',
                 data: [elementData],
               });
             }}
@@ -202,7 +202,7 @@ function Size(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改H',
+                desc: 'Resize Height',
                 data: [elementData],
               });
             }}

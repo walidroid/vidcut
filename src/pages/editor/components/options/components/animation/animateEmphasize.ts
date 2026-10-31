@@ -6,7 +6,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'zoom-in',
     ename: 'zoom-in',
     id: 'zoom-in',
-    tips: '缩小',
+    tips: 'Shrink',
     frames: [
       { progress: 0, transform: { scaleX: 1.2, scaleY: 1.2 } },
       { progress: 1, transform: { scaleX: 1, scaleY: 1 } },
@@ -17,7 +17,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'zoom-out',
     ename: 'zoom-out',
     id: 'zoom-out',
-    tips: '放大',
+    tips: 'Zoom In',
     frames: [
       { progress: 0, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 1, transform: { scaleX: 1.2, scaleY: 1.2 } },
@@ -28,7 +28,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'shake',
     ename: 'shake',
     id: 'shake',
-    tips: '震动',
+    tips: 'Vibrate',
     frames: [
       { progress: 0, transform: { translateX: 0 } },
       { progress: 0.1, transform: { translateX: -10 } },
@@ -48,7 +48,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'swing',
     ename: 'swing',
     id: 'swing',
-    tips: '摇摆',
+    tips: 'Sway',
     frames: [
       { progress: 0, transform: { rotation: 0 } },
       { progress: 0.2, transform: { rotation: (Math.PI / 180) * 15 } },
@@ -63,7 +63,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'tada',
     ename: 'tada',
     id: 'tada',
-    tips: '嘚瑟',
+    tips: 'Wiggle',
     frames: [
       { progress: 0, transform: { scaleX: 1, scaleY: 1, rotation: 0 } },
       { progress: 0.1, transform: { scaleX: 0.9, scaleY: 0.9, rotation: (-Math.PI / 180) * 3 } },
@@ -83,7 +83,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'bounce',
     ename: 'bounce',
     id: 'bounce',
-    tips: '跳动',
+    tips: 'Bounce',
     frames: [
       { progress: 0, transform: { translateY: 0 } },
       { progress: 0.2, transform: { translateY: 0 } },
@@ -101,7 +101,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'flash',
     ename: 'flash',
     id: 'flash',
-    tips: '闪动',
+    tips: 'Flash',
     frames: [
       { progress: 0, alpha: 1 },
       { progress: 0.25, alpha: 0 },
@@ -115,7 +115,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'pulse',
     ename: 'pulse',
     id: 'pulse',
-    tips: '呼吸',
+    tips: 'Breathe',
     frames: [
       { progress: 0, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.5, transform: { scaleX: 1.05, scaleY: 1.05 } },
@@ -127,7 +127,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'rubberBand',
     ename: 'rubberBand',
     id: 'rubberBand',
-    tips: '弹性',
+    tips: 'Elastic',
     frames: [
       { progress: 0, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.3, transform: { scaleX: 1.25, scaleY: 0.75 } },
@@ -143,7 +143,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'shakeX',
     ename: 'shakeX',
     id: 'shakeX',
-    tips: '水平震动',
+    tips: 'Horizontal Shake',
     frames: [
       { progress: 0, transform: { translateX: 0 } },
       { progress: 0.1, transform: { translateX: -10 } },
@@ -163,7 +163,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'shakeY',
     ename: 'shakeY',
     id: 'shakeY',
-    tips: '垂直震动',
+    tips: 'Vertical Shake',
     frames: [
       { progress: 0, transform: { translateY: 0 } },
       { progress: 0.1, transform: { translateY: -10 } },
@@ -183,7 +183,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'headShake',
     ename: 'headShake',
     id: 'headShake',
-    tips: '头部震动',
+    tips: 'Head Shake',
     frames: [
       { progress: 0, transform: { translateX: 0, rotation: 0 } },
       { progress: 0.065, transform: { translateX: -6, rotation: (Math.PI / 180) * -9 } },
@@ -198,7 +198,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'heartBeat',
     ename: 'heartBeat',
     id: 'heartBeat',
-    tips: '心跳',
+    tips: 'Heartbeat',
     frames: [
       { progress: 0, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.3, transform: { scaleX: 1.8, scaleY: 1.8 } },
@@ -212,7 +212,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'rotation1',
     ename: 'rotation1',
     id: 'rotation1',
-    tips: '旋转',
+    tips: 'Rotate',
     frames: new Array(2).fill(1).map((_d, i) => {
       return { progress: i / 1, transform: { rotation: i * Math.PI * 2 } };
     }),
@@ -222,7 +222,7 @@ export const animateEmphasize: AnimationItem[] = [
     name: 'jello',
     ename: 'jello',
     id: 'jello',
-    tips: '拉扯',
+    tips: 'Stretch',
     frames: [
       { progress: 0, transform: { skewX: 0, skewY: 0 } },
       { progress: 0.111, transform: { skewX: 0, skewY: 0 } },

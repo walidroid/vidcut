@@ -178,7 +178,7 @@ export default function List(props: IProps) {
     // === 本地存储模式 ===
     // 验证项目 ID
     if (!editor.appid) {
-      Toast.error('项目 ID 未设置，请先保存项目');
+      Toast.error('Project ID not set, please save project first');
       return { shouldUpload: false, status: 'error' };
     }
 
@@ -315,7 +315,7 @@ export default function List(props: IProps) {
       setTimeout(() => getList(), 300);
     } catch (err) {
       console.error('本地存储素材失败:', err);
-      Toast.error('存储素材失败，请重试');
+      Toast.error('Failed to save material, please retry');
       if (cacheInfoData.current[uid]) {
         cacheInfoData.current[uid].status = 'ready';
         cacheInfoData.current[uid].progress = 0;
@@ -330,7 +330,7 @@ export default function List(props: IProps) {
     <>
       {checkboxs.length !== 0 && (
         <div className={styles.checkboxBtns}>
-          <span>选中: {checkboxs.length}个</span>
+          <span>Selected: {checkboxs.length}</span>
           <Space>
             <Button
               icon={<DeleteFive theme="filled" size="14" fill="var(--semi-color-danger)" />}
@@ -572,7 +572,7 @@ export default function List(props: IProps) {
               className={styles.back}
             >
               <Left theme="filled" size="24" fill="var(--theme-icon)" />
-              在线录音
+              Record Audio
             </a>
             <RecordAudioBox
               onCancel={() => setShowType('')}
@@ -605,11 +605,11 @@ export default function List(props: IProps) {
                 <>
                   {d.progress !== undefined && (
                     <span className={styles.progress}>
-                      {d.status === 'ready' && <span className={styles.tips}>上传准备</span>}
+                      {d.status === 'ready' && <span className={styles.tips}>Preparing</span>}
                       {['uploadStart', 'uploading', 'decoding'].includes(d.status) && (
                         <Progress percent={d.progress} strokeWidth={2} showInfo type="circle" width={50} />
                       )}
-                      {d.status === 'uploaded' && <span className={styles.tips}>上传完成</span>}
+                      {d.status === 'uploaded' && <span className={styles.tips}>Uploaded</span>}
                     </span>
                   )}
                   {d.status !== 'uploading' && (

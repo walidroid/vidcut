@@ -48,7 +48,7 @@ const ViewHide = props => {
   return (
     <>
       <a
-        title="锁定"
+        title="Lock"
         onClick={() => {
           hideLockOption.lock = !hideLockOption.lock;
           editor.movie.updateControl('trigger', []);
@@ -64,7 +64,7 @@ const ViewHide = props => {
         )}
       </a>
       <a
-        title="隐藏/可见"
+        title="Hide/Show"
         onClick={() => {
           hideLockOption.hide = !hideLockOption.hide;
           editor.movie.updateControl('trigger', []);
@@ -120,7 +120,7 @@ const TrackType = (props: Props) => {
               key={utils.betterHash(track.map(d => d.id).join('-'))}
             >
               <a
-                title="吸附"
+                title="Snap"
                 onClick={() => {
                   // 点击磁铁图标，将该轨道元素的间隙去掉
                   let nextStartTime = track[0].startTime || 0;

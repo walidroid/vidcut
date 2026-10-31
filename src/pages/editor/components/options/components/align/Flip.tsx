@@ -25,7 +25,7 @@ function Flip(props: IProps) {
         props.onChange(checked);
         editor.record({
           type: 'elements_update',
-          desc: '镜像翻转',
+          desc: 'Flip',
           data: [elementData],
         });
       }}

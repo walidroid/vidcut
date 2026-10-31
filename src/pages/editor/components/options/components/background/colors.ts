@@ -1,7 +1,7 @@
 export const colors = [
   {
     name: 'Art Deco',
-    cname: '艺术风格',
+    cname: 'Artistic',
     colors: [
       '#EF3E5B',
       '#F26279',
@@ -22,7 +22,7 @@ export const colors = [
   },
   {
     name: 'Beach',
-    cname: '海滨风',
+    cname: 'Coastal',
     colors: [
       '#C0362C',
       '#FF8642',
@@ -43,7 +43,7 @@ export const colors = [
   },
   {
     name: 'Cool',
-    cname: '冷色',
+    cname: 'Cool',
     colors: [
       '#004159',
       '#AACEE2',
@@ -63,7 +63,7 @@ export const colors = [
   },
   {
     name: 'Cute',
-    cname: '可爱风',
+    cname: 'Cute',
     colors: [
       '#8DB6C7',
       '#C1B38E',
@@ -83,7 +83,7 @@ export const colors = [
   },
   {
     name: 'Elegant',
-    cname: '优雅范',
+    cname: 'Elegant',
     colors: [
       '#502812',
       '#603618',
@@ -104,7 +104,7 @@ export const colors = [
   },
   {
     name: 'Gorgeous',
-    cname: '华丽风',
+    cname: 'Glamour',
     colors: [
       '#006884',
       '#00909E',
@@ -125,7 +125,7 @@ export const colors = [
   },
   {
     name: 'Neutral',
-    cname: '中性风',
+    cname: 'Neutral',
     colors: [
       '#B7A6AD',
       '#C8CAC0',
@@ -146,7 +146,7 @@ export const colors = [
   },
   {
     name: 'Warm',
-    cname: '暖色',
+    cname: 'Warm',
     colors: [
       '#793F0D',
       '#AC703D',

@@ -92,7 +92,7 @@ export function resizeBase64Image(base64, newHeight, type = 'image/png', quality
       // 获取2D上下文
       const ctx = canvas.getContext('2d');
       if (!ctx) {
-        reject(new Error('无法获取Canvas上下文'));
+        reject(new Error('Failed to get Canvas context'));
         return;
       }
 
@@ -109,7 +109,7 @@ export function resizeBase64Image(base64, newHeight, type = 'image/png', quality
     };
 
     img.onerror = () => {
-      reject(new Error('图片加载失败'));
+      reject(new Error('Failed to load image'));
     };
 
     // 设置图片源
@@ -201,13 +201,13 @@ export function fileToJson(file) {
   return new Promise((resolve, reject) => {
     // 检查文件是否存在
     if (!file) {
-      reject(new Error('没有提供文件'));
+      reject(new Error('No file provided'));
       return;
     }
 
     // 检查文件类型（可选）
     if (!file.type.includes('json') && !file.name.endsWith('.json')) {
-      reject(new Error('文件不是JSON类型'));
+      reject(new Error('File is not JSON type'));
       return;
     }
 
@@ -222,13 +222,13 @@ export function fileToJson(file) {
         const jsonData = JSON.parse(event.target.result);
         resolve(jsonData);
       } catch (error) {
-        reject(new Error('JSON解析失败: ' + error.message));
+        reject(new Error('JSON parse failed: ' + error.message));
       }
     };
 
     // 读取文件错误时的处理
     reader.onerror = () => {
-      reject(new Error('文件读取失败: ' + reader.error.message));
+      reject(new Error('File read failed: ' + reader.error.message));
     };
 
     // 以文本形式读取文件
@@ -268,7 +268,7 @@ export function downloadJson(jsonData, fileName) {
     console.log(`JSON数据已成功保存为${fileName}.json`);
   } catch (error) {
     console.error('保存JSON文件时出错:', error);
-    alert('保存文件失败，请重试');
+    alert('Failed to save file, please try again.');
   }
 }
 
@@ -316,7 +316,7 @@ export async function getVideoFile(url: string, fileName = 'video.mp4') {
     // 使用 fetch 下载视频数据
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`无法获取视频: ${response.statusText}`);
+      throw new Error(`Failed to load video: ${response.statusText}`);
     }
     // 将响应转换为 Blob
     const blob = await response.blob();
@@ -636,7 +636,7 @@ export async function blobUrlToBase64(blobUrl: string): Promise<string> {
   try {
     const response = await fetch(blobUrl);
     if (!response.ok) {
-      throw new Error(`HTTP错误! 状态: ${response.status}`);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const blob = await response.blob();
 

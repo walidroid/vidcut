@@ -32,7 +32,7 @@ function ReplaceTpl(props: IProps) {
         </div>
       )}
       <div className={styles.replaceTpl + ' scroll'}>
-        {tpls.length === 0 && <div className={styles.noReplace}>暂无可替换元素</div>}
+        {tpls.length === 0 && <div className={styles.noReplace}>{language.val('tpl_no_elements') || 'No replaceable elements'}</div>}
         {tpls.map(elementData => {
           const { type, name, duration } = elementData;
           if (type === 'image' || type === 'video') {
@@ -44,10 +44,10 @@ function ReplaceTpl(props: IProps) {
                 data-id={elementData.id}
                 key={elementData.id}
               >
-                <span className={styles.tip}>拖入元素替换</span>
+                <span className={styles.tip}>{language.val('tpl_drag_replace') || 'Drag element here to replace'}</span>
                 <a className={styles.btn}>
                   <Scissors theme="outline" size="14" fill="var(--theme-icon)" />
-                  裁剪
+                  {language.val('common_crop') || 'Crop'}
                 </a>
                 <div className={styles.inner} style={{ backgroundImage: `url(${resource?.thumb})` }}></div>
                 <h5 className={styles.name} title={name}>
@@ -63,7 +63,7 @@ function ReplaceTpl(props: IProps) {
                 className={classNames(styles.item, styles.text)}
                 key={elementData.id}
               >
-                <span className={styles.tip}>点击修改文案</span>
+                <span className={styles.tip}>{language.val('tpl_click_edit') || 'Click to edit text'}</span>
                 <div className={styles.inner}>
                   <p>{(elementData as TextElement).text}</p>
                 </div>
@@ -81,7 +81,7 @@ function ReplaceTpl(props: IProps) {
       <Modal
         visible={!!elementId}
         onCancel={() => setElementId(null)}
-        title="修改文本"
+        title={language.val('tpl_edit_text') || 'Edit Text'}
         onOk={() => {
           editor.updateMovie();
           setElementId(null);

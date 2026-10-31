@@ -64,7 +64,7 @@ function Rotation(props: IProps) {
           onAfterChange={e => {
             editor.record({
               type: 'elements_update',
-              desc: '修改旋转角度',
+              desc: 'Change Rotation',
               data: [elementData],
             });
           }}

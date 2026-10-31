@@ -84,7 +84,7 @@ function ElementTransition(props: IProps) {
     >
       <div className="element-replace-inner">
         <ExchangeFour theme="outline" size="18" fill="#fff" strokeWidth={3} />
-        &nbsp; 替换
+        &nbsp; {language.val('common_replace') || 'Replace'}
       </div>
       <a
         onMouseDown={e => onDragStart(e, 'left')}

@@ -20,7 +20,7 @@ function User(props: IProps) {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const info = user.info;
   const isVip = Number(info.vip_level || 0) > 0 && info.vip_expire && new Date(info.vip_expire).getTime() > Date.now();
-  const vipExpire = info.vip_expire ? util.formatDate(info.vip_expire, 'YYYY-MM-DD') : '未开通';
+  const vipExpire = info.vip_expire ? util.formatDate(info.vip_expire, 'YYYY-MM-DD') : 'Inactive';
   return (
     <div className={styles.user}>
       <div className={styles.photo}>

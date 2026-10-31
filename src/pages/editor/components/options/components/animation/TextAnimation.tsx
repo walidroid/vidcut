@@ -154,7 +154,7 @@ function Animation(props: IProps) {
               editor.updateTimelineElement();
               editor.record({
                 type: 'elements_update',
-                desc: '设置动画',
+                desc: 'Set Animation',
                 data: [elementData],
               });
             }}
@@ -190,7 +190,7 @@ function Animation(props: IProps) {
               editor.updateTimelineElement();
               editor.record({
                 type: 'elements_update',
-                desc: '设置动画',
+                desc: 'Set Animation',
                 data: [elementData],
               });
             }}
@@ -238,7 +238,7 @@ function Animation(props: IProps) {
                 ename: 'null',
                 frames: [],
                 id: 'null',
-                name: '无动画',
+                name: language.val('option_no_animation') || 'None',
                 type: 'enter',
                 width: size,
                 height: size,

@@ -92,7 +92,7 @@ function EChart(props: IProps) {
 
   return (
     <div className={styles.content + ' scroll'}>
-      <Item title="图表类型">
+      <Item title="Chart Type">
         <Select
           defaultValue={option.chartType}
           onChange={(e: any) => {
@@ -103,11 +103,11 @@ function EChart(props: IProps) {
           }}
           style={{ width: '100%' }}
         >
-          <Select.Option value="bar">柱状图</Select.Option>
-          <Select.Option value="pie">饼图</Select.Option>
+          <Select.Option value="bar">Bar</Select.Option>
+          <Select.Option value="pie">Pie</Select.Option>
         </Select>
       </Item>
-      <Item title="切换动画时长">
+      <Item title="Animation Duration">
         <SliderInput
           value={option.animateDuration}
           onChange={v => {
@@ -129,7 +129,7 @@ function EChart(props: IProps) {
           }}
         />
       </Item>
-      <Item title="图表颜色">
+      <Item title="Chart Color">
         <Popover
           content={
             <div className={styles.colorsGroup}>
@@ -165,11 +165,11 @@ function EChart(props: IProps) {
           </section>
         </Popover>
       </Item>
-      <OptionItem title="标题配置" name="title" option={option} update={update} />
-      <OptionItem title="刻度配置" name="ruler" option={option} update={update} />
-      <OptionItem title="图例配置" name="legend" option={option} update={update} />
-      <OptionItem title="数据文字" name="seriesName" noColor={true} option={option} update={update} />
-      <Item title="数据配置">
+      <OptionItem title="Title" name="title" option={option} update={update} />
+      <OptionItem title="Ruler" name="ruler" option={option} update={update} />
+      <OptionItem title="Legend" name="legend" option={option} update={update} />
+      <OptionItem title="Series Label" name="seriesName" noColor={true} option={option} update={update} />
+      <Item title="Data Config">
         <div className={styles.dataOption}>
           <div className={styles.btns}>
             <Upload
@@ -194,17 +194,13 @@ function EChart(props: IProps) {
               multiple={false}
               showUploadList={false}
             >
-              <Button theme="solid" icon={<UploadOne theme="outline" size="20" fill="var(--theme-text)" />}>
-                导入Excel
-              </Button>{' '}
+              <Button theme="solid" icon={<UploadOne theme="outline" size="20" fill="var(--theme-text)" />}>Import Excel</Button>{' '}
             </Upload>
             <Button
               icon={<DownloadTwo theme="outline" size="20" fill="var(--theme-text)" />}
               className={styles.downBtn}
             >
-              <a href="/assets/demo.xlsx" download="模版.xlsx">
-                样例数据
-              </a>
+              <a href="/assets/demo.xlsx" download="Template.xlsx">Sample Data</a>
             </Button>
           </div>
           {/* <div className={styles.coding}>
@@ -224,9 +220,9 @@ function EChart(props: IProps) {
                     elementData._optionDirty = +new Date() + '';
                     elementData.data = JSON.stringify(code);
                     update();
-                    Toast.error('数据更新成功！');
+                    Toast.success('Data updated successfully!');
                   } catch (err) {
-                    Toast.error('数据格式错误');
+                    Toast.error('Invalid data format');
                     console.error('json格式错误', err);
                   }
                 },

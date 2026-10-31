@@ -98,7 +98,7 @@ function ClipModal(props: ClipProps) {
     >
       {visible && (
         <div className={styles.clip}>
-          <h1>视频裁剪</h1>
+          <h1>Crop Video</h1>
           <div className={styles.view}>
             {resource && (
               <ClipVideo
@@ -140,7 +140,7 @@ function ClipModal(props: ClipProps) {
               }}
               className={styles.export}
             >
-              确认裁剪
+              Confirm Crop
             </Button>
           </div>
         </div>

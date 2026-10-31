@@ -118,7 +118,7 @@ function Mask(props: IProps) {
     <div className={'scroll scrollBox'}>
       <Item title={language.val('option_mask_shape')}>
         {/* <div>
-          <Button block>上传</Button>
+          <Button block>{language.val('common_upload') || 'Upload'}</Button>
         </div> */}
         <div className={styles.list}>
           <a
@@ -285,7 +285,7 @@ function Mask(props: IProps) {
                 onBlur={() => {
                   editor.record({
                     type: 'elements_update',
-                    desc: '修改W',
+                    desc: 'Resize Width',
                     data: [elementData],
                   });
                 }}
@@ -320,7 +320,7 @@ function Mask(props: IProps) {
                 onBlur={() => {
                   editor.record({
                     type: 'elements_update',
-                    desc: '修改H',
+                    desc: 'Resize Height',
                     data: [elementData],
                   });
                 }}

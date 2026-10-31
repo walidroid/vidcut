@@ -81,7 +81,7 @@ export default function GradualColor(props: IProps) {
                       props.onChange([...colors]);
                     }}
                   >
-                    删除颜色
+                    Delete Color
                   </a>
                 </div>
               </div>

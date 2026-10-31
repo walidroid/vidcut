@@ -66,7 +66,7 @@ export default function Color(props: IProps) {
           />
           {isSupported && (
             <Button onClick={handleEyedropper} style={{ marginTop: 0 }}>
-              吸取颜色
+              Pick Color
             </Button>
           )}
         </div>

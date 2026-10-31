@@ -48,7 +48,7 @@ function Animation(props: IProps) {
       case 'emphasize':
         return emphasizeAnimation;
       default:
-        throw new Error('未知类型');
+        throw new Error('Unknown type');
     }
   };
 
@@ -92,13 +92,13 @@ function Animation(props: IProps) {
     return { duration, start };
   };
 
-  // 添加自定义动画
+  // 添加{language.val('option_custom_animation') || 'Custom Animation'}
   // const insertCustomAnimation = () => {
-  //   // 有了自定义动画，就会去掉其他动画
+  //   // 有了{language.val('option_custom_animation') || 'Custom Animation'}，就会去掉其他动画
   //   elementData.animates = [];
   //   setAnimate({
   //     type: 'custom',
-  //     name: '自定义动画',
+  //     name: '{language.val('option_custom_animation') || 'Custom Animation'}',
   //     ename: 'custom animation',
   //     id: utils.createID(),
   //     frames: [
@@ -250,7 +250,7 @@ function Animation(props: IProps) {
           }
           break;
         default:
-          throw new Error('类型错误');
+          throw new Error('Type error');
       }
       elementData._animationDirty = utils.createID();
       forceUpdate();
@@ -258,12 +258,12 @@ function Animation(props: IProps) {
       editor.updateMovie();
       editor.record({
         type: 'elements_update',
-        desc: '设置动画',
+        desc: 'Set Animation',
         data: [elementData],
       });
     };
 
-    // 如果有自定义动画的情况下，其他动画会覆盖自定义动画
+    // 如果有{language.val('option_custom_animation') || 'Custom Animation'}的情况下，其他动画会覆盖{language.val('option_custom_animation') || 'Custom Animation'}
     setAnimation();
   };
 
@@ -342,7 +342,7 @@ function Animation(props: IProps) {
           })}
           onClick={() => setAnimationType('custom')}
         >
-          自定义动画
+          {language.val('option_custom_animation') || 'Custom Animation'}
         </a> */}
       </div>
       <div className={styles.contents + ' scroll'}>
@@ -417,7 +417,7 @@ function Animation(props: IProps) {
               editor.updateMovie();
               editor.record({
                 type: 'elements_update',
-                desc: '设置动画',
+                desc: 'Set Animation',
                 data: [elementData],
               });
             }}
@@ -469,7 +469,7 @@ function Animation(props: IProps) {
                 ename: 'null',
                 frames: [],
                 id: 'null',
-                name: '无动画',
+                name: language.val('option_no_animation') || 'None',
                 type: animationType,
                 width: size,
                 height: size,

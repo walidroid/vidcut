@@ -23,7 +23,7 @@ function Speed(props: IProps) {
         title={language.val('option_speed')}
         extra={
           <span>
-            <span style={{ fontSize: 12, marginRight: 5, fontWeight: 'normal' }}>禁用动画</span>
+            <span style={{ fontSize: 12, marginRight: 5, fontWeight: 'normal' }}>{language.val('option_disable_animation') || 'Disable Animation'}</span>
             <span>
               <Switch
                 size="small"
@@ -55,15 +55,13 @@ function Speed(props: IProps) {
             editor.updateMovie();
             editor.record({
               type: 'elements_update',
-              desc: '修改播放速度',
+              desc: 'Change Playback Speed',
               data: [elementData],
             });
           }}
         />
       </Item>
-      {/* <Item title="曲线变速">
-        <CurveSpeed />
-      </Item> */}
+      
     </>
   );
 }

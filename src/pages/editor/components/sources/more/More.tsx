@@ -70,7 +70,7 @@ export default function More() {
         list={[
           {
             id: 'qrcode',
-            name: '二维码',
+            name: 'QR Code',
             ename: 'qrcode',
             icon: <PayCodeOne theme="filled" size="25" fill="var(--theme-icon)" />,
           },

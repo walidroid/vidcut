@@ -71,13 +71,13 @@ function GreenScreen(props: IProps) {
               onAfterChange={() => {
                 editor.record({
                   type: 'elements_update',
-                  desc: '修改绿幕抠像颜色',
+                  desc: 'Change Chroma Key Color',
                   data: [elementData],
                 });
               }}
             />
           </Item>
-          <Item title={'抠图强度'}>
+          <Item title={language.val('option_strength') || 'Keying Strength'}>
             <SliderInput
               value={matting.similarityThreshold}
               onChange={v => {
@@ -92,7 +92,7 @@ function GreenScreen(props: IProps) {
               onAfterChange={() => {
                 editor.record({
                   type: 'elements_update',
-                  desc: '修改绿幕参数',
+                  desc: 'Change Chroma Key Param',
                   data: [elementData],
                 });
               }}
@@ -113,7 +113,7 @@ function GreenScreen(props: IProps) {
               onAfterChange={() => {
                 editor.record({
                   type: 'elements_update',
-                  desc: '修改绿幕参数',
+                  desc: 'Change Chroma Key Param',
                   data: [elementData],
                 });
               }}

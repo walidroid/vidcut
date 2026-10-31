@@ -4,7 +4,7 @@ export const animateLeave = [
     name: 'fadeOut',
     id: 'fadeOut',
     ename: 'fadeOut',
-    tips: '渐隐',
+    tips: 'Fade Out',
     frames: [
       { progress: 0, alpha: 1 },
       { progress: 0.5, alpha: 0.5 },
@@ -16,7 +16,7 @@ export const animateLeave = [
     name: 'fadeOutDown',
     id: 'fadeOutDown',
     ename: 'fadeOutDown',
-    tips: '下渐隐',
+    tips: 'Fade Out Down',
     frames: [
       { progress: 0, alpha: 1, transform: { translateY: 0 } },
       { progress: 1, alpha: 0, transform: { translateY: 100 } },
@@ -27,7 +27,7 @@ export const animateLeave = [
     name: 'fadeOutZoom',
     id: 'fadeOutZoom',
     ename: 'fadeOutZoom',
-    tips: '放大渐隐',
+    tips: 'Zoom Fade Out',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 1, alpha: 0, transform: { scaleX: 1.5, scaleY: 1.5 } },
@@ -38,7 +38,7 @@ export const animateLeave = [
     name: 'fadeOutLeft',
     id: 'fadeOutLeft',
     ename: 'fadeOutLeft',
-    tips: '左渐隐',
+    tips: 'Fade Out Left',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0 } },
       { progress: 1, alpha: 0, transform: { translateX: -100 } },
@@ -49,7 +49,7 @@ export const animateLeave = [
     name: 'fadeOutRight',
     id: 'fadeOutRight',
     ename: 'fadeOutRight',
-    tips: '右渐隐',
+    tips: 'Fade Out Right',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0 } },
       { progress: 1, alpha: 0, transform: { translateX: 100 } },
@@ -60,7 +60,7 @@ export const animateLeave = [
     name: 'fadeOutTopLeft',
     id: 'fadeOutTopLeft',
     ename: 'fadeOutTopLeft',
-    tips: '左上渐隐',
+    tips: 'Fade Out Top Left',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0, translateY: 0 } },
       { progress: 1, alpha: 0, transform: { translateX: -100, translateY: -100 } },
@@ -71,7 +71,7 @@ export const animateLeave = [
     name: 'fadeOutTopRight',
     id: 'fadeOutTopRight',
     ename: 'fadeOutTopRight',
-    tips: '右上渐隐',
+    tips: 'Fade Out Top Right',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0, translateY: 0 } },
       { progress: 1, alpha: 0, transform: { translateX: 100, translateY: -100 } },
@@ -82,7 +82,7 @@ export const animateLeave = [
     name: 'fadeOutBottomRight',
     id: 'fadeOutBottomRight',
     ename: 'fadeOutBottomRight',
-    tips: '右下渐隐',
+    tips: 'Fade Out Bottom Right',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0, translateY: 0 } },
       { progress: 1, alpha: 0, transform: { translateX: 100, translateY: 100 } },
@@ -93,7 +93,7 @@ export const animateLeave = [
     name: 'backOutDown',
     id: 'backOutDown',
     ename: 'backOutDown',
-    tips: '下后渐隐',
+    tips: 'Fade Out Down Back',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.2, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -105,7 +105,7 @@ export const animateLeave = [
     name: 'backOutLeft',
     id: 'backOutLeft',
     ename: 'backOutLeft',
-    tips: '左后渐隐',
+    tips: 'Fade Out Left Back',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.2, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -117,7 +117,7 @@ export const animateLeave = [
     name: 'backOutRight',
     id: 'backOutRight',
     ename: 'backOutRight',
-    tips: '右后渐隐',
+    tips: 'Fade Out Right Back',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.2, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -129,7 +129,7 @@ export const animateLeave = [
     name: 'backOutUp',
     id: 'backOutUp',
     ename: 'backOutUp',
-    tips: '上后渐隐',
+    tips: 'Fade Out Up Back',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.2, alpha: 0.7, transform: { translateY: 0, scaleX: 0.7, scaleY: 0.7 } },
@@ -141,7 +141,7 @@ export const animateLeave = [
     name: 'bounceOut',
     id: 'bounceOut',
     ename: 'bounceOut',
-    tips: '弹走',
+    tips: 'Bounce Out',
     frames: [
       { progress: 0, alpha: 1, transform: { scaleX: 1, scaleY: 1 } },
       { progress: 0.2, alpha: 1, transform: { scaleX: 0.9, scaleY: 0.9 } },
@@ -155,7 +155,7 @@ export const animateLeave = [
     name: 'bounceOutDown',
     id: 'bounceOutDown',
     ename: 'bounceOutDown',
-    tips: '下弹走',
+    tips: 'Bounce Down Out',
     frames: [
       { progress: 0, alpha: 1, transform: { translateY: 0, scaleY: 1 } },
       { progress: 0.2, alpha: 1, transform: { translateY: 10, scaleY: 0.985 } },
@@ -169,7 +169,7 @@ export const animateLeave = [
     name: 'bounceOutLeft',
     id: 'bounceOutLeft',
     ename: 'bounceOutLeft',
-    tips: '左弹走',
+    tips: 'Bounce Left Out',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0, scaleY: 1 } },
       { progress: 0.2, alpha: 1, transform: { translateX: 20, scaleY: 0.9 } },
@@ -181,7 +181,7 @@ export const animateLeave = [
     name: 'bounceOutRight',
     id: 'bounceOutRight',
     ename: 'bounceOutRight',
-    tips: '右弹走',
+    tips: 'Bounce Right Out',
     frames: [
       { progress: 0, alpha: 1, transform: { translateX: 0, scaleY: 1 } },
       { progress: 0.2, alpha: 1, transform: { translateX: -20, scaleY: 0.9 } },
@@ -193,7 +193,7 @@ export const animateLeave = [
     name: 'bounceOutUp',
     id: 'bounceOutUp',
     ename: 'bounceOutUp',
-    tips: '上弹走',
+    tips: 'Bounce Up Out',
     frames: [
       { progress: 0, alpha: 1, transform: { translateY: 0, scaleY: 1 } },
       { progress: 0.2, alpha: 1, transform: { translateY: -10, scaleY: 0.985 } },

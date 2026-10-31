@@ -48,7 +48,7 @@ function QrcodeSet(props: { editor: Record<string, any> }) {
             // 保存操作记录
             editor.record({
               type: 'elements_update',
-              desc: '修改二维码内容',
+              desc: 'Change QR Code Content',
             });
           }}
         />
@@ -66,7 +66,7 @@ function QrcodeSet(props: { editor: Record<string, any> }) {
             // 保存操作记录
             editor.record({
               type: 'elements_update',
-              desc: '修改二维码颜色',
+              desc: 'Change QR Code Color',
             });
           }}
         />

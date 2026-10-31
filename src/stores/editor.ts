@@ -658,13 +658,13 @@ export class Editor {
       this.currentTime = _self.startTime;
       this.record({
         type: 'update',
-        desc: '合并字幕',
+        desc: 'Merge Subtitles',
       });
       this.updateMovie();
       this.updateTimeline();
       this.setContorlAndSelectedElemenent([_self.id]);
     } else {
-      Toast.warning('只能和下一个元素进行合并');
+      Toast.warning('Can only merge with the next element');
     }
   };
 
@@ -729,7 +729,7 @@ export class Editor {
     sentences: {
       BeginTime: number;
       EndTime: number;
-      Text: '你好，世界哈哈哈。';
+      Text: 'Sample Caption Text';
     }[],
   ) => {
     this.data.captions = [];
@@ -770,7 +770,7 @@ export class Editor {
     }
     this.record({
       type: 'add',
-      desc: '添加字幕',
+      desc: 'Add Subtitles',
     });
     this.updateMovie();
     this.updateTimeline();
@@ -853,7 +853,7 @@ export class Editor {
       } else {
         // 如果有，小于1s不可以插入
         if (next.startTime - (_self.startTime + _self.duration) < 1) {
-          Toast.error('插入时间必须大于1秒');
+          Toast.error('Insertion duration must be greater than 1s');
           return;
         } else {
           caption.duration = Math.min(1, next.startTime - (_self.startTime + _self.duration));
@@ -871,7 +871,7 @@ export class Editor {
     this.currentTime = startTime;
     this.record({
       type: 'add',
-      desc: '添加字幕',
+      desc: 'Add Subtitles',
     });
     this.updateMovie();
     this.updateTimeline();

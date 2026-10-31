@@ -170,12 +170,12 @@ function Align(props: IProps) {
           </Tooltip>
         </div>
       </Item>
-      <Item title="镜像翻转" extra={<Flip onChange={() => {
+      <Item title="Mirror Flip" extra={<Flip onChange={() => {
         forceUpdate();
       }} />}>
         {elementData?.flipx && (
           <div className={styles.flipOffset}>
-            <span className={styles.flipOffsetTitle}>偏移量</span>
+            <span className={styles.flipOffsetTitle}>Offset</span>
             <div className={styles.flipOffsetRow}>
               <span className={styles.flipOffsetLabel}>X</span>
               <InputNumber
@@ -188,7 +188,7 @@ function Align(props: IProps) {
                   forceUpdate();
                   editor.record({
                     type: 'elements_update',
-                    desc: '修改镜像偏移量X',
+                    desc: 'Change Mirror Offset X',
                     data: [elementData],
                   });
                 }}
@@ -206,7 +206,7 @@ function Align(props: IProps) {
                   forceUpdate();
                   editor.record({
                     type: 'elements_update',
-                    desc: '修改镜像偏移量Y',
+                    desc: 'Change Mirror Offset Y',
                     data: [elementData],
                   });
                 }}

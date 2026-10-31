@@ -185,7 +185,7 @@ export default function DragItem(props: IProps) {
       // 保存历史记录
       editor.record({
         type: 'elements_update',
-        desc: '替换元素资源' + elementData.id,
+        desc: 'Replace element resource ' + elementData.id,
         data: [elementData],
       });
     };

@@ -85,7 +85,7 @@ function CropSize(props: IProps) {
           />
         </a>
       </Tooltip>
-      <Modal maskClosable={false} visible={visible} onCancel={() => setVisible(false)} footer={null} title="裁剪">
+      <Modal maskClosable={false} visible={visible} onCancel={() => setVisible(false)} footer={null} title="Crop">
         {visible && src && (
           <>
             <Cropper
@@ -107,9 +107,7 @@ function CropSize(props: IProps) {
               ref={cropperRef}
             />
             <div className={styles.btns}>
-              <Button onClick={() => setVisible(false)} type="danger">
-                取消
-              </Button>
+              <Button onClick={() => setVisible(false)} type="danger">{language.val("common_cancel") || "Cancel"}</Button>
               <Button
                 onClick={() => {
                   const cropper = cropperRef.current?.cropper;
@@ -156,9 +154,7 @@ function CropSize(props: IProps) {
                   editor.updateMovie();
                   setVisible(false);
                 }}
-              >
-                确认
-              </Button>
+              >{language.val("common_confirm") || "Apply"}</Button>
             </div>
           </>
         )}

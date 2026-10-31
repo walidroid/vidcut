@@ -1,6 +1,6 @@
 export const colors = [
   {
-    name: '明亮',
+    name: 'Bright',
     colors: [
       'rgb(73, 146, 255)',
       'rgb(124, 255, 178)',
@@ -11,7 +11,7 @@ export const colors = [
     ],
   },
   {
-    name: '暗淡',
+    name: 'Muted',
     colors: [
       'rgb(84, 112, 198)',
       'rgb(145, 204, 117)',
@@ -22,7 +22,7 @@ export const colors = [
     ],
   },
   {
-    name: '马卡龙',
+    name: 'Macaron',
     colors: [
       'rgb(46, 199, 201)',
       'rgb(182, 162, 222)',
@@ -33,7 +33,7 @@ export const colors = [
     ],
   },
   {
-    name: '蓝绿',
+    name: 'Teal',
     colors: [
       'rgb(63, 177, 227)',
       'rgb(107, 230, 193)',
@@ -44,7 +44,7 @@ export const colors = [
     ],
   },
   {
-    name: '深紫',
+    name: 'Deep Purple',
     colors: [
       'rgb(155, 139, 186)',
       'rgb(224, 152, 199)',
@@ -55,7 +55,7 @@ export const colors = [
     ],
   },
   {
-    name: '复古',
+    name: 'Retro',
     colors: [
       'rgb(216, 124, 124)',
       'rgb(145, 158, 139)',
@@ -66,7 +66,7 @@ export const colors = [
     ],
   },
   {
-    name: '粉青',
+    name: 'Pastel',
     colors: [
       'rgb(252, 151, 175)',
       'rgb(135, 247, 207)',
@@ -77,7 +77,7 @@ export const colors = [
     ],
   },
   {
-    name: '灰粉',
+    name: 'Dusty Rose',
     colors: [
       'rgb(81, 107, 145)',
       'rgb(89, 196, 230)',
@@ -88,7 +88,7 @@ export const colors = [
     ],
   },
   {
-    name: '青草',
+    name: 'Grass Green',
     colors: [
       'rgb(78, 163, 151)',
       'rgb(34, 195, 170)',
@@ -99,7 +99,7 @@ export const colors = [
     ],
   },
   {
-    name: '橘红',
+    name: 'Sunset Orange',
     colors: [
       'rgb(137, 52, 72)',
       'rgb(217, 88, 80)',
@@ -110,7 +110,7 @@ export const colors = [
     ],
   },
   {
-    name: '深色',
+    name: 'Dark',
     colors: [
       'rgb(193, 46, 52)',
       'rgb(230, 182, 0)',
@@ -121,7 +121,7 @@ export const colors = [
     ],
   },
   {
-    name: '罗马红',
+    name: 'Roman Red',
     colors: [
       'rgb(224, 31, 84)',
       'rgb(94, 78, 165)',

@@ -229,7 +229,7 @@ function ElementButton(props: IProps) {
           editor.record({
             type: 'elements_update',
             data: [element],
-            desc: '更新元素clipTime，duration',
+            desc: 'Update clip time and duration',
           });
         });
     },

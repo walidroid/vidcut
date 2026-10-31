@@ -24,7 +24,7 @@ const Sidebar = props => {
       icon: <AllApplication theme="outline" size="20" fill="var(--theme-icon)" />,
     },
     {
-      name: '我的积分',
+      name: 'Credits',
       path: `/user/credit`,
       icon: <VipOne theme="outline" size="20" fill="var(--theme-icon)" />,
     },

@@ -37,7 +37,7 @@ function Effects(props: IProps) {
   };
 
   return (
-    <Item title="特效">
+    <Item title={language.val('option_tab_effect') || 'Effect'}>
       <div className={styles.effects}>
         {effectImages.map((item, index) => {
           let effectItem = getEffectItemByName(item.name);

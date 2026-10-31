@@ -230,19 +230,7 @@ function Header(props: IProps) {
             }}
           />
         </section>
-        {/* <section className={styles.center}></section> */}
         <section className={styles.right}>
-          {/* <a>
-          <Protect theme="filled" size="20" fill="#2CB25A" />
-        </a> */}
-          {/* <Button
-            className={styles.openVipButton}
-            theme="solid"
-            type="tertiary"
-            icon={<VipOne theme="filled" size="20" fill="#FF9431" />}
-          >
-            开通VIP
-          </Button> */}
           {editor.exConfig?.supportLanguage ? (
             <a
               className={styles.languagebtn}
@@ -260,25 +248,7 @@ function Header(props: IProps) {
               {language.getLanguage() === 'en-US' ? '🇬🇧 English' : (language.getLanguage() === 'fr-FR' ? '🇫🇷 Français' : '🇸🇦 العربية')}
             </a>
           ) : null}
-          {/* <RadioGroup
-            type="button"
-            buttonSize="middle"
-            value={editor.editMode}
-            aria-label="编辑模式切换"
-            style={{ marginRight: 10 }}
-            onChange={e => {
-              editor.selectedElementIds = [];
-              editor.editMode = e.target.value;
-              editor.setContorlAndSelectedElemenent([]);
-            }}
-          >
-            <Radio value={'auto'}>
-              <Intl name="header_pro" />
-            </Radio>
-            <Radio value={'template'}>
-              <Intl name="header_simple" />
-            </Radio>
-          </RadioGroup> */}
+          
           {editor.exConfig?.showProjectButton ? <Project /> : null}
           {editor.exportButtonConfig ? (
             <span className={editor.exportButtonConfig.className} id={editor.exportButtonConfig.id}>

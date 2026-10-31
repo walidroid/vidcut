@@ -31,7 +31,7 @@ function Speed(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '修改播放速度',
+              desc: 'Change Playback Speed',
               data: [elementData],
             });
           }}
@@ -52,7 +52,7 @@ function Speed(props: IProps) {
           onAfterChange={() => {
             editor.record({
               type: 'elements_update',
-              desc: '修改播放速度',
+              desc: 'Change Playback Speed',
               data: [elementData],
             });
           }}

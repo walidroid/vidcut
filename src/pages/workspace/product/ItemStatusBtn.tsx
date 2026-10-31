@@ -23,20 +23,14 @@ const ItemStatusBtn = (props: Props) => {
 
   return (
     <div className={styles.btns}>
-      {/* <Button style={{ color: '#000' }} color="primary">
-        去编辑
-      </Button> */}
+      
       {data.status === 0 && (
         <a className={styles.btn} color="primary">
           <Loading theme="outline" size="14" fill="var(--theme-main)" strokeWidth={3} />
           &nbsp;{language.val('product_preparing')}
         </a>
       )}
-      {/* {data.status === 3 && (
-        <a onClick={() => {}} className={styles.btn} color="primary">
-          失败/重试
-        </a>
-      )} */}
+      
       {data.status === 2 && (
         <>
           <a

@@ -74,7 +74,7 @@ const Lottie = ({ url, setValues }: IProps) => {
         }}
       />
       <div>
-        大小：
+        Size: 
         <Slider
           min={100}
           max={300}
@@ -84,7 +84,7 @@ const Lottie = ({ url, setValues }: IProps) => {
           }}
         />
       </div>
-      <Button onClick={screenshot}>截图</Button>
+      <Button onClick={screenshot}>Screenshot</Button>
     </>
   );
 };

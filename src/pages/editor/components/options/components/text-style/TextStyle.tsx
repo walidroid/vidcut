@@ -63,7 +63,7 @@ function TextStyle(props: IProps) {
     forceUpdate();
     editor.record({
       type: 'elements_update',
-      desc: '文本对齐' + key,
+      desc: 'Align Text ' + key,
       data: [elementData],
     });
   };
@@ -257,7 +257,7 @@ function TextStyle(props: IProps) {
               forceUpdate();
               editor.record({
                 type: 'elements_update',
-                desc: '修改字体',
+                desc: 'Change Font',
                 data: [elementData],
               });
             }}
@@ -300,7 +300,7 @@ function TextStyle(props: IProps) {
               forceUpdate();
               editor.record({
                 type: 'elements_update',
-                desc: '加粗&取消',
+                desc: 'Toggle Bold',
                 data: [elementData],
               });
             }}
@@ -327,7 +327,7 @@ function TextStyle(props: IProps) {
               forceUpdate();
               editor.record({
                 type: 'elements_update',
-                desc: '倾斜',
+                desc: 'Toggle Italic',
                 data: [elementData],
               });
             }}
@@ -380,7 +380,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字行高',
+                desc: 'Change Line Height',
                 data: [elementData],
               });
             }}
@@ -397,7 +397,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字间距',
+                desc: 'Change Letter Spacing',
                 data: [elementData],
               });
             }}
@@ -451,7 +451,7 @@ function TextStyle(props: IProps) {
               setFillColorType(v);
               editor.record({
                 type: 'elements_update',
-                desc: '文字颜色类型',
+                desc: 'Change Text Color Type',
                 data: [elementData],
               });
             }}
@@ -466,7 +466,7 @@ function TextStyle(props: IProps) {
               onAfterChange={() => {
                 editor.record({
                   type: 'elements_update',
-                  desc: '文字颜色',
+                  desc: 'Change Text Color',
                   data: [elementData],
                 });
               }}
@@ -498,7 +498,7 @@ function TextStyle(props: IProps) {
                 onBlur={() => {
                   editor.record({
                     type: 'elements_update',
-                    desc: '修改文字渐变角度',
+                    desc: 'Change Gradient Angle',
                     data: [elementData],
                   });
                 }}
@@ -530,7 +530,7 @@ function TextStyle(props: IProps) {
               onAfterChange={() => {
                 editor.record({
                   type: 'elements_update',
-                  desc: '修改文字渐变色',
+                  desc: 'Change Gradient Color',
                   data: [elementData],
                 });
               }}
@@ -559,7 +559,7 @@ function TextStyle(props: IProps) {
               editor.updateMovie();
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字渐变色',
+                desc: 'Change Gradient Color',
                 data: [elementData],
               });
             }}
@@ -578,7 +578,7 @@ function TextStyle(props: IProps) {
             onAfterChange={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字描边颜色',
+                desc: 'Change Stroke Color',
                 data: [elementData],
               });
             }}
@@ -597,7 +597,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字阴影',
+                desc: 'Change Text Shadow',
                 data: [elementData],
               });
             }}
@@ -616,7 +616,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '文字阴影距离',
+                desc: 'Change Shadow Distance',
                 data: [elementData],
               });
             }}
@@ -633,7 +633,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '文字阴影角度',
+                desc: 'Change Shadow Angle',
                 data: [elementData],
               });
             }}
@@ -653,7 +653,7 @@ function TextStyle(props: IProps) {
             onAfterChange={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字描边颜色',
+                desc: 'Change Stroke Color',
                 data: [elementData],
               });
             }}
@@ -672,7 +672,7 @@ function TextStyle(props: IProps) {
             onBlur={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字描边',
+                desc: 'Change Stroke Width',
                 data: [elementData],
               });
             }}
@@ -700,7 +700,7 @@ function TextStyle(props: IProps) {
             onAfterChange={() => {
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字背景颜色',
+                desc: 'Change Background Color',
                 data: [elementData],
               });
             }}
@@ -722,7 +722,7 @@ function TextStyle(props: IProps) {
               editor.updateMovie();
               editor.record({
                 type: 'elements_update',
-                desc: '修改文字背景颜色',
+                desc: 'Change Background Color',
                 data: [elementData],
               });
             }}
@@ -748,7 +748,7 @@ function TextStyle(props: IProps) {
           editor.updateMovie();
           editor.record({
             type: 'elements_update',
-            desc: '修改文字圆角',
+            desc: 'Change Border Radius',
             data: [elementData],
           });
         }}
@@ -770,7 +770,7 @@ function TextStyle(props: IProps) {
           editor.updateMovie();
           editor.record({
             type: 'elements_update',
-            desc: '修改文字padding',
+            desc: 'Change Text Padding',
             data: [elementData],
           });
         }}

@@ -97,7 +97,7 @@ export default class BasicService {
         if (res.code === 1) {
           console.error('登录失效，请刷新页面重新登录');
           user.clearUserInfo();
-          return [null, '登录失效'];
+          return [null, 'Session expired'];
         }
         if (res.error) {
           console.log('res.error', res.error);
@@ -112,7 +112,7 @@ export default class BasicService {
       .catch(err => {
         if (err?.__CANCEL__) {
           console.warn('请求已取消');
-          return Promise.reject('请求已取消');
+          return Promise.reject('Request cancelled');
         }
         console.error('err', err);
         return Promise.reject(err);

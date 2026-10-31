@@ -95,7 +95,7 @@ export default function LutFilter({ editor, elementData, forceUpdate }: LutFilte
     elementData._filtersDirty = utils.createID();
     editor.record({
       type: 'update',
-      desc: '应用滤镜',
+      desc: 'Apply Filter',
     });
     editor.updateMovie();
     forceUpdate();
@@ -125,7 +125,7 @@ export default function LutFilter({ editor, elementData, forceUpdate }: LutFilte
     editor.updateMovie();
     editor.record({
       type: 'update',
-      desc: '移除滤镜',
+      desc: 'Remove Filter',
     });
     forceUpdate();
   };
@@ -134,11 +134,9 @@ export default function LutFilter({ editor, elementData, forceUpdate }: LutFilte
     <div style={{ padding: '0 8px' }}>
       {lutFilter && (
         <Item
-          title="强度"
+          title={language.val('option_strength') || 'Strength'}
           extra={
-            <a onClick={removeLutFilter} style={{ color: 'var(--semi-color-danger)', fontSize: 12 }}>
-              移除滤镜
-            </a>
+            <a onClick={removeLutFilter} style={{ color: 'var(--semi-color-danger)', fontSize: 12 }}>{language.val("option_filter_remove") || "Remove Filter"}</a>
           }
         >
           <SliderInput
