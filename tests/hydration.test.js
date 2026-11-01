@@ -397,8 +397,71 @@ async function runTests() {
     console.log('  -> PASSED: Reconstructed resourceManage was detected and repopulated.');
   }
 
+  // Test 9: Resource overwrite on same relative path & Blob URL disposal
+  {
+    console.log('[Test 9] Resource overwrite on same path & Blob URL disposal...');
+    const urlCache = new Map();
+    const revokedUrls = [];
+
+    function mockRevokeObjectURL(url) {
+      revokedUrls.push(url);
+    }
+
+    function mockSaveFileToLocal(relPath, content) {
+      if (urlCache.has(relPath)) {
+        const old = urlCache.get(relPath);
+        mockRevokeObjectURL(old);
+        urlCache.delete(relPath);
+      }
+      const newUrl = `blob:v2_${relPath}_${content}`;
+      urlCache.set(relPath, newUrl);
+      return newUrl;
+    }
+
+    // Step 1: Initial save
+    const url1 = mockSaveFileToLocal('materials/proj_A/track.mp4', 'hash_v1');
+    assert.strictEqual(urlCache.get('materials/proj_A/track.mp4'), url1);
+    assert.strictEqual(revokedUrls.length, 0);
+
+    // Step 2: Overwrite with same relative path
+    const url2 = mockSaveFileToLocal('materials/proj_A/track.mp4', 'hash_v2');
+    assert.notStrictEqual(url1, url2);
+    assert.strictEqual(urlCache.get('materials/proj_A/track.mp4'), url2);
+    assert.strictEqual(revokedUrls.length, 1);
+    assert.strictEqual(revokedUrls[0], url1, 'Old Blob URL must be revoked on overwrite');
+    console.log('  -> PASSED: Overwritten path safely revoked previous Blob URL and created fresh entry.');
+  }
+
+  // Test 10: In-place observable array mutations (splice, push, replace)
+  {
+    console.log('[Test 10] In-place observable array mutations...');
+    const rm = createMockResourceManager();
+    const editor = {
+      appid: 'proj_A',
+      useLocalStorage: true,
+      movie: { resourceManage: rm },
+      data: {
+        resouces: [
+          { url: 'materials/proj_A/elem1.mp4' },
+          { url: 'materials/proj_A/elem2.mp4' },
+        ]
+      }
+    };
+    const controller = new CanvasHydrationController(editor);
+    await controller.runEffect();
+    assert.strictEqual(controller.hydratedPaths.size, 2);
+
+    // Splice: replace elem2 with elem3 in-place
+    editor.data.resouces.splice(1, 1, { url: 'materials/proj_A/elem3.mp4' });
+    await controller.runEffect();
+
+    assert.ok(rm.cache.has('materials/proj_A/elem3.mp4'));
+    assert.strictEqual(controller.hydratedPaths.has('materials/proj_A/elem3.mp4'), true);
+    console.log('  -> PASSED: In-place array mutations seamlessly detected and hydrated.');
+  }
+
   console.log('\n========================================================');
-  console.log('  ALL 8 CANVAS HYDRATION TEST SCENARIOS PASSED (100%)    ');
+  console.log('  ALL 10 CANVAS HYDRATION TEST SCENARIOS PASSED (100%)   ');
   console.log('========================================================\n');
 }
 

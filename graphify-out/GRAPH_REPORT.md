@@ -1,17 +1,17 @@
 # Graph Report - unicut  (2026-11-01)
 
 ## Corpus Check
-- 467 files · ~258,078 words
+- 474 files · ~263,822 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 153 file(s) not represented in the graph (top: .less 144, (none) 3, .wasm 2)
 
 ## Summary
-- 3403 nodes · 7159 edges · 248 communities (158 shown, 90 thin omitted)
+- 3482 nodes · 7248 edges · 272 communities (161 shown, 111 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 242 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `681b0693`
+- Built from commit: `f4d90bda`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,16 +30,16 @@
 - Build & Configuration #2
 - Core Utilities & Helpers #3
 - 🚀 功能全到不像开源项目
-- BasicService.ts
+- Server
 - Editor.tsx
 - Index Module
 - Core Utilities & Helpers #4
 - Tsconfig Module
-- stores/index.ts
+- @douyinfe/semi-ui
 - Service & API Layer
 - User Profile & Account #2
 - sources/index.tsx
-- pubsub-js
+- package.json
 - localStorageService.ts
 - GitHub Actions CI/CD
 - BasicService
@@ -50,22 +50,22 @@
 - components/index.ts
 - VidCut Performance Optimization Validation & Verification Report
 - Credit.tsx
-- language.ts
+- react
 - Links.tsx
 - Webgl2D Module
 - uploadBeforeData.ts
 - Electron Desktop Integration
 - 重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
-- TextOptions.tsx
+- ImageOptions.tsx
 - VidCut Performance Optimization Report
-- NotFound
+- routes.config.ts
 - projectImport.ts
 - Element
 - Core Utilities & Helpers #5
 - Ffmpeg Core Module #2
 - Lame Min Module #2
 - utils/index.ts
-- Account.tsx
+- Account
 - Ffmpeg Core Module #3
 - Lame Min Module #3
 - precision-fix.js
@@ -80,14 +80,14 @@
 - Ffmpeg Core Module #5
 - crypto.ts
 - Uploaddecode Module
-- DragItem
+- addItem.ts
 - Ffmpeg Core Module #6
 - 上市公司都在使用的开源视频剪辑工具：低成本、高安全、可定制
 - Core Utilities & Helpers #7
 - Electron Desktop Integration #2
 - Ffmpeg Core Module #7
 - Ffmpeg Core Module #8
-- language
+- stores
 - 和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单
 - 全球最大免费矢量动画素材动画网站： lottieFiles
 - agreement/index.ts
@@ -102,7 +102,7 @@
 - Index Module #2
 - Lame Min Module #4
 - Mp4Box All Module #4
-- CurveSpeed.tsx
+- VIDCUT v1.0.0 — PRODUCTION HARDENING & COMPATIBILITY REPORT
 - Index Module #3
 - Decode Worker Webgl Module
 - 3 年打磨，只为今日开源，一鸣惊人
@@ -114,7 +114,7 @@
 - Index Module #4
 - Index Min Module
 - Verticalsortablelist Module
-- theme/index.ts
+- src/components/header/Header.tsx
 - Animation.tsx
 - uploadBeforeData.ts
 - language/index.ts
@@ -139,7 +139,7 @@
 - benchmark-storage-matrix.js
 - 终于有可以替代剪映的开源视频工具了！数据全本地，还能用 AI 聊天剪视频
 - Custom Module
-- reURL
+- Content.tsx
 - Index Module #7
 - Index Module #8
 - Index Module #9
@@ -160,9 +160,9 @@
 - 九、画布
 - 八、项目管理
 - TextStyle.tsx
-- DraftThumbImage.tsx
+- List
 - 七、素材管理
-- @douyinfe/semi-ui
+- CameraOptions.tsx
 - selection.test.js
 - Server
 - final-cleanup.js
@@ -171,41 +171,64 @@
 - ref_fs
 - Color.tsx
 - .destroy
-- LoginRegisterBox.tsx
-- patch-sdk.js
-- SDK.tsx
+- LoginQrcode
+- BasicService.ts
+- VideoEditorSDK
 - TextOptions.tsx
-- Home.tsx
+- benchmark-real-application-export.js
 - FrameData
 - electron
 - AgreementLayout.tsx
 - validate-real-export.js
-- Export.tsx
+- audit-electron-environment.js
 - User
 - 2. Implemented Optimizations & Code Architecture
-- Toolbar
+- .addCaption
 - 3. Architectural Implementations & Technical Details
 - qrcode/index.ts
 - Canvas
 - Layout
-- benchmark-real-video-lifecycle.js
+- App.tsx
 - hydration.test.js
-- UserLayout.tsx
-- EditorPage.tsx
-- react
+- inspect-binary-versions.js
+- background/Background.tsx
+- react-router-dom
 - MemoryStorage
 - 6.1 Exact Byte Reconciliation
-- routes.config.ts
+- Draft.tsx
 - options/Options.tsx
-- editor/server.ts
+- Message
 - components/filter/Filter.tsx
-- genId
+- Mask.tsx
 - 1. CRITICAL CANVAS HYDRATION INVESTIGATION & FIX
-- 5. RESOURCE LIFECYCLE & EXPORT DISPOSAL SAFETY
+- benchmark-storage-matrix.js
 - ref_assert
 - RecordTest.tsx
-- simple-query-string
+- validate-bundle.js
 - toolbar/icon.tsx
+- LottieOptions.tsx
+- LottieItem.tsx
+- server/index.ts
+- theme.ts
+- Menus.tsx
+- 3. REAL VIDEO EXPORT VALIDATION & DISCREPANCY RECONCILIATION
+- SliderInput.tsx
+- cropUpload/server.ts
+- CreditRecharge.tsx
+- more/icon.tsx
+- dayjs
+- @ffmpeg/util
+- ignore-styles@^5.0.1
+- js-audio-recorder
+- jsdom@^22.1.0
+- pixi-filters@^5.2.1
+- qrcode
+- react-cropper
+- react-fast-compare@^3.2.2
+- undo-redo-manager2@^1.0.0
+- use-fs-access
+- xlsx
+- dragFun
 
 ## God Nodes (most connected - your core abstractions)
 1. `react` - 169 edges
@@ -239,19 +262,19 @@
 - 5-file cycle: `src/pages/editor/SDK.tsx -> src/utils/export.ts -> src/pages/editor/plugins/index.ts -> src/pages/editor/plugins/qrcode/index.ts -> src/pages/editor/plugins/qrcode/Element.tsx -> src/pages/editor/SDK.tsx`
 - 5-file cycle: `src/pages/editor/SDK.tsx -> src/utils/export.ts -> src/pages/editor/plugins/index.ts -> src/pages/editor/plugins/qrcode/index.ts -> src/pages/editor/plugins/qrcode/Options.tsx -> src/pages/editor/SDK.tsx`
 
-## Communities (248 total, 90 thin omitted)
+## Communities (272 total, 111 thin omitted)
 
 ### Community 0 - "Item"
 Cohesion: 0.04
-Nodes (63): mobx-react, GroupAlign(), IProps, GroupFast(), IProps, Animation(), CustomAnimation(), IProps (+55 more)
+Nodes (65): mobx-react, video-core-sdk, GroupAlign(), IProps, Animation(), CustomAnimation(), IProps, Animation() (+57 more)
 
 ### Community 1 - "Home.tsx"
-Cohesion: 0.25
-Nodes (5): Footer(), IProps, AboutUs(), IProps, routes
+Cohesion: 0.13
+Nodes (13): Footer(), IProps, AboutUs(), IProps, routes, VipRecharge(), aiFeatures, allFeatures (+5 more)
 
 ### Community 2 - "VIDCUT — FINAL PRODUCTION AUDIT, HYDRATION FIX & REAL VIDEO BENCHMARKS"
 Cohesion: 0.15
-Nodes (12): 2.1 Pure JavaScript Execution vs Chromium Video Presentation Pipeline, 2.2 Empirical Playback Performance, 2.3 `requestVideoFrameCallback` (rVFC) vs `requestAnimationFrame` (rAF), 2. REAL VIDEO PLAYBACK BENCHMARK & PRESENTATION LIFECYCLE, 3.1 Correcting the "58.5 ms" Export Micro-Benchmark, 3.2 Real Transcode Benchmarks with FFmpeg 7.0.1, 3.3 Stream & Container Probe Validation, 3. REAL VIDEO EXPORT VALIDATION & DISCREPANCY RECONCILIATION (+4 more)
+Nodes (12): 2.1 Pure JavaScript Execution vs Chromium Video Presentation Pipeline, 2.2 Empirical Playback Performance, 2.3 `requestVideoFrameCallback` (rVFC) vs `requestAnimationFrame` (rAF), 2. REAL VIDEO PLAYBACK BENCHMARK & PRESENTATION LIFECYCLE, 5.1 Export Lifecycle & `safeDestroy` Architecture, 5.2 Unit Test Verification (`tests/export-cleanup.test.js`), 5.3 Editor Unmount Teardown (`editor.destroy()`), 5. RESOURCE LIFECYCLE & EXPORT DISPOSAL SAFETY (+4 more)
 
 ### Community 3 - "VidCut Production Performance Acceptance Report"
 Cohesion: 0.15
@@ -266,8 +289,8 @@ Cohesion: 0.09
 Nodes (61): w(), Is(), an(), ar(), b(), bn(), bt(), C() (+53 more)
 
 ### Community 6 - "dependencies"
-Cohesion: 0.03
-Nodes (69): dependencies, asset-require-hook@^1.2.0, classnames@^2.3.2, dexie@^4.4.3, @douyinfe/semi-ui@^2.89.1, gifuct-js@^2.1.2, gl-transitions@^1.43.0, howler@^2.2.4 (+61 more)
+Cohesion: 0.04
+Nodes (51): dependencies, apng-js@^1.1.5, axios@^0.24.0, classnames@^2.3.2, @douyinfe/semi-ui@^2.89.1, http-proxy@^1.18.1, @icon-park/react@^1.4.2, jquery@^3.7.1 (+43 more)
 
 ### Community 7 - "Core Utilities & Helpers #2"
 Cohesion: 0.05
@@ -277,17 +300,13 @@ Nodes (34): a(), ae(), a(), ct(), deleteLater(), destructor(), fromWireType(), g
 Cohesion: 0.06
 Nodes (22): ByteArray(), GIFEncoder(), LZWEncoder(), char_out(), cl_block(), cl_hash(), compress(), encode() (+14 more)
 
-### Community 9 - "Editor Effects & Options #3"
-Cohesion: 0.07
-Nodes (3): LutFilterProps, Editor, sleep()
-
 ### Community 10 - "server"
 Cohesion: 0.14
 Nodes (8): server, copyLocalProject(), createLocalProject(), deleteAllMaterialsByAppId(), deleteLocalProject(), getLocalProjectList(), getProject(), updateLocalProjectMeta()
 
 ### Community 11 - "Build & Configuration #2"
-Cohesion: 0.05
-Nodes (59): author, description, devDependencies, @babel/plugin-proposal-class-properties@^7.18.6, @babel/plugin-proposal-decorators@^7.22.7, electron-builder@^25.1.8, husky@^8.0.1, less@^4.1.3 (+51 more)
+Cohesion: 0.04
+Nodes (51): devDependencies, @babel/plugin-proposal-class-properties@^7.18.6, @babel/plugin-proposal-decorators@^7.22.7, electron-builder@^25.1.8, husky@^8.0.1, less@^4.1.3, less-loader@^11.1.3, lint-staged@^12.4.2 (+43 more)
 
 ### Community 12 - "Core Utilities & Helpers #3"
 Cohesion: 0.05
@@ -297,13 +316,9 @@ Nodes (8): du(), Fs(), fu(), ke(), Ls(), lu(), Ns(), p()
 Cohesion: 0.10
 Nodes (20): 🔹 4 种抠图方式, 🤖 AI 能力拉满，不用为功能付费, VIDCUT：一款真正可用的开源视频剪辑工具, 🔹 专业级动画系统, 🔹 专业级时间轴, 🔹 丰富的视觉效果, 为什么说它是「真正可用」的开源剪辑工具？, 企业客户 (+12 more)
 
-### Community 14 - "BasicService.ts"
-Cohesion: 0.12
-Nodes (13): react-router, Item(), Props, ItemStatus(), Props, ItemStatusBtn(), Props, IProps (+5 more)
-
 ### Community 15 - "Editor.tsx"
-Cohesion: 0.11
-Nodes (14): axios@^0.24.0, axios, APIServer, UserInfo, ColorBg(), IProps, Loading(), ContextMenus() (+6 more)
+Cohesion: 0.07
+Nodes (15): axios, IProps, Loading(), IProps, ReplaceTpl(), IProps, TextModal(), Props (+7 more)
 
 ### Community 16 - "Index Module"
 Cohesion: 0.05
@@ -311,47 +326,47 @@ Nodes (7): RFC-2279, RFC-3629, leadingNulls(), leadingSomething(), onComplete(),
 
 ### Community 17 - "Core Utilities & Helpers #4"
 Cohesion: 0.05
-Nodes (9): dayjs@^1.11.10, dayjs, clearData(), cloneDeep(), dateFormatPreset, isIOSWechatBrowser(), mediaLazy(), timeToNum() (+1 more)
+Nodes (8): clearData(), cloneDeep(), dateFormatPreset, isIOSWechatBrowser(), joinURL(), mediaLazy(), timeToNum(), uniq()
 
 ### Community 19 - "Tsconfig Module"
 Cohesion: 0.05
 Nodes (38): compilerOptions, allowJs, allowSyntheticDefaultImports, baseUrl, esModuleInterop, experimentalDecorators, forceConsistentCasingInFileNames, isolatedModules (+30 more)
 
-### Community 20 - "stores/index.ts"
-Cohesion: 0.07
-Nodes (35): classnames, @icon-park/react, IProps, IProps, ReplaceTpl(), IProps, TextModal(), Props (+27 more)
+### Community 20 - "@douyinfe/semi-ui"
+Cohesion: 0.06
+Nodes (43): classnames, @douyinfe/semi-ui, @icon-park/react, ProgressData, IProps, Props, IProps, IProps (+35 more)
 
 ### Community 24 - "sources/index.tsx"
-Cohesion: 0.06
-Nodes (31): Source(), Background(), IProps, colors, addEffectItem(), addFilterItem(), addImageVideoAudioItem(), addItem() (+23 more)
+Cohesion: 0.09
+Nodes (14): Source(), Audio(), Caption(), Effect(), Filter(), Image(), IProps, Sources() (+6 more)
 
-### Community 25 - "pubsub-js"
-Cohesion: 0.08
-Nodes (15): echarts@^5.5.0, mp4-muxer@^5.2.1, ndarray@^1.0.19, pubsub-js@^1.9.4, react-image-crop@^11.0.10, tinycolor2@^1.6.0, optionalDependencies, esbuild-windows-64@^0.15.18 (+7 more)
+### Community 25 - "package.json"
+Cohesion: 0.06
+Nodes (33): author, asset-require-hook@^1.2.0, dexie@^4.4.3, echarts@^5.5.0, gifuct-js@^2.1.2, gl-transitions@^1.43.0, howler@^2.2.4, mediabunny@^1.50.9 (+25 more)
 
 ### Community 26 - "localStorageService.ts"
-Cohesion: 0.11
-Nodes (31): MaterialRecord, useLocalStorage(), UseLocalStorageReturn, Export(), Header(), Project(), List(), QrcodeUpload() (+23 more)
+Cohesion: 0.12
+Nodes (24): MaterialRecord, useLocalStorage(), UseLocalStorageReturn, CreditRecharge(), Export(), Header(), Project(), clearUrlCache() (+16 more)
 
 ### Community 27 - "GitHub Actions CI/CD"
 Cohesion: 0.07
 Nodes (29): name, runs-on, steps, GH_TOKEN, GITHUB_TOKEN, jobs, build-windows, name (+21 more)
 
 ### Community 28 - "BasicService"
-Cohesion: 0.08
-Nodes (10): server, Server, Server, Server, server, BasicService, globalOptions, Method (+2 more)
+Cohesion: 0.16
+Nodes (3): server, Server, BasicService
 
 ### Community 29 - "Folders.tsx"
-Cohesion: 0.21
-Nodes (10): Content(), getItems(), Folders(), IProps, FolderIcon(), IconProps, PictureSplit(), createLocalCategory() (+2 more)
+Cohesion: 0.19
+Nodes (11): Content(), getItems(), Folders(), IProps, FolderIcon(), IconProps, SelectedSet(), createLocalCategory() (+3 more)
 
 ### Community 30 - "Editor State Store"
-Cohesion: 0.16
-Nodes (15): ElementOptionType, LayoutName, SourceType, Collect(), IProps, IProps, Search(), IProps (+7 more)
+Cohesion: 0.18
+Nodes (16): APIServer, ElementOptionType, LayoutName, SourceType, EventsName, Point, Collect(), IProps (+8 more)
 
 ### Community 31 - "Sdk Module"
-Cohesion: 0.09
-Nodes (22): AiChatParams, AiImageParams, AiVideo2VideoParams, AiVideoParams, AppDetailRes, CollectParams, CreateAppParams, CreateTTSParams (+14 more)
+Cohesion: 0.10
+Nodes (23): AiChatParams, AiImageParams, AiVideo2VideoParams, AiVideoParams, AppDetailRes, CollectParams, CreateAppParams, CreateTTSParams (+15 more)
 
 ### Community 32 - "Lame Min Module"
 Cohesion: 0.13
@@ -362,20 +377,16 @@ Cohesion: 0.14
 Nodes (13): 1. Executive Summary, 3. Bundle Analysis & Network Transfer Validation, 5. Timeline Subtree Virtualization Analysis, 6. Storage Hydration Benchmark Matrix (Cold vs. Warm Cache), 7. Memory & Lifecycle Audit, 8. Defect Rectifications Applied During Validation, 9. Final Production Readiness Assessment, Architectural Design (+5 more)
 
 ### Community 35 - "Credit.tsx"
-Cohesion: 0.10
-Nodes (14): ContentUser(), IProps, actionMap, Credit(), creditStatusMap, formatDate(), formatTime(), sceneMap (+6 more)
+Cohesion: 0.14
+Nodes (10): ContentUser(), IProps, actionMap, Credit(), creditStatusMap, formatDate(), formatTime(), sceneMap (+2 more)
 
-### Community 36 - "language.ts"
-Cohesion: 0.11
-Nodes (11): AccountLogin(), IProps, arSA, enUS, frFR, _window, calculateScaleFactor(), IProps (+3 more)
-
-### Community 37 - "Links.tsx"
-Cohesion: 0.08
-Nodes (6): react-resize-detector@^9.1.0, swiper@^12.1.2, react-resize-detector, swiper, IProps, ILinksProps
+### Community 36 - "react"
+Cohesion: 0.04
+Nodes (39): react, IProps, AccountLogin(), IProps, arSA, enUS, frFR, Intl() (+31 more)
 
 ### Community 39 - "uploadBeforeData.ts"
-Cohesion: 0.15
-Nodes (7): Separation(), AudioSVGWaveform, dataURLtoBlob(), getSharedAudioContext(), parseArrayBufferResponse(), checkVideoUrlHasAudio(), getVideoFile()
+Cohesion: 0.13
+Nodes (9): Separation(), useBackground(), AudioSVGWaveform, dataURLtoBlob(), getSharedAudioContext(), parseArrayBufferResponse(), updateMaterialAttrs(), checkVideoUrlHasAudio() (+1 more)
 
 ### Community 40 - "Electron Desktop Integration"
 Cohesion: 0.10
@@ -385,13 +396,17 @@ Nodes (20): appId, copyright, directories, buildResources, output, electronVersi
 Cohesion: 0.10
 Nodes (20): 🤖 AI 全程加持，效率提升 10 倍, ✂️ 专业级抠图能力, ⏱️ 专业级时间轴，剪辑丝滑流畅, 🎵 丰富的素材生态, 🆓 免费 AI 能力, 🚀 功能有多全？看这篇就够了, ✨ 动画效果拉满, 🏁 即将上线，敬请期待 (+12 more)
 
-### Community 42 - "TextOptions.tsx"
-Cohesion: 0.14
-Nodes (5): IProps, IProps, IProps, IProps, IProps
+### Community 42 - "ImageOptions.tsx"
+Cohesion: 0.17
+Nodes (4): AudioOptions(), IProps, IProps, IProps
 
 ### Community 43 - "VidCut Performance Optimization Report"
 Cohesion: 0.33
 Nodes (5): 1. Executive Summary, 2. Before & After Benchmark Comparison, 4. Packaging & Deployment Verification, 5. Engineering Guidelines & Anti-Regression Rules, VidCut Performance Optimization Report
+
+### Community 44 - "routes.config.ts"
+Cohesion: 0.20
+Nodes (5): NotFound, AgreementLayout(), Editor(), EditorComp, routes
 
 ### Community 45 - "projectImport.ts"
 Cohesion: 0.24
@@ -415,11 +430,11 @@ Nodes (14): Bc(), c(), ca(), Cc(), dc(), Ec(), Fc(), Ic() (+6 more)
 
 ### Community 51 - "utils/index.ts"
 Cohesion: 0.06
-Nodes (35): jquery, lodash, mobx, video-core-sdk, IProps, IProps, EventsName, Point (+27 more)
+Nodes (33): jquery, lodash, mobx, IProps, IProps, GroupFast(), IProps, CustomShakeModal() (+25 more)
 
-### Community 52 - "Account.tsx"
-Cohesion: 0.13
-Nodes (12): Account(), IProps, BindEmail(), IProps, BindWechat(), IProps, IProps, Item() (+4 more)
+### Community 52 - "Account"
+Cohesion: 0.22
+Nodes (7): Account(), BindEmail(), BindWechat(), IProps, Item(), NickName(), Password()
 
 ### Community 53 - "Ffmpeg Core Module #3"
 Cohesion: 0.16
@@ -446,8 +461,8 @@ Cohesion: 0.10
 Nodes (8): CategoryRecord, FolderHandleRecord, localDB, ProjectRecord, UploadRecord, genId(), Server, getMaterialFileUrlCached()
 
 ### Community 59 - "Local Storage & Persistence #7"
-Cohesion: 0.19
-Nodes (17): jszip@^3.10.1, jszip, getMaterialFile(), downloadBlob(), exportProjectZip(), ExportProjectZipOptions, ExportProjectZipResult, EXT_FOLDER_MAP (+9 more)
+Cohesion: 0.23
+Nodes (15): getMaterialFile(), downloadBlob(), exportProjectZip(), ExportProjectZipOptions, ExportProjectZipResult, EXT_FOLDER_MAP, extFromMime(), getFieldValue() (+7 more)
 
 ### Community 60 - "Core Utilities & Helpers #6"
 Cohesion: 0.16
@@ -466,12 +481,16 @@ Cohesion: 0.18
 Nodes (15): alignMemory(), getSocketAddress(), getSocketFromFD(), mmapAlloc(), ___syscall_accept4(), ___syscall_bind(), ___syscall_connect(), ___syscall_getpeername() (+7 more)
 
 ### Community 65 - "crypto.ts"
-Cohesion: 0.60
-Nodes (4): crypto, decrypt(), encrypt(), getNumArr()
+Cohesion: 0.83
+Nodes (3): decrypt(), encrypt(), getNumArr()
 
 ### Community 66 - "Uploaddecode Module"
-Cohesion: 0.21
-Nodes (16): @ffmpeg/util@^0.12.1, @ffmpeg/util, buildOutputArgs(), checkAndConvert(), ConvertOptions, ConvertResult, createFFmpeg(), destroyFFmpeg() (+8 more)
+Cohesion: 0.26
+Nodes (14): buildOutputArgs(), checkAndConvert(), ConvertOptions, ConvertResult, createFFmpeg(), destroyFFmpeg(), ensureFFmpeg(), execFFmpeg() (+6 more)
+
+### Community 67 - "addItem.ts"
+Cohesion: 0.27
+Nodes (11): DragItem(), DragItemCls, addEffectItem(), addFilterItem(), addImageVideoAudioItem(), addItem(), addLottieItem(), addTextItem() (+3 more)
 
 ### Community 69 - "上市公司都在使用的开源视频剪辑工具：低成本、高安全、可定制"
 Cohesion: 0.11
@@ -493,9 +512,9 @@ Nodes (13): assert(), ___assert_fail(), _getaddrinfo(), allocaddrinfo(), handleM
 Cohesion: 0.17
 Nodes (9): _getnameinfo(), intArrayFromString(), LazyUint8Array(), lengthBytesUTF8(), stringToNewUTF8(), stringToUTF8(), stringToUTF8Array(), ___syscall_getdents64() (+1 more)
 
-### Community 74 - "language"
-Cohesion: 0.04
-Nodes (41): react-router-dom, App(), AppProps, IProps, UploadItem, IProps, Props, VideoSplit() (+33 more)
+### Community 74 - "stores"
+Cohesion: 0.06
+Nodes (25): LoginEmail(), LoginMobile(), IProps, IState, LoginRegister(), LoginRegisterBox(), config, CapturePoster() (+17 more)
 
 ### Community 75 - "和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单"
 Cohesion: 0.14
@@ -514,8 +533,8 @@ Cohesion: 0.21
 Nodes (7): fflate@^0.8.2, lottie-web@^5.12.2, fflate, lottie-web, fetchLottie(), IProps, Lottie()
 
 ### Community 79 - "worker.config.js"
-Cohesion: 0.33
-Nodes (5): fs, main(), { minify }, minscript(), path
+Cohesion: 0.25
+Nodes (7): terser@^5.24.0, terser, fs, main(), { minify }, minscript(), path
 
 ### Community 80 - "Decode Worker Module"
 Cohesion: 0.30
@@ -541,9 +560,9 @@ Nodes (9): W(), a(), B(), f(), m(), n(), V(), z() (+1 more)
 Cohesion: 0.18
 Nodes (3): ColorPoint(), pad(), Pixel()
 
-### Community 89 - "CurveSpeed.tsx"
-Cohesion: 0.39
-Nodes (5): CurveSpeed(), Props, CurveSpeedItems(), Props, curveSpeedMock
+### Community 89 - "VIDCUT v1.0.0 — PRODUCTION HARDENING & COMPATIBILITY REPORT"
+Cohesion: 0.06
+Nodes (30): 10. FINAL RELEASE READINESS DECISION, 1.1 Correcting Previous Environmental Misconceptions, 1.2 Exact Runtime Specification Matrix, 1. RUNTIME ENVIRONMENT AUDIT & CORRECTION, 2.1 Electron 33 vs Electron 25 Upgrade Verification, 2.2 Compatibility Assessment for Electron 33+, 2.3 Electron Security Posture Audit, 2. ELECTRON UPGRADE & SECURITY AUDIT (+22 more)
 
 ### Community 90 - "Index Module #3"
 Cohesion: 0.22
@@ -589,25 +608,25 @@ Nodes (7): D(), qa(), B(), E(), f(), k(), u()
 Cohesion: 0.31
 Nodes (4): SortableItem, SortableItemProps, VerticalSortableList(), VerticalSortableListProps
 
-### Community 101 - "theme/index.ts"
-Cohesion: 0.15
-Nodes (8): Props, themeDark, themeLight, theme, ThemeName, DARK, LIGHT, ThemeType
+### Community 101 - "src/components/header/Header.tsx"
+Cohesion: 0.07
+Nodes (20): IProps, IProps, User(), User(), Props, ISideBarProps, Clip(), ClipModal() (+12 more)
 
 ### Community 103 - "Animation.tsx"
-Cohesion: 0.14
-Nodes (11): ChildProps, IProps, WaterFall(), AnimateItem(), IProps, AnimateItem(), IProps, IProps (+3 more)
+Cohesion: 0.11
+Nodes (13): react-resize-detector, ChildProps, IProps, IProps, WaterFall(), AnimateItem(), IProps, AnimateItem() (+5 more)
 
 ### Community 104 - "uploadBeforeData.ts"
-Cohesion: 0.15
-Nodes (19): apng-js@^1.1.5, apng-js, convertWavToMp3(), RecordAudioBox(), apngArr2FrameImage(), decoderVideo(), decoderVideoDrawFrameImage(), getUploadBeforeData() (+11 more)
+Cohesion: 0.18
+Nodes (17): convertWavToMp3(), RecordAudioBox(), apngArr2FrameImage(), decoderVideo(), decoderVideoDrawFrameImage(), getUploadBeforeData(), gifArr2FrameImage(), imageThumb() (+9 more)
 
 ### Community 106 - "Build & Configuration #8"
 Cohesion: 0.25
 Nodes (7): ImportMeta, ImportMetaEnv, pixi-filters, PubSub, react-resize-detector, react-router-dom, simple-query-string
 
 ### Community 107 - "WorkspaceLayout.tsx"
-Cohesion: 0.29
-Nodes (6): FolderGuard(), FolderGuardProps, PageLoading(), HomeLayout(), IndexLayout(), WorkspaceLayout()
+Cohesion: 0.19
+Nodes (9): FolderGuard(), FolderGuardProps, PageLoading(), HomeLayout(), IndexLayout(), UserLayout(), ColorBg(), IProps (+1 more)
 
 ### Community 108 - "Lame Min Module #5"
 Cohesion: 0.33
@@ -622,8 +641,8 @@ Cohesion: 0.15
 Nodes (12): AI 加持, 专业时间轴, 元素类型, 功能，不妥协, 动画能力, 地址, 天下苦剪映久已, 抠图 (+4 more)
 
 ### Community 112 - "user-layout/sidebar/Sidebar.tsx"
-Cohesion: 0.24
-Nodes (5): react-easy-crop@^5.0.2, react-easy-crop, CropUpload(), Sidebar(), getUrl()
+Cohesion: 0.31
+Nodes (3): CropUpload(), Sidebar(), getUrl()
 
 ### Community 113 - "User Profile & Account #7"
 Cohesion: 0.40
@@ -667,19 +686,19 @@ Nodes (5): initRuntime(), postRun(), preRun(), run(), doRun()
 
 ### Community 124 - "benchmark-storage-matrix.js"
 Cohesion: 0.11
-Nodes (12): os, { performance }, getStats(), os, { performance }, runPlaybackBenchmark(), { observable, autorun, transaction }, { performance } (+4 more)
+Nodes (14): os, { performance }, fs, getStats(), os, path, { performance }, runRealPerformanceValidation() (+6 more)
 
 ### Community 125 - "终于有可以替代剪映的开源视频工具了！数据全本地，还能用 AI 聊天剪视频"
 Cohesion: 0.17
 Nodes (11): AI 能力直接拉满, 不需要安装，打开浏览器就能用, 为什么 VIDCUT 能替代剪映？, 写在最后, 功能全面对标, 开源意味着什么？, 快速开始, 数据只在你自己的电脑上 (+3 more)
 
 ### Community 126 - "Custom Module"
-Cohesion: 0.50
-Nodes (3): Custom(), Props, sides
-
-### Community 127 - "reURL"
 Cohesion: 0.33
-Nodes (6): Header(), User(), User(), Box, joinURL(), reURL()
+Nodes (5): react-router@^5.2.0, react-router, Custom(), Props, sides
+
+### Community 127 - "Content.tsx"
+Cohesion: 0.13
+Nodes (11): jszip@^3.10.1, jszip, IProps, UploadItem, IProps, PictureSplit(), Props, VideoSplit() (+3 more)
 
 ### Community 128 - "Index Module #7"
 Cohesion: 0.50
@@ -698,8 +717,8 @@ Cohesion: 0.67
 Nodes (3): VidCut Architecture & Offline Strategy, Electron Desktop Integration, Local Storage & OPFS Engine
 
 ### Community 141 - "localResources.ts"
-Cohesion: 0.18
-Nodes (10): LOCAL_AUDIO_ITEMS, LOCAL_EFFECT_ITEMS, LOCAL_FILTER_ITEMS, LOCAL_FONTS, LOCAL_TEXT_ITEMS, LOCAL_TRANSITION_ITEMS, LocalResourceItem, RAW_EFFECTS (+2 more)
+Cohesion: 0.13
+Nodes (13): LOCAL_AUDIO_ITEMS, LOCAL_EFFECT_ITEMS, LOCAL_FILTER_ITEMS, LOCAL_FONTS, LOCAL_MATERIAL_TYPES, LOCAL_TEXT_ITEMS, LOCAL_TRANSITION_ITEMS, LocalResourceItem (+5 more)
 
 ### Community 142 - "三、元素效果"
 Cohesion: 0.18
@@ -711,7 +730,7 @@ Nodes (10): AI 对话助手——用自然语言操控编辑器, AI 深度集成
 
 ### Community 149 - "reconcile-bundle.js"
 Cohesion: 0.15
-Nodes (11): distDir, fs, getFileInfo(), path, reconcile(), zlib, files, fs (+3 more)
+Nodes (12): distDir, fs, getFileInfo(), path, reconcile(), distDir, fs, getFileInfo() (+4 more)
 
 ### Community 195 - "UNICUT 功能清单"
 Cohesion: 0.20
@@ -734,20 +753,20 @@ Cohesion: 0.40
 Nodes (5): 8.1 新建/保存/另存为, 8.2 视频导出, 8.3 截图/海报, 8.4 模板系统, 八、项目管理
 
 ### Community 201 - "TextStyle.tsx"
-Cohesion: 0.29
-Nodes (5): InputNumber4(), IProps, FontImage(), IProps, TextStyle()
+Cohesion: 0.20
+Nodes (7): GradualColor(), IProps, InputNumber4(), IProps, FontImage(), IProps, TextStyle()
 
-### Community 202 - "DraftThumbImage.tsx"
-Cohesion: 0.67
-Nodes (3): DraftThumbImage(), IProps, resolveLocalUrl()
+### Community 202 - "List"
+Cohesion: 0.14
+Nodes (13): ColorBg(), IProps, ContextMenus(), List(), QrcodeUpload(), Sources(), EditorPage(), PreviewSource() (+5 more)
 
 ### Community 203 - "七、素材管理"
 Cohesion: 0.50
 Nodes (4): 7.1 素材库, 7.2 我的素材, 7.3 素材管理能力, 七、素材管理
 
-### Community 204 - "@douyinfe/semi-ui"
-Cohesion: 0.08
-Nodes (12): @douyinfe/semi-ui, CustomShakeModal(), Props, Props, IProps, IProps, IProps, IProps (+4 more)
+### Community 204 - "CameraOptions.tsx"
+Cohesion: 0.22
+Nodes (3): IProps, GroupOptions(), IProps
 
 ### Community 205 - "selection.test.js"
 Cohesion: 0.23
@@ -762,60 +781,56 @@ Cohesion: 0.22
 Nodes (8): 3. Exact Modified Files Summary, 4. Empirical Benchmarks & Measurements, 5. Performance Limitations & Engineering Tradeoffs, 6. Production Verification, A. Timeline Selection Scalability Benchmark, B. Route Payload Matrix (After Granular Splitting), C. Playback Controller Re-renders (React Profiler), VidCut — Final Performance Engineering Report
 
 ### Community 209 - "ref_path"
-Cohesion: 0.20
-Nodes (5): fs, path, { performance }, fs, path
+Cohesion: 0.12
+Nodes (10): fs, path, { performance }, fs, path, code, fs, path (+2 more)
 
 ### Community 210 - "ref_fs"
-Cohesion: 0.25
-Nodes (5): bs, csm, fs, ut, fs
+Cohesion: 0.11
+Nodes (13): checks, content, fs, workerConfig, content, fs, idx, idxAudio (+5 more)
 
 ### Community 211 - "Color.tsx"
-Cohesion: 0.18
-Nodes (7): @uiw/react-color@^2.4.0, @uiw/react-color, EyeDropperAPI, IProps, Window, GradualColor(), IProps
+Cohesion: 0.29
+Nodes (5): @uiw/react-color@^2.4.0, @uiw/react-color, EyeDropperAPI, IProps, Window
 
 ### Community 212 - ".destroy"
-Cohesion: 0.17
+Cohesion: 0.15
 Nodes (11): 1. Executive Summary, 4.1 Methodology, 4.2 Memory Consumption Across 30 Cycles, 4.3 Plateau Analysis & Verification, 4. LONG-SESSION MEMORY STABILITY (30-CYCLE LIFECYCLE BENCHMARK), EXECUTIVE SUMMARY & AUDIT SCORECARD, Subsystem Verification Scorecard, 1. Executive Summary & Verification Matrix (+3 more)
 
-### Community 213 - "LoginRegisterBox.tsx"
-Cohesion: 0.21
-Nodes (4): LoginEmail(), LoginMobile(), LoginQrcode, LoginRegisterBox()
-
-### Community 214 - "patch-sdk.js"
-Cohesion: 0.33
-Nodes (5): code, fs, path, targetPath, viteCacheDir
-
-### Community 215 - "SDK.tsx"
+### Community 214 - "BasicService.ts"
 Cohesion: 0.20
-Nodes (8): react-dom@^18.2.0, react-dom, VideoEditorSDKParams, plugins, conf, VideoEditorSDK, exportMovie(), prewarmLocalMaterials()
+Nodes (5): Server, server, globalOptions, Method, Res
 
-### Community 217 - "Home.tsx"
-Cohesion: 0.20
-Nodes (8): VipRecharge(), aiFeatures, allFeatures, coreFeatures, faqList, freeFeatures, Home(), vipFeatures
+### Community 216 - "TextOptions.tsx"
+Cohesion: 0.22
+Nodes (3): IProps, IProps, IProps
+
+### Community 217 - "benchmark-real-application-export.js"
+Cohesion: 0.22
+Nodes (8): { execSync }, fs, outputDir, path, { performance }, probeFile(), profiles, runApplicationExportVerification()
 
 ### Community 218 - "FrameData"
-Cohesion: 0.23
-Nodes (12): FrameData(), AudioOptions(), CameraOptions(), CaptionOptions(), FilterOptions(), GroupOptions(), ImageOptions(), EffectOptions() (+4 more)
+Cohesion: 0.33
+Nodes (9): FrameData(), CameraOptions(), CaptionOptions(), FilterOptions(), ImageOptions(), TextOptions(), TransitionOptions(), VideoOptions() (+1 more)
 
 ### Community 219 - "electron"
 Cohesion: 0.50
 Nodes (3): { contextBridge, ipcRenderer }, electron@33.2.1, electron
 
 ### Community 221 - "validate-real-export.js"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (8): { execSync }, fs, outputDir, path, { performance }, probeFile(), runExportValidation(), targets
 
-### Community 222 - "Export.tsx"
-Cohesion: 0.29
-Nodes (5): CapturePoster(), Props, IProps, PosterCanvas, Props
+### Community 222 - "audit-electron-environment.js"
+Cohesion: 0.20
+Nodes (9): { execSync, spawn }, fs, mainJsPath, mainOutPath, originalMainJs, originalPreloadJs, path, preloadJsPath (+1 more)
+
+### Community 223 - "User"
+Cohesion: 0.26
+Nodes (3): Header(), User, Box
 
 ### Community 224 - "2. Implemented Optimizations & Code Architecture"
 Cohesion: 0.29
 Nodes (7): 2. Implemented Optimizations & Code Architecture, Phase 1: Fine-Grained $O(1)$ Selection State, Phase 2: Playhead & Ruler Decoupling, Phase 3: Canvas Pan & Drag Performance, Phase 4: Long-Session Memory & Resource Reclamation, Ruler(), TimelineCursor
-
-### Community 225 - "Toolbar"
-Cohesion: 0.20
-Nodes (10): AddCamera(), CropSize(), Delete(), ForbiddenAudio(), Frame(), Freeze(), Poster(), SetScale() (+2 more)
 
 ### Community 226 - "3. Architectural Implementations & Technical Details"
 Cohesion: 0.22
@@ -823,75 +838,95 @@ Nodes (9): Phase 5: Granular UI Vendor Splitting, 3. Architectural Implementatio
 
 ### Community 227 - "qrcode/index.ts"
 Cohesion: 0.15
-Nodes (11): pixi.js@^7.3.0, qrcode@^1.5.4, pixi.js, qrcode, config, QrcodeEl(), Params, QrcodeElement (+3 more)
+Nodes (11): plugins, config, QrcodeEl(), Params, QrcodeElement, conf, IOptionsProps, Options() (+3 more)
 
 ### Community 228 - "Canvas"
 Cohesion: 0.33
 Nodes (6): 4. React & MobX Rendering Analysis, A. Player Playback Scrubbing, Canvas(), Player(), TimeDisplay, TemplatePlayer()
 
-### Community 229 - "Layout"
-Cohesion: 0.15
-Nodes (4): IProps, SelectedSet(), deleteLocalCategory(), Layout
-
-### Community 230 - "benchmark-real-video-lifecycle.js"
-Cohesion: 0.33
-Nodes (6): fs, getStats(), os, path, { performance }, runRealPerformanceValidation()
+### Community 230 - "App.tsx"
+Cohesion: 0.28
+Nodes (4): react-router-config, App(), AppProps, routes
 
 ### Community 231 - "hydration.test.js"
-Cohesion: 0.33
-Nodes (5): assert, CanvasHydrationController, createMockResourceManager(), hydrateResourcePaths(), runTests()
+Cohesion: 0.27
+Nodes (7): assert, CanvasHydrationController, createMockResourceManager(), hydrateResourcePaths(), runTests(), mockRevokeObjectURL(), mockSaveFileToLocal()
 
-### Community 232 - "UserLayout.tsx"
+### Community 232 - "inspect-binary-versions.js"
+Cohesion: 0.22
+Nodes (8): buf, chromeVersions, electronVersions, fs, nodeVersions, path, str, v8Versions
+
+### Community 233 - "background/Background.tsx"
 Cohesion: 0.32
-Nodes (3): UserLayout(), ColorBg(), IProps
+Nodes (4): Background(), IProps, colors, splitArray()
 
-### Community 233 - "EditorPage.tsx"
-Cohesion: 0.38
-Nodes (4): EditorPage(), Editor(), EditorComp, routes
-
-### Community 234 - "react"
-Cohesion: 0.07
-Nodes (21): react, ProgressData, IProps, IProps, Props, IProps, IProps, IProps (+13 more)
+### Community 234 - "react-router-dom"
+Cohesion: 0.40
+Nodes (3): react-router-dom@^5.1.0, react-router-dom, routes
 
 ### Community 236 - "6.1 Exact Byte Reconciliation"
 Cohesion: 0.33
 Nodes (6): 6.1 Exact Byte Reconciliation, 6.2 Electron Desktop Deployment, 6. PRODUCTION BUNDLE RECONCILIATION & BUILD COMPATIBILITY, Grand Total Distribution, Route 1: Initial Workspace Route (Loaded on initial hit), Route 2: Deferred Editor Route (Loaded ONLY upon opening editor)
 
-### Community 237 - "routes.config.ts"
-Cohesion: 0.24
-Nodes (4): react-router-config, routes, Material(), routes
+### Community 237 - "Draft.tsx"
+Cohesion: 0.15
+Nodes (10): getInitData(), Draft(), IProps, DraftThumbImage(), IProps, MoreMenus(), routes, Material() (+2 more)
 
-### Community 239 - "editor/server.ts"
-Cohesion: 0.33
-Nodes (3): LOCAL_MATERIAL_TYPES, queryLocalMaterials(), MaterialTypes
+### Community 238 - "options/Options.tsx"
+Cohesion: 0.22
+Nodes (3): IProps, Options(), IProps
+
+### Community 239 - "Message"
+Cohesion: 0.29
+Nodes (4): Detail(), List(), Message(), Server
+
+### Community 241 - "Mask.tsx"
+Cohesion: 0.38
+Nodes (4): calculateScaleFactor(), IProps, Mask(), mock
 
 ### Community 242 - "1. CRITICAL CANVAS HYDRATION INVESTIGATION & FIX"
 Cohesion: 0.50
 Nodes (4): 1.1 The Original Architectural Vulnerability, 1.2 The Production Implementation, 1.3 Automated Hydration Test Suite (`tests/hydration.test.js`), 1. CRITICAL CANVAS HYDRATION INVESTIGATION & FIX
 
-### Community 243 - "5. RESOURCE LIFECYCLE & EXPORT DISPOSAL SAFETY"
+### Community 243 - "benchmark-storage-matrix.js"
+Cohesion: 0.40
+Nodes (4): getStats(), os, { performance }, runStorageBenchmark()
+
+### Community 246 - "validate-bundle.js"
+Cohesion: 0.33
+Nodes (5): files, fs, html, path, zlib
+
+### Community 249 - "LottieItem.tsx"
+Cohesion: 0.53
+Nodes (3): IProps, LottieEl(), LottieItem()
+
+### Community 251 - "theme.ts"
+Cohesion: 0.47
+Nodes (3): themeDark, themeLight, ThemeType
+
+### Community 253 - "3. REAL VIDEO EXPORT VALIDATION & DISCREPANCY RECONCILIATION"
 Cohesion: 0.50
-Nodes (4): 5.1 Export Lifecycle & `safeDestroy` Architecture, 5.2 Unit Test Verification (`tests/export-cleanup.test.js`), 5.3 Editor Unmount Teardown (`editor.destroy()`), 5. RESOURCE LIFECYCLE & EXPORT DISPOSAL SAFETY
+Nodes (4): 3.1 Correcting the "58.5 ms" Export Micro-Benchmark, 3.2 Real Transcode Benchmarks with FFmpeg 7.0.1, 3.3 Stream & Container Probe Validation, 3. REAL VIDEO EXPORT VALIDATION & DISCREPANCY RECONCILIATION
 
 ## Knowledge Gaps
 - **13 isolated node(s):** `RFC-2279`, `RFC-3629`, `DARK`, `LIGHT`, `Video Editing Feature Specification` (+8 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1494 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **90 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1551 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **111 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Is()` connect `Core Utilities & Helpers` to `Core Utilities & Helpers #3`, `Core Utilities & Helpers #2`?**
-  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+  _High betweenness centrality (0.095) - this node is a cross-community bridge._
 - **What connects `RFC-2279`, `RFC-3629`, `DARK` to the rest of the system?**
   _13 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Item` be split into smaller, more focused modules?**
-  _Cohesion score 0.03632310516653554 - nodes in this community are weakly interconnected._
-- **Why does `react` connect `react` to `Item`, `dependencies`, `Build & Configuration #2`, `BasicService.ts`, `Editor.tsx`, `stores/index.ts`, `sources/index.tsx`, `localStorageService.ts`, `Folders.tsx`, `Editor State Store`, `Credit.tsx`, `language.ts`, `Links.tsx`, `TextOptions.tsx`, `NotFound`, `utils/index.ts`, `Account.tsx`, `TextStyle.tsx`, `language`, `DraftThumbImage.tsx`, `@douyinfe/semi-ui`, `agreement/index.ts`, `Build & Configuration #6`, `Color.tsx`, `LoginRegisterBox.tsx`, `CurveSpeed.tsx`, `Home.tsx`, `AgreementLayout.tsx`, `Export.tsx`, `qrcode/index.ts`, `Verticalsortablelist Module`, `theme/index.ts`, `Animation.tsx`, `UserLayout.tsx`, `EditorPage.tsx`, `WorkspaceLayout.tsx`, `user-layout/sidebar/Sidebar.tsx`?**
-  _High betweenness centrality (0.081) - this node is a cross-community bridge._
+  _Cohesion score 0.03787026621672291 - nodes in this community are weakly interconnected._
+- **Why does `react` connect `react` to `CreditRecharge.tsx`, `Item`, `Home.tsx`, `dependencies`, `Editor.tsx`, `@douyinfe/semi-ui`, `sources/index.tsx`, `package.json`, `localStorageService.ts`, `Folders.tsx`, `Editor State Store`, `Credit.tsx`, `Links.tsx`, `ImageOptions.tsx`, `routes.config.ts`, `utils/index.ts`, `TextStyle.tsx`, `stores`, `agreement/index.ts`, `Build & Configuration #6`, `Color.tsx`, `AgreementLayout.tsx`, `qrcode/index.ts`, `Verticalsortablelist Module`, `src/components/header/Header.tsx`, `App.tsx`, `Animation.tsx`, `background/Background.tsx`, `react-router-dom`, `WorkspaceLayout.tsx`, `Draft.tsx`, `user-layout/sidebar/Sidebar.tsx`, `Mask.tsx`, `LottieItem.tsx`, `Content.tsx`?**
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
+- **Should `Home.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.12857142857142856 - nodes in this community are weakly interconnected._
+- **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `CreditRecharge.tsx`, `Item`, `Home.tsx`, `dependencies`, `Editor.tsx`, `package.json`, `localStorageService.ts`, `Folders.tsx`, `Editor State Store`, `Credit.tsx`, `react`, `Links.tsx`, `ImageOptions.tsx`, `routes.config.ts`, `utils/index.ts`, `addItem.ts`, `TextStyle.tsx`, `stores`, `CameraOptions.tsx`, `Build & Configuration #6`, `Color.tsx`, `TextOptions.tsx`, `qrcode/index.ts`, `src/components/header/Header.tsx`, `App.tsx`, `Animation.tsx`, `Draft.tsx`, `options/Options.tsx`, `user-layout/sidebar/Sidebar.tsx`, `Mask.tsx`, `LottieOptions.tsx`, `Custom Module`, `SliderInput.tsx`, `Content.tsx`?**
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **Should `Ffmpeg Core Module` be split into smaller, more focused modules?**
   _Cohesion score 0.03729071537290715 - nodes in this community are weakly interconnected._
-- **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `Item`, `dependencies`, `Build & Configuration #2`, `BasicService.ts`, `Editor.tsx`, `stores/index.ts`, `sources/index.tsx`, `localStorageService.ts`, `Folders.tsx`, `Editor State Store`, `Credit.tsx`, `language.ts`, `Links.tsx`, `TextOptions.tsx`, `utils/index.ts`, `Account.tsx`, `TextStyle.tsx`, `language`, `Build & Configuration #6`, `Color.tsx`, `LoginRegisterBox.tsx`, `TextOptions.tsx`, `CurveSpeed.tsx`, `Home.tsx`, `Export.tsx`, `qrcode/index.ts`, `Layout`, `theme/index.ts`, `Animation.tsx`, `EditorPage.tsx`, `react`, `options/Options.tsx`, `user-layout/sidebar/Sidebar.tsx`, `Custom Module`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
-- **Should `Core Utilities & Helpers` be split into smaller, more focused modules?**
-  _Cohesion score 0.08630952380952381 - nodes in this community are weakly interconnected._

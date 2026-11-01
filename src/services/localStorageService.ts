@@ -148,7 +148,19 @@ async function copyFileToLocal(
   await writable.write(sourceFile);
   await writable.close();
 
-  return { relativePath: `${dirName ? dirName + '/' : ''}${actualFileName}`, fileName: actualFileName };
+  const finalRelativePath = `${dirName ? dirName + '/' : ''}${actualFileName}`;
+  // 若该相对路径已有旧 Blob URL 缓存（同路径文件覆盖写入），先释放旧 URL 并清理缓存，确保后续读取获得最新文件
+  if (urlCache.has(finalRelativePath)) {
+    const oldUrl = urlCache.get(finalRelativePath);
+    if (oldUrl && oldUrl.startsWith('blob:')) {
+      try {
+        URL.revokeObjectURL(oldUrl);
+      } catch (e) {}
+    }
+    urlCache.delete(finalRelativePath);
+  }
+
+  return { relativePath: finalRelativePath, fileName: actualFileName };
 }
 
 /** 将文件写入本地存储的指定相对路径（供工程包导入使用），root 可传入已获取的句柄避免重复查询 */
@@ -370,9 +382,24 @@ export async function getMaterialFileUrlCached(relativePath: string): Promise<st
 /** 清除 URL 缓存 */
 export function clearUrlCache(): void {
   for (const url of urlCache.values()) {
-    URL.revokeObjectURL(url);
+    try {
+      URL.revokeObjectURL(url);
+    } catch (e) {}
   }
   urlCache.clear();
+}
+
+/** 针对单素材路径主动失效缓存并释放 Blob URL（例如覆盖更新、替换素材） */
+export function invalidateMaterialUrl(relativePath: string): void {
+  if (urlCache.has(relativePath)) {
+    const oldUrl = urlCache.get(relativePath);
+    if (oldUrl && oldUrl.startsWith('blob:')) {
+      try {
+        URL.revokeObjectURL(oldUrl);
+      } catch (e) {}
+    }
+    urlCache.delete(relativePath);
+  }
 }
 
 /** 获取所有素材（按 appId 分组） */

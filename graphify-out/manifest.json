@@ -2208,9 +2208,9 @@
     "semantic_hash": "56d788f64f31108484112336a52e3065"
   },
   "src/services/localStorageService.ts": {
-    "mtime": 1793552869.9367294,
-    "seen": 1793553737.5154786,
-    "ast_hash": "a825e8d81e8012710f67a93fe4c1f411",
+    "mtime": 1793556501.657769,
+    "seen": 1793557161.6650782,
+    "ast_hash": "4d41c2bc06b560b549f7e856ec383ec2",
     "semantic_hash": ""
   },
   "src/stores/audios.ts": {
@@ -6912,33 +6912,75 @@
     "semantic_hash": ""
   },
   "scripts/benchmark-30cycle-memory.js": {
-    "mtime": 1793553237.1402104,
-    "seen": 1793553737.513759,
-    "ast_hash": "c9337859bc41913be1660cce10c260d3",
+    "mtime": 1793556804.6945548,
+    "seen": 1793557161.6622083,
+    "ast_hash": "8d35f5caa8874d21e7c33b24f5948f10",
     "semantic_hash": ""
   },
   "scripts/benchmark-real-video-playback.js": {
-    "mtime": 1793553210.1159375,
-    "seen": 1793553737.5137742,
-    "ast_hash": "0cfa6f4dd15f5313e9c21ae12017829e",
+    "mtime": 1793556611.2458024,
+    "seen": 1793557161.662245,
+    "ast_hash": "2df3019088a4e3f58d80d0394de16fc0",
     "semantic_hash": ""
   },
   "scripts/validate-real-export.js": {
-    "mtime": 1793553157.994318,
-    "seen": 1793553737.5138183,
-    "ast_hash": "65296cb6a7244206587940daf772af7c",
+    "mtime": 1793553798.765834,
+    "seen": 1793557161.662351,
+    "ast_hash": "cd6636e1fb2ad2ce13a4091e0b7a8d24",
     "semantic_hash": ""
   },
   "tests/hydration.test.js": {
-    "mtime": 1793553076.37047,
-    "seen": 1793553737.5155568,
-    "ast_hash": "e0cb5303ac5acc556730238121d753c2",
+    "mtime": 1793556560.521936,
+    "seen": 1793557161.6652718,
+    "ast_hash": "b98d4fb99a21351fc536351d8e6f4d6b",
     "semantic_hash": ""
   },
   "docs/VIDCUT_FINAL_ACCEPTANCE_VERIFICATION.md": {
-    "mtime": 1793553574.009377,
-    "seen": 1793553737.5155876,
-    "ast_hash": "842f19d32389791e5147685f80725e44",
+    "mtime": 1793553798.1917725,
+    "seen": 1793557161.6653872,
+    "ast_hash": "f9acacca8c4ca9858343f6819f1ba872",
+    "semantic_hash": ""
+  },
+  "scripts/audit-electron-environment.js": {
+    "mtime": 1793556298.5194545,
+    "seen": 1793557161.6621983,
+    "ast_hash": "f5394d30efdb5e99a5d9fe4f3f679a49",
+    "semantic_hash": ""
+  },
+  "scripts/benchmark-real-application-export.js": {
+    "mtime": 1793556705.0347881,
+    "seen": 1793557161.6622276,
+    "ast_hash": "0e761d47a64a26eeb98e6eb133c01908",
+    "semantic_hash": ""
+  },
+  "scripts/inspect-binary-versions.js": {
+    "mtime": 1793556391.4767444,
+    "seen": 1793557161.662278,
+    "ast_hash": "4ba56a776a5133a590eef7fed91d78aa",
+    "semantic_hash": ""
+  },
+  "scripts/inspect-export-backend.js": {
+    "mtime": 1793556655.8866594,
+    "seen": 1793557161.6622844,
+    "ast_hash": "58806a578248cbdf73cbd283c83d2d8f",
+    "semantic_hash": ""
+  },
+  "scripts/inspect-export-details.js": {
+    "mtime": 1793556676.5850816,
+    "seen": 1793557161.66229,
+    "ast_hash": "0c23b6be0ac23acb88bf12769cdbf5a5",
+    "semantic_hash": ""
+  },
+  "scripts/reconcile-bundle-v2.js": {
+    "mtime": 1793556865.430824,
+    "seen": 1793557161.6623206,
+    "ast_hash": "d2ea8b7ce3d3e405b6140f410b4ccd55",
+    "semantic_hash": ""
+  },
+  "docs/VIDCUT_RELEASE_HARDENING_REPORT.md": {
+    "mtime": 1793556973.442878,
+    "seen": 1793557161.6654015,
+    "ast_hash": "c9a2e648a86029eecfc4eff05b4bbec2",
     "semantic_hash": ""
   },
   "yarn.lock": {
