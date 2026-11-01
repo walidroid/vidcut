@@ -9,6 +9,15 @@ import { stores } from '@stores/index';
 
 export interface IProps {}
 
+const TimeDisplay = observer(() => {
+  const { editor } = stores;
+  return (
+    <span className={styles.times}>
+      <i>{utils.secToTime(editor.currentTime, 'hh:mm:ss')}</i> /{' '}
+      <i className={styles.total}>{utils.secToTime(editor.movie?.getTotalTime?.() || 0, 'hh:mm:ss')}</i>
+    </span>
+  );
+});
 function Player(props: IProps) {
   const { editor } = stores;
   const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -31,10 +40,7 @@ function Player(props: IProps) {
   return (
     <div className={styles.bottom}>
       <div className={styles.bottomInner}>
-        <span className={styles.times}>
-          <i>{utils.secToTime(editor.currentTime, 'hh:mm:ss')}</i> /{' '}
-          <i className={styles.total}>{utils.secToTime(editor.movie.getTotalTime(), 'hh:mm:ss')}</i>
-        </span>
+        <TimeDisplay />
         <span className={styles.player}>
           {editor.movie.playing ? (
             <a

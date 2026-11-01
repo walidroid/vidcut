@@ -45,10 +45,6 @@ import { language } from '@language/language';
 import { stores } from '@stores/index';
 // import { sides } from './Sides';
 
-// 延迟加载ffmpeg，避免页面阻塞
-setTimeout(() => {
-  loadFFmpeg();
-}, 1000);
 
 interface IProps {
   match?: { params: { appid: string } };

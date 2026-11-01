@@ -18,7 +18,6 @@ type Props = {};
 
 const Trackbody = (props: Props) => {
   const { editor } = stores;
-  editor.selectedElementIds;
   editor.timelineUpdateKey;
   const [trackWidth, setTrackWidth] = useState(window.innerWidth);
 

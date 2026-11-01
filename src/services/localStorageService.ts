@@ -5,6 +5,9 @@ import type { MovieData } from 'video-core-sdk';
 
 const ROOT_HANDLE_KEY = 'root';
 
+/** In-memory cache for root directory handle to avoid repetitive IndexedDB queries */
+let cachedRootHandle: FileSystemDirectoryHandle | null = null;
+
 /** 检查 File System Access API 是否可用 */
 export function isFSApiSupported(): boolean {
   if (typeof window === 'undefined') return false;
@@ -16,15 +19,24 @@ export function _unused_old_isFSApiSupported(): boolean {
 }
 /** 获取持久化的文件夹句柄 (优先已选文件夹，默认使用沙箱 OPFS 自动持久化存储) */
 async function getStoredHandle(): Promise<FileSystemDirectoryHandle | null> {
+  if (cachedRootHandle) {
+    return cachedRootHandle;
+  }
   try {
     const record = await localDB.folderHandles.get(ROOT_HANDLE_KEY);
     if (record?.handle) {
       const opts: FileSystemHandlePermissionDescriptor = { mode: 'readwrite' };
       try {
         const permission = await record.handle.queryPermission(opts);
-        if (permission === 'granted') return record.handle;
+        if (permission === 'granted') {
+          cachedRootHandle = record.handle;
+          return record.handle;
+        }
         const newPermission = await record.handle.requestPermission(opts);
-        if (newPermission === 'granted') return record.handle;
+        if (newPermission === 'granted') {
+          cachedRootHandle = record.handle;
+          return record.handle;
+        }
       } catch (err) {
         console.warn('文件系统权限请求警告:', err);
       }
@@ -37,7 +49,9 @@ async function getStoredHandle(): Promise<FileSystemDirectoryHandle | null> {
   if (typeof navigator !== 'undefined' && navigator.storage && typeof navigator.storage.getDirectory === 'function') {
     try {
       const opfsRoot = await navigator.storage.getDirectory();
-      return await opfsRoot.getDirectoryHandle('vidcut_workspace', { create: true });
+      const opfsHandle = await opfsRoot.getDirectoryHandle('vidcut_workspace', { create: true });
+      cachedRootHandle = opfsHandle;
+      return opfsHandle;
     } catch (err) {
       console.warn('OPFS 初始化失败:', err);
     }
@@ -53,6 +67,7 @@ export async function initLocalFolder(): Promise<FileSystemDirectoryHandle | nul
     try {
       const handle = await showDirectoryPicker({ mode: 'readwrite' });
       if (handle) {
+        cachedRootHandle = handle;
         await localDB.folderHandles.put({ id: ROOT_HANDLE_KEY, handle });
         return handle;
       }
@@ -72,6 +87,8 @@ export async function getRootHandle(): Promise<FileSystemDirectoryHandle | null>
 
 /** 重置本地存储文件夹 */
 export async function resetLocalFolder(): Promise<void> {
+  cachedRootHandle = null;
+  clearUrlCache();
   await localDB.folderHandles.delete(ROOT_HANDLE_KEY);
 }
 
@@ -411,10 +428,18 @@ export async function updateMaterialAttrs(
   await localDB.materials.put(record);
 }
 
-/** 删除素材（同时删除本地文件） */
+/** 删除素材（同时删除本地文件与内存Blob缓存） */
 export async function deleteMaterial(id: string): Promise<void> {
   const record = await localDB.materials.get(id);
   if (!record) return;
+
+  // 释放关联的内存 Blob URL 缓存
+  for (const p of [record.relativePath, record.thumbRelativePath, record.framesRelativePath, record.waveRelativePath]) {
+    if (p && urlCache.has(p)) {
+      URL.revokeObjectURL(urlCache.get(p)!);
+      urlCache.delete(p);
+    }
+  }
 
   const root = await getRootHandle();
   if (root) {
@@ -510,16 +535,19 @@ export async function getMaterialFile(relativePath: string): Promise<File | null
   }
 }
 
-/** 读取素材文件为 URL */
+/** 读取素材文件为 URL（带内存缓存避免重复读取磁盘与重复生成 Blob URL） */
 export async function getMaterialFileUrl(relativePath: string): Promise<string | null> {
-
   // 非本地资源，直接跳过
   if (!relativePath.startsWith('materials/')) {
     return relativePath;
   }
 
-  const root = await getRootHandle();
+  // 1. 优先使用缓存
+  if (urlCache.has(relativePath)) {
+    return urlCache.get(relativePath)!;
+  }
 
+  const root = await getRootHandle();
   if (!root) return null;
 
   try {
@@ -536,7 +564,9 @@ export async function getMaterialFileUrl(relativePath: string): Promise<string |
 
     const fileHandle = await dir.getFileHandle(fileName);
     const file = await fileHandle.getFile();
-    return URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
+    urlCache.set(relativePath, url);
+    return url;
   } catch (err) {
     console.error(err);
     console.error('读取素材文件失败:', relativePath);
@@ -738,18 +768,31 @@ export async function hydrateResourcePaths(
   resources: Array<{ url?: string; thumb?: string; frames?: string; wave?: string; [key: string]: any }>,
   resourceManage?: { fetchBlob: (path: string) => Promise<string> },
 ): Promise<void> {
+  if (!resourceManage?.fetchBlob) return;
+  const paths: string[] = [];
   for (const res of resources) {
-    const paths = [res.url, res.thumb, res.frames, res.wave].filter(
-      (p): p is string => !!p && p.startsWith('materials/'),
-    );
-    for (const p of paths) {
-      try {
-        // fetchBlob 内部会调用 getMaterialFileUrl 解析 materials/ 路径并写入 blob 缓存
-        await resourceManage?.fetchBlob?.(p);
-      } catch {
-        /* ignore */
+    for (const p of [res.url, res.thumb, res.frames, res.wave]) {
+      if (typeof p === 'string' && p.startsWith('materials/')) {
+        paths.push(p);
       }
     }
+  }
+
+  // Deduplicate paths to avoid redundant parallel decoding
+  const uniquePaths = Array.from(new Set(paths));
+  if (!uniquePaths.length) return;
+
+  // Parallel hydration with concurrency limit of 8 for optimal I/O throughput
+  const CONCURRENCY = 8;
+  for (let i = 0; i < uniquePaths.length; i += CONCURRENCY) {
+    const chunk = uniquePaths.slice(i, i + CONCURRENCY);
+    await Promise.all(
+      chunk.map(p =>
+        resourceManage.fetchBlob(p).catch((err: any) => {
+          console.warn('[hydrateResourcePaths] Warning resolving path:', p, err);
+        }),
+      ),
+    );
   }
 }
 

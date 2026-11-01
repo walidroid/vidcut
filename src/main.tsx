@@ -1,4 +1,3 @@
-import * as sdk from 'video-core-sdk';
 import '@less/initialize.less';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -11,8 +10,6 @@ import { language } from '@language/language';
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
 import fr from '@douyinfe/semi-ui/lib/es/locale/source/fr';
 import ar from '@douyinfe/semi-ui/lib/es/locale/source/ar';
-
-console.log('VidCut initialized', sdk);
 
 const locale = {
   'en-US': en_US,

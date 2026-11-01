@@ -31,12 +31,26 @@ function parseArrayBufferResponse(response) {
   return response.arrayBuffer();
 }
 
+let _sharedAudioContext = null;
+function getSharedAudioContext() {
+  if (typeof window === 'undefined') return null;
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  if (!_sharedAudioContext || _sharedAudioContext.state === 'closed') {
+    _sharedAudioContext = new AudioCtx();
+  }
+  return _sharedAudioContext;
+}
+
 export default class AudioSVGWaveform {
-  constructor({ url, buffer, maxWidth }) {
+  constructor({ url, buffer, maxWidth } = {}) {
     this.url = url || null;
     this.audioBuffer = buffer || null;
-    this.context = new AudioContext();
     this.maxWidth = maxWidth || 10000;
+  }
+
+  get context() {
+    return getSharedAudioContext();
   }
 
   set _url(u) {

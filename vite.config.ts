@@ -4,7 +4,6 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import vitePluginImp from 'vite-plugin-imp';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { terser } from 'rollup-plugin-terser';
 
 //@ts-ignore
 const resolve = url => path.resolve(__dirname, url);
@@ -29,18 +28,17 @@ export default defineConfig({
       '@plugins': resolve('./src/pages/editor/plugins'),
       '@database': resolve('./src/database'),
       '@services': resolve('./src/services'),
-      // 'video-core-sdk': resolve('C:/E/gitlab/h5-video/packages/video-core/src/react-pixi/CoreSDK.tsx'),
     },
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'], // 省略扩展名
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
   },
   plugins: [
     visualizer({
       filename: 'dist/stats.html',
-      open: true,
+      open: false,
       gzipSize: true,
       brotliSize: true,
     }),
-        react({
+    react({
       babel: {
         plugins: [
           ['@babel/plugin-proposal-decorators', { legacy: true }],
@@ -60,9 +58,6 @@ export default defineConfig({
           libDirectory: '',
           camel2DashComponentName: false,
         },
-        // {
-        //   libName: '@douyinfe/semi-ui',
-        // },
       ],
     }),
   ],
@@ -72,44 +67,53 @@ export default defineConfig({
     },
     preprocessorOptions: {
       less: {
-        // 支持内联 javascript
         javascriptEnabled: true,
       },
     },
   },
-  // 入口
   build: {
+    chunkSizeWarningLimit: 1500,
     rollupOptions: {
       output: {
         chunkFileNames: 'homeAssets/js/[name]-[hash].js',
         entryFileNames: 'homeAssets/js/[name]-[hash].js',
         assetFileNames: 'homeAssets/[ext]/[name]-[hash].[ext]',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('video-core-sdk') || id.includes('pixi.js') || id.includes('@pixi')) {
+              return 'vendor-editor';
+            }
+            if (id.includes('@douyinfe/semi-ui') || id.includes('@douyinfe/semi-icons') || id.includes('@icon-park')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('react') || id.includes('mobx') || id.includes('scheduler')) {
+              return 'vendor-react';
+            }
+            if (id.includes('echarts') || id.includes('zrender')) {
+              return 'vendor-charts';
+            }
+            if (id.includes('lodash') || id.includes('dayjs') || id.includes('axios') || id.includes('dexie') || id.includes('fflate')) {
+              return 'vendor-utils';
+            }
+          }
+        },
       },
       input: {
         main: resolve('index.html'),
       },
-      plugins: [
-        terser({
-          compress: {
-            drop_console: true,
-            drop_debugger: true,
-            pure_funcs: ['console.log', 'console.warn', 'console.error'],
-          },
-          format: { comments: false },
-        }),
-        visualizer(),
-      ],
     },
     minify: 'terser',
     terserOptions: {
       compress: {
-        //生产环境时移除console
         drop_console: true,
         drop_debugger: true,
       },
+      format: {
+        comments: false,
+      },
     },
   },
-  base: '/', // 公共基础路径
+  base: '/',
   server: {
     host: '0.0.0.0',
     port: 3005,
@@ -120,14 +124,8 @@ export default defineConfig({
       },
       '/api': {
         target: 'https://video.h5ds.com',
-        // target: 'http://192.168.31.153:8882',
-        // target: 'https://video-business.i.h5ds.com',
         changeOrigin: true,
       },
-      // '/video': {
-      //   target: 'https://cdn.h5ds.com',
-      //   changeOrigin: true,
-      // },
     },
   },
 });

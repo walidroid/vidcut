@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { config } from '../config';
 import type { BaseElement, ImageElement, VideoElement } from 'video-core-sdk';
 import { util } from '@utils/index';
@@ -35,6 +35,37 @@ const useBackground = (
 
   const [backgroundFrames, setBackgroundFrames] = useState<{ blobURL: string; width: number }[]>([]);
   const [audioWaves, setAudioWaves] = useState<{ blobURL: string; width: number }[]>([]);
+
+  const prevFramesRef = useRef<{ blobURL: string }[]>([]);
+  const prevWavesRef = useRef<{ blobURL: string }[]>([]);
+
+  // Clean up blob URLs on unmount
+  useEffect(() => {
+    return () => {
+      prevFramesRef.current.forEach(f => {
+        if (f.blobURL && f.blobURL.startsWith('blob:')) URL.revokeObjectURL(f.blobURL);
+      });
+      prevWavesRef.current.forEach(w => {
+        if (w.blobURL && w.blobURL.startsWith('blob:')) URL.revokeObjectURL(w.blobURL);
+      });
+    };
+  }, []);
+
+  const updateBackgroundFrames = useCallback((newFrames: { blobURL: string; width: number }[]) => {
+    prevFramesRef.current.forEach(f => {
+      if (f.blobURL && f.blobURL.startsWith('blob:')) URL.revokeObjectURL(f.blobURL);
+    });
+    prevFramesRef.current = newFrames;
+    setBackgroundFrames(newFrames);
+  }, []);
+
+  const updateAudioWaves = useCallback((newWaves: { blobURL: string; width: number }[]) => {
+    prevWavesRef.current.forEach(w => {
+      if (w.blobURL && w.blobURL.startsWith('blob:')) URL.revokeObjectURL(w.blobURL);
+    });
+    prevWavesRef.current = newWaves;
+    setAudioWaves(newWaves);
+  }, []);
 
   // 通过音波数据生成音波图
   const setAudioWaveImages = useCallback(
@@ -319,7 +350,7 @@ const useBackground = (
 
       // 音视频分离之后没有音波数据
       if (separate) {
-        setAudioWaves([]);
+        updateAudioWaves([]);
       }
     }
     if (element.type === 'image') {

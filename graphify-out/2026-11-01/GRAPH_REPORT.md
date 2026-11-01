@@ -1,7 +1,7 @@
-# Graph Report - unicut  (2026-10-31)
+# Graph Report - unicut  (2026-11-01)
 
 ## Corpus Check
-- 450 files · ~239,175 words
+- 450 files · ~239,322 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 153 file(s) not represented in the graph (top: .less 144, (none) 3, .wasm 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `38e8d350`
+- Built from commit: `0be20fc7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -55,7 +55,7 @@
 - Webgl2D Module
 - uploadBeforeData.ts
 - Electron Desktop Integration
-- 重磅预热！UNICUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
+- 重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
 - @douyinfe/semi-ui
 - UserLayout.tsx
 - User Profile & Account #4
@@ -281,7 +281,7 @@ Nodes (8): du(), Fs(), fu(), ke(), Ls(), lu(), Ns(), p()
 
 ### Community 13 - "🚀 功能全到不像开源项目"
 Cohesion: 0.10
-Nodes (20): 🔹 4 种抠图方式, 🤖 AI 能力拉满，不用为功能付费, UNICUT：一款真正可用的开源视频剪辑工具, 🔹 专业级动画系统, 🔹 专业级时间轴, 🔹 丰富的视觉效果, 为什么说它是「真正可用」的开源剪辑工具？, 企业客户 (+12 more)
+Nodes (20): 🔹 4 种抠图方式, 🤖 AI 能力拉满，不用为功能付费, VIDCUT：一款真正可用的开源视频剪辑工具, 🔹 专业级动画系统, 🔹 专业级时间轴, 🔹 丰富的视觉效果, 为什么说它是「真正可用」的开源剪辑工具？, 企业客户 (+12 more)
 
 ### Community 14 - "EChart.tsx"
 Cohesion: 0.16
@@ -375,7 +375,7 @@ Nodes (8): Separation(), cacheWavePeaks, Props, useBackground(), AudioSVGWavefor
 Cohesion: 0.10
 Nodes (19): appId, copyright, directories, buildResources, output, files, nsis, allowToChangeInstallationDirectory (+11 more)
 
-### Community 41 - "重磅预热！UNICUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端"
+### Community 41 - "重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端"
 Cohesion: 0.10
 Nodes (20): 🤖 AI 全程加持，效率提升 10 倍, ✂️ 专业级抠图能力, ⏱️ 专业级时间轴，剪辑丝滑流畅, 🎵 丰富的素材生态, 🆓 免费 AI 能力, 🚀 功能有多全？看这篇就够了, ✨ 动画效果拉满, 🏁 即将上线，敬请期待 (+12 more)
 
@@ -429,7 +429,7 @@ Nodes (17): arContent, contextMenus, cropUpload, editorHeader, enContent, f1, f2
 
 ### Community 56 - "剪映的付费墙越来越厚了，这个开源浏览器剪辑工具 7 项 AI 全免费"
 Cohesion: 0.11
-Nodes (17): 4 种抠图方式, 6 大元素类型, 6 种动画方式, 8 类模板素材, unicut 还替代不了剪映的部分, 一张表说清楚, 不只是 AI 免费, 专业级时间轴 (+9 more)
+Nodes (17): 4 种抠图方式, 6 大元素类型, 6 种动画方式, 8 类模板素材, vidcut 还替代不了剪映的部分, 一张表说清楚, 不只是 AI 免费, 专业级时间轴 (+9 more)
 
 ### Community 57 - "Audio Tracks & Processing #3"
 Cohesion: 0.19
@@ -497,7 +497,7 @@ Nodes (7): GradualColor(), IProps, InputNumber4(), IProps, FontImage(), IProps, 
 
 ### Community 75 - "和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单"
 Cohesion: 0.14
-Nodes (13): 1. 省去机械性操作, 2. 不会遗漏步骤, 3. 像跟剪辑助理对话一样自然, 不只是残影——你能用自然语言做什么？, 为什么 Agent 模式比传统操作更高效？, 举个例子：给视频加残影动画, 写在最后, 和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单 (+5 more)
+Nodes (13): 1. 省去机械性操作, 2. 不会遗漏步骤, 3. 像跟剪辑助理对话一样自然, 不只是残影——你能用自然语言做什么？, 为什么 Agent 模式比传统操作更高效？, 举个例子：给视频加残影动画, 写在最后, 和 AI 聊天就能剪视频？VIDCUT 的 Agent 模式让剪辑变得像聊天一样简单 (+5 more)
 
 ### Community 76 - "全球最大免费矢量动画素材动画网站： lottieFiles"
 Cohesion: 0.14
@@ -633,7 +633,7 @@ Nodes (5): Video Editing Feature Specification, FFmpeg WebAssembly Core, VidCut 
 
 ### Community 114 - "终于有可替代剪映的开源视频软件了"
 Cohesion: 0.15
-Nodes (12): AI 能力全面集成, 专业时间轴编辑, 元素类型, 功能到底有多强？, 动画系统, 开源协议 & 授权, 抠图能力, 无界云剪（unicut）是什么？ (+4 more)
+Nodes (12): AI 能力全面集成, 专业时间轴编辑, 元素类型, 功能到底有多强？, 动画系统, 开源协议 & 授权, 抠图能力, 无界云剪（vidcut）是什么？ (+4 more)
 
 ### Community 115 - "Lame Min Module #6"
 Cohesion: 0.47
@@ -669,7 +669,7 @@ Nodes (5): initRuntime(), postRun(), preRun(), run(), doRun()
 
 ### Community 125 - "终于有可以替代剪映的开源视频工具了！数据全本地，还能用 AI 聊天剪视频"
 Cohesion: 0.17
-Nodes (11): AI 能力直接拉满, 不需要安装，打开浏览器就能用, 为什么 UNICUT 能替代剪映？, 写在最后, 功能全面对标, 开源意味着什么？, 快速开始, 数据只在你自己的电脑上 (+3 more)
+Nodes (11): AI 能力直接拉满, 不需要安装，打开浏览器就能用, 为什么 VIDCUT 能替代剪映？, 写在最后, 功能全面对标, 开源意味着什么？, 快速开始, 数据只在你自己的电脑上 (+3 more)
 
 ### Community 126 - "Custom Module"
 Cohesion: 0.33
@@ -705,7 +705,7 @@ Nodes (11): 3.10 文字效果, 3.1 基础变换, 3.2 图层叠加模式, 3.3 调
 
 ### Community 143 - "重磅开源！UNICUT——纯 Web 端在线视频编辑器，功能比肩桌面端"
 Cohesion: 0.18
-Nodes (10): AI 对话助手——用自然语言操控编辑器, AI 深度集成, 下一步计划, 为什么选择 UNICUT？, 功能齐全，覆盖完整视频创作工作流, 快速开始, 技术栈亮点, 真正的"数据本地化" (+2 more)
+Nodes (10): AI 对话助手——用自然语言操控编辑器, AI 深度集成, 下一步计划, 为什么选择 VIDCUT？, 功能齐全，覆盖完整视频创作工作流, 快速开始, 技术栈亮点, 真正的"数据本地化" (+2 more)
 
 ### Community 149 - "routes.config.ts"
 Cohesion: 0.17
@@ -713,7 +713,7 @@ Nodes (4): EditorPage(), routes, routes, routes
 
 ### Community 195 - "UNICUT 功能清单"
 Cohesion: 0.20
-Nodes (9): 10.1 二维码插件, 10.2 扩展机制, 4.1 钢笔工具抠图, 4.2 魔棒抠图, 4.3 AI 抠图, 4.4 裁剪抠图, UNICUT 功能清单, 十、插件系统 (+1 more)
+Nodes (9): 10.1 二维码插件, 10.2 扩展机制, 4.1 钢笔工具抠图, 4.2 魔棒抠图, 4.3 AI 抠图, 4.4 裁剪抠图, VIDCUT 功能清单, 十、插件系统 (+1 more)
 
 ### Community 196 - "二、元素动画"
 Cohesion: 0.22
@@ -799,17 +799,17 @@ Nodes (3): DraftThumbImage(), IProps, resolveLocalUrl()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Is()` connect `Core Utilities & Helpers` to `Core Utilities & Helpers #3`, `Core Utilities & Helpers #2`?**
+- **Why does `react` connect `react` to `Editor Effects & Options`, `Home.tsx`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `mobx-react`, `jquery`, `routes.config.ts`, `Audio Tracks & Processing`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `Draft.tsx`, `Build & Configuration #4`, `uploadBeforeData.ts`, `@douyinfe/semi-ui`, `UserLayout.tsx`, `User Profile & Account #4`, `language`, `Authentication UI`, `AccountLogin.tsx`, `TextStyle.tsx`, `Material.tsx`, `Tracks.tsx`, `content/SourceList.tsx`, `agreement/index.ts`, `Build & Configuration #6`, `ElementTransition.tsx`, `CurveSpeed.tsx`, `background/Background.tsx`, `Mask.tsx`, `Audio Tracks & Processing #4`, `NotFound`, `User`, `Loading.tsx`, `DraftThumbImage.tsx`, `Verticalsortablelist Module`, `theme`, `Align.tsx`, `WorkspaceLayout.tsx`, `user-layout/sidebar/Sidebar.tsx`, `src/components/header/Header.tsx`?**
   _High betweenness centrality (0.090) - this node is a cross-community bridge._
 - **What connects `RFC-2279`, `RFC-3629`, `DARK` to the rest of the system?**
   _13 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Editor Effects & Options` be split into smaller, more focused modules?**
   _Cohesion score 0.037481259370314844 - nodes in this community are weakly interconnected._
-- **Why does `react` connect `react` to `Editor Effects & Options`, `Home.tsx`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `mobx-react`, `jquery`, `routes.config.ts`, `Audio Tracks & Processing`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `Draft.tsx`, `Build & Configuration #4`, `uploadBeforeData.ts`, `@douyinfe/semi-ui`, `UserLayout.tsx`, `User Profile & Account #4`, `language`, `Authentication UI`, `AccountLogin.tsx`, `TextStyle.tsx`, `Material.tsx`, `Tracks.tsx`, `content/SourceList.tsx`, `agreement/index.ts`, `Build & Configuration #6`, `ElementTransition.tsx`, `CurveSpeed.tsx`, `background/Background.tsx`, `Mask.tsx`, `Audio Tracks & Processing #4`, `NotFound`, `User`, `Loading.tsx`, `DraftThumbImage.tsx`, `Verticalsortablelist Module`, `theme`, `Align.tsx`, `WorkspaceLayout.tsx`, `user-layout/sidebar/Sidebar.tsx`, `src/components/header/Header.tsx`?**
-  _High betweenness centrality (0.089) - this node is a cross-community bridge._
+- **Why does `Is()` connect `Core Utilities & Helpers` to `Core Utilities & Helpers #3`, `Core Utilities & Helpers #2`?**
+  _High betweenness centrality (0.090) - this node is a cross-community bridge._
 - **Should `react` be split into smaller, more focused modules?**
   _Cohesion score 0.04188166494668043 - nodes in this community are weakly interconnected._
 - **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `Editor Effects & Options`, `Home.tsx`, `react`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `mobx-react`, `Audio Tracks & Processing`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `editor.ts`, `Draft.tsx`, `Build & Configuration #4`, `User Profile & Account #4`, `language`, `Local Storage & Persistence #6`, `Authentication UI`, `AccountLogin.tsx`, `TextStyle.tsx`, `Material.tsx`, `Tracks.tsx`, `content/SourceList.tsx`, `Build & Configuration #6`, `CurveSpeed.tsx`, `Mask.tsx`, `theme`, `Align.tsx`, `user-layout/sidebar/Sidebar.tsx`, `Custom Module`, `src/components/header/Header.tsx`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+  _High betweenness centrality (0.066) - this node is a cross-community bridge._
 - **Should `Ffmpeg Core Module` be split into smaller, more focused modules?**
   _Cohesion score 0.03729071537290715 - nodes in this community are weakly interconnected._
