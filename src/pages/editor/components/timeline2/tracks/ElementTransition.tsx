@@ -1,3 +1,4 @@
+import { language } from '@language/language';
 ﻿import styles from './elementTransition.module.less';
 
 import { observer } from 'mobx-react';

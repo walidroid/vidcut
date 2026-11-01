@@ -111,3 +111,4 @@ To preserve these performance gains in future feature development:
 3. **AudioContext Rule**: Never use `new AudioContext()` directly in constructors. Always import and use `getSharedAudioContext()` to avoid hardware context exhaustion.
 4. **Heavy Module Rule**: Never import heavy WebGL, Pixi, or WebAssembly modules at the root application level. Always wrap feature routes with `React.lazy()`.
 5. **Storage Access Rule**: Batch and deduplicate file reads when hydrating project states. Use concurrency pools rather than unbounded `Promise.all` or sequential `for-await` loops.
+

@@ -1,3 +1,4 @@
+import { language } from '@language/language';
 import { observer } from 'mobx-react';
 import React, { useState, useEffect, useRef, useReducer } from 'react';
 import { config } from '../config';

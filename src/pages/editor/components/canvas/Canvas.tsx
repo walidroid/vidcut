@@ -1,3 +1,4 @@
+import { language } from '@language/language';
 import styles from './canvas.module.less';
 import { Store, Movie, utils } from 'video-core-sdk';
 

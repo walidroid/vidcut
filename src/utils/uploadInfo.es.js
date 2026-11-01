@@ -3029,7 +3029,7 @@ class Mr {
     buffer: n,
     maxWidth: o
   }) {
-    this.url = r || null, this.audioBuffer = n || null, this.context = new AudioContext(), this.maxWidth = o || 1e4;
+    this.url = r || null, this.audioBuffer = n || null, this.context = typeof window !== 'undefined' ? (window.__vidcut_shared_audio_ctx = window.__vidcut_shared_audio_ctx || new (window.AudioContext || window.webkitAudioContext)()) : null, this.maxWidth = o || 1e4;
   }
   set _url(r) {
     this.url = r;

@@ -1,3 +1,4 @@
+import { language } from '@language/language';
 ﻿import { Tooltip } from '@douyinfe/semi-ui';
 import { observer } from 'mobx-react';
 import React from 'react';

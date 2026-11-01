@@ -1,25 +1,25 @@
 # Graph Report - unicut  (2026-11-01)
 
 ## Corpus Check
-- 450 files · ~239,322 words
+- 451 files · ~240,299 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 153 file(s) not represented in the graph (top: .less 144, (none) 3, .wasm 2)
 
 ## Summary
-- 3212 nodes · 6915 edges · 234 communities (141 shown, 93 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 218 edges (avg confidence: 0.85)
+- 3227 nodes · 6936 edges · 231 communities (139 shown, 92 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 219 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0be20fc7`
+- Built from commit: `cf7862b8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Editor Effects & Options
+- Item
 - AboutUs.tsx
 - Home.tsx
-- react
+- @douyinfe/semi-ui
 - Ffmpeg Core Module
 - Core Utilities & Helpers
 - dependencies
@@ -31,14 +31,14 @@
 - Core Utilities & Helpers #3
 - 🚀 功能全到不像开源项目
 - EChart.tsx
-- mobx-react
+- components/index.ts
 - Index Module
 - Core Utilities & Helpers #4
 - Tsconfig Module
-- jquery
+- video-core-sdk
 - Service & API Layer
 - User Profile & Account #2
-- Audio Tracks & Processing
+- sources/index.tsx
 - package.json
 - localStorageService.ts
 - GitHub Actions CI/CD
@@ -47,16 +47,16 @@
 - Editor State Store
 - Sdk Module
 - Lame Min Module
-- Player Canvas & Rendering
+- Editor.tsx
 - editor.ts
-- Draft.tsx
+- language
 - User Profile & Account #3
 - Build & Configuration #4
 - Webgl2D Module
 - uploadBeforeData.ts
 - Electron Desktop Integration
 - 重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
-- @douyinfe/semi-ui
+- item/index.ts
 - UserLayout.tsx
 - User Profile & Account #4
 - projectImport.ts
@@ -65,7 +65,7 @@
 - Ffmpeg Core Module #2
 - Lame Min Module #2
 - DragItem
-- language
+- Account.tsx
 - Ffmpeg Core Module #3
 - Lame Min Module #3
 - precision-fix.js
@@ -78,16 +78,16 @@
 - Ffmpeg Module
 - Ffmpeg Core Module #4
 - Ffmpeg Core Module #5
-- Authentication UI
+- my/List.tsx
 - Uploaddecode Module
-- Message
+- stores
 - Ffmpeg Core Module #6
 - 上市公司都在使用的开源视频剪辑工具：低成本、高安全、可定制
 - Core Utilities & Helpers #7
 - Electron Desktop Integration #2
 - Ffmpeg Core Module #7
 - Ffmpeg Core Module #8
-- TextStyle.tsx
+- react
 - 和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单
 - 全球最大免费矢量动画素材动画网站： lottieFiles
 - content/SourceList.tsx
@@ -114,17 +114,17 @@
 - Index Module #4
 - Index Min Module
 - Verticalsortablelist Module
-- theme
-- Align.tsx
+- src/components/header/Header.tsx
+- Animation.tsx
 - uploadBeforeData.ts
 - language/index.ts
 - Build & Configuration #8
 - WorkspaceLayout.tsx
 - Lame Min Module #5
 - Mp4Box All Module #6
-- controlHelper.ts
+- CustomAnimationPath.tsx
 - 功能，不妥协
-- user-layout/sidebar/Sidebar.tsx
+- utils/index.ts
 - User Profile & Account #7
 - 终于有可替代剪映的开源视频软件了
 - Lame Min Module #6
@@ -139,7 +139,7 @@
 - Menus Module
 - 终于有可以替代剪映的开源视频工具了！数据全本地，还能用 AI 聊天剪视频
 - Custom Module
-- src/components/header/Header.tsx
+- CreditRecharge.tsx
 - Index Module #7
 - Index Module #8
 - Index Module #9
@@ -150,7 +150,7 @@
 - 三、元素效果
 - 重磅开源！UNICUT——纯 Web 端在线视频编辑器，功能比肩桌面端
 - Internationalization (i18n)
-- AxiosAbort
+- BasicService.ts
 - routes.config.ts
 - UI Theme System #3
 - UNICUT 功能清单
@@ -159,47 +159,44 @@
 - 十一、通用能力
 - 九、画布
 - 八、项目管理
-- AccountLogin.tsx
-- Material.tsx
+- crypto.ts
+- Draft.tsx
 - 七、素材管理
-- Tracks.tsx
+- Clip.tsx
 - agreement/index.ts
-- ElementTransition.tsx
+- Export.tsx
 - final-cleanup.js
-- Toolbar
-- CurveSpeed.tsx
+- Product.tsx
+- benchmark-baseline.js
 - ref_fs
 - background/Background.tsx
-- Mask.tsx
+- pubsub.ts
 - LoginQrcode
 - patch-sdk.js
-- NotFound
+- VideoEditorSDK
 - ref_path
-- Loading.tsx
+- BlendMode.tsx
 - MemoryStorage
 - electron
-- DraftThumbImage.tsx
-- axios
-- gifuct-js@^2.1.2
-- gl-transitions@^1.43.0
-- howler@^2.2.4
-- p-limit
-- qrcode.react
-- react-image-crop
-- three@^0.168.0
-- toolbar/icon.tsx
-- checkVideoUrlHasAudio
-- isIOSWechatBrowser
-- cloneDeep
-- uniq
+- FontScale.tsx
+- speed/Speed.tsx
+- StartFrameNumber.tsx
+- TemplateDown.tsx
+- components/transition/Transition.tsx
+- Server
+- SliderInput.tsx
+- RecordTest.tsx
+- mediabunny@^1.50.9
+- nanoid@^4.0.2
+- react-photo-view@^1.2.3
 
 ## God Nodes (most connected - your core abstractions)
-1. `react` - 168 edges
-2. `@douyinfe/semi-ui` - 138 edges
+1. `react` - 169 edges
+2. `@douyinfe/semi-ui` - 139 edges
 3. `stores` - 129 edges
 4. `mobx-react` - 125 edges
 5. `language` - 120 edges
-6. `video-core-sdk` - 113 edges
+6. `video-core-sdk` - 112 edges
 7. `@icon-park/react` - 85 edges
 8. `Item()` - 74 edges
 9. `Is()` - 64 edges
@@ -225,23 +222,23 @@
 - 5-file cycle: `src/pages/editor/SDK.tsx -> src/utils/export.ts -> src/pages/editor/plugins/index.ts -> src/pages/editor/plugins/qrcode/index.ts -> src/pages/editor/plugins/qrcode/Element.tsx -> src/pages/editor/SDK.tsx`
 - 5-file cycle: `src/pages/editor/SDK.tsx -> src/utils/export.ts -> src/pages/editor/plugins/index.ts -> src/pages/editor/plugins/qrcode/index.ts -> src/pages/editor/plugins/qrcode/Options.tsx -> src/pages/editor/SDK.tsx`
 
-## Communities (234 total, 93 thin omitted)
+## Communities (231 total, 92 thin omitted)
 
-### Community 0 - "Editor Effects & Options"
-Cohesion: 0.04
-Nodes (57): video-core-sdk, GroupFast(), AnimateItem(), IProps, AnimateItem(), IProps, Animation(), IProps (+49 more)
+### Community 0 - "Item"
+Cohesion: 0.11
+Nodes (25): Align(), Flip(), GroupAlign(), GroupFast(), CustomAnimation(), IProps, Speed(), Audio() (+17 more)
 
 ### Community 1 - "AboutUs.tsx"
-Cohesion: 0.40
-Nodes (3): AboutUs(), IProps, routes
+Cohesion: 0.25
+Nodes (5): Footer(), IProps, AboutUs(), IProps, routes
 
 ### Community 2 - "Home.tsx"
 Cohesion: 0.22
 Nodes (8): VipRecharge(), aiFeatures, allFeatures, coreFeatures, faqList, freeFeatures, Home(), vipFeatures
 
-### Community 3 - "react"
-Cohesion: 0.04
-Nodes (65): classnames, @icon-park/react, lodash, react, IProps, IProps, IState, config (+57 more)
+### Community 3 - "@douyinfe/semi-ui"
+Cohesion: 0.07
+Nodes (44): classnames, @douyinfe/semi-ui, @icon-park/react, lodash, mobx-react, IProps, IProps, IProps (+36 more)
 
 ### Community 4 - "Ffmpeg Core Module"
 Cohesion: 0.04
@@ -252,8 +249,8 @@ Cohesion: 0.09
 Nodes (61): w(), Is(), an(), ar(), b(), bn(), bt(), C() (+53 more)
 
 ### Community 6 - "dependencies"
-Cohesion: 0.04
-Nodes (56): dependencies, asset-require-hook@^1.2.0, classnames@^2.3.2, dayjs@^1.11.10, @douyinfe/semi-ui@^2.89.1, echarts@^5.5.0, @ffmpeg/util@^0.12.1, http-proxy@^1.18.1 (+48 more)
+Cohesion: 0.03
+Nodes (58): dependencies, asset-require-hook@^1.2.0, axios@^0.24.0, classnames@^2.3.2, dayjs@^1.11.10, dexie@^4.4.3, @douyinfe/semi-ui@^2.89.1, gifuct-js@^2.1.2 (+50 more)
 
 ### Community 7 - "Core Utilities & Helpers #2"
 Cohesion: 0.05
@@ -265,15 +262,15 @@ Nodes (22): ByteArray(), GIFEncoder(), LZWEncoder(), char_out(), cl_block(), cl_
 
 ### Community 9 - "Editor Effects & Options #3"
 Cohesion: 0.07
-Nodes (3): LutFilterProps, Editor, sleep()
+Nodes (3): EditorPage(), Editor, sleep()
 
 ### Community 10 - "ImageOptions.tsx"
-Cohesion: 0.05
-Nodes (27): FrameData(), AudioOptions(), IProps, CameraOptions(), IProps, CaptionOptions(), IProps, IProps (+19 more)
+Cohesion: 0.08
+Nodes (20): FrameData(), AudioOptions(), IProps, CameraOptions(), CaptionOptions(), IProps, IProps, FilterOptions() (+12 more)
 
 ### Community 11 - "Build & Configuration #2"
 Cohesion: 0.04
-Nodes (49): devDependencies, @babel/plugin-proposal-class-properties@^7.18.6, @babel/plugin-proposal-decorators@^7.22.7, electron-builder@^25.1.8, husky@^8.0.1, less@^4.1.3, less-loader@^11.1.3, lint-staged@^12.4.2 (+41 more)
+Nodes (51): devDependencies, @babel/plugin-proposal-class-properties@^7.18.6, @babel/plugin-proposal-decorators@^7.22.7, electron-builder@^25.1.8, husky@^8.0.1, less@^4.1.3, less-loader@^11.1.3, lint-staged@^12.4.2 (+43 more)
 
 ### Community 12 - "Core Utilities & Helpers #3"
 Cohesion: 0.05
@@ -284,119 +281,115 @@ Cohesion: 0.10
 Nodes (20): 🔹 4 种抠图方式, 🤖 AI 能力拉满，不用为功能付费, VIDCUT：一款真正可用的开源视频剪辑工具, 🔹 专业级动画系统, 🔹 专业级时间轴, 🔹 丰富的视觉效果, 为什么说它是「真正可用」的开源剪辑工具？, 企业客户 (+12 more)
 
 ### Community 14 - "EChart.tsx"
-Cohesion: 0.16
-Nodes (7): Color(), EyeDropperAPI, IProps, Window, colors, IProps, OptionItemProps
+Cohesion: 0.15
+Nodes (9): Color(), EyeDropperAPI, IProps, Window, colors, EChart(), IProps, OptionItem() (+1 more)
 
-### Community 15 - "mobx-react"
-Cohesion: 0.06
-Nodes (16): mobx-react, IProps, IProps, BlendMode(), IProps, Filter(), IProps, IProps (+8 more)
+### Community 15 - "components/index.ts"
+Cohesion: 0.09
+Nodes (3): effectImages, Filter(), IProps
 
 ### Community 16 - "Index Module"
 Cohesion: 0.05
 Nodes (7): RFC-2279, RFC-3629, leadingNulls(), leadingSomething(), onComplete(), registerType(), sharedRegisterType()
 
 ### Community 17 - "Core Utilities & Helpers #4"
-Cohesion: 0.06
-Nodes (3): clearData(), dateFormatPreset, timeToNum()
+Cohesion: 0.05
+Nodes (8): clearData(), cloneDeep(), dateFormatPreset, isIOSWechatBrowser(), joinURL(), mediaLazy(), timeToNum(), uniq()
 
 ### Community 19 - "Tsconfig Module"
 Cohesion: 0.05
 Nodes (38): compilerOptions, allowJs, allowSyntheticDefaultImports, baseUrl, esModuleInterop, experimentalDecorators, forceConsistentCasingInFileNames, isolatedModules (+30 more)
 
-### Community 20 - "jquery"
-Cohesion: 0.17
-Nodes (13): jquery, config, Element(), Props, ElementButton(), IProps, FrameItems(), IProps (+5 more)
+### Community 20 - "video-core-sdk"
+Cohesion: 0.07
+Nodes (35): jquery, mobx, video-core-sdk, IProps, config, Props, Element(), Props (+27 more)
 
 ### Community 21 - "Service & API Layer"
 Cohesion: 0.06
 Nodes (3): queryLocalMaterials(), genId(), server
 
-### Community 24 - "Audio Tracks & Processing"
-Cohesion: 0.05
-Nodes (36): Source(), Canvas(), Player(), TemplatePlayer(), addEffectItem(), addFilterItem(), addImageVideoAudioItem(), addItem() (+28 more)
+### Community 24 - "sources/index.tsx"
+Cohesion: 0.10
+Nodes (17): Source(), Audio(), Caption(), Effect(), Filter(), Image(), IProps, Sources() (+9 more)
 
 ### Community 25 - "package.json"
 Cohesion: 0.05
-Nodes (37): author, apng-js@^1.1.5, dexie@^4.4.3, ignore-styles@^5.0.1, jsdom@^22.1.0, pixi-filters@^5.2.1, pubsub-js@^1.9.4, react-contexify@^6.0.0 (+29 more)
+Nodes (41): author, apng-js@^1.1.5, echarts@^5.5.0, @ffmpeg/util@^0.12.1, gl-transitions@^1.43.0, http-proxy@^1.18.1, ignore-styles@^5.0.1, localforage@^1.10.0 (+33 more)
 
 ### Community 26 - "localStorageService.ts"
-Cohesion: 0.14
-Nodes (26): useLocalStorage(), List(), QrcodeUpload(), Sources(), addMaterial(), base64ToBlob(), copyFileToLocal(), createLocalUploadBase64() (+18 more)
+Cohesion: 0.13
+Nodes (23): MaterialRecord, useLocalStorage(), UseLocalStorageReturn, Export(), Header(), Project(), clearUrlCache(), deleteFileByPath() (+15 more)
 
 ### Community 27 - "GitHub Actions CI/CD"
 Cohesion: 0.07
 Nodes (29): name, runs-on, steps, GH_TOKEN, GITHUB_TOKEN, jobs, build-windows, name (+21 more)
 
 ### Community 28 - "BasicService"
-Cohesion: 0.08
-Nodes (9): Server, Server, Server, Server, server, BasicService, globalOptions, Method (+1 more)
+Cohesion: 0.10
+Nodes (5): server, Server, Server, Server, BasicService
 
 ### Community 29 - "Content.tsx"
-Cohesion: 0.15
-Nodes (15): Content(), getItems(), IProps, UploadItem, Folders(), IProps, FolderIcon(), IconProps (+7 more)
+Cohesion: 0.08
+Nodes (24): jszip@^3.10.1, jszip, react-router-dom, Content(), getItems(), IProps, UploadItem, Folders() (+16 more)
 
 ### Community 30 - "Editor State Store"
-Cohesion: 0.16
-Nodes (15): IProps, WaterFall(), ElementOptionType, LayoutName, SourceType, Collect(), IProps, IProps (+7 more)
+Cohesion: 0.21
+Nodes (14): ElementOptionType, LayoutName, SourceType, Collect(), IProps, IProps, Search(), IProps (+6 more)
 
 ### Community 31 - "Sdk Module"
-Cohesion: 0.12
-Nodes (20): AiChatParams, AiImageParams, AiVideo2VideoParams, AiVideoParams, AppDetailRes, CollectParams, CreateAppParams, CreateTTSParams (+12 more)
+Cohesion: 0.10
+Nodes (24): AiChatParams, AiImageParams, AiVideo2VideoParams, AiVideoParams, APIServer, AppDetailRes, CollectParams, CreateAppParams (+16 more)
 
 ### Community 32 - "Lame Min Module"
 Cohesion: 0.13
 Nodes (10): lamejs(), Ac(), da(), Gc(), Hc(), Ia(), rb(), sb() (+2 more)
 
-### Community 33 - "Player Canvas & Rendering"
+### Community 33 - "Editor.tsx"
 Cohesion: 0.10
-Nodes (13): APIServer, SideItem, UserInfo, ColorBg(), IProps, ContextMenus(), ISideBarProps, EditorPage() (+5 more)
+Nodes (11): ColorBg(), IProps, IProps, Loading(), ContextMenus(), Props, Timeline(), EditorPage() (+3 more)
 
 ### Community 34 - "editor.ts"
-Cohesion: 0.16
-Nodes (8): VideoEditorSDKParams, EventsName, Point, VideoEditorSDK, MaterialTypes, PreviewSourceParams, exportMovie(), prewarmLocalMaterials()
+Cohesion: 0.11
+Nodes (14): DanMuIcon(), IProps, plugins, config, QrcodeEl(), Params, QrcodeElement, conf (+6 more)
 
-### Community 35 - "Draft.tsx"
-Cohesion: 0.25
-Nodes (4): dayjs, IProps, IProps, MoreMenus()
-
-### Community 36 - "User Profile & Account #3"
-Cohesion: 0.12
-Nodes (6): Account(), BindEmail(), BindMobile(), BindWechat(), Password(), Server
+### Community 35 - "language"
+Cohesion: 0.06
+Nodes (16): arSA, enUS, frFR, language, _window, IProps, IProps, IProps (+8 more)
 
 ### Community 37 - "Build & Configuration #4"
-Cohesion: 0.09
-Nodes (5): react-resize-detector@^9.1.0, swiper@^12.1.2, react-resize-detector, swiper, ILinksProps
+Cohesion: 0.08
+Nodes (6): react-resize-detector@^9.1.0, swiper@^12.1.2, react-resize-detector, swiper, IProps, ILinksProps
 
 ### Community 39 - "uploadBeforeData.ts"
-Cohesion: 0.15
-Nodes (8): Separation(), cacheWavePeaks, Props, useBackground(), AudioSVGWaveform, dataURLtoBlob(), parseArrayBufferResponse(), updateMaterialAttrs()
+Cohesion: 0.13
+Nodes (9): Separation(), useBackground(), AudioSVGWaveform, dataURLtoBlob(), getSharedAudioContext(), parseArrayBufferResponse(), updateMaterialAttrs(), checkVideoUrlHasAudio() (+1 more)
 
 ### Community 40 - "Electron Desktop Integration"
 Cohesion: 0.10
-Nodes (19): appId, copyright, directories, buildResources, output, files, nsis, allowToChangeInstallationDirectory (+11 more)
+Nodes (20): appId, copyright, directories, buildResources, output, electronVersion, files, nsis (+12 more)
 
 ### Community 41 - "重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端"
 Cohesion: 0.10
 Nodes (20): 🤖 AI 全程加持，效率提升 10 倍, ✂️ 专业级抠图能力, ⏱️ 专业级时间轴，剪辑丝滑流畅, 🎵 丰富的素材生态, 🆓 免费 AI 能力, 🚀 功能有多全？看这篇就够了, ✨ 动画效果拉满, 🏁 即将上线，敬请期待 (+12 more)
 
-### Community 42 - "@douyinfe/semi-ui"
-Cohesion: 0.10
-Nodes (11): @douyinfe/semi-ui, ProgressData, BasicFilter(), BasicFilterProps, Colour(), IProps, LutFilter(), CustomShakeModal() (+3 more)
+### Community 42 - "item/index.ts"
+Cohesion: 0.14
+Nodes (9): BasicFilter(), BasicFilterProps, Colour(), IProps, LutFilter(), LutFilterProps, GreenScreen(), IProps (+1 more)
 
 ### Community 43 - "UserLayout.tsx"
-Cohesion: 0.19
-Nodes (6): Footer(), AgreementLayout(), Sidebar(), UserLayout(), ColorBg(), IProps
+Cohesion: 0.26
+Nodes (4): AgreementLayout(), Sidebar(), ColorBg(), IProps
 
 ### Community 44 - "User Profile & Account #4"
-Cohesion: 0.20
-Nodes (9): ContentUser(), IProps, actionMap, Credit(), creditStatusMap, formatDate(), formatTime(), sceneMap (+1 more)
+Cohesion: 0.14
+Nodes (10): ContentUser(), IProps, actionMap, Credit(), creditStatusMap, formatDate(), formatTime(), sceneMap (+2 more)
 
 ### Community 45 - "projectImport.ts"
-Cohesion: 0.15
-Nodes (17): CategoryRecord, FolderHandleRecord, localDB, MaterialRecord, ProjectRecord, UploadRecord, UseLocalStorageReturn, saveFileToLocal() (+9 more)
+Cohesion: 0.16
+Nodes (19): List(), QrcodeUpload(), Sources(), addMaterial(), base64ToBlob(), copyFileToLocal(), createLocalUploadBase64(), ensureDir() (+11 more)
 
 ### Community 46 - "Local Storage & Persistence #5"
-Cohesion: 0.15
+Cohesion: 0.16
 Nodes (7): server, copyLocalProject(), createLocalProject(), deleteAllMaterialsByAppId(), deleteLocalProject(), getLocalProjectList(), updateLocalProjectMeta()
 
 ### Community 47 - "Core Utilities & Helpers #5"
@@ -411,9 +404,13 @@ Nodes (17): addOnInit(), addRunDependency(), asyncLoad(), createWasm(), receiveI
 Cohesion: 0.18
 Nodes (14): Bc(), c(), ca(), Cc(), dc(), Ec(), Fc(), Ic() (+6 more)
 
-### Community 52 - "language"
-Cohesion: 0.06
-Nodes (23): arSA, enUS, frFR, IProps, language, locals, ValueType, _window (+15 more)
+### Community 51 - "DragItem"
+Cohesion: 0.25
+Nodes (3): DragItemCls, EventsName, Point
+
+### Community 52 - "Account.tsx"
+Cohesion: 0.13
+Nodes (12): Account(), IProps, BindEmail(), IProps, BindWechat(), IProps, IProps, Item() (+4 more)
 
 ### Community 53 - "Ffmpeg Core Module #3"
 Cohesion: 0.16
@@ -432,24 +429,24 @@ Cohesion: 0.11
 Nodes (17): 4 种抠图方式, 6 大元素类型, 6 种动画方式, 8 类模板素材, vidcut 还替代不了剪映的部分, 一张表说清楚, 不只是 AI 免费, 专业级时间轴 (+9 more)
 
 ### Community 57 - "Audio Tracks & Processing #3"
-Cohesion: 0.19
-Nodes (3): AudioSVGWaveform, dataURLtoBlob(), parseArrayBufferResponse()
+Cohesion: 0.17
+Nodes (4): AudioSVGWaveform, dataURLtoBlob(), getSharedAudioContext(), parseArrayBufferResponse()
 
 ### Community 58 - "Local Storage & Persistence #6"
-Cohesion: 0.11
-Nodes (6): IProps, SelectedSet(), genId(), Server, deleteLocalCategory(), getMaterialFileUrlCached()
+Cohesion: 0.10
+Nodes (8): CategoryRecord, FolderHandleRecord, localDB, ProjectRecord, UploadRecord, genId(), Server, getMaterialFileUrlCached()
 
 ### Community 59 - "Local Storage & Persistence #7"
-Cohesion: 0.16
-Nodes (19): CreditRecharge(), Export(), Header(), Project(), getMaterialFile(), downloadBlob(), exportProjectZip(), ExportProjectZipOptions (+11 more)
+Cohesion: 0.19
+Nodes (17): p-limit@^4.0.0, p-limit, getMaterialFile(), downloadBlob(), exportProjectZip(), ExportProjectZipOptions, ExportProjectZipResult, EXT_FOLDER_MAP (+9 more)
 
 ### Community 60 - "Core Utilities & Helpers #6"
 Cohesion: 0.16
 Nodes (15): Ar(), be(), da(), en(), ha(), la(), n(), pa() (+7 more)
 
 ### Community 61 - "Build & Configuration #5"
-Cohesion: 0.17
-Nodes (10): rollup-plugin-terser@^7.0.2, rollup-plugin-visualizer@^6.0.5, vite@^4.4.4, vite-plugin-imp@^2.4.0, @vitejs/plugin-react@^4.0.3, rollup-plugin-terser, rollup-plugin-visualizer, vite (+2 more)
+Cohesion: 0.18
+Nodes (8): rollup-plugin-visualizer@^6.0.5, vite@^4.4.4, vite-plugin-imp@^2.4.0, @vitejs/plugin-react@^4.0.3, rollup-plugin-visualizer, vite, vite-plugin-imp, @vitejs/plugin-react
 
 ### Community 63 - "Ffmpeg Core Module #4"
 Cohesion: 0.15
@@ -459,17 +456,17 @@ Nodes (14): abort(), _dlopen(), ___dlsym(), getBinary(), getBinaryPromise(), get
 Cohesion: 0.18
 Nodes (15): alignMemory(), getSocketAddress(), getSocketFromFD(), mmapAlloc(), ___syscall_accept4(), ___syscall_bind(), ___syscall_connect(), ___syscall_getpeername() (+7 more)
 
-### Community 65 - "Authentication UI"
-Cohesion: 0.23
-Nodes (4): LoginEmail(), LoginMobile(), LoginRegister(), LoginRegisterBox()
+### Community 65 - "my/List.tsx"
+Cohesion: 0.06
+Nodes (19): App(), AppProps, LoginEmail(), LoginMobile(), IProps, IState, LoginRegister(), LoginRegisterBox() (+11 more)
 
 ### Community 66 - "Uploaddecode Module"
 Cohesion: 0.26
 Nodes (14): buildOutputArgs(), checkAndConvert(), ConvertOptions, ConvertResult, createFFmpeg(), destroyFFmpeg(), ensureFFmpeg(), execFFmpeg() (+6 more)
 
-### Community 67 - "Message"
-Cohesion: 0.29
-Nodes (4): Detail(), List(), Message(), Server
+### Community 67 - "stores"
+Cohesion: 0.11
+Nodes (14): DragItem(), IProps, IProps, Props, addEffectItem(), addFilterItem(), addImageVideoAudioItem(), addItem() (+6 more)
 
 ### Community 69 - "上市公司都在使用的开源视频剪辑工具：低成本、高安全、可定制"
 Cohesion: 0.11
@@ -491,9 +488,9 @@ Nodes (13): assert(), ___assert_fail(), _getaddrinfo(), allocaddrinfo(), handleM
 Cohesion: 0.17
 Nodes (9): _getnameinfo(), intArrayFromString(), LazyUint8Array(), lengthBytesUTF8(), stringToNewUTF8(), stringToUTF8(), stringToUTF8Array(), ___syscall_getdents64() (+1 more)
 
-### Community 74 - "TextStyle.tsx"
-Cohesion: 0.18
-Nodes (7): GradualColor(), IProps, InputNumber4(), IProps, FontImage(), IProps, TextStyle()
+### Community 74 - "react"
+Cohesion: 0.09
+Nodes (18): react, CustomShakeModal(), Props, Props, GradualColor(), IProps, InputNumber4(), IProps (+10 more)
 
 ### Community 75 - "和 AI 聊天就能剪视频？UNICUT 的 Agent 模式让剪辑变得像聊天一样简单"
 Cohesion: 0.14
@@ -504,8 +501,8 @@ Cohesion: 0.14
 Nodes (13): AI 加持：Motion Copilot, Lottie Creator（在线编辑器）, LottieFiles for After Effects, LottieFiles for Figma, LottieFiles for VS Code, LottieFiles 是什么？, 什么是 Lottie？, 免费能用吗？ (+5 more)
 
 ### Community 77 - "content/SourceList.tsx"
-Cohesion: 0.12
-Nodes (5): ChildProps, IProps, Layout, SelectItem, storage
+Cohesion: 0.15
+Nodes (4): IProps, SelectedSet(), deleteLocalCategory(), Layout
 
 ### Community 78 - "Build & Configuration #6"
 Cohesion: 0.21
@@ -527,10 +524,6 @@ Nodes (10): debounce(), decodeClipTime(), decodeFrameByTime(), decodeFrameImage(
 Cohesion: 0.14
 Nodes (13): AI 全流程加持, 专业时间轴, 元素类型, 动画系统, 地址汇总, 它是什么？, 它能做什么？, 开源 & 商用 (+5 more)
 
-### Community 85 - "Audio Tracks & Processing #4"
-Cohesion: 0.13
-Nodes (4): mobx@^5.15.4, mobx, IProps, Audios
-
 ### Community 86 - "Index Module #2"
 Cohesion: 0.27
 Nodes (3): isError(), MediaInfo, unknownToError()
@@ -542,10 +535,6 @@ Nodes (9): W(), a(), B(), f(), m(), n(), V(), z() (+1 more)
 ### Community 88 - "Mp4Box All Module #4"
 Cohesion: 0.18
 Nodes (3): ColorPoint(), pad(), Pixel()
-
-### Community 89 - "User"
-Cohesion: 0.13
-Nodes (7): App(), AppProps, systemService, CreateTTSParams, _window, globalOptions, User
 
 ### Community 90 - "Index Module #3"
 Cohesion: 0.22
@@ -591,41 +580,41 @@ Nodes (7): D(), qa(), B(), E(), f(), k(), u()
 Cohesion: 0.31
 Nodes (4): SortableItem, SortableItemProps, VerticalSortableList(), VerticalSortableListProps
 
-### Community 101 - "theme"
-Cohesion: 0.08
-Nodes (22): IProps, User(), User(), Props, Clip(), ClipModal(), ClipProps, Props (+14 more)
+### Community 101 - "src/components/header/Header.tsx"
+Cohesion: 0.05
+Nodes (28): axios, IProps, IProps, User(), Intl(), IProps, locals, ValueType (+20 more)
 
-### Community 103 - "Align.tsx"
-Cohesion: 0.20
-Nodes (6): Align(), IProps, Flip(), IProps, GroupAlign(), IProps
+### Community 103 - "Animation.tsx"
+Cohesion: 0.16
+Nodes (11): WaterFall(), AnimateItem(), IProps, AnimateItem(), IProps, Animation(), IProps, eases (+3 more)
 
 ### Community 104 - "uploadBeforeData.ts"
-Cohesion: 0.18
-Nodes (17): convertWavToMp3(), RecordAudioBox(), apngArr2FrameImage(), decoderVideo(), decoderVideoDrawFrameImage(), getUploadBeforeData(), gifArr2FrameImage(), imageThumb() (+9 more)
+Cohesion: 0.21
+Nodes (15): apngArr2FrameImage(), decoderVideo(), decoderVideoDrawFrameImage(), getUploadBeforeData(), gifArr2FrameImage(), imageThumb(), isAPNG(), lazyBase64() (+7 more)
 
 ### Community 106 - "Build & Configuration #8"
 Cohesion: 0.25
 Nodes (7): ImportMeta, ImportMetaEnv, pixi-filters, PubSub, react-resize-detector, react-router-dom, simple-query-string
 
 ### Community 107 - "WorkspaceLayout.tsx"
-Cohesion: 0.26
-Nodes (8): react-router-config@^5.1.1, react-router-config, FolderGuard(), FolderGuardProps, PageLoading(), HomeLayout(), IndexLayout(), WorkspaceLayout()
+Cohesion: 0.19
+Nodes (9): react-router-config@^5.1.1, react-router-config, FolderGuard(), FolderGuardProps, PageLoading(), HomeLayout(), IndexLayout(), UserLayout() (+1 more)
 
 ### Community 108 - "Lame Min Module #5"
 Cohesion: 0.33
 Nodes (3): zb(), E(), V()
 
-### Community 110 - "controlHelper.ts"
-Cohesion: 0.67
-Nodes (3): getSizeFromTarget(), parseTransform(), CustomAnimationPath()
+### Community 110 - "CustomAnimationPath.tsx"
+Cohesion: 0.33
+Nodes (6): react-moveable@^0.56.0, react-moveable, getSizeFromTarget(), parseTransform(), CustomAnimationPath(), IProps
 
 ### Community 111 - "功能，不妥协"
 Cohesion: 0.15
 Nodes (12): AI 加持, 专业时间轴, 元素类型, 功能，不妥协, 动画能力, 地址, 天下苦剪映久已, 抠图 (+4 more)
 
-### Community 112 - "user-layout/sidebar/Sidebar.tsx"
-Cohesion: 0.18
-Nodes (6): react-router-dom@^5.1.0, react-router-dom, CropUpload(), Sidebar(), routes, getUrl()
+### Community 112 - "utils/index.ts"
+Cohesion: 0.13
+Nodes (13): AccountLogin(), IProps, CropUpload(), Sidebar(), CurveSpeed(), Props, CurveSpeedItems(), Props (+5 more)
 
 ### Community 113 - "User Profile & Account #7"
 Cohesion: 0.40
@@ -675,9 +664,9 @@ Nodes (11): AI 能力直接拉满, 不需要安装，打开浏览器就能用, �
 Cohesion: 0.33
 Nodes (5): react-router@^5.2.0, react-router, Custom(), Props, sides
 
-### Community 127 - "src/components/header/Header.tsx"
-Cohesion: 0.16
-Nodes (7): Header(), IProps, server, getInitData(), IProps, statusMap, Box
+### Community 127 - "CreditRecharge.tsx"
+Cohesion: 0.40
+Nodes (3): CreditRecharge(), IProps, statusMap
 
 ### Community 128 - "Index Module #7"
 Cohesion: 0.50
@@ -707,9 +696,13 @@ Nodes (11): 3.10 文字效果, 3.1 基础变换, 3.2 图层叠加模式, 3.3 调
 Cohesion: 0.18
 Nodes (10): AI 对话助手——用自然语言操控编辑器, AI 深度集成, 下一步计划, 为什么选择 VIDCUT？, 功能齐全，覆盖完整视频创作工作流, 快速开始, 技术栈亮点, 真正的"数据本地化" (+2 more)
 
+### Community 148 - "BasicService.ts"
+Cohesion: 0.14
+Nodes (6): AxiosAbort, server, globalOptions, Method, Res, systemService
+
 ### Community 149 - "routes.config.ts"
-Cohesion: 0.17
-Nodes (4): EditorPage(), routes, routes, routes
+Cohesion: 0.18
+Nodes (5): NotFound, Editor(), EditorComp, routes, routes
 
 ### Community 195 - "UNICUT 功能清单"
 Cohesion: 0.20
@@ -731,41 +724,41 @@ Nodes (6): 9.1 实时预览, 9.2 元素自由操作, 9.3 多选与框选, 9.4 �
 Cohesion: 0.40
 Nodes (5): 8.1 新建/保存/另存为, 8.2 视频导出, 8.3 截图/海报, 8.4 模板系统, 八、项目管理
 
-### Community 201 - "AccountLogin.tsx"
-Cohesion: 0.27
-Nodes (6): AccountLogin(), IProps, crypto, decrypt(), encrypt(), getNumArr()
+### Community 201 - "crypto.ts"
+Cohesion: 0.83
+Nodes (3): decrypt(), encrypt(), getNumArr()
 
-### Community 202 - "Material.tsx"
-Cohesion: 0.19
-Nodes (5): Draft(), routes, IProps, Material(), Product()
+### Community 202 - "Draft.tsx"
+Cohesion: 0.14
+Nodes (11): Header(), getInitData(), Draft(), IProps, DraftThumbImage(), IProps, MoreMenus(), routes (+3 more)
 
 ### Community 203 - "七、素材管理"
 Cohesion: 0.50
 Nodes (4): 7.1 素材库, 7.2 我的素材, 7.3 素材管理能力, 七、素材管理
 
-### Community 204 - "Tracks.tsx"
-Cohesion: 0.22
-Nodes (7): Props, Timeline(), Ruler(), Props, Tracks(), Props, TrackTime()
+### Community 204 - "Clip.tsx"
+Cohesion: 0.20
+Nodes (9): Clip(), ClipModal(), ClipProps, Props, ClipFrame(), dragFun(), Props, ClipVideo() (+1 more)
 
 ### Community 205 - "agreement/index.ts"
 Cohesion: 0.24
 Nodes (4): Agree(), routes, Privacy(), VipService()
 
-### Community 206 - "ElementTransition.tsx"
-Cohesion: 0.20
-Nodes (8): ElementTransition(), IProps, transitionIcon, checkClickScrollbar(), Trackbody(), TrackType(), ViewHide(), TransitionInsertTemp()
+### Community 206 - "Export.tsx"
+Cohesion: 0.29
+Nodes (5): CapturePoster(), Props, IProps, PosterCanvas, Props
 
 ### Community 207 - "final-cleanup.js"
 Cohesion: 0.20
 Nodes (9): anim, bm, csm, ech, fs, imgd, lut, sp1 (+1 more)
 
-### Community 208 - "Toolbar"
-Cohesion: 0.20
-Nodes (10): AddCamera(), CropSize(), Delete(), ForbiddenAudio(), Frame(), Freeze(), Poster(), SetScale() (+2 more)
+### Community 208 - "Product.tsx"
+Cohesion: 0.24
+Nodes (3): IProps, Product(), Server
 
-### Community 209 - "CurveSpeed.tsx"
-Cohesion: 0.39
-Nodes (5): CurveSpeed(), Props, CurveSpeedItems(), Props, curveSpeedMock
+### Community 209 - "benchmark-baseline.js"
+Cohesion: 0.33
+Nodes (3): fs, path, { performance }
 
 ### Community 210 - "ref_fs"
 Cohesion: 0.25
@@ -775,9 +768,9 @@ Nodes (5): bs, csm, fs, ut, fs
 Cohesion: 0.32
 Nodes (4): Background(), IProps, colors, splitArray()
 
-### Community 212 - "Mask.tsx"
-Cohesion: 0.32
-Nodes (4): calculateScaleFactor(), IProps, Mask(), mock
+### Community 212 - "pubsub.ts"
+Cohesion: 0.06
+Nodes (24): ProgressData, Canvas(), IProps, IProps, Player(), TimeDisplay, IProps, TemplatePlayer() (+16 more)
 
 ### Community 214 - "patch-sdk.js"
 Cohesion: 0.33
@@ -785,31 +778,27 @@ Nodes (5): code, fs, path, targetPath, viteCacheDir
 
 ### Community 219 - "electron"
 Cohesion: 0.50
-Nodes (3): { contextBridge, ipcRenderer }, electron@^33.2.1, electron
-
-### Community 220 - "DraftThumbImage.tsx"
-Cohesion: 0.67
-Nodes (3): DraftThumbImage(), IProps, resolveLocalUrl()
+Nodes (3): { contextBridge, ipcRenderer }, electron@33.2.1, electron
 
 ## Knowledge Gaps
 - **13 isolated node(s):** `RFC-2279`, `RFC-3629`, `DARK`, `LIGHT`, `Video Editing Feature Specification` (+8 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1390 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **93 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1396 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **92 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `react` to `Editor Effects & Options`, `Home.tsx`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `mobx-react`, `jquery`, `routes.config.ts`, `Audio Tracks & Processing`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `Draft.tsx`, `Build & Configuration #4`, `uploadBeforeData.ts`, `@douyinfe/semi-ui`, `UserLayout.tsx`, `User Profile & Account #4`, `language`, `Authentication UI`, `AccountLogin.tsx`, `TextStyle.tsx`, `Material.tsx`, `Tracks.tsx`, `content/SourceList.tsx`, `agreement/index.ts`, `Build & Configuration #6`, `ElementTransition.tsx`, `CurveSpeed.tsx`, `background/Background.tsx`, `Mask.tsx`, `Audio Tracks & Processing #4`, `NotFound`, `User`, `Loading.tsx`, `DraftThumbImage.tsx`, `Verticalsortablelist Module`, `theme`, `Align.tsx`, `WorkspaceLayout.tsx`, `user-layout/sidebar/Sidebar.tsx`, `src/components/header/Header.tsx`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+- **Why does `react` connect `react` to `Item`, `Home.tsx`, `@douyinfe/semi-ui`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `video-core-sdk`, `routes.config.ts`, `sources/index.tsx`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Editor.tsx`, `editor.ts`, `language`, `Build & Configuration #4`, `item/index.ts`, `UserLayout.tsx`, `User Profile & Account #4`, `Account.tsx`, `my/List.tsx`, `stores`, `Draft.tsx`, `Clip.tsx`, `agreement/index.ts`, `Export.tsx`, `Build & Configuration #6`, `Product.tsx`, `background/Background.tsx`, `pubsub.ts`, `BlendMode.tsx`, `FontScale.tsx`, `speed/Speed.tsx`, `StartFrameNumber.tsx`, `TemplateDown.tsx`, `components/transition/Transition.tsx`, `Verticalsortablelist Module`, `src/components/header/Header.tsx`, `Animation.tsx`, `WorkspaceLayout.tsx`, `CustomAnimationPath.tsx`, `utils/index.ts`, `CreditRecharge.tsx`?**
+  _High betweenness centrality (0.082) - this node is a cross-community bridge._
 - **What connects `RFC-2279`, `RFC-3629`, `DARK` to the rest of the system?**
   _13 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Editor Effects & Options` be split into smaller, more focused modules?**
-  _Cohesion score 0.037481259370314844 - nodes in this community are weakly interconnected._
+- **Should `Item` be split into smaller, more focused modules?**
+  _Cohesion score 0.1053763440860215 - nodes in this community are weakly interconnected._
 - **Why does `Is()` connect `Core Utilities & Helpers` to `Core Utilities & Helpers #3`, `Core Utilities & Helpers #2`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
-- **Should `react` be split into smaller, more focused modules?**
-  _Cohesion score 0.04188166494668043 - nodes in this community are weakly interconnected._
-- **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `Editor Effects & Options`, `Home.tsx`, `react`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `mobx-react`, `Audio Tracks & Processing`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Player Canvas & Rendering`, `editor.ts`, `Draft.tsx`, `Build & Configuration #4`, `User Profile & Account #4`, `language`, `Local Storage & Persistence #6`, `Authentication UI`, `AccountLogin.tsx`, `TextStyle.tsx`, `Material.tsx`, `Tracks.tsx`, `content/SourceList.tsx`, `Build & Configuration #6`, `CurveSpeed.tsx`, `Mask.tsx`, `theme`, `Align.tsx`, `user-layout/sidebar/Sidebar.tsx`, `Custom Module`, `src/components/header/Header.tsx`?**
-  _High betweenness centrality (0.066) - this node is a cross-community bridge._
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Should `@douyinfe/semi-ui` be split into smaller, more focused modules?**
+  _Cohesion score 0.0658876987990912 - nodes in this community are weakly interconnected._
+- **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `Item`, `Home.tsx`, `dependencies`, `ImageOptions.tsx`, `EChart.tsx`, `video-core-sdk`, `routes.config.ts`, `package.json`, `localStorageService.ts`, `Content.tsx`, `Editor State Store`, `Editor.tsx`, `editor.ts`, `language`, `Build & Configuration #4`, `item/index.ts`, `User Profile & Account #4`, `Account.tsx`, `my/List.tsx`, `stores`, `react`, `Draft.tsx`, `Clip.tsx`, `content/SourceList.tsx`, `Export.tsx`, `Build & Configuration #6`, `Product.tsx`, `pubsub.ts`, `BlendMode.tsx`, `StartFrameNumber.tsx`, `TemplateDown.tsx`, `SliderInput.tsx`, `src/components/header/Header.tsx`, `Animation.tsx`, `utils/index.ts`, `Custom Module`, `CreditRecharge.tsx`?**
+  _High betweenness centrality (0.053) - this node is a cross-community bridge._
 - **Should `Ffmpeg Core Module` be split into smaller, more focused modules?**
   _Cohesion score 0.03729071537290715 - nodes in this community are weakly interconnected._
