@@ -55,7 +55,7 @@ const Element = (props: Props) => {
       setStyle(pos);
     },
   });
-  const isActive = editor.selectedElementIds.includes(element.id);
+  const isActive = editor.isElementSelected(element.id);
 
   // 监听是否在可视化区域
   useEffect(() => {
@@ -120,7 +120,7 @@ const Element = (props: Props) => {
             <ExchangeFour theme="outline" size="18" fill="#fff" strokeWidth={3} />
             &nbsp; {language.val('common_replace') || 'Replace'}
           </div>
-          {editor.selectedElementIds.includes(element.id) && <FrameItems scale={scale} element={element} />}
+          {isActive && <FrameItems scale={scale} element={element} />}
           {element.type === 'video' && backgroundFrames.length === 0 && !isResourceError && (
             <div className={styles.spin}>
               <IconSpin spin />

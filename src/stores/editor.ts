@@ -482,7 +482,15 @@ export class Editor {
   /**
    * 选中的元素
    */
+  /**
+   * 选中的元素 (Array for batch reads, Map for fine-grained O(1) per-element reactivity)
+   */
   @observable selectedElementIds: string[] = [];
+  @observable selectedElementMap: any = observable.map({});
+
+  public isElementSelected(id: string): boolean {
+    return !!this.selectedElementMap.get(id);
+  }
   @action
   setSelectedElementIds(ids: string[]) {
     if (ids.length === 1 && this.selectedElementIds.length === 1 && ids[0] === this.selectedElementIds[0]) {
@@ -504,11 +512,20 @@ export class Editor {
     // }
 
     transaction(() => {
-      // this.elementOptionType = 'basic';
+      const oldIds = this.selectedElementIds;
+      for (const oldId of oldIds) {
+        if (!ids.includes(oldId)) {
+          this.selectedElementMap.delete(oldId);
+        }
+      }
+      for (const newId of ids) {
+        if (!this.selectedElementMap.get(newId)) {
+          this.selectedElementMap.set(newId, true);
+        }
+      }
       this.elementOptionType = 'basic';
       this.selectedElementIds = [...ids];
       this.optionPanelCustom = '';
-      // this.frameSelectedId = frameSelectedId;
       this.frameSelectedId = '';
     });
   }
@@ -915,6 +932,22 @@ export class Editor {
       console.error('取消pubsub订阅失败:', e);
     }
 
+    // 清理音频与视频播放元素
+    if (this.audio) {
+      try {
+        this.audio.pause();
+        this.audio.remove();
+        this.audio = null;
+      } catch (e) {}
+    }
+    if (this.clipVideo) {
+      try {
+        this.clipVideo.pause();
+        this.clipVideo.remove();
+        this.clipVideo = null;
+      } catch (e) {}
+    }
+
     // 清理上下文菜单实例
     if (this.contextMenuInstance) {
       this.contextMenuInstance.hideAll();
@@ -930,6 +963,7 @@ export class Editor {
       this.activeItems = [];
       this.watermark = null;
       this.previewSource = null;
+      this.selectedElementIds.forEach(id => this.selectedElementMap.delete(id));
       this.selectedElementIds = [];
       this.userInfo = null;
       this.aiLoopStatus = {};

@@ -83,8 +83,11 @@ export default defineConfig({
             if (id.includes('video-core-sdk') || id.includes('pixi.js') || id.includes('@pixi')) {
               return 'vendor-editor';
             }
-            if (id.includes('@douyinfe/semi-ui') || id.includes('@douyinfe/semi-icons') || id.includes('@icon-park')) {
-              return 'vendor-ui';
+            if (id.includes('@douyinfe/semi-icons') || id.includes('@icon-park')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('@douyinfe/semi-ui')) {
+              return 'vendor-semi';
             }
             if (id.includes('react') || id.includes('mobx') || id.includes('scheduler')) {
               return 'vendor-react';

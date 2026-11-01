@@ -10,7 +10,6 @@ type Props = {};
 
 const Tracks = (props: Props) => {
   const { editor } = stores;
-  console.log('强制更新------>');
   return (
     <div className={styles.tracks}>
       {editor.globalLoading && (

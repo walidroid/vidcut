@@ -14,6 +14,18 @@ export interface IProps {
   noElement: boolean;
 }
 
+const TimelineCursor = observer(({ width, dragCursor }: { width: number; dragCursor: any }) => {
+  const { editor } = stores;
+  const tx = editor.currentTime * editor.rulerScale - editor.timelineTrackScrollLeft;
+  return (
+    <a
+      id="h5dsCursor"
+      onMouseDown={dragCursor}
+      className={styles.cursor}
+      style={{ transform: `translate3d(${tx}px, 0, 0)`, display: tx < 0 || tx > width - 16 ? "none" : "block" }}
+    />
+  );
+});
 function Ruler(props: IProps) {
   const { editor } = stores;
   const { width, ref } = useResizeDetector();
@@ -128,12 +140,7 @@ function Ruler(props: IProps) {
         editor.pause(time);
       }}
     >
-      <a
-        id="h5dsCursor"
-        onMouseDown={dragCursor}
-        className={styles.cursor}
-        style={{ transform: `translate(${tx}px)`, display: tx < 0 || tx > width - 16 ? 'none' : 'block' }}
-      ></a>
+      {width && <TimelineCursor width={width} dragCursor={dragCursor} />}
       {width && <canvas id="canvaTimelineRuler" width={width} height={rulerHeight}></canvas>}
     </div>
   );

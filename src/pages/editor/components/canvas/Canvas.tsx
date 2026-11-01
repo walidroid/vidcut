@@ -124,7 +124,7 @@ function Canvas(props: IProps) {
 
   const mouseDown = useCallback(
     e => {
-      console.log(e, e.ctrlKey);
+      
       if (e.ctrlKey && !editor.canvasDragEnable) {
         $('.selecto-selection')[0].style.opacity = '0';
         editor.canvasDragEnable = true;
@@ -141,7 +141,7 @@ function Canvas(props: IProps) {
       let startY = mv.y;
 
       const mouseMove = em => {
-        console.log(em.clientX, em.clientY);
+        
         setMv({ x: startX + em.clientX - e.clientX, y: startY + em.clientY - e.clientY });
       };
 

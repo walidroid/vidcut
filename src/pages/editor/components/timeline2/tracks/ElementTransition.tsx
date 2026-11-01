@@ -27,7 +27,7 @@ function ElementTransition(props: IProps) {
   const { editor } = stores;
   const { transitionElement, element, nextElement } = props;
   const scale = editor.rulerScale;
-  const isActive = editor.selectedElementIds.includes(transitionElement.id);
+  const isActive = editor.isElementSelected(transitionElement.id);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   const speed = speedHelper.videoAvgSpeed(element as any);
