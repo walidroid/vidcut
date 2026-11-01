@@ -93,24 +93,82 @@ function Canvas(props: IProps) {
   }, []);
 
   // 本地存储模式：当 movie 就绪后，将资源中的相对路径解析为 blob URL
-  // 使用当前 project appid 追踪，避免工程切换时沿用旧状态；支持取消过期异步请求
-  const hydratedAppIdRef = useRef<string | null>(null);
+  // 健壮跟踪：基于工程标识、素材路径 Set、resourceManage 实例及世代计数器 (generation token)
+  // 支持增量素材水合、更换 resourceManage 重新水合、失败自动重试、防并发冲突与快速切换工程任务取消
+  const hydratedPathsRef = useRef<Set<string>>(new Set());
+  const lastResourceManageRef = useRef<any>(null);
+  const lastAppIdRef = useRef<string | null>(null);
+  const hydrationGenerationRef = useRef<number>(0);
+
   useEffect(() => {
     let isCancelled = false;
+    const currentGeneration = ++hydrationGenerationRef.current;
     const currentAppId = editor.appid;
-    if (editor.movie?.resourceManage && editor.useLocalStorage && editor.data?.resouces?.length) {
-      if (hydratedAppIdRef.current !== currentAppId) {
-        hydratedAppIdRef.current = currentAppId;
-        editor.movie.resourceManage.useLocalStorage = editor.useLocalStorage;
-        hydrateResourcePaths(editor.data.resouces, editor.movie.resourceManage).catch(err => {
-          if (!isCancelled) console.warn('[Canvas] Hydration error:', err);
-        });
+    const resourceManage = editor.movie?.resourceManage;
+
+    if (!resourceManage || !editor.useLocalStorage) {
+      return;
+    }
+
+    // 1. 检测是否切换了工程或重建了 resourceManage 实例（新实例缓存为空，需清空已水合路径）
+    if (lastAppIdRef.current !== currentAppId || lastResourceManageRef.current !== resourceManage) {
+      lastAppIdRef.current = currentAppId;
+      lastResourceManageRef.current = resourceManage;
+      hydratedPathsRef.current.clear();
+    }
+
+    resourceManage.useLocalStorage = editor.useLocalStorage;
+
+    const resources = editor.data?.resouces || [];
+    if (!resources.length) return;
+
+    // 2. 收集尚未成功水合的本地素材路径（增量水合 & 失败素材可重试）
+    const pendingPaths: string[] = [];
+    for (const res of resources) {
+      for (const p of [res.url, res.thumb, res.frames, res.wave]) {
+        if (typeof p === 'string' && p.startsWith('materials/') && !hydratedPathsRef.current.has(p)) {
+          pendingPaths.push(p);
+        }
       }
     }
+
+    const uniquePendingPaths = Array.from(new Set(pendingPaths));
+    if (!uniquePendingPaths.length) {
+      return; // 全部素材已水合，无需重复处理
+    }
+
+    const pendingResources = uniquePendingPaths.map(p => ({ url: p }));
+
+    // 3. 执行分批并行水合，并传递世代与取消判定
+    hydrateResourcePaths(pendingResources, resourceManage, {
+      isCancelled: () =>
+        isCancelled ||
+        currentGeneration !== hydrationGenerationRef.current ||
+        editor.appid !== currentAppId ||
+        editor.movie?.resourceManage !== resourceManage,
+      onPathHydrated: (p: string) => {
+        if (
+          !isCancelled &&
+          currentGeneration === hydrationGenerationRef.current &&
+          editor.appid === currentAppId
+        ) {
+          hydratedPathsRef.current.add(p);
+        }
+      },
+    }).catch(err => {
+      if (!isCancelled) console.warn('[Canvas] Hydration error:', err);
+    });
+
     return () => {
       isCancelled = true;
     };
-  }, [editor.appid, editor.movie?.resourceManage, editor.useLocalStorage, editor.data?.resouces]);
+  }, [
+    editor.appid,
+    editor.movie?.resourceManage,
+    editor.useLocalStorage,
+    editor.data?.resouces?.length,
+    editor.data?.resouces,
+  ]);
 
   useEffect(() => {
     // 鼠标在h5dsCanvasOuter元素上，按住ctrl滚动缩放

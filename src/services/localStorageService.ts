@@ -535,44 +535,59 @@ export async function getMaterialFile(relativePath: string): Promise<File | null
   }
 }
 
-/** 读取素材文件为 URL（带内存缓存避免重复读取磁盘与重复生成 Blob URL） */
+// 并发请求去重 Map，避免同一素材并发读取时创建重复 Blob URL
+const inFlightUrlPromises = new Map<string, Promise<string | null>>();
+
+/** 读取素材文件为 URL（带内存缓存与并发去重，避免重复读取磁盘与重复生成 Blob URL） */
 export async function getMaterialFileUrl(relativePath: string): Promise<string | null> {
   // 非本地资源，直接跳过
   if (!relativePath.startsWith('materials/')) {
     return relativePath;
   }
 
-  // 1. 优先使用缓存
+  // 1. 优先使用已完成的内存缓存
   if (urlCache.has(relativePath)) {
     return urlCache.get(relativePath)!;
   }
 
-  const root = await getRootHandle();
-  if (!root) return null;
-
-  try {
-    const parts = relativePath.split('/').filter(Boolean);
-    const fileName = parts.pop()!;
-    const dirPath = parts.join('/');
-
-    let dir = root;
-    if (dirPath) {
-      for (const seg of dirPath.split('/')) {
-        dir = await dir.getDirectoryHandle(seg);
-      }
-    }
-
-    const fileHandle = await dir.getFileHandle(fileName);
-    const file = await fileHandle.getFile();
-    const url = URL.createObjectURL(file);
-    urlCache.set(relativePath, url);
-    return url;
-  } catch (err) {
-    console.error(err);
-    console.error('读取素材文件失败:', relativePath);
-    Toast.error('Failed to read material file: ' + relativePath);
-    return null;
+  // 2. 检查是否有正在读取中的并发任务
+  if (inFlightUrlPromises.has(relativePath)) {
+    return inFlightUrlPromises.get(relativePath)!;
   }
+
+  const promise = (async () => {
+    try {
+      const root = await getRootHandle();
+      if (!root) return null;
+
+      const parts = relativePath.split('/').filter(Boolean);
+      const fileName = parts.pop()!;
+      const dirPath = parts.join('/');
+
+      let dir = root;
+      if (dirPath) {
+        for (const seg of dirPath.split('/')) {
+          dir = await dir.getDirectoryHandle(seg);
+        }
+      }
+
+      const fileHandle = await dir.getFileHandle(fileName);
+      const file = await fileHandle.getFile();
+      const url = URL.createObjectURL(file);
+      urlCache.set(relativePath, url);
+      return url;
+    } catch (err) {
+      console.error(err);
+      console.error('读取素材文件失败:', relativePath);
+      Toast.error('Failed to read material file: ' + relativePath);
+      return null;
+    } finally {
+      inFlightUrlPromises.delete(relativePath);
+    }
+  })();
+
+  inFlightUrlPromises.set(relativePath, promise);
+  return promise;
 }
 
 /** 保存项目数据 */
@@ -767,8 +782,14 @@ export async function getLocalProjectList(params: ProjectListParams): Promise<[a
 export async function hydrateResourcePaths(
   resources: Array<{ url?: string; thumb?: string; frames?: string; wave?: string; [key: string]: any }>,
   resourceManage?: { fetchBlob: (path: string) => Promise<string> },
+  options?: {
+    isCancelled?: () => boolean;
+    onPathHydrated?: (path: string) => void;
+  },
 ): Promise<void> {
   if (!resourceManage?.fetchBlob) return;
+  if (options?.isCancelled?.()) return;
+
   const paths: string[] = [];
   for (const res of resources) {
     for (const p of [res.url, res.thumb, res.frames, res.wave]) {
@@ -785,13 +806,18 @@ export async function hydrateResourcePaths(
   // Parallel hydration with concurrency limit of 8 for optimal I/O throughput
   const CONCURRENCY = 8;
   for (let i = 0; i < uniquePaths.length; i += CONCURRENCY) {
+    if (options?.isCancelled?.()) return;
     const chunk = uniquePaths.slice(i, i + CONCURRENCY);
     await Promise.all(
-      chunk.map(p =>
-        resourceManage.fetchBlob(p).catch((err: any) => {
+      chunk.map(async p => {
+        if (options?.isCancelled?.()) return;
+        try {
+          await resourceManage.fetchBlob(p);
+          options?.onPathHydrated?.(p);
+        } catch (err: any) {
           console.warn('[hydrateResourcePaths] Warning resolving path:', p, err);
-        }),
-      ),
+        }
+      }),
     );
   }
 }

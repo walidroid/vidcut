@@ -600,9 +600,9 @@
     "semantic_hash": "ffbfc319607043c281ed94b801e99e03"
   },
   "src/pages/editor/components/canvas/Canvas.tsx": {
-    "mtime": 1793551377.2150931,
-    "seen": 1793551884.5576067,
-    "ast_hash": "11dceea914ad928800d20c911af1c101",
+    "mtime": 1793552942.919964,
+    "seen": 1793553737.514313,
+    "ast_hash": "ffc10f8144c6bb715cc5b5fdc6bda22a",
     "semantic_hash": ""
   },
   "src/pages/editor/components/canvas/ContextMenus.tsx": {
@@ -2208,9 +2208,9 @@
     "semantic_hash": "56d788f64f31108484112336a52e3065"
   },
   "src/services/localStorageService.ts": {
-    "mtime": 1793542995.4838107,
-    "seen": 1793544007.8326118,
-    "ast_hash": "22235d37a8e17927956f11f65c594045",
+    "mtime": 1793552869.9367294,
+    "seen": 1793553737.5154786,
+    "ast_hash": "a825e8d81e8012710f67a93fe4c1f411",
     "semantic_hash": ""
   },
   "src/stores/audios.ts": {
@@ -2448,8 +2448,8 @@
     "semantic_hash": "a2014940a1532fa1846b543b1a53ffa9"
   },
   "public/assets/worker/decode.worker.js": {
-    "mtime": 1793551465.883101,
-    "seen": 1793551884.5573502,
+    "mtime": 1793553322.1640725,
+    "seen": 1793553737.5137014,
     "ast_hash": "6a0f9ca94873d84ae387cbba3a3c3ba3",
     "semantic_hash": "6a0f9ca94873d84ae387cbba3a3c3ba3"
   },
@@ -2460,14 +2460,14 @@
     "semantic_hash": "05f84bf80b8246207e2d8240c6243e2a"
   },
   "public/assets/worker/demuxer.worker.js": {
-    "mtime": 1793551465.883101,
-    "seen": 1793551884.5573547,
+    "mtime": 1793553322.1640725,
+    "seen": 1793553737.51371,
     "ast_hash": "c625cdc3cf61a5b5c35101dde885d4ba",
     "semantic_hash": "c625cdc3cf61a5b5c35101dde885d4ba"
   },
   "public/assets/worker/mp4box.all.js": {
-    "mtime": 1793551465.883101,
-    "seen": 1793551884.557357,
+    "mtime": 1793553322.1705532,
+    "seen": 1793553737.5137138,
     "ast_hash": "8682d95edbed136526c7012fc7852aa3",
     "semantic_hash": "8682d95edbed136526c7012fc7852aa3"
   },
@@ -6909,6 +6909,36 @@
     "mtime": 1793551763.8556328,
     "seen": 1793551884.5582173,
     "ast_hash": "a405ef77168e03e1cfe9a1c5cca5fcab",
+    "semantic_hash": ""
+  },
+  "scripts/benchmark-30cycle-memory.js": {
+    "mtime": 1793553237.1402104,
+    "seen": 1793553737.513759,
+    "ast_hash": "c9337859bc41913be1660cce10c260d3",
+    "semantic_hash": ""
+  },
+  "scripts/benchmark-real-video-playback.js": {
+    "mtime": 1793553210.1159375,
+    "seen": 1793553737.5137742,
+    "ast_hash": "0cfa6f4dd15f5313e9c21ae12017829e",
+    "semantic_hash": ""
+  },
+  "scripts/validate-real-export.js": {
+    "mtime": 1793553157.994318,
+    "seen": 1793553737.5138183,
+    "ast_hash": "65296cb6a7244206587940daf772af7c",
+    "semantic_hash": ""
+  },
+  "tests/hydration.test.js": {
+    "mtime": 1793553076.37047,
+    "seen": 1793553737.5155568,
+    "ast_hash": "e0cb5303ac5acc556730238121d753c2",
+    "semantic_hash": ""
+  },
+  "docs/VIDCUT_FINAL_ACCEPTANCE_VERIFICATION.md": {
+    "mtime": 1793553574.009377,
+    "seen": 1793553737.5155876,
+    "ast_hash": "842f19d32389791e5147685f80725e44",
     "semantic_hash": ""
   },
   "yarn.lock": {
