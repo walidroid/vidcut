@@ -513,13 +513,18 @@ export class Editor {
 
     transaction(() => {
       const oldIds = this.selectedElementIds;
+      const newSet = new Set(ids);
+      const oldSet = new Set(oldIds);
+
+      // Delete only keys that were unselected (O(|S_old|))
       for (const oldId of oldIds) {
-        if (!ids.includes(oldId)) {
+        if (!newSet.has(oldId)) {
           this.selectedElementMap.delete(oldId);
         }
       }
+      // Add only keys that are newly selected (O(|S_new|))
       for (const newId of ids) {
-        if (!this.selectedElementMap.get(newId)) {
+        if (!oldSet.has(newId)) {
           this.selectedElementMap.set(newId, true);
         }
       }

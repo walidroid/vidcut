@@ -93,17 +93,24 @@ function Canvas(props: IProps) {
   }, []);
 
   // 本地存储模式：当 movie 就绪后，将资源中的相对路径解析为 blob URL
-  const hydratedRef = useRef(false);
+  // 使用当前 project appid 追踪，避免工程切换时沿用旧状态；支持取消过期异步请求
+  const hydratedAppIdRef = useRef<string | null>(null);
   useEffect(() => {
-    if (editor.movie?.resourceManage) {
-      // 设置本地存储模式标记
-      editor.movie.resourceManage.useLocalStorage = editor.useLocalStorage;
-      if (!hydratedRef.current && editor.useLocalStorage && editor.data?.resouces?.length) {
-        hydratedRef.current = true;
-        hydrateResourcePaths(editor.data.resouces, editor.movie.resourceManage);
+    let isCancelled = false;
+    const currentAppId = editor.appid;
+    if (editor.movie?.resourceManage && editor.useLocalStorage && editor.data?.resouces?.length) {
+      if (hydratedAppIdRef.current !== currentAppId) {
+        hydratedAppIdRef.current = currentAppId;
+        editor.movie.resourceManage.useLocalStorage = editor.useLocalStorage;
+        hydrateResourcePaths(editor.data.resouces, editor.movie.resourceManage).catch(err => {
+          if (!isCancelled) console.warn('[Canvas] Hydration error:', err);
+        });
       }
     }
-  });
+    return () => {
+      isCancelled = true;
+    };
+  }, [editor.appid, editor.movie?.resourceManage, editor.useLocalStorage, editor.data?.resouces]);
 
   useEffect(() => {
     // 鼠标在h5dsCanvasOuter元素上，按住ctrl滚动缩放

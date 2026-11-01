@@ -87,7 +87,20 @@ export const exportMovie = async (params: {
     config.workerPath = workerPath;
   }
 
-  const me = new MovieEncoding({
+  let isDestroyed = false;
+  let me: any = null;
+
+  const safeDestroy = () => {
+    if (isDestroyed) return;
+    isDestroyed = true;
+    try {
+      me?.destroy?.();
+    } catch (e) {
+      console.warn('[exportMovie] Safe destroy warning:', e);
+    }
+  };
+
+  me = new MovieEncoding({
     // id: 'Stats-output',
     ...values,
     gifWorkerPath: config.workerPath + '/gif.worker.js',
@@ -96,34 +109,31 @@ export const exportMovie = async (params: {
     EModuleEffectSourcePath: config.EModuleEffectSourcePath,
     plugins: plugins,
     movieData: exportData,
-    // 本地存储模式下 materials/ 路径需要解析为 blob URL，否则导出时音频/视频素材无法加载
     getMaterialFileUrl: getMaterialFileUrl,
     watermark: params.watermark,
-    // renderEnv: 'web',
     times: values.format === 'gif' ? values.gifTimes : undefined,
     initSuccess: () => {
-      console.log('初始化成功');
+      console.log('MovieEncoding initSuccess');
     },
     onReady: async () => {
-      // 判断是否有缓存数据
-      // if (await me.current.getCacheIndexDBData()) {
-      //   Toast.warning('浏览器发生过意外关闭，将从上次任务继续导出');
-      // }
       console.log('onReady=---->', values);
-
-      // 先等本地素材全部解析成 blob URL，再开始编码（音频合成依赖此缓存）
-      await prewarmLocalMaterials(me, exportData);
-
-      if (values.format === 'mp4') {
-        await me.run();
+      try {
+        await prewarmLocalMaterials(me, exportData);
+        if (values.format === 'mp4') {
+          await me.run();
+        }
+        if (values.format === 'mp3') {
+          const audioURL = await me.encoderAudio();
+          me.downURL(audioURL, `${values.name || +new Date()}.mp3`);
+        }
+      } catch (err) {
+        console.error('[exportMovie] Export runtime error:', err);
+        try {
+          params.onError?.(err);
+        } finally {
+          safeDestroy();
+        }
       }
-
-      if (values.format === 'mp3') {
-        const audioURL = await me.encoderAudio();
-        // console.log('audioURL', audioURL);
-        me.downURL(audioURL, `${values.name || +new Date()}.mp3`);
-      }
-      // console.timeEnd('run');
     },
     onEachSourceProgress: n => {
       progress.eachSourceLoad = n.p;
@@ -132,20 +142,36 @@ export const exportMovie = async (params: {
     },
     onProgress: v => {
       if (values.format === 'mp3' && v.type === 'encoderAudio' && v.progress === 1) {
-        // 音频合成over
-        setTimeout(() => {
-          onFinish({ url: me.remixAudioURL });
-          // me.destroy();
+        setTimeout(async () => {
+          try {
+            await onFinish({ url: me.remixAudioURL });
+          } finally {
+            safeDestroy();
+          }
         }, 1000);
       }
       progress[v.type] = v.progress;
       onProgress({ ...progress });
     },
-    onFinish: url => {
-      onFinish({ url });
-      // me.destroy();
+    onError: err => {
+      try {
+        params.onError?.(err);
+      } finally {
+        safeDestroy();
+      }
+    },
+    onFinish: async url => {
+      try {
+        await onFinish({ url });
+      } finally {
+        safeDestroy();
+      }
     },
   });
+
+  me.cancel = () => {
+    safeDestroy();
+  };
 
   return me;
 };
