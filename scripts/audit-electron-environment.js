@@ -88,3 +88,4 @@ setTimeout(() => {
   execSync(`npx @electron/asar pack "${appDir}" "${asarPath}"`);
   console.log('[Audit] Clean asar restored.');
 }
+

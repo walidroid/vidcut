@@ -310,3 +310,4 @@ Reconciliation script [`scripts/reconcile-bundle-v2.js`](file:///c:/Users/Admin/
 3. **Export Correctness**: Real end-to-end transcode execution verified across 3 runs with full `ffprobe` stream validation, reconciling the historical 58.5 ms micro-benchmark claim.
 4. **Memory Stability**: Demonstrated strict memory plateau behavior over 30 consecutive cycles with zero runaway leaks.
 5. **Security & Packaging**: Packaged under modern Electron 33.4.11 / Chromium 130 with full context isolation, restricted IPC, and validated ASAR deployment.
+

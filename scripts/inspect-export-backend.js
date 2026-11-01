@@ -29,3 +29,4 @@ for (const term of checks) {
 const workerConfig = fs.readFileSync('worker.config.js', 'utf8');
 console.log('\n--- worker.config.js ---');
 console.log(workerConfig);
+

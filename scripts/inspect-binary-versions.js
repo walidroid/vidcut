@@ -38,3 +38,4 @@ console.log('Electron versions found in binary:', Array.from(electronVersions));
 console.log('Chrome versions found in binary:', Array.from(chromeVersions));
 console.log('Node versions found in binary:', Array.from(nodeVersions));
 console.log('V8 versions found in binary:', Array.from(v8Versions));
+
