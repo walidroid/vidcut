@@ -39,13 +39,18 @@ if (code.includes(s2)) {
 
 // 3. Bypass the loading overlay div to never block the canvas
 const s3 = 'if(!je)return jsxs("div",{style:{color:"#ccc"},children:["loading ",ze.toFixed(1),"%"]});';
-const r3 = 'if(!1&&!je)return jsxs("div",{style:{color:"#ccc"},children:["loading ",ze.toFixed(1),"%"]});';
+const s3b = 'if(!1&&!je)return jsxs("div",{style:{color:"#ccc"},children:["loading ",ze.toFixed(1),"%"]});';
+const r3 = 'if(false)return null;';
 if (code.includes(s3)) {
   code = code.replace(s3, r3);
   modified = true;
-  console.log('[patch-sdk] Successfully bypassed loading 0% overlay.');
+  console.log('[patch-sdk] Successfully eliminated loading overlay.');
+} else if (code.includes(s3b)) {
+  code = code.replace(s3b, r3);
+  modified = true;
+  console.log('[patch-sdk] Successfully upgraded loading overlay bypass to null.');
 } else if (code.includes(r3)) {
-  console.log('[patch-sdk] Loading overlay bypass already patched.');
+  console.log('[patch-sdk] Loading overlay bypass already up to date.');
 } else {
   console.warn('[patch-sdk] Warning: could not find loading overlay pattern.');
 }
@@ -191,6 +196,19 @@ if (code.includes(s14)) {
   console.log('[patch-sdk] Registration ID check already bypassed.');
 } else {
   console.warn('[patch-sdk] Warning: could not find registration ID pattern.');
+}
+
+// 15. Safe timeout guard in renderBack() so Stage never hangs forever waiting on elementReadyMark
+const s15 = 'renderBack=async()=>{if(await sleep(500),Object.keys(Ie.elementReadyMark).length)for(;0!==Object.keys(Ie.elementReadyMark).length;){for(let E in Ie.elementReadyMark)"success"===Ie.elementReadyMark[E]&&delete Ie.elementReadyMark[E];if(0===Object.keys(Ie.elementReadyMark).length)break;await sleep(100)}E.callback&&E.callback(E.store)};';
+const r15 = 'renderBack=async()=>{let _w=0;if(await sleep(200),Object.keys(Ie.elementReadyMark).length)for(;0!==Object.keys(Ie.elementReadyMark).length;){for(let E in Ie.elementReadyMark)"success"===Ie.elementReadyMark[E]&&delete Ie.elementReadyMark[E];if(0===Object.keys(Ie.elementReadyMark).length||++_w>15)break;await sleep(100)}E.callback&&E.callback(E.store)};';
+if (code.includes(s15)) {
+  code = code.replace(s15, r15);
+  modified = true;
+  console.log('[patch-sdk] Successfully added timeout guard in renderBack().');
+} else if (code.includes(r15)) {
+  console.log('[patch-sdk] renderBack() timeout guard already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find renderBack pattern.');
 }
 
 if (modified) {

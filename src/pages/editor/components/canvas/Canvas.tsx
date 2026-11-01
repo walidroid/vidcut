@@ -77,6 +77,20 @@ function Canvas(props: IProps) {
     };
   }, []);
 
+  // Safety fallback: Ensure workspace panels (Header, Sidebar, Sources, Options, Timeline) activate without hanging
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
+      if (!editor.movieCreateSuccess) {
+        editor.movieCreateSuccess = true;
+        if (editor.callback) {
+          editor.callback({ editor });
+        }
+        editor.updateTimeline();
+      }
+    }, 1200);
+    return () => clearTimeout(safetyTimer);
+  }, []);
+
   // 本地存储模式：当 movie 就绪后，将资源中的相对路径解析为 blob URL
   const hydratedRef = useRef(false);
   useEffect(() => {

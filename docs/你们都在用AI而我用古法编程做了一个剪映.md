@@ -4,9 +4,9 @@
 
 我偏不。
 
-我用了**纯手工、无添加、古法酿造**的方式，一行一行敲出了一个开源的视频剪辑工具——**无界云剪（unicut）**。
+我用了**纯手工、无添加、古法酿造**的方式，一行一行敲出了一个开源的视频剪辑工具——**无界云剪（vidcut）**。
 
-![unicut](https://h5ds-cdn.oss-cn-beijing.aliyuncs.com/github/images/chat-ai-to-video.png)
+![vidcut](https://h5ds-cdn.oss-cn-beijing.aliyuncs.com/github/images/chat-ai-to-video.png)
 
 ## 为什么做这个？
 
@@ -20,7 +20,7 @@
 
 ## 古法编程的成果
 
-经过无数个手工 coding 的日夜，unicut 现在长这样：
+经过无数个手工 coding 的日夜，vidcut 现在长这样：
 
 ### 支持的元素类型
 
@@ -74,9 +74,9 @@ LUT 滤镜、基础滤镜、绿幕抠图、WebGL 特效、叠加模式、缩放�
 
 别光听我说，自己去试试：
 
-- 在线体验：<https://unicut.h5ds.com/>
-- GitHub（求 Star）：<https://github.com/mtsee/unicut>
-- Gitee：<https://gitee.com/676015863/unicut>
+- 在线体验：<https://vidcut.h5ds.com/>
+- GitHub（求 Star）：<https://github.com/mtsee/vidcut>
+- Gitee：<https://gitee.com/676015863/vidcut>
 
 ***
 

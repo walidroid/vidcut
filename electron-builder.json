@@ -2,6 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.vidcut.app",
   "productName": "VidCut",
+  "electronVersion": "33.2.1",
   "copyright": "Copyright © 2026 VidCut",
   "directories": {
     "output": "release",

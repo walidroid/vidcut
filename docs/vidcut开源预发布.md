@@ -1,4 +1,4 @@
-# 重磅预热！UNICUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
+# 重磅预热！VIDCUT 开源版即将上线：纯 Web 端 AI 视频剪辑工具，功能比肩桌面端
 
 ![编辑器界面](https://cdn.h5ds.com/github/images/editor.png)
 
@@ -6,11 +6,11 @@
 
 不用了。
 
-**UNICUT（无界云剪辑）即将正式开源上线**——一款功能拉满的纯 Web 端 AI 视频剪辑工具，打开浏览器就能用，所有核心剪辑功能永久免费。
+**VIDCUT（无界云剪辑）即将正式开源上线**——一款功能拉满的纯 Web 端 AI 视频剪辑工具，打开浏览器就能用，所有核心剪辑功能永久免费。
 
 ***
 
-## 🎯 我们为什么要做 UNICUT？
+## 🎯 我们为什么要做 VIDCUT？
 
 目前市面上的 Web 端剪辑工具大多是「玩具级」：要么功能少得可怜，要么剪辑逻辑反人类，要么核心功能锁付费，根本没法满足正经的创作需求。而桌面端工具又太重，安装麻烦、占用空间大、跨设备同步难。
 
@@ -25,7 +25,7 @@
 
 ## 🚀 功能有多全？看这篇就够了
 
-UNICUT 不是概念产品，而是已经可以投入生产使用的成熟工具，覆盖从基础剪辑到 AI 创作的全流程能力：
+VIDCUT 不是概念产品，而是已经可以投入生产使用的成熟工具，覆盖从基础剪辑到 AI 创作的全流程能力：
 
 ### 📦 支持所有主流元素类型
 
@@ -112,16 +112,16 @@ UNICUT 不是概念产品，而是已经可以投入生产使用的成熟工具�
 
 ### 🧩 插件可扩展
 
-支持插件机制，你可以基于 UNICUT 开发自己的专属功能，比如自定义特效、企业内部素材库、特定行业模板等。
+支持插件机制，你可以基于 VIDCUT 开发自己的专属功能，比如自定义特效、企业内部素材库、特定行业模板等。
 
 ***
 
 ## 🏁 即将上线，敬请期待
 
-UNICUT 开源版预计 2026 年 8 月正式上线，届时将同步开放 GitHub 和 Gitee 仓库：
+VIDCUT 开源版预计 2026 年 8 月正式上线，届时将同步开放 GitHub 和 Gitee 仓库：
 
-- GitHub: <https://github.com/mtsee/unicut>
-- Gitee: <https://gitee.com/676015863/unicut>
+- GitHub: <https://github.com/mtsee/vidcut>
+- Gitee: <https://gitee.com/676015863/vidcut>
 
 上线后会提供完整的部署文档、二次开发指南和演示站点，任何人都可以免费部署、免费使用、免费修改。
 
@@ -144,8 +144,8 @@ UNICUT 开源版预计 2026 年 8 月正式上线，届时将同步开放 GitHub
 ### 快速开始（上线后可用）
 
 ```bash
-git clone https://github.com/mtsee/unicut.git
-cd unicut
+git clone https://github.com/mtsee/vidcut.git
+cd vidcut
 yarn install
 yarn dev
 ```
@@ -154,6 +154,6 @@ yarn dev
 
 ***
 
-**关注 UNICUT，让 AI 帮你剪视频，把时间留给创意。**
+**关注 VIDCUT，让 AI 帮你剪视频，把时间留给创意。**
 
-⭐ 现在去 GitHub Star 一下，上线第一时间收到通知：<https://github.com/mtsee/unicut>
+⭐ 现在去 GitHub Star 一下，上线第一时间收到通知：<https://github.com/mtsee/vidcut>

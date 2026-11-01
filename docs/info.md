@@ -1,6 +1,6 @@
 # 项目介绍
 
-无界云剪辑（unicut）是一款AI驱动的开源视频剪辑工具。B/S剪辑工具中全网功能最齐全。无需安装，打开浏览器即可创作。AI全程加持，让创作更高效。
+无界云剪辑（vidcut）是一款AI驱动的开源视频剪辑工具。B/S剪辑工具中全网功能最齐全。无需安装，打开浏览器即可创作。AI全程加持，让创作更高效。
 
 # 功能强大
 
@@ -89,11 +89,11 @@
 
 # 地址
 
-体验地址： https://unicut.h5ds.com/
+体验地址： https://vidcut.h5ds.com/
 
-github地址： https://github.com/mtsee/unicut
+github地址： https://github.com/mtsee/vidcut
 
-gitee地址： https://gitee.com/676015863/unicut
+gitee地址： https://gitee.com/676015863/vidcut
 
 # 开源协议
 

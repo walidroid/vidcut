@@ -1,12 +1,12 @@
 # VidCut Transformation Plan & Migration Guide
 
-> **Objective**: Convert the UNICUT codebase into **VidCut** — a clean, standalone, browser-based **video editor** with **zero AI dependencies**, bilingual support (**English & French only**, removing all Chinese), and a refined user experience.
+> **Objective**: Convert the VIDCUT codebase into **VidCut** — a clean, standalone, browser-based **video editor** with **zero AI dependencies**, bilingual support (**English & French only**, removing all Chinese), and a refined user experience.
 
 ---
 
 ## Table of Contents
 1. [Transformation Overview](#1-transformation-overview)
-2. [Step 1: Rebrand from UNICUT to VidCut](#step-1-rebrand-from-unicut-to-vidcut)
+2. [Step 1: Rebrand from VIDCUT to VidCut](#step-1-rebrand-from-vidcut-to-vidcut)
 3. [Step 2: Complete Removal of AI Modules & Assets](#step-2-complete-removal-of-ai-modules--assets)
 4. [Step 3: Remove Chinese & Setup English + French Localization](#step-3-remove-chinese--setup-english--french-localization)
 5. [Step 4: Streamline UI into a Pure Video Editor](#step-4-streamline-ui-into-a-pure-video-editor)
@@ -20,11 +20,11 @@
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│                           UNICUT (Before)                                     │
+│                           VIDCUT (Before)                                     │
 │  • Mixed Video Editor + Generative AI + AI Chat Agent + Cloud VIP Recharge     │
 │  • Chinese (zh-CN) & English (en-US) with hardcoded Chinese strings           │
 │  • Heavy AI models in /public/assets/ai (~100MB+ of ONNX, OpenCV, Tesseract)  │
-│  • Name: UNICUT / aacut / 无界云剪                                             │
+│  • Name: VIDCUT / aacut / 无界云剪                                             │
 └──────────────────────────────────────┬────────────────────────────────────────┘
                                        │
                                        ▼
@@ -42,7 +42,7 @@
 
 ---
 
-## Step 1: Rebrand from UNICUT to VidCut
+## Step 1: Rebrand from VIDCUT to VidCut
 
 ### 1.1 `package.json`
 Update package metadata:
@@ -514,7 +514,7 @@ Delete `public/assets/ai` which frees ~120 MB of static binary models (OpenCV WA
 
 ## Step 6: Automated Execution Script (PowerShell)
 
-Save and run this script in PowerShell from `c:\Users\Admin\Documents\unicut`:
+Save and run this script in PowerShell from `c:\Users\Admin\Documents\vidcut`:
 
 ```powershell
 Write-Host ">>> Starting VidCut Transformation..." -ForegroundColor Cyan

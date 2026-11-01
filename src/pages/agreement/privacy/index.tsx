@@ -8,12 +8,12 @@ const Privacy = () => {
         <div className={styles.mainTitle}>Privacy Policy</div>
         <div className={styles.title}>1. Overview</div>
         <p className={styles.paragraph}>
-          We take your personal privacy seriously. This Privacy Policy explains how information is handled when you use UniCut.
+          We take your personal privacy seriously. This Privacy Policy explains how information is handled when you use VidCut.
         </p>
 
         <div className={styles.title}>2. Data We Do Not Collect</div>
         <p className={styles.paragraph}>
-          UniCut does not upload, copy, store, or transmit your video files, audio tracks, images, or project timelines to external servers. All rendering and media file operations occur entirely within your local browser or desktop application environment.
+          VidCut does not upload, copy, store, or transmit your video files, audio tracks, images, or project timelines to external servers. All rendering and media file operations occur entirely within your local browser or desktop application environment.
         </p>
 
         <div className={styles.title}>3. Local Storage</div>

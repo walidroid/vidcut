@@ -94,12 +94,12 @@ const coreFeatures = [
 
 const faqList = [
   {
-    q: 'Is UniCut free to use?',
-    a: 'Yes! UniCut provides a comprehensive video editing suite, full multi-track timeline, transitions, filters, audio editing, and export completely free.',
+    q: 'Is VidCut free to use?',
+    a: 'Yes! VidCut provides a comprehensive video editing suite, full multi-track timeline, transitions, filters, audio editing, and export completely free.',
   },
   {
-    q: 'Does UniCut require installing software?',
-    a: 'UniCut is available both as a standalone desktop app (Windows) and as a modern web application that runs directly in your browser without plugins.',
+    q: 'Does VidCut require installing software?',
+    a: 'VidCut is available both as a standalone desktop app (Windows) and as a modern web application that runs directly in your browser without plugins.',
   },
   {
     q: 'Which browsers are recommended?',
@@ -107,15 +107,15 @@ const faqList = [
   },
   {
     q: 'Which media formats are supported?',
-    a: 'UniCut supports all major video formats (MP4, MOV, WebM, MKV), audio formats (MP3, WAV, AAC), and image formats (JPG, PNG, WebP, SVG, APNG, GIF).',
+    a: 'VidCut supports all major video formats (MP4, MOV, WebM, MKV), audio formats (MP3, WAV, AAC), and image formats (JPG, PNG, WebP, SVG, APNG, GIF).',
   },
   {
     q: 'What resolution and formats can I export?',
     a: 'You can export in standard MP4 (H.264 / AAC) at 720p, 1080p, 2K, and up to 4K Ultra HD at smooth 30 or 60 frames per second.',
   },
   {
-    q: 'Can I use videos made with UniCut commercially?',
-    a: 'Yes! Any content you produce, edit, and export with UniCut belongs entirely to you and can be used for commercial projects without royalties.',
+    q: 'Can I use videos made with VidCut commercially?',
+    a: 'Yes! Any content you produce, edit, and export with VidCut belongs entirely to you and can be used for commercial projects without royalties.',
   },
 ];
 
@@ -191,7 +191,7 @@ export default function Home() {
             Professional Offline Video Creation Suite
           </div>
           <h1 className={styles.heroTitle}>
-            UniCut Video Studio
+            VidCut Video Studio
             <br />
             <span className={styles.heroHighlight}>Fast & Private</span> Video Editor
           </h1>
@@ -420,7 +420,7 @@ export default function Home() {
           <div className={styles.sectionHeader}>
             <div className={styles.overline}>FAQ</div>
             <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-            <p className={styles.sectionDesc}>Quick answers to common questions about UniCut</p>
+            <p className={styles.sectionDesc}>Quick answers to common questions about VidCut</p>
           </div>
           <div className={styles.faqList}>
             {faqList.map((item, i) => (
