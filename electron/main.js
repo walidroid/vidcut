@@ -20,6 +20,10 @@ const MIME_TYPES = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+  '.ogg': 'audio/ogg',
+  '.aac': 'audio/aac',
+  '.flac': 'audio/flac',
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
 };
@@ -59,6 +63,13 @@ function startLocalServer(distDir) {
           res.writeHead(200, { 'Content-Type': contentType });
           fs.createReadStream(filePath).pipe(res);
         } else {
+          // If the request was for a static asset (has non-html extension), return 404 instead of SPA html
+          const ext = path.extname(filePath).toLowerCase();
+          if (ext && ext !== '.html') {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not Found');
+            return;
+          }
           // SPA Fallback: serve index.html for client-side routing
           const indexPath = path.join(resolvedDist, 'index.html');
           res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -67,13 +78,24 @@ function startLocalServer(distDir) {
       });
     });
 
-    server.listen(0, '127.0.0.1', () => {
+    // Try predictable port 33005 first to maintain stable origin for IndexedDB/LocalStorage, fallback to ephemeral port 0 if busy
+    server.once('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        server.listen(0, '127.0.0.1', () => {
+          const addr = server.address();
+          serverPort = addr.port;
+          resolve(serverPort);
+        });
+      } else {
+        reject(err);
+      }
+    });
+
+    server.listen(33005, '127.0.0.1', () => {
       const addr = server.address();
       serverPort = addr.port;
       resolve(serverPort);
     });
-
-    server.on('error', reject);
   });
 }
 
@@ -136,6 +158,23 @@ function createWindow(port) {
       shell.openExternal(url);
     }
     return { action: 'deny' };
+  });
+
+  // Log renderer console warnings/errors and load failures for diagnostics
+  mainWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+    const levels = ['VERBOSE', 'INFO', 'WARNING', 'ERROR'];
+    const levelStr = levels[level] || 'LOG';
+    if (level >= 2) {
+      console.error(`[Renderer ${levelStr}] ${message} (${sourceId}:${line})`);
+    }
+  });
+
+  mainWindow.webContents.on('render-process-gone', (event, details) => {
+    console.error('[Main] Renderer process gone:', details);
+  });
+
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    console.error(`[Main] Failed to load URL ${validatedURL}: ${errorDescription} (${errorCode})`);
   });
 
   mainWindow.loadURL(`http://127.0.0.1:${port}`);

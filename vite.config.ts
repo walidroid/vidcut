@@ -79,23 +79,37 @@ export default defineConfig({
         entryFileNames: 'homeAssets/js/[name]-[hash].js',
         assetFileNames: 'homeAssets/[ext]/[name]-[hash].[ext]',
         manualChunks(id) {
+          if (id.includes('commonjsHelpers') || id.includes('\0commonjsHelpers')) {
+            return 'vendor-react';
+          }
           if (id.includes('node_modules')) {
-            if (id.includes('video-core-sdk') || id.includes('pixi.js') || id.includes('@pixi')) {
-              return 'vendor-editor';
-            }
-            if (id.includes('@douyinfe/semi-icons') || id.includes('@icon-park')) {
-              return 'vendor-icons';
-            }
-            if (id.includes('@douyinfe/semi-ui')) {
+            // Keep all @douyinfe packages together to prevent internal circular dependencies
+            if (id.includes('@douyinfe/')) {
               return 'vendor-semi';
             }
-            if (id.includes('react') || id.includes('mobx') || id.includes('scheduler')) {
+            if (id.includes('@icon-park/')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('video-core-sdk') || id.includes('pixi.js') || id.includes('@pixi') || id.includes('three')) {
+              return 'vendor-editor';
+            }
+            if (
+              /[\\/]node_modules[\\/](react|react-dom|scheduler|mobx|mobx-react|mobx-react-lite|react-router|react-router-dom|react-router-config)[\\/]/.test(
+                id
+              )
+            ) {
               return 'vendor-react';
             }
             if (id.includes('echarts') || id.includes('zrender')) {
               return 'vendor-charts';
             }
-            if (id.includes('lodash') || id.includes('dayjs') || id.includes('axios') || id.includes('dexie') || id.includes('fflate')) {
+            if (
+              id.includes('lodash') ||
+              id.includes('dayjs') ||
+              id.includes('axios') ||
+              id.includes('dexie') ||
+              id.includes('fflate')
+            ) {
               return 'vendor-utils';
             }
           }
