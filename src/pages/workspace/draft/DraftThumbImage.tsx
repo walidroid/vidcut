@@ -33,6 +33,9 @@ export default function DraftThumbImage({ thumb, width, height }: IProps) {
       }}
       src={url}
       alt=""
+      onError={() => {
+        setUrl('');
+      }}
     />
   );
 }

@@ -3146,7 +3146,7 @@ et.exports;
 (function(e, r) {
   (function(n, o) {
     var a = {};
-    n.PubSub ? (a = n.PubSub, console.warn("PubSub already loaded, using existing version")) : (n.PubSub = a, o(a)), e !== void 0 && e.exports && (r = e.exports = a), r.PubSub = a, e.exports = r = a;
+    n.PubSub ? (a = n.PubSub) : (n.PubSub = a, o(a)), e !== void 0 && e.exports && (r = e.exports = a), r.PubSub = a, e.exports = r = a;
   })(typeof window == "object" && window || _e, function(n) {
     var o = {}, a = -1, i = "*";
     function f(v) {

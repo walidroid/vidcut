@@ -59,7 +59,7 @@ function Folders(props: IProps) {
     checkboxStyle.display = 'flex';
   }
 
-  console.log('list', list);
+
 
   return (
     <div className={classNames(styles.folders, 'scroll')}>

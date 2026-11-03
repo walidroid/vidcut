@@ -1,7 +1,7 @@
-# Graph Report - unicut  (2026-11-02)
+# Graph Report - unicut  (2026-11-03)
 
 ## Corpus Check
-- 475 files · ~264,132 words
+- 475 files · ~264,264 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 153 file(s) not represented in the graph (top: .less 144, (none) 3, .wasm 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9952ab3b`
+- Built from commit: `7d23cc86`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -891,10 +891,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Item` be split into smaller, more focused modules?**
   _Cohesion score 0.02783528870485392 - nodes in this community are weakly interconnected._
 - **Why does `react` connect `react` to `Item`, `Home.tsx`, `dependencies`, `Editor.tsx`, `sources/index.tsx`, `package.json`, `localStorageService.ts`, `DragItem.tsx`, `Editor State Store`, `Align.tsx`, `Credit.tsx`, `language`, `Links.tsx`, `mobx-react`, `routes.config.ts`, `CurveSpeed.tsx`, `EChart.tsx`, `TextStyle.tsx`, `utils/index.ts`, `agreement/index.ts`, `Build & Configuration #6`, `LoginRegisterBox.tsx`, `CapturePoster.tsx`, `EditorPage.tsx`, `AgreementLayout.tsx`, `@douyinfe/semi-ui`, `qrcode/index.ts`, `Verticalsortablelist Module`, `Layout`, `PageLoading`, `Clip.tsx`, `background/Background.tsx`, `WorkspaceLayout.tsx`, `Draft.tsx`, `CustomAnimationPath.tsx`, `Mask.tsx`, `LottieItem.tsx`, `Content.tsx`?**
-  _High betweenness centrality (0.073) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **Should `VIDCUT — FINAL PRODUCTION AUDIT, HYDRATION FIX & REAL VIDEO BENCHMARKS` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Why does `@douyinfe/semi-ui` connect `@douyinfe/semi-ui` to `Item`, `Home.tsx`, `dependencies`, `Editor.tsx`, `package.json`, `localStorageService.ts`, `DragItem.tsx`, `Editor State Store`, `Align.tsx`, `Credit.tsx`, `language`, `Links.tsx`, `mobx-react`, `CurveSpeed.tsx`, `react`, `EChart.tsx`, `Local Storage & Persistence #6`, `addItem.ts`, `TextStyle.tsx`, `utils/index.ts`, `Build & Configuration #6`, `LoginRegisterBox.tsx`, `CapturePoster.tsx`, `EditorPage.tsx`, `Layout`, `PageLoading`, `More.tsx`, `Clip.tsx`, `background/Background.tsx`, `Draft.tsx`, `Mask.tsx`, `Custom Module`, `SliderInput.tsx`, `Content.tsx`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **Should `Ffmpeg Core Module` be split into smaller, more focused modules?**
   _Cohesion score 0.03729071537290715 - nodes in this community are weakly interconnected._

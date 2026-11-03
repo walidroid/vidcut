@@ -71,12 +71,8 @@ const Header = (props: IProps) => {
   return (
     <div className={styles.header}>
       <div className={styles.logoNav}>
-        <Link to="/">
-          <div
-            className={classNames({
-              [styles.logoen]: true,
-            })}
-          ></div>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: 10 }}>
+          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--theme-text, #fff)', letterSpacing: '-0.5px' }}>VidCut</div>
         </Link>
         <div className={styles.nav}>
           <NavLink

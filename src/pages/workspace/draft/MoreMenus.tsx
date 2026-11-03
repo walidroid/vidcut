@@ -15,7 +15,7 @@ export interface IProps {
 export default function MoreMenus(props: IProps) {
   const refName = useRef('');
   const { item, cates, updateContent } = props;
-  console.log(cates, 'cates');
+
   return (
     <ul className={styles.menus}>
       <li

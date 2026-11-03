@@ -23,14 +23,14 @@ export interface IProps {
 
 export default function Draft(props: IProps) {
   const history = useHistory();
-  console.log('props', props.match.params);
+
   const [cid = '', cname = ''] = props.match.params.cid?.split('@') || [];
   const [cates, setCates] = useState([]);
   const catesRef = useRef<any[]>([]);
   const [updateContent, setUpdateContent] = useState(1);
   const currentName = useRef<string>();
 
-  console.log('cid', cid, cname);
+
 
   return (
     <Content

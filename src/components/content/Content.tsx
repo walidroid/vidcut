@@ -158,7 +158,7 @@ function Content(props: IProps, ref: any) {
     const { list, total } = await getItems(props.type, params.current, props.getListServer);
     totalRef.current = total;
 
-    console.log(list, total, 'list.length-------------------------');
+
 
     // 同步更新ref和state
     itemsRef.current = [...list];
@@ -543,7 +543,7 @@ function Content(props: IProps, ref: any) {
           items={[
             ...uploadList,
             ...(itemsRef.current || []).map(d => {
-              console.log(d);
+
               if (d.convert_status === 0 || d.convert_status === 1) {
                 d.status = 'decoding';
               } else if (d.convert_status === 2 || d.convert_status === -1) {

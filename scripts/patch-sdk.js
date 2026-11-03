@@ -211,6 +211,32 @@ if (code.includes(s15)) {
   console.warn('[patch-sdk] Warning: could not find renderBack pattern.');
 }
 
+// 16. Silence PixiJS FILTER_RESOLUTION deprecation warning
+const s16 = 'FILTER_RESOLUTION:{get:()=>(deprecation("7.1.0","settings.FILTER_RESOLUTION is deprecated, use Filter.defaultResolution"),Filter.defaultResolution),set(E){Filter.defaultResolution=E}}';
+const r16 = 'FILTER_RESOLUTION:{get:()=>Filter.defaultResolution,set(E){Filter.defaultResolution=E}}';
+if (code.includes(s16)) {
+  code = code.replace(s16, r16);
+  modified = true;
+  console.log('[patch-sdk] Successfully silenced PixiJS FILTER_RESOLUTION deprecation warning.');
+} else if (code.includes(r16)) {
+  console.log('[patch-sdk] PixiJS FILTER_RESOLUTION deprecation already patched.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find FILTER_RESOLUTION pattern.');
+}
+
+// 17. Silence PubSub duplicate load warning in video-core-sdk
+const s17 = 'J.PubSub?(xe=J.PubSub,console.warn("PubSub already loaded, using existing version")):(J.PubSub=xe,_e(xe))';
+const r17 = 'J.PubSub?(xe=J.PubSub):(J.PubSub=xe,_e(xe))';
+if (code.includes(s17)) {
+  code = code.replace(s17, r17);
+  modified = true;
+  console.log('[patch-sdk] Successfully silenced PubSub duplicate load warning in video-core-sdk.');
+} else if (code.includes(r17)) {
+  console.log('[patch-sdk] PubSub duplicate load warning already patched in video-core-sdk.');
+} else {
+  console.warn('[patch-sdk] Warning: could not find PubSub pattern in video-core-sdk.');
+}
+
 if (modified) {
   fs.writeFileSync(targetPath, code, 'utf8');
   console.log('[patch-sdk] All patches successfully applied to video-core-sdk.js.');
