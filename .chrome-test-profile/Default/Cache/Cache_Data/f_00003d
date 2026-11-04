@@ -1,0 +1,244 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/footer/Footer.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=0edf8e4c"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+import styles from "/src/components/footer/footer.module.less";
+import { Intl } from "/src/language/index.ts";
+export default function Footer(props) {
+  return /* @__PURE__ */ jsxDEV("div", { className: styles.footer, children: [
+    /* @__PURE__ */ jsxDEV("div", { className: styles.divider }, void 0, false, {
+      fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+      lineNumber: 29,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: styles.footerInner, children: [
+      /* @__PURE__ */ jsxDEV("section", { className: styles.item, children: [
+        /* @__PURE__ */ jsxDEV("span", { className: styles.logo }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 32,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("span", { className: styles.info, children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_about_us_info" }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 34,
+          columnNumber: 13
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 33,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+        lineNumber: 31,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("section", { className: styles.item, children: [
+        /* @__PURE__ */ jsxDEV("h3", { children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_navigation" }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 38,
+          columnNumber: 15
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 38,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("ul", { className: styles.links, children: /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "#", children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_home" }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 41,
+          columnNumber: 28
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 41,
+          columnNumber: 15
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 40,
+          columnNumber: 13
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 39,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+        lineNumber: 37,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("section", { className: styles.item, children: [
+        /* @__PURE__ */ jsxDEV("h3", { children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_support" }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 48,
+          columnNumber: 15
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 48,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("ul", { className: styles.links, children: [
+          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "#", children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_help_center" }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 51,
+            columnNumber: 28
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 51,
+            columnNumber: 15
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 50,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "#", children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_privacy_policy" }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 54,
+            columnNumber: 28
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 54,
+            columnNumber: 15
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 53,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "#", children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_service_agreement" }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 57,
+            columnNumber: 28
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 57,
+            columnNumber: 15
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 56,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "#", children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_disclaimer" }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 60,
+            columnNumber: 28
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 60,
+            columnNumber: 15
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 59,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 49,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+        lineNumber: 47,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV("section", { className: styles.item, children: [
+        /* @__PURE__ */ jsxDEV("h3", { children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_contact_us" }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 65,
+          columnNumber: 15
+        }, this) }, void 0, false, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 65,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: styles.contact, children: [
+          /* @__PURE__ */ jsxDEV("p", { children: [
+            /* @__PURE__ */ jsxDEV(Intl, { name: "common_private_deployment_saas_consultation" }, void 0, false, {
+              fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+              lineNumber: 68,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
+              fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+              lineNumber: 69,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV(Intl, { name: "common_phone" }, void 0, false, {
+              fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+              lineNumber: 70,
+              columnNumber: 15
+            }, this),
+            ":"
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 67,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("span", { className: styles.span }, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+            lineNumber: 72,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+          lineNumber: 66,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+        lineNumber: 64,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+      lineNumber: 30,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV("div", { className: styles.footerBottom, children: /* @__PURE__ */ jsxDEV("span", { className: styles.copyRight, children: /* @__PURE__ */ jsxDEV(Intl, { name: "common_copyright" }, void 0, false, {
+      fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+      lineNumber: 81,
+      columnNumber: 11
+    }, this) }, void 0, false, {
+      fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+      lineNumber: 80,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+      lineNumber: 79,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx",
+    lineNumber: 28,
+    columnNumber: 5
+  }, this);
+}
+_c = Footer;
+var _c;
+$RefreshReg$(_c, "Footer");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports)
+        return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Admin/Documents/unicut/src/components/footer/Footer.tsx", currentExports, nextExports);
+      if (invalidateMessage)
+        import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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UUFBSyxNQUFLLHVCQUFYO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFBOEIsS0FBbEM7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUFxQztBQUFBLFFBQ3JDLHVCQUFDLFNBQUksV0FBV1AsT0FBT1csU0FDckI7QUFBQSxpQ0FBQyxPQUNDO0FBQUEsbUNBQUMsUUFBSyxNQUFLLGlEQUFYO0FBQUE7QUFBQTtBQUFBO0FBQUEsbUJBQXdEO0FBQUEsWUFDeEQsdUJBQUMsVUFBRDtBQUFBO0FBQUE7QUFBQTtBQUFBLG1CQUFHO0FBQUEsWUFDSCx1QkFBQyxRQUFLLE1BQUssa0JBQVg7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFBeUI7QUFBQSxZQUFHO0FBQUEsZUFIOUI7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFJQTtBQUFBLFVBQ0EsdUJBQUMsVUFBSyxXQUFXWCxPQUFPWSxRQUF4QjtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQUVBO0FBQUEsYUFSRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBVUE7QUFBQSxXQVpGO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUFhQTtBQUFBLFNBL0NGO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FnREE7QUFBQSxJQUNBLHVCQUFDLFNBQUksV0FBV1osT0FBT2EsY0FDckIsaUNBQUMsVUFBSyxXQUFXYixPQUFPYyxXQUN0QixpQ0FBQyxRQUFLLE1BQUssc0JBQVg7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQUE2QixLQUQvQjtBQUFBO0FBQUE7QUFBQTtBQUFBLFdBRUEsS0FIRjtBQUFBO0FBQUE7QUFBQTtBQUFBLFdBS0E7QUFBQSxPQXhERjtBQUFBO0FBQUE7QUFBQTtBQUFBLFNBeURBO0FBRUo7QUFBQ0MsS0E3RHVCYjtBQUFNLElBQUFhO0FBQUEsYUFBQUEsSUFBQSIsIm5hbWVzIjpbInN0eWxlcyIsIkludGwiLCJGb290ZXIiLCJwcm9wcyIsImZvb3RlciIsImRpdmlkZXIiLCJmb290ZXJJbm5lciIsIml0ZW0iLCJsb2dvIiwiaW5mbyIsImxpbmtzIiwiY29udGFjdCIsInNwYW4iLCJmb290ZXJCb3R0b20iLCJjb3B5UmlnaHQiLCJfYyJdLCJzb3VyY2VzIjpbIkZvb3Rlci50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdGhlbWUgfSBmcm9tICdAdGhlbWUnO1xuaW1wb3J0IHN0eWxlcyBmcm9tICcuL2Zvb3Rlci5tb2R1bGUubGVzcyc7XG5pbXBvcnQgeyBJbnRsIH0gZnJvbSAnQGxhbmd1YWdlL2luZGV4JztcblxuZXhwb3J0IGludGVyZmFjZSBJUHJvcHMge31cblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRm9vdGVyKHByb3BzOiBJUHJvcHMpIHtcbiAgcmV0dXJuIChcbiAgICA8ZGl2IGNsYXNzTmFtZT17c3R5bGVzLmZvb3Rlcn0+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT17c3R5bGVzLmRpdmlkZXJ9PjwvZGl2PlxuICAgICAgPGRpdiBjbGFzc05hbWU9e3N0eWxlcy5mb290ZXJJbm5lcn0+XG4gICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT17c3R5bGVzLml0ZW19PlxuICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT17c3R5bGVzLmxvZ299Pjwvc3Bhbj5cbiAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9e3N0eWxlcy5pbmZvfT5cbiAgICAgICAgICAgIDxJbnRsIG5hbWU9XCJjb21tb25fYWJvdXRfdXNfaW5mb1wiIC8+XG4gICAgICAgICAgPC9zcGFuPlxuICAgICAgICA8L3NlY3Rpb24+XG4gICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT17c3R5bGVzLml0ZW19PlxuICAgICAgICAgIDxoMz48SW50bCBuYW1lPVwiY29tbW9uX25hdmlnYXRpb25cIiAvPjwvaDM+XG4gICAgICAgICAgPHVsIGNsYXNzTmFtZT17c3R5bGVzLmxpbmtzfT5cbiAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgPGEgaHJlZj1cIiNcIj57PEludGwgbmFtZT1cImNvbW1vbl9ob21lXCIgLz59PC9hPlxuICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgXG4gICAgICAgICAgPC91bD5cbiAgICAgICAgPC9zZWN0aW9uPlxuICAgICAgICA8c2VjdGlvbiBjbGFzc05hbWU9e3N0eWxlcy5pdGVtfT5cbiAgICAgICAgICA8aDM+PEludGwgbmFtZT1cImNvbW1vbl9zdXBwb3J0XCIgLz48L2gzPlxuICAgICAgICAgIDx1bCBjbGFzc05hbWU9e3N0eWxlcy5saW5rc30+XG4gICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgIDxhIGhyZWY9XCIjXCI+ezxJbnRsIG5hbWU9XCJjb21tb25faGVscF9jZW50ZXJcIiAvPn08L2E+XG4gICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgPGxpPlxuICAgICAgICAgICAgICA8YSBocmVmPVwiI1wiPns8SW50bCBuYW1lPVwiY29tbW9uX3ByaXZhY3lfcG9saWN5XCIgLz59PC9hPlxuICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgPGEgaHJlZj1cIiNcIj57PEludGwgbmFtZT1cImNvbW1vbl9zZXJ2aWNlX2FncmVlbWVudFwiIC8+fTwvYT5cbiAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgIDxhIGhyZWY9XCIjXCI+ezxJbnRsIG5hbWU9XCJjb21tb25fZGlzY2xhaW1lclwiIC8+fTwvYT5cbiAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgPC91bD5cbiAgICAgICAgPC9zZWN0aW9uPlxuICAgICAgICA8c2VjdGlvbiBjbGFzc05hbWU9e3N0eWxlcy5pdGVtfT5cbiAgICAgICAgICA8aDM+PEludGwgbmFtZT1cImNvbW1vbl9jb250YWN0X3VzXCIgLz48L2gzPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXtzdHlsZXMuY29udGFjdH0+XG4gICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgPEludGwgbmFtZT1cImNvbW1vbl9wcml2YXRlX2RlcGxveW1lbnRfc2Fhc19jb25zdWx0YXRpb25cIiAvPlxuICAgICAgICAgICAgICA8YnIgLz5cbiAgICAgICAgICAgICAgPEludGwgbmFtZT1cImNvbW1vbl9waG9uZVwiIC8+OiBcbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT17c3R5bGVzLnNwYW59PlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIFxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L3NlY3Rpb24+XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPXtzdHlsZXMuZm9vdGVyQm90dG9tfT5cbiAgICAgICAgPHNwYW4gY2xhc3NOYW1lPXtzdHlsZXMuY29weVJpZ2h0fT5cbiAgICAgICAgICA8SW50bCBuYW1lPVwiY29tbW9uX2NvcHlyaWdodFwiIC8+XG4gICAgICAgIDwvc3Bhbj5cbiAgICAgICAgXG4gICAgICA8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgKTtcbn1cbiJdLCJmaWxlIjoiQzovVXNlcnMvQWRtaW4vRG9jdW1lbnRzL3VuaWN1dC9zcmMvY29tcG9uZW50cy9mb290ZXIvRm9vdGVyLnRzeCJ9

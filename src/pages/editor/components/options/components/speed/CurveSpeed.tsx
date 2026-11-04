@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import type { VideoElement } from 'video-core-sdk';
 import styles from './curveSpeed.module.less';
 import { Redo, Plus, Delete } from '@icon-park/react';
@@ -12,6 +12,7 @@ import { curveSpeedMock } from './curveSpeedMock';
 import { util } from '@utils/index';
 import _remove from 'lodash/remove';
 import { stores } from '@stores/index';
+import { language } from '@language/index';
 
 type Props = {};
 

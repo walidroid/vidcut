@@ -1,4 +1,4 @@
-﻿import styles from './style.module.less';
+import styles from './style.module.less';
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import type { BaseElement, TextElement } from 'video-core-sdk';
@@ -8,6 +8,7 @@ import { pubsub } from '@utils/index';
 import { Spin, Modal } from '@douyinfe/semi-ui';
 import TextModal from './TextModal';
 import { stores } from '@stores/index';
+import { language } from '@language/index';
 
 export interface IProps {}
 

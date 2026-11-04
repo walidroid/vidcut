@@ -180,7 +180,11 @@ function Export(props: IProps) {
   };
 
   useEffect(() => {
+    const unsub = pubsub.subscribe('keyboardExport', () => {
+      setVisible(true);
+    });
     return () => {
+      pubsub.unsubscribe('keyboardExport');
       clearProgress();
     };
   }, []);

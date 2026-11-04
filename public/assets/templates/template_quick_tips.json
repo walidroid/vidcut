@@ -1,0 +1,164 @@
+{
+  "title": "Quick Tips & Lifehacks Reel",
+  "width": 1080,
+  "height": 1920,
+  "background": {
+    "color": "#451a03"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_tips_1",
+      "text": "3 PRO TIPS YOU DIDN'T KNOW!",
+      "startTime": 0.5,
+      "endTime": 3,
+      "duration": 2.5,
+      "style": {
+        "x": 540,
+        "y": 1600,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 56,
+        "fill": "#facc15",
+        "stroke": "#000000",
+        "strokeThickness": 6,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.55
+    },
+    {
+      "id": "cap_tips_2",
+      "text": "SAVE THIS REEL FOR LATER",
+      "startTime": 3.2,
+      "endTime": 6,
+      "duration": 2.8,
+      "style": {
+        "x": 540,
+        "y": 1600,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 52,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.55
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_tips_bell",
+      "name": "Alert Bell",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 6,
+      "duration": 5.8,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/bell.svg",
+        "thumb": "/assets/stickers/bell.svg"
+      },
+      "style": {
+        "x": 440,
+        "y": 700,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 440,
+        "y": 700,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_tips_bell",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_tips_sparkles",
+      "name": "Magic Sparkles",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1,
+      "endTime": 6,
+      "duration": 5,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/sparkles.svg",
+        "thumb": "/assets/stickers/sparkles.svg"
+      },
+      "style": {
+        "x": 600,
+        "y": 620,
+        "width": 160,
+        "height": 160,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 600,
+        "y": 620,
+        "width": 160,
+        "height": 160,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_tips_sparkles",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_tips_bell",
+      "originId": "sticker_bell",
+      "url": "/assets/stickers/bell.svg",
+      "name": "Alert Bell",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/bell.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_tips_sparkles",
+      "originId": "sticker_sparkles",
+      "url": "/assets/stickers/sparkles.svg",
+      "name": "Magic Sparkles",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/sparkles.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 160,
+        "height": 160
+      }
+    }
+  ]
+}

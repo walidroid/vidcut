@@ -1,7 +1,6 @@
 {
   "4": "Ffmpeg Core Module",
   "5": "Core Utilities & Helpers",
-  "7": "Core Utilities & Helpers #2",
   "8": "Gif Worker Module",
   "9": "Editor Effects & Options #3",
   "11": "Build & Configuration #2",
@@ -16,7 +15,6 @@
   "27": "GitHub Actions CI/CD",
   "30": "Editor State Store",
   "31": "Sdk Module",
-  "32": "Lame Min Module",
   "38": "Webgl2D Module",
   "40": "Electron Desktop Integration",
   "47": "Core Utilities & Helpers #5",
@@ -68,7 +66,6 @@
   "121": "Index Module #5",
   "122": "Index Module #6",
   "123": "Lame Min Module #7",
-  "126": "Custom Module",
   "128": "Index Module #7",
   "129": "Index Module #8",
   "130": "Index Module #9",

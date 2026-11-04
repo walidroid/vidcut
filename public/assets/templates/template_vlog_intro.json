@@ -1,0 +1,164 @@
+{
+  "title": "Vlog Channel Intro",
+  "width": 1920,
+  "height": 1080,
+  "background": {
+    "color": "#1e1b4b"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_vlog_1",
+      "text": "WELCOME TO MY VLOG",
+      "startTime": 0.5,
+      "endTime": 3,
+      "duration": 2.5,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 48,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    },
+    {
+      "id": "cap_vlog_2",
+      "text": "DON'T FORGET TO SUBSCRIBE",
+      "startTime": 3.2,
+      "endTime": 6,
+      "duration": 2.8,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 48,
+        "fill": "#facc15",
+        "stroke": "#000000",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_vlog_star",
+      "name": "Golden Star",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 6,
+      "duration": 5.8,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/star.svg",
+        "thumb": "/assets/stickers/star.svg"
+      },
+      "style": {
+        "x": 860,
+        "y": 340,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 860,
+        "y": 340,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_vlog_star",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_vlog_like",
+      "name": "Thumbs Up",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 2.5,
+      "endTime": 6,
+      "duration": 3.5,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/like.svg",
+        "thumb": "/assets/stickers/like.svg"
+      },
+      "style": {
+        "x": 1100,
+        "y": 340,
+        "width": 180,
+        "height": 180,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 1100,
+        "y": 340,
+        "width": 180,
+        "height": 180,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_vlog_like",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_vlog_star",
+      "originId": "sticker_star",
+      "url": "/assets/stickers/star.svg",
+      "name": "Golden Star",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/star.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_vlog_like",
+      "originId": "sticker_like",
+      "url": "/assets/stickers/like.svg",
+      "name": "Thumbs Up",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/like.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 180,
+        "height": 180
+      }
+    }
+  ]
+}

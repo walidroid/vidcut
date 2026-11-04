@@ -1,0 +1,1047 @@
+import {
+  $mobx,
+  Reaction,
+  allowStateChanges,
+  allowStateReadsEnd,
+  allowStateReadsStart,
+  configure,
+  createAtom,
+  getDependencyTree,
+  isObservableArray,
+  isObservableMap,
+  isObservableObject,
+  observable,
+  runInAction,
+  spy,
+  transaction,
+  untracked
+} from "/node_modules/.vite/deps/chunk-CMYTTOCZ.js?v=fb12273d";
+import {
+  require_react_dom
+} from "/node_modules/.vite/deps/chunk-6WSBVGM5.js?v=fb12273d";
+import {
+  require_react
+} from "/node_modules/.vite/deps/chunk-Y6HYPMTH.js?v=fb12273d";
+import {
+  __toESM
+} from "/node_modules/.vite/deps/chunk-MCCDO5NH.js?v=fb12273d";
+
+// node_modules/mobx-react/dist/mobxreact.esm.js
+var import_react8 = __toESM(require_react());
+
+// node_modules/mobx-react-lite/es/assertEnvironment.js
+var import_react = __toESM(require_react());
+if (!import_react.useState) {
+  throw new Error("mobx-react-lite requires React with Hooks support");
+}
+if (!spy) {
+  throw new Error("mobx-react-lite requires mobx at least version 4 to be available");
+}
+
+// node_modules/mobx-react-lite/es/utils/reactBatchedUpdates.js
+var import_react_dom = __toESM(require_react_dom());
+
+// node_modules/mobx-react-lite/es/utils.js
+var import_react2 = __toESM(require_react());
+var __read = function(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m)
+    return o;
+  var i = m.call(o), r, ar = [], e;
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+      ar.push(r.value);
+  } catch (error) {
+    e = { error };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"]))
+        m.call(i);
+    } finally {
+      if (e)
+        throw e.error;
+    }
+  }
+  return ar;
+};
+function useForceUpdate() {
+  var _a = __read((0, import_react2.useState)(0), 2), setTick = _a[1];
+  var update = (0, import_react2.useCallback)(function() {
+    setTick(function(tick) {
+      return tick + 1;
+    });
+  }, []);
+  return update;
+}
+function isPlainObject(value) {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  var proto = Object.getPrototypeOf(value);
+  return !proto || proto === Object.prototype;
+}
+function getSymbol(name) {
+  if (typeof Symbol === "function") {
+    return Symbol.for(name);
+  }
+  return "__$mobx-react " + name + "__";
+}
+var mockGlobal = {};
+function getGlobal() {
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  return mockGlobal;
+}
+
+// node_modules/mobx-react-lite/es/observerBatching.js
+var observerBatchingConfiguredSymbol = getSymbol("observerBatching");
+function defaultNoopBatch(callback) {
+  callback();
+}
+function observerBatching(reactionScheduler) {
+  if (!reactionScheduler) {
+    reactionScheduler = defaultNoopBatch;
+    if (true) {
+      console.warn("[MobX] Failed to get unstable_batched updates from react-dom / react-native");
+    }
+  }
+  configure({ reactionScheduler });
+  getGlobal()[observerBatchingConfiguredSymbol] = true;
+}
+
+// node_modules/mobx-react-lite/es/staticRendering.js
+var globalIsUsingStaticRendering = false;
+function useStaticRendering(enable) {
+  globalIsUsingStaticRendering = enable;
+}
+function isUsingStaticRendering() {
+  return globalIsUsingStaticRendering;
+}
+
+// node_modules/mobx-react-lite/es/observer.js
+var import_react5 = __toESM(require_react());
+
+// node_modules/mobx-react-lite/es/useObserver.js
+var import_react4 = __toESM(require_react());
+
+// node_modules/mobx-react-lite/es/printDebugValue.js
+function printDebugValue(v) {
+  return getDependencyTree(v);
+}
+
+// node_modules/mobx-react-lite/es/reactionCleanupTracking.js
+function createTrackingData(reaction) {
+  var trackingData = {
+    cleanAt: Date.now() + CLEANUP_LEAKED_REACTIONS_AFTER_MILLIS,
+    reaction
+  };
+  return trackingData;
+}
+var CLEANUP_LEAKED_REACTIONS_AFTER_MILLIS = 1e4;
+var CLEANUP_TIMER_LOOP_MILLIS = 1e4;
+var uncommittedReactionRefs = /* @__PURE__ */ new Set();
+var reactionCleanupHandle;
+function ensureCleanupTimerRunning() {
+  if (reactionCleanupHandle === void 0) {
+    reactionCleanupHandle = setTimeout(cleanUncommittedReactions, CLEANUP_TIMER_LOOP_MILLIS);
+  }
+}
+function scheduleCleanupOfReactionIfLeaked(ref) {
+  uncommittedReactionRefs.add(ref);
+  ensureCleanupTimerRunning();
+}
+function recordReactionAsCommitted(reactionRef) {
+  uncommittedReactionRefs.delete(reactionRef);
+}
+function cleanUncommittedReactions() {
+  reactionCleanupHandle = void 0;
+  var now = Date.now();
+  uncommittedReactionRefs.forEach(function(ref) {
+    var tracking = ref.current;
+    if (tracking) {
+      if (now >= tracking.cleanAt) {
+        tracking.reaction.dispose();
+        ref.current = null;
+        uncommittedReactionRefs.delete(ref);
+      }
+    }
+  });
+  if (uncommittedReactionRefs.size > 0) {
+    ensureCleanupTimerRunning();
+  }
+}
+
+// node_modules/mobx-react-lite/es/useQueuedForceUpdate.js
+var import_react3 = __toESM(require_react());
+var insideRender = false;
+var forceUpdateQueue = [];
+function useQueuedForceUpdate(forceUpdate) {
+  return function() {
+    if (insideRender) {
+      forceUpdateQueue.push(forceUpdate);
+    } else {
+      forceUpdate();
+    }
+  };
+}
+function useQueuedForceUpdateBlock(callback) {
+  insideRender = true;
+  forceUpdateQueue = [];
+  try {
+    var result = callback();
+    insideRender = false;
+    var queue_1 = forceUpdateQueue.length > 0 ? forceUpdateQueue : void 0;
+    import_react3.default.useLayoutEffect(function() {
+      if (queue_1) {
+        queue_1.forEach(function(x) {
+          return x();
+        });
+      }
+    }, [queue_1]);
+    return result;
+  } finally {
+    insideRender = false;
+  }
+}
+
+// node_modules/mobx-react-lite/es/useObserver.js
+var EMPTY_OBJECT = {};
+function observerComponentNameFor(baseComponentName) {
+  return "observer" + baseComponentName;
+}
+function useObserver(fn, baseComponentName, options) {
+  if (baseComponentName === void 0) {
+    baseComponentName = "observed";
+  }
+  if (options === void 0) {
+    options = EMPTY_OBJECT;
+  }
+  if (isUsingStaticRendering()) {
+    return fn();
+  }
+  var wantedForceUpdateHook = options.useForceUpdate || useForceUpdate;
+  var forceUpdate = wantedForceUpdateHook();
+  var queuedForceUpdate = useQueuedForceUpdate(forceUpdate);
+  var reactionTrackingRef = import_react4.default.useRef(null);
+  if (!reactionTrackingRef.current) {
+    var newReaction_1 = new Reaction(observerComponentNameFor(baseComponentName), function() {
+      if (trackingData_1.mounted) {
+        queuedForceUpdate();
+      } else {
+        newReaction_1.dispose();
+        reactionTrackingRef.current = null;
+      }
+    });
+    var trackingData_1 = createTrackingData(newReaction_1);
+    reactionTrackingRef.current = trackingData_1;
+    scheduleCleanupOfReactionIfLeaked(reactionTrackingRef);
+  }
+  var reaction = reactionTrackingRef.current.reaction;
+  import_react4.default.useDebugValue(reaction, printDebugValue);
+  import_react4.default.useEffect(function() {
+    recordReactionAsCommitted(reactionTrackingRef);
+    if (reactionTrackingRef.current) {
+      reactionTrackingRef.current.mounted = true;
+    } else {
+      reactionTrackingRef.current = {
+        reaction: new Reaction(observerComponentNameFor(baseComponentName), function() {
+          queuedForceUpdate();
+        }),
+        cleanAt: Infinity
+      };
+      queuedForceUpdate();
+    }
+    return function() {
+      reactionTrackingRef.current.reaction.dispose();
+      reactionTrackingRef.current = null;
+    };
+  }, []);
+  return useQueuedForceUpdateBlock(function() {
+    var rendering;
+    var exception;
+    reaction.track(function() {
+      try {
+        rendering = fn();
+      } catch (e) {
+        exception = e;
+      }
+    });
+    if (exception) {
+      throw exception;
+    }
+    return rendering;
+  });
+}
+
+// node_modules/mobx-react-lite/es/observer.js
+var __assign = function() {
+  __assign = Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p))
+          t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+function observer(baseComponent, options) {
+  if (isUsingStaticRendering()) {
+    return baseComponent;
+  }
+  var realOptions = __assign({ forwardRef: false }, options);
+  var baseComponentName = baseComponent.displayName || baseComponent.name;
+  var wrappedComponent = function(props, ref) {
+    return useObserver(function() {
+      return baseComponent(props, ref);
+    }, baseComponentName);
+  };
+  wrappedComponent.displayName = baseComponentName;
+  var memoComponent;
+  if (realOptions.forwardRef) {
+    memoComponent = (0, import_react5.memo)((0, import_react5.forwardRef)(wrappedComponent));
+  } else {
+    memoComponent = (0, import_react5.memo)(wrappedComponent);
+  }
+  copyStaticProperties(baseComponent, memoComponent);
+  memoComponent.displayName = baseComponentName;
+  return memoComponent;
+}
+var hoistBlackList = {
+  $$typeof: true,
+  render: true,
+  compare: true,
+  type: true
+};
+function copyStaticProperties(base, target) {
+  Object.keys(base).forEach(function(key) {
+    if (!hoistBlackList[key]) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(base, key));
+    }
+  });
+}
+
+// node_modules/mobx-react-lite/es/ObserverComponent.js
+function ObserverComponent(_a) {
+  var children = _a.children, render = _a.render;
+  var component = children || render;
+  if (typeof component !== "function") {
+    return null;
+  }
+  return useObserver(component);
+}
+ObserverComponent.propTypes = {
+  children: ObserverPropsCheck,
+  render: ObserverPropsCheck
+};
+ObserverComponent.displayName = "Observer";
+function ObserverPropsCheck(props, key, componentName, location, propFullName) {
+  var extraKey = key === "children" ? "render" : "children";
+  var hasProp = typeof props[key] === "function";
+  var hasExtraProp = typeof props[extraKey] === "function";
+  if (hasProp && hasExtraProp) {
+    return new Error("MobX Observer: Do not use children and render in the same time in`" + componentName);
+  }
+  if (hasProp || hasExtraProp) {
+    return null;
+  }
+  return new Error("Invalid prop `" + propFullName + "` of type `" + typeof props[key] + "` supplied to `" + componentName + "`, expected `function`.");
+}
+
+// node_modules/mobx-react-lite/es/useAsObservableSource.js
+var import_react6 = __toESM(require_react());
+var __read2 = function(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m)
+    return o;
+  var i = m.call(o), r, ar = [], e;
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+      ar.push(r.value);
+  } catch (error) {
+    e = { error };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"]))
+        m.call(i);
+    } finally {
+      if (e)
+        throw e.error;
+    }
+  }
+  return ar;
+};
+function useAsObservableSourceInternal(current, usedByLocalStore) {
+  var culprit = usedByLocalStore ? "useLocalStore" : "useAsObservableSource";
+  if (usedByLocalStore) {
+    var _a = __read2(import_react6.default.useState(current), 1), initialSource = _a[0];
+    if (initialSource !== void 0 && current === void 0 || initialSource === void 0 && current !== void 0) {
+      throw new Error("make sure you never pass `undefined` to " + culprit);
+    }
+  }
+  if (usedByLocalStore && current === void 0) {
+    return void 0;
+  }
+  if (!isPlainObject(current)) {
+    throw new Error(culprit + " expects a plain object as " + (usedByLocalStore ? "second" : "first") + " argument");
+  }
+  var _b = __read2(import_react6.default.useState(function() {
+    return observable(current, {}, { deep: false });
+  }), 1), res = _b[0];
+  if (Object.keys(res).length !== Object.keys(current).length) {
+    throw new Error("the shape of objects passed to " + culprit + " should be stable");
+  }
+  runInAction(function() {
+    Object.assign(res, current);
+  });
+  return res;
+}
+function useAsObservableSource(current) {
+  return useAsObservableSourceInternal(current, false);
+}
+
+// node_modules/mobx-react-lite/es/useLocalStore.js
+var import_react7 = __toESM(require_react());
+function useLocalStore(initializer, current) {
+  var source = useAsObservableSourceInternal(current, true);
+  return import_react7.default.useState(function() {
+    var local = observable(initializer(source));
+    if (isPlainObject(local)) {
+      runInAction(function() {
+        Object.keys(local).forEach(function(key) {
+          var value = local[key];
+          if (typeof value === "function") {
+            local[key] = wrapInTransaction(value, local);
+          }
+        });
+      });
+    }
+    return local;
+  })[0];
+}
+function wrapInTransaction(fn, context) {
+  return function() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+    return transaction(function() {
+      return fn.apply(context, args);
+    });
+  };
+}
+
+// node_modules/mobx-react-lite/es/index.js
+observerBatching(import_react_dom.unstable_batchedUpdates);
+
+// node_modules/mobx-react/dist/mobxreact.esm.js
+var symbolId = 0;
+function createSymbol(name) {
+  if (typeof Symbol === "function") {
+    return Symbol(name);
+  }
+  var symbol = "__$mobx-react " + name + " (" + symbolId + ")";
+  symbolId++;
+  return symbol;
+}
+var createdSymbols = {};
+function newSymbol(name) {
+  if (!createdSymbols[name]) {
+    createdSymbols[name] = createSymbol(name);
+  }
+  return createdSymbols[name];
+}
+function shallowEqual(objA, objB) {
+  if (is(objA, objB))
+    return true;
+  if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) {
+    return false;
+  }
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+  if (keysA.length !== keysB.length)
+    return false;
+  for (var i = 0; i < keysA.length; i++) {
+    if (!Object.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+  return true;
+}
+function is(x, y) {
+  if (x === y) {
+    return x !== 0 || 1 / x === 1 / y;
+  } else {
+    return x !== x && y !== y;
+  }
+}
+var hoistBlackList2 = {
+  $$typeof: 1,
+  render: 1,
+  compare: 1,
+  type: 1,
+  childContextTypes: 1,
+  contextType: 1,
+  contextTypes: 1,
+  defaultProps: 1,
+  getDefaultProps: 1,
+  getDerivedStateFromError: 1,
+  getDerivedStateFromProps: 1,
+  mixins: 1,
+  propTypes: 1
+};
+function copyStaticProperties2(base, target) {
+  var protoProps = Object.getOwnPropertyNames(Object.getPrototypeOf(base));
+  Object.getOwnPropertyNames(base).forEach(function(key) {
+    if (!hoistBlackList2[key] && protoProps.indexOf(key) === -1) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(base, key));
+    }
+  });
+}
+function setHiddenProp(target, prop, value) {
+  if (!Object.hasOwnProperty.call(target, prop)) {
+    Object.defineProperty(target, prop, {
+      enumerable: false,
+      configurable: true,
+      writable: true,
+      value
+    });
+  } else {
+    target[prop] = value;
+  }
+}
+var mobxMixins = newSymbol("patchMixins");
+var mobxPatchedDefinition = newSymbol("patchedDefinition");
+function getMixins(target, methodName) {
+  var mixins = target[mobxMixins] = target[mobxMixins] || {};
+  var methodMixins = mixins[methodName] = mixins[methodName] || {};
+  methodMixins.locks = methodMixins.locks || 0;
+  methodMixins.methods = methodMixins.methods || [];
+  return methodMixins;
+}
+function wrapper(realMethod, mixins) {
+  var _this = this;
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+  mixins.locks++;
+  try {
+    var retVal;
+    if (realMethod !== void 0 && realMethod !== null) {
+      retVal = realMethod.apply(this, args);
+    }
+    return retVal;
+  } finally {
+    mixins.locks--;
+    if (mixins.locks === 0) {
+      mixins.methods.forEach(function(mx) {
+        mx.apply(_this, args);
+      });
+    }
+  }
+}
+function wrapFunction(realMethod, mixins) {
+  var fn = function fn2() {
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+    wrapper.call.apply(wrapper, [this, realMethod, mixins].concat(args));
+  };
+  return fn;
+}
+function patch(target, methodName, mixinMethod) {
+  var mixins = getMixins(target, methodName);
+  if (mixins.methods.indexOf(mixinMethod) < 0) {
+    mixins.methods.push(mixinMethod);
+  }
+  var oldDefinition = Object.getOwnPropertyDescriptor(target, methodName);
+  if (oldDefinition && oldDefinition[mobxPatchedDefinition]) {
+    return;
+  }
+  var originalMethod = target[methodName];
+  var newDefinition = createDefinition(target, methodName, oldDefinition ? oldDefinition.enumerable : void 0, mixins, originalMethod);
+  Object.defineProperty(target, methodName, newDefinition);
+}
+function createDefinition(target, methodName, enumerable, mixins, originalMethod) {
+  var _ref;
+  var wrappedFunc = wrapFunction(originalMethod, mixins);
+  return _ref = {}, _ref[mobxPatchedDefinition] = true, _ref.get = function get() {
+    return wrappedFunc;
+  }, _ref.set = function set(value) {
+    if (this === target) {
+      wrappedFunc = wrapFunction(value, mixins);
+    } else {
+      var newDefinition = createDefinition(this, methodName, enumerable, mixins, value);
+      Object.defineProperty(this, methodName, newDefinition);
+    }
+  }, _ref.configurable = true, _ref.enumerable = enumerable, _ref;
+}
+var mobxAdminProperty = $mobx || "$mobx";
+var mobxObserverProperty = newSymbol("isMobXReactObserver");
+var mobxIsUnmounted = newSymbol("isUnmounted");
+var skipRenderKey = newSymbol("skipRender");
+var isForcingUpdateKey = newSymbol("isForcingUpdate");
+function makeClassComponentObserver(componentClass) {
+  var target = componentClass.prototype;
+  if (componentClass[mobxObserverProperty]) {
+    var displayName = getDisplayName(target);
+    console.warn("The provided component class (" + displayName + ") \n                has already been declared as an observer component.");
+  } else {
+    componentClass[mobxObserverProperty] = true;
+  }
+  if (target.componentWillReact)
+    throw new Error("The componentWillReact life-cycle event is no longer supported");
+  if (componentClass["__proto__"] !== import_react8.PureComponent) {
+    if (!target.shouldComponentUpdate)
+      target.shouldComponentUpdate = observerSCU;
+    else if (target.shouldComponentUpdate !== observerSCU)
+      throw new Error("It is not allowed to use shouldComponentUpdate in observer based components.");
+  }
+  makeObservableProp(target, "props");
+  makeObservableProp(target, "state");
+  var baseRender = target.render;
+  target.render = function() {
+    return makeComponentReactive.call(this, baseRender);
+  };
+  patch(target, "componentWillUnmount", function() {
+    var _this$render$mobxAdmi;
+    if (isUsingStaticRendering() === true)
+      return;
+    (_this$render$mobxAdmi = this.render[mobxAdminProperty]) === null || _this$render$mobxAdmi === void 0 ? void 0 : _this$render$mobxAdmi.dispose();
+    this[mobxIsUnmounted] = true;
+    if (!this.render[mobxAdminProperty]) {
+      var _displayName = getDisplayName(this);
+      console.warn("The reactive render of an observer class component (" + _displayName + ") \n                was overriden after MobX attached. This may result in a memory leak if the \n                overriden reactive render was not properly disposed.");
+    }
+  });
+  return componentClass;
+}
+function getDisplayName(comp) {
+  return comp.displayName || comp.name || comp.constructor && (comp.constructor.displayName || comp.constructor.name) || "<component>";
+}
+function makeComponentReactive(render) {
+  var _this = this;
+  if (isUsingStaticRendering() === true)
+    return render.call(this);
+  setHiddenProp(this, skipRenderKey, false);
+  setHiddenProp(this, isForcingUpdateKey, false);
+  var initialName = getDisplayName(this);
+  var baseRender = render.bind(this);
+  var isRenderingPending = false;
+  var reaction = new Reaction(initialName + ".render()", function() {
+    if (!isRenderingPending) {
+      isRenderingPending = true;
+      if (_this[mobxIsUnmounted] !== true) {
+        var hasError = true;
+        try {
+          setHiddenProp(_this, isForcingUpdateKey, true);
+          if (!_this[skipRenderKey])
+            import_react8.Component.prototype.forceUpdate.call(_this);
+          hasError = false;
+        } finally {
+          setHiddenProp(_this, isForcingUpdateKey, false);
+          if (hasError)
+            reaction.dispose();
+        }
+      }
+    }
+  });
+  reaction["reactComponent"] = this;
+  reactiveRender[mobxAdminProperty] = reaction;
+  this.render = reactiveRender;
+  function reactiveRender() {
+    isRenderingPending = false;
+    var exception = void 0;
+    var rendering = void 0;
+    reaction.track(function() {
+      try {
+        rendering = allowStateChanges(false, baseRender);
+      } catch (e) {
+        exception = e;
+      }
+    });
+    if (exception) {
+      throw exception;
+    }
+    return rendering;
+  }
+  return reactiveRender.call(this);
+}
+function observerSCU(nextProps, nextState) {
+  if (isUsingStaticRendering()) {
+    console.warn("[mobx-react] It seems that a re-rendering of a React component is triggered while in static (server-side) mode. Please make sure components are rendered only once server-side.");
+  }
+  if (this.state !== nextState) {
+    return true;
+  }
+  return !shallowEqual(this.props, nextProps);
+}
+function makeObservableProp(target, propName) {
+  var valueHolderKey = newSymbol("reactProp_" + propName + "_valueHolder");
+  var atomHolderKey = newSymbol("reactProp_" + propName + "_atomHolder");
+  function getAtom() {
+    if (!this[atomHolderKey]) {
+      setHiddenProp(this, atomHolderKey, createAtom("reactive " + propName));
+    }
+    return this[atomHolderKey];
+  }
+  Object.defineProperty(target, propName, {
+    configurable: true,
+    enumerable: true,
+    get: function get() {
+      var prevReadState = false;
+      if (allowStateReadsStart && allowStateReadsEnd) {
+        prevReadState = allowStateReadsStart(true);
+      }
+      getAtom.call(this).reportObserved();
+      if (allowStateReadsStart && allowStateReadsEnd) {
+        allowStateReadsEnd(prevReadState);
+      }
+      return this[valueHolderKey];
+    },
+    set: function set(v) {
+      if (!this[isForcingUpdateKey] && !shallowEqual(this[valueHolderKey], v)) {
+        setHiddenProp(this, valueHolderKey, v);
+        setHiddenProp(this, skipRenderKey, true);
+        getAtom.call(this).reportChanged();
+        setHiddenProp(this, skipRenderKey, false);
+      } else {
+        setHiddenProp(this, valueHolderKey, v);
+      }
+    }
+  });
+}
+var hasSymbol = typeof Symbol === "function" && Symbol.for;
+var ReactForwardRefSymbol = hasSymbol ? Symbol.for("react.forward_ref") : typeof import_react8.forwardRef === "function" && (0, import_react8.forwardRef)(function(props) {
+  return null;
+})["$$typeof"];
+var ReactMemoSymbol = hasSymbol ? Symbol.for("react.memo") : typeof import_react8.memo === "function" && (0, import_react8.memo)(function(props) {
+  return null;
+})["$$typeof"];
+function observer2(component) {
+  if (component["isMobxInjector"] === true) {
+    console.warn("Mobx observer: You are trying to use 'observer' on a component that already has 'inject'. Please apply 'observer' before applying 'inject'");
+  }
+  if (ReactMemoSymbol && component["$$typeof"] === ReactMemoSymbol) {
+    throw new Error("Mobx observer: You are trying to use 'observer' on a function component wrapped in either another observer or 'React.memo'. The observer already applies 'React.memo' for you.");
+  }
+  if (ReactForwardRefSymbol && component["$$typeof"] === ReactForwardRefSymbol) {
+    var baseRender = component["render"];
+    if (typeof baseRender !== "function")
+      throw new Error("render property of ForwardRef was not a function");
+    return (0, import_react8.forwardRef)(function ObserverForwardRef() {
+      var args = arguments;
+      return (0, import_react8.createElement)(ObserverComponent, null, function() {
+        return baseRender.apply(void 0, args);
+      });
+    });
+  }
+  if (typeof component === "function" && (!component.prototype || !component.prototype.render) && !component["isReactClass"] && !Object.prototype.isPrototypeOf.call(import_react8.Component, component)) {
+    return observer(component);
+  }
+  return makeClassComponentObserver(component);
+}
+function _extends() {
+  _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0)
+      continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+var MobXProviderContext = import_react8.default.createContext({});
+function Provider(props) {
+  var children = props.children, stores = _objectWithoutPropertiesLoose(props, ["children"]);
+  var parentValue = import_react8.default.useContext(MobXProviderContext);
+  var mutableProviderRef = import_react8.default.useRef(_extends({}, parentValue, stores));
+  var value = mutableProviderRef.current;
+  if (true) {
+    var newValue = _extends({}, value, stores);
+    if (!shallowEqual(value, newValue)) {
+      throw new Error("MobX Provider: The set of provided stores has changed. See: https://github.com/mobxjs/mobx-react#the-set-of-provided-stores-has-changed-error.");
+    }
+  }
+  return import_react8.default.createElement(MobXProviderContext.Provider, {
+    value
+  }, children);
+}
+Provider.displayName = "MobXProvider";
+function createStoreInjector(grabStoresFn, component, injectNames, makeReactive) {
+  var Injector = import_react8.default.forwardRef(function(props, ref) {
+    var newProps = _extends({}, props);
+    var context = import_react8.default.useContext(MobXProviderContext);
+    Object.assign(newProps, grabStoresFn(context || {}, newProps) || {});
+    if (ref) {
+      newProps.ref = ref;
+    }
+    return import_react8.default.createElement(component, newProps);
+  });
+  if (makeReactive)
+    Injector = observer2(Injector);
+  Injector["isMobxInjector"] = true;
+  copyStaticProperties2(component, Injector);
+  Injector["wrappedComponent"] = component;
+  Injector.displayName = getInjectName(component, injectNames);
+  return Injector;
+}
+function getInjectName(component, injectNames) {
+  var displayName;
+  var componentName = component.displayName || component.name || component.constructor && component.constructor.name || "Component";
+  if (injectNames)
+    displayName = "inject-with-" + injectNames + "(" + componentName + ")";
+  else
+    displayName = "inject(" + componentName + ")";
+  return displayName;
+}
+function grabStoresByName(storeNames) {
+  return function(baseStores, nextProps) {
+    storeNames.forEach(function(storeName) {
+      if (storeName in nextProps)
+        return;
+      if (!(storeName in baseStores))
+        throw new Error("MobX injector: Store '" + storeName + "' is not available! Make sure it is provided by some Provider");
+      nextProps[storeName] = baseStores[storeName];
+    });
+    return nextProps;
+  };
+}
+function inject() {
+  for (var _len = arguments.length, storeNames = new Array(_len), _key = 0; _key < _len; _key++) {
+    storeNames[_key] = arguments[_key];
+  }
+  if (typeof arguments[0] === "function") {
+    var grabStoresFn = arguments[0];
+    return function(componentClass) {
+      return createStoreInjector(grabStoresFn, componentClass, grabStoresFn.name, true);
+    };
+  } else {
+    return function(componentClass) {
+      return createStoreInjector(grabStoresByName(storeNames), componentClass, storeNames.join("-"), false);
+    };
+  }
+}
+var protoStoreKey = newSymbol("disposeOnUnmountProto");
+var instStoreKey = newSymbol("disposeOnUnmountInst");
+function runDisposersOnWillUnmount() {
+  var _this = this;
+  [].concat(this[protoStoreKey] || [], this[instStoreKey] || []).forEach(function(propKeyOrFunction) {
+    var prop = typeof propKeyOrFunction === "string" ? _this[propKeyOrFunction] : propKeyOrFunction;
+    if (prop !== void 0 && prop !== null) {
+      if (Array.isArray(prop))
+        prop.map(function(f) {
+          return f();
+        });
+      else
+        prop();
+    }
+  });
+}
+function disposeOnUnmount(target, propertyKeyOrFunction) {
+  if (Array.isArray(propertyKeyOrFunction)) {
+    return propertyKeyOrFunction.map(function(fn) {
+      return disposeOnUnmount(target, fn);
+    });
+  }
+  var c = Object.getPrototypeOf(target).constructor;
+  var c2 = Object.getPrototypeOf(target.constructor);
+  var c3 = Object.getPrototypeOf(Object.getPrototypeOf(target));
+  if (!(c === import_react8.default.Component || c === import_react8.default.PureComponent || c2 === import_react8.default.Component || c2 === import_react8.default.PureComponent || c3 === import_react8.default.Component || c3 === import_react8.default.PureComponent)) {
+    throw new Error("[mobx-react] disposeOnUnmount only supports direct subclasses of React.Component or React.PureComponent.");
+  }
+  if (typeof propertyKeyOrFunction !== "string" && typeof propertyKeyOrFunction !== "function" && !Array.isArray(propertyKeyOrFunction)) {
+    throw new Error("[mobx-react] disposeOnUnmount only works if the parameter is either a property key or a function.");
+  }
+  var isDecorator = typeof propertyKeyOrFunction === "string";
+  var componentWasAlreadyModified = !!target[protoStoreKey] || !!target[instStoreKey];
+  var store = isDecorator ? (
+    // decorators are added to the prototype store
+    target[protoStoreKey] || (target[protoStoreKey] = [])
+  ) : (
+    // functions are added to the instance store
+    target[instStoreKey] || (target[instStoreKey] = [])
+  );
+  store.push(propertyKeyOrFunction);
+  if (!componentWasAlreadyModified) {
+    patch(target, "componentWillUnmount", runDisposersOnWillUnmount);
+  }
+  if (typeof propertyKeyOrFunction !== "string") {
+    return propertyKeyOrFunction;
+  }
+}
+function createChainableTypeChecker(validator) {
+  function checkType(isRequired, props, propName, componentName, location, propFullName) {
+    for (var _len = arguments.length, rest = new Array(_len > 6 ? _len - 6 : 0), _key = 6; _key < _len; _key++) {
+      rest[_key - 6] = arguments[_key];
+    }
+    return untracked(function() {
+      componentName = componentName || "<<anonymous>>";
+      propFullName = propFullName || propName;
+      if (props[propName] == null) {
+        if (isRequired) {
+          var actual = props[propName] === null ? "null" : "undefined";
+          return new Error("The " + location + " `" + propFullName + "` is marked as required in `" + componentName + "`, but its value is `" + actual + "`.");
+        }
+        return null;
+      } else {
+        return validator.apply(void 0, [props, propName, componentName, location, propFullName].concat(rest));
+      }
+    });
+  }
+  var chainedCheckType = checkType.bind(null, false);
+  chainedCheckType.isRequired = checkType.bind(null, true);
+  return chainedCheckType;
+}
+function isSymbol(propType, propValue) {
+  if (propType === "symbol") {
+    return true;
+  }
+  if (propValue["@@toStringTag"] === "Symbol") {
+    return true;
+  }
+  if (typeof Symbol === "function" && propValue instanceof Symbol) {
+    return true;
+  }
+  return false;
+}
+function getPropType(propValue) {
+  var propType = typeof propValue;
+  if (Array.isArray(propValue)) {
+    return "array";
+  }
+  if (propValue instanceof RegExp) {
+    return "object";
+  }
+  if (isSymbol(propType, propValue)) {
+    return "symbol";
+  }
+  return propType;
+}
+function getPreciseType(propValue) {
+  var propType = getPropType(propValue);
+  if (propType === "object") {
+    if (propValue instanceof Date) {
+      return "date";
+    } else if (propValue instanceof RegExp) {
+      return "regexp";
+    }
+  }
+  return propType;
+}
+function createObservableTypeCheckerCreator(allowNativeType, mobxType) {
+  return createChainableTypeChecker(function(props, propName, componentName, location, propFullName) {
+    return untracked(function() {
+      if (allowNativeType) {
+        if (getPropType(props[propName]) === mobxType.toLowerCase())
+          return null;
+      }
+      var mobxChecker;
+      switch (mobxType) {
+        case "Array":
+          mobxChecker = isObservableArray;
+          break;
+        case "Object":
+          mobxChecker = isObservableObject;
+          break;
+        case "Map":
+          mobxChecker = isObservableMap;
+          break;
+        default:
+          throw new Error("Unexpected mobxType: " + mobxType);
+      }
+      var propValue = props[propName];
+      if (!mobxChecker(propValue)) {
+        var preciseType = getPreciseType(propValue);
+        var nativeTypeExpectationMessage = allowNativeType ? " or javascript `" + mobxType.toLowerCase() + "`" : "";
+        return new Error("Invalid prop `" + propFullName + "` of type `" + preciseType + "` supplied to `" + componentName + "`, expected `mobx.Observable" + mobxType + "`" + nativeTypeExpectationMessage + ".");
+      }
+      return null;
+    });
+  });
+}
+function createObservableArrayOfTypeChecker(allowNativeType, typeChecker) {
+  return createChainableTypeChecker(function(props, propName, componentName, location, propFullName) {
+    for (var _len2 = arguments.length, rest = new Array(_len2 > 5 ? _len2 - 5 : 0), _key2 = 5; _key2 < _len2; _key2++) {
+      rest[_key2 - 5] = arguments[_key2];
+    }
+    return untracked(function() {
+      if (typeof typeChecker !== "function") {
+        return new Error("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation.");
+      } else {
+        var error = createObservableTypeCheckerCreator(allowNativeType, "Array")(props, propName, componentName, location, propFullName);
+        if (error instanceof Error)
+          return error;
+        var propValue = props[propName];
+        for (var i = 0; i < propValue.length; i++) {
+          error = typeChecker.apply(void 0, [propValue, i, componentName, location, propFullName + "[" + i + "]"].concat(rest));
+          if (error instanceof Error)
+            return error;
+        }
+        return null;
+      }
+    });
+  });
+}
+var observableArray = createObservableTypeCheckerCreator(false, "Array");
+var observableArrayOf = createObservableArrayOfTypeChecker.bind(null, false);
+var observableMap = createObservableTypeCheckerCreator(false, "Map");
+var observableObject = createObservableTypeCheckerCreator(false, "Object");
+var arrayOrObservableArray = createObservableTypeCheckerCreator(true, "Array");
+var arrayOrObservableArrayOf = createObservableArrayOfTypeChecker.bind(null, true);
+var objectOrObservableObject = createObservableTypeCheckerCreator(true, "Object");
+var PropTypes = {
+  observableArray,
+  observableArrayOf,
+  observableMap,
+  observableObject,
+  arrayOrObservableArray,
+  arrayOrObservableArrayOf,
+  objectOrObservableObject
+};
+if (!import_react8.Component)
+  throw new Error("mobx-react requires React to be available");
+if (!observable)
+  throw new Error("mobx-react requires mobx to be available");
+export {
+  MobXProviderContext,
+  ObserverComponent as Observer,
+  PropTypes,
+  Provider,
+  disposeOnUnmount,
+  inject,
+  isUsingStaticRendering,
+  observer2 as observer,
+  observerBatching,
+  useAsObservableSource,
+  useLocalStore,
+  useObserver,
+  useStaticRendering
+};
+//# sourceMappingURL=mobx-react.js.map

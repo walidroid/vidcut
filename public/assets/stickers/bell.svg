@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#F57C00" />
+    </linearGradient>
+  </defs>
+  <path d="M100 25 C95 25 90 29 90 34 C90 35 90 36 90 37 C68 43 52 63 52 87 L52 130 L40 142 C38 144 40 148 43 148 L157 148 C160 148 162 144 160 142 L148 130 L148 87 C148 63 132 43 110 37 C110 36 110 35 110 34 C110 29 105 25 100 25 Z" fill="url(#bellGrad)" filter="drop-shadow(0px 8px 16px rgba(245,124,0,0.4))" />
+  <circle cx="100" cy="165" r="14" fill="#E65100" />
+</svg>
+

@@ -117,6 +117,13 @@ export const arSA = {
   shortcut_key_timeline_zoomout: 'تصغير الخط الزمني',
   shortcut_key_save: 'حفظ',
   shortcut_key_space: 'مسافة',
+  shortcut_key_timeline_fit: 'ملاءمة الخط الزمني',
+  shortcut_key_export: 'تصدير الفيديو',
+  shortcut_key_select_all: 'تحديد الكل',
+  shortcut_key_deselect: 'إلغاء التحديد',
+  shortcut_key_fullscreen: 'ملء الشاشة',
+  desktop_drop_files_title: 'إسقاط ملفات الوسائط للاستيراد',
+  desktop_drop_files_desc: 'اسحب مقاطع الفيديو أو الصوت أو الصور من مستكشف الملفات مباشرة إلى VidCut',
 
   // 时间轴
   timeline_top_redo: 'إعادة',
@@ -445,6 +452,8 @@ export const arSA = {
   common_move: 'نقل',
   common_cancel: 'إلغاء',
   common_confirm: 'تأكيد',
+  ok: 'حسناً',
+  cancel: 'إلغاء',
   common_edit: 'تعديل',
   common_material: 'وسائطي',
   common_draft: 'مسوداتي',

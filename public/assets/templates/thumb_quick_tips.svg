@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180">
+  <defs>
+    <linearGradient id="tipsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="12" fill="url(#tipsBg)"/>
+  <!-- Phone outline 9:16 -->
+  <rect x="135" y="24" width="50" height="85" rx="8" fill="#1c1917" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Lightbulb / tip icon -->
+  <circle cx="160" cy="55" r="10" fill="#facc15"/>
+  <rect x="157" y="65" width="6" height="4" fill="#ca8a04"/>
+  <!-- Text -->
+  <text x="160" y="136" font-family="Arial Black, sans-serif" font-weight="900" font-size="18" fill="#ffffff" text-anchor="middle">QUICK TIPS</text>
+  <text x="160" y="158" font-family="Arial, sans-serif" font-size="12" fill="#fed7aa" text-anchor="middle">9:16 TikTok • Step by Step</text>
+</svg>
+

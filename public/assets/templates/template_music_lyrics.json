@@ -1,0 +1,164 @@
+{
+  "title": "Acoustic Music Lyrics Video",
+  "width": 1920,
+  "height": 1080,
+  "background": {
+    "color": "#2e1065"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_music_1",
+      "text": "♪ WHEN THE SUN GOES DOWN AND SHADOWS FADE ♪",
+      "startTime": 0.5,
+      "endTime": 3.8,
+      "duration": 3.3,
+      "style": {
+        "x": 960,
+        "y": 900,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 48,
+        "fill": "#f472b6",
+        "stroke": "#3b0764",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    },
+    {
+      "id": "cap_music_2",
+      "text": "♪ WE WILL FIND OUR WAY THROUGH THE DARKEST NIGHT ♪",
+      "startTime": 4,
+      "endTime": 7.5,
+      "duration": 3.5,
+      "style": {
+        "x": 960,
+        "y": 900,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 48,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_music_note",
+      "name": "Musical Note",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 7.5,
+      "duration": 7.3,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/music_note.svg",
+        "thumb": "/assets/stickers/music_note.svg"
+      },
+      "style": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_music_note",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_music_sparkles",
+      "name": "Magic Sparkles",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1.2,
+      "endTime": 7.5,
+      "duration": 6.3,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/sparkles.svg",
+        "thumb": "/assets/stickers/sparkles.svg"
+      },
+      "style": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_music_sparkles",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_music_note",
+      "originId": "sticker_music_note",
+      "url": "/assets/stickers/music_note.svg",
+      "name": "Musical Note",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/music_note.svg",
+      "duration": 8,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_music_sparkles",
+      "originId": "sticker_sparkles",
+      "url": "/assets/stickers/sparkles.svg",
+      "name": "Magic Sparkles",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/sparkles.svg",
+      "duration": 8,
+      "styleSize": {
+        "width": 140,
+        "height": 140
+      }
+    }
+  ]
+}

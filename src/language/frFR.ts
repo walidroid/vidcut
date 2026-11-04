@@ -117,6 +117,13 @@ export const frFR = {
   shortcut_key_timeline_zoomout: 'Zoom arrière chronologie',
   shortcut_key_save: 'Enregistrer',
   shortcut_key_space: 'Espace',
+  shortcut_key_timeline_fit: 'Ajuster la chronologie',
+  shortcut_key_export: 'Exporter la vidéo',
+  shortcut_key_select_all: 'Tout sélectionner',
+  shortcut_key_deselect: 'Désélectionner',
+  shortcut_key_fullscreen: 'Plein écran',
+  desktop_drop_files_title: 'Déposez vos fichiers média pour importer',
+  desktop_drop_files_desc: 'Glissez-déposez vidéos, audio ou images depuis l\'explorateur Windows',
 
   // 时间轴
   timeline_top_redo: 'Rétablir',
@@ -440,6 +447,8 @@ export const frFR = {
   common_move: 'Déplacer',
   common_cancel: 'Annuler',
   common_confirm: 'Confirmer',
+  ok: 'OK',
+  cancel: 'Annuler',
   common_edit: 'Modifier',
   common_material: 'Mes médias',
   common_draft: 'Mes projets',

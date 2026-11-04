@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell, session, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, shell, session, ipcMain, dialog, screen } = require('electron');
 const path = require('path');
 const http = require('http');
 const fs = require('fs');
@@ -31,6 +31,48 @@ const MIME_TYPES = {
 let server = null;
 let serverPort = 0;
 let mainWindow = null;
+
+function getWindowStatePath() {
+  return path.join(app.getPath('userData'), 'window-state.json');
+}
+
+function loadWindowState() {
+  try {
+    const file = getWindowStatePath();
+    if (fs.existsSync(file)) {
+      const data = fs.readFileSync(file, 'utf-8');
+      const state = JSON.parse(data);
+      if (state && typeof state.width === 'number' && typeof state.height === 'number') {
+        return state;
+      }
+    }
+  } catch (e) {
+    console.warn('[Main] Could not read window state:', e.message);
+  }
+  return {
+    width: 1440,
+    height: 900,
+    isMaximized: false,
+  };
+}
+
+function saveWindowState(win) {
+  if (!win || win.isDestroyed()) return;
+  try {
+    const isMaximized = win.isMaximized();
+    const bounds = win.getNormalBounds ? win.getNormalBounds() : win.getBounds();
+    const state = {
+      x: bounds.x,
+      y: bounds.y,
+      width: bounds.width,
+      height: bounds.height,
+      isMaximized,
+    };
+    fs.writeFileSync(getWindowStatePath(), JSON.stringify(state, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('[Main] Failed to save window state:', e.message);
+  }
+}
 
 function startLocalServer(distDir) {
   return new Promise((resolve, reject) => {
@@ -101,9 +143,11 @@ function startLocalServer(distDir) {
 
 function createWindow(port) {
   const iconPath = path.join(__dirname, '../build/icon.ico');
+  const savedState = loadWindowState();
+
   const windowOpts = {
-    width: 1440,
-    height: 900,
+    width: savedState.width || 1440,
+    height: savedState.height || 900,
     minWidth: 1024,
     minHeight: 680,
     backgroundColor: '#141414',
@@ -118,12 +162,50 @@ function createWindow(port) {
     },
   };
 
+  // Restore position if valid
+  if (typeof savedState.x === 'number' && typeof savedState.y === 'number') {
+    windowOpts.x = savedState.x;
+    windowOpts.y = savedState.y;
+  }
+
+  // Windows 10/11 Frameless Titlebar with Native Window Controls Overlay (Snap layouts, minimize, maximize, close)
+  if (process.platform === 'win32') {
+    windowOpts.titleBarStyle = 'hidden';
+    windowOpts.titleBarOverlay = {
+      color: '#16161a',
+      symbolColor: '#e0e0e0',
+      height: 40,
+    };
+  } else if (process.platform === 'darwin') {
+    windowOpts.titleBarStyle = 'hiddenInset';
+  }
+
   if (fs.existsSync(iconPath)) {
     windowOpts.icon = iconPath;
   }
 
   mainWindow = new BrowserWindow(windowOpts);
   mainWindow.setMenuBarVisibility(false);
+
+  // Restore maximized state if saved
+  if (savedState.isMaximized) {
+    mainWindow.maximize();
+  }
+
+  // Persistent window state saving on resize and move (debounced)
+  let saveTimeout = null;
+  const debouncedSaveState = () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      saveWindowState(mainWindow);
+    }, 400);
+  };
+
+  mainWindow.on('resize', debouncedSaveState);
+  mainWindow.on('move', debouncedSaveState);
+  mainWindow.on('close', () => {
+    saveWindowState(mainWindow);
+  });
 
   // Configure session permission handlers for File System Access API
   const ses = mainWindow.webContents.session;
@@ -197,7 +279,119 @@ ipcMain.handle('dialog:openDirectory', async () => {
   return result.filePaths[0];
 });
 
+// IPC handler for native media files selection
+ipcMain.handle('dialog:openFiles', async (event, options = {}) => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  const result = await dialog.showOpenDialog(win, {
+    properties: ['openFile', 'multiSelections'],
+    title: options.title || 'Import Media Files',
+    filters: options.filters || [
+      { name: 'Media Files', extensions: ['mp4', 'mov', 'webm', 'mkv', 'avi', 'mp3', 'wav', 'aac', 'flac', 'ogg', 'jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'] },
+      { name: 'Video Files', extensions: ['mp4', 'mov', 'webm', 'mkv', 'avi'] },
+      { name: 'Audio Files', extensions: ['mp3', 'wav', 'aac', 'flac', 'ogg'] },
+      { name: 'Image Files', extensions: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'] },
+      { name: 'All Files', extensions: ['*'] },
+    ],
+  });
+  if (result.canceled || !result.filePaths.length) {
+    return [];
+  }
+  return result.filePaths.map(filePath => {
+    try {
+      const stat = fs.statSync(filePath);
+      return {
+        path: filePath,
+        name: path.basename(filePath),
+        size: stat.size,
+      };
+    } catch (e) {
+      return {
+        path: filePath,
+        name: path.basename(filePath),
+        size: 0,
+      };
+    }
+  });
+});
+
+// IPC handler for native export file save
+ipcMain.handle('dialog:saveExport', async (event, options = {}) => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  const result = await dialog.showSaveDialog(win, {
+    title: options.title || 'Export Video',
+    defaultPath: options.defaultPath || 'Untitled.mp4',
+    filters: [
+      { name: 'MP4 Video', extensions: ['mp4'] },
+      { name: 'All Files', extensions: ['*'] },
+    ],
+  });
+  if (result.canceled || !result.filePath) {
+    return null;
+  }
+  return result.filePath;
+});
+
+// IPC handler to reveal file in Windows File Explorer
+ipcMain.handle('shell:showItemInFolder', async (event, fullPath) => {
+  if (fullPath && fs.existsSync(fullPath)) {
+    shell.showItemInFolder(fullPath);
+    return true;
+  }
+  return false;
+});
+
+// IPC handler to open external links
+ipcMain.handle('shell:openExternal', async (event, url) => {
+  if (url && (url.startsWith('http:') || url.startsWith('https:'))) {
+    await shell.openExternal(url);
+    return true;
+  }
+  return false;
+});
+
+// Window control IPC handlers
+ipcMain.handle('window:minimize', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  if (win) win.minimize();
+});
+
+ipcMain.handle('window:maximize', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  if (win && !win.isMaximized()) win.maximize();
+});
+
+ipcMain.handle('window:unmaximize', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  if (win && win.isMaximized()) win.unmaximize();
+});
+
+ipcMain.handle('window:toggleMaximize', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  if (win) {
+    if (win.isMaximized()) {
+      win.unmaximize();
+      return false;
+    } else {
+      win.maximize();
+      return true;
+    }
+  }
+  return false;
+});
+
+ipcMain.handle('window:close', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  if (win) win.close();
+});
+
+ipcMain.handle('window:isMaximized', () => {
+  const win = BrowserWindow.getFocusedWindow() || mainWindow;
+  return win ? win.isMaximized() : false;
+});
+
 app.whenReady().then(async () => {
+  app.setAppUserModelId('com.vidcut.app');
+
   const distDir = path.resolve(__dirname, '../dist');
   try {
     const port = await startLocalServer(distDir);

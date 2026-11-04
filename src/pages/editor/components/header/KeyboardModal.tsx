@@ -1,4 +1,4 @@
-﻿import styles from './keyboardModal.module.less';
+import styles from './keyboardModal.module.less';
 import { Modal, Toast } from '@douyinfe/semi-ui';
 import { EnterTheKeyboard } from '@icon-park/react';
 import { useState, useEffect } from 'react';
@@ -18,6 +18,10 @@ import {
   LinkCloudSucess,
   ArrowCircleUp,
   ArrowCircleDown,
+  AutoWidthOne,
+  SendOne,
+  CheckCorrect,
+  CloseSmall,
 } from '@icon-park/react';
 import $ from 'jquery';
 import { pubsub } from '@utils/pubsub';
@@ -67,15 +71,57 @@ export default function KeyboardModal(props: IProps) {
     },
     {
       name: language.val('shortcut_key_redo'),
-      win: 'Ctrl + Shift + Z',
+      win: 'Ctrl + Y / Ctrl + Shift + Z',
       mac: '⌘ + Shift + Z',
       icon: <Return style={{ transform: `scaleX(-1)` }} theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_select_all'),
+      win: 'Ctrl + A',
+      mac: '⌘ + A',
+      icon: <CheckCorrect theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_deselect'),
+      win: 'Escape',
+      mac: 'Escape',
+      icon: <CloseSmall theme="outline" size="20" fill="var(--theme-icon)" />,
     },
     {
       name: language.val('shortcut_key_play'),
       win: language.val('shortcut_key_space'),
       mac: language.val('shortcut_key_space'),
       icon: <LinkFour theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_timeline_zoomin'),
+      win: 'Ctrl + +',
+      mac: '⌘ + +',
+      icon: <ZoomIn theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_timeline_zoomout'),
+      win: 'Ctrl + -',
+      mac: '⌘ + -',
+      icon: <ZoomOut theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_timeline_fit'),
+      win: 'Ctrl + 0',
+      mac: '⌘ + 0',
+      icon: <AutoWidthOne theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_save'),
+      win: 'Ctrl + S',
+      mac: '⌘ + S',
+      icon: <LinkCloudSucess theme="outline" size="20" fill="var(--theme-icon)" />,
+    },
+    {
+      name: language.val('shortcut_key_export'),
+      win: 'Ctrl + E',
+      mac: '⌘ + E',
+      icon: <SendOne theme="outline" size="20" fill="var(--theme-icon)" />,
     },
     {
       name: language.val('shortcut_key_right'),
@@ -101,24 +147,6 @@ export default function KeyboardModal(props: IProps) {
       mac: '↓',
       icon: <ArrowCircleDown theme="outline" size="20" fill="var(--theme-icon)" />,
     },
-    {
-      name: language.val('shortcut_key_timeline_zoomin'),
-      win: 'Ctrl + +',
-      mac: '⌘ + +',
-      icon: <ZoomIn theme="outline" size="20" fill="var(--theme-icon)" />,
-    },
-    {
-      name: language.val('shortcut_key_timeline_zoomout'),
-      win: 'Ctrl + -',
-      mac: '⌘ + -',
-      icon: <ZoomOut theme="outline" size="20" fill="var(--theme-icon)" />,
-    },
-    {
-      name: language.val('shortcut_key_save'),
-      win: 'Ctrl + S',
-      mac: '⌘ + S',
-      icon: <LinkCloudSucess theme="outline" size="20" fill="var(--theme-icon)" />,
-    },
   ];
 
   const isMac = /macintosh|mac os x/i.test(navigator.userAgent);
@@ -127,34 +155,88 @@ export default function KeyboardModal(props: IProps) {
 
   useEffect(() => {
     $(document).on('keydown.ievent.keyboard', (e: any) => {
-      if (['INPUT', 'TEXTAREA'].includes(e.target?.nodeName) || e.target.className.indexOf('EVENT_STOP') !== -1) {
+      const nodeName = e.target?.nodeName?.toUpperCase?.();
+      const isInput =
+        ['INPUT', 'TEXTAREA'].includes(nodeName) ||
+        e.target?.isContentEditable ||
+        (typeof e.target?.className === 'string' && e.target.className.indexOf('EVENT_STOP') !== -1);
+
+      if (isInput) {
         return;
       }
 
-      // 快捷键
-      if (e.ctrlKey || e.metaKey) {
+      // F11 Fullscreen toggle
+      if (e.key === 'F11') {
         e.preventDefault();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen?.().catch(() => {});
+        } else {
+          document.exitFullscreen?.().catch(() => {});
+        }
+        return;
+      }
+
+      // Escape Deselect
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        e.preventDefault();
+        pubsub.publish('keyboardDeselect');
+        return;
+      }
+
+      // 快捷键 with Ctrl or Command
+      if (e.ctrlKey || e.metaKey) {
         const key = e.key.toLowerCase();
+
+        // Prevent unwanted browser defaults
+        if (['p', 'f', 'g', 'u'].includes(key)) {
+          e.preventDefault();
+          return;
+        }
+
         switch (key) {
           case '-':
+            e.preventDefault();
             pubsub.publish('keyboardScaleRuler', 'in');
             break;
           case '=':
+          case '+':
+            e.preventDefault();
             pubsub.publish('keyboardScaleRuler', 'out');
             break;
+          case '0':
+            e.preventDefault();
+            pubsub.publish('keyboardScaleRuler', 'auto');
+            break;
+          case 'a':
+            e.preventDefault();
+            pubsub.publish('keyboardSelectAll');
+            break;
+          case 'e':
+            e.preventDefault();
+            pubsub.publish('keyboardExport');
+            break;
           case 'b': // 分割
+            e.preventDefault();
             pubsub.publish('keyboardSplit');
             break;
           case 'c': // 复制
+            e.preventDefault();
             pubsub.publish('keyboardCopy');
             break;
           case 'x': // 裁剪
+            e.preventDefault();
             pubsub.publish('keyboardCut');
             break;
           case 'v': // 粘贴
+            e.preventDefault();
             pubsub.publish('keyboardPaste');
             break;
+          case 'y': // Windows Redo
+            e.preventDefault();
+            pubsub.publish('keyboardRedo');
+            break;
           case 'z': // 撤销
+            e.preventDefault();
             if (e.shiftKey) {
               // 恢复
               pubsub.publish('keyboardRedo');
@@ -163,6 +245,7 @@ export default function KeyboardModal(props: IProps) {
             }
             break;
           case 's':
+            e.preventDefault();
             pubsub.publish('keyboardSaveApp', () => {
               Toast.success(language.val('common_save_success'));
             });

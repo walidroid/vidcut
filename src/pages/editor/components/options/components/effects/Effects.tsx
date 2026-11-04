@@ -1,4 +1,4 @@
-﻿import styles from './styles.module.less';
+import styles from './styles.module.less';
 import Item from '../item';
 import { observer } from 'mobx-react';
 import { effectImages } from './data';
@@ -12,6 +12,7 @@ import { pubsub, util } from '@utils/index';
 import Color from '../color';
 import { utils } from '@pages/editor/SDK';
 import { removeEmptyFrames } from 'video-core-sdk';
+import { language } from '@language/index';
 
 export interface IProps {}
 

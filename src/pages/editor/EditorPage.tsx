@@ -8,6 +8,7 @@ const EditorPage = (props: any) => {
   const editor = useMemo(() => {
     const ed = new Editor();
     stores.editor = ed;
+    (window as any).editor = ed;
     return ed;
   }, [props.match?.params?.appId]);
 

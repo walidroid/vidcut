@@ -1,0 +1,227 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/user/account/BindEmail.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=0edf8e4c"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+var _s = $RefreshSig$();
+import { Button, Modal, Form, Steps, Toast } from "/node_modules/.vite/deps/@douyinfe_semi-ui.js?v=fdb0f74c";
+import __vite__cjsImport4_react from "/node_modules/.vite/deps/react.js?v=0edf8e4c"; const useState = __vite__cjsImport4_react["useState"];
+import styles from "/src/pages/user/account/bindMobile.module.less";
+import server from "/src/pages/user/account/server.ts";
+import { user } from "/src/stores/user.ts";
+import { observer } from "/node_modules/.vite/deps/mobx-react.js?v=785b19a1";
+import { language } from "/src/language/language.ts";
+function BindEmail(props) {
+  _s();
+  const [visible, setVisible] = useState(false);
+  const [step, setStep] = useState(0);
+  const [email, setEmail] = useState("");
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV(
+      Button,
+      {
+        onClick: () => {
+          setVisible(true);
+        },
+        children: language.val("user_bind")
+      },
+      void 0,
+      false,
+      {
+        fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+        lineNumber: 36,
+        columnNumber: 7
+      },
+      this
+    ),
+    /* @__PURE__ */ jsxDEV(
+      Modal,
+      {
+        maskClosable: false,
+        width: 400,
+        footer: null,
+        title: language.val("user_bind_email"),
+        visible,
+        onCancel: () => {
+          setVisible(false);
+          setStep(0);
+        },
+        children: [
+          /* @__PURE__ */ jsxDEV(Steps, { type: "basic", current: step, onChange: (i) => console.log(i), children: [
+            /* @__PURE__ */ jsxDEV(Steps.Step, { title: language.val("user_get_code_tip") }, void 0, false, {
+              fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+              lineNumber: 55,
+              columnNumber: 11
+            }, this),
+            /* @__PURE__ */ jsxDEV(Steps.Step, { title: language.val("user_code") }, void 0, false, {
+              fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+              lineNumber: 56,
+              columnNumber: 11
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+            lineNumber: 54,
+            columnNumber: 9
+          }, this),
+          step === 0 && /* @__PURE__ */ jsxDEV(
+            Form,
+            {
+              className: styles.form,
+              onSubmit: async (vals) => {
+                console.log(vals);
+                const [res, err] = await server.getEmailCode({
+                  email: vals.email
+                });
+                if (err) {
+                  return Toast.error(err);
+                }
+                setEmail(vals.email);
+                Toast.success(language.val("user_email_code_tip"));
+                setStep(1);
+              },
+              children: [
+                /* @__PURE__ */ jsxDEV(
+                  Form.Input,
+                  {
+                    field: "email",
+                    label: language.val("user_email"),
+                    placeholder: language.val("user_email_tip"),
+                    trigger: "blur",
+                    rules: [
+                      { required: true, message: language.val("user_email_empty_tip") },
+                      { type: "email", message: language.val("user_email_format_tip") }
+                    ]
+                  },
+                  void 0,
+                  false,
+                  {
+                    fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+                    lineNumber: 74,
+                    columnNumber: 13
+                  },
+                  this
+                ),
+                /* @__PURE__ */ jsxDEV(Button, { className: styles.submit, block: true, theme: "solid", htmlType: "submit", children: language.val("user_email_send_code_tip") }, void 0, false, {
+                  fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+                  lineNumber: 84,
+                  columnNumber: 13
+                }, this)
+              ]
+            },
+            void 0,
+            true,
+            {
+              fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+              lineNumber: 59,
+              columnNumber: 9
+            },
+            this
+          ),
+          step === 1 && /* @__PURE__ */ jsxDEV(
+            Form,
+            {
+              className: styles.form,
+              onSubmit: async (vals) => {
+                console.log(vals);
+                const [res, err] = await server.getBindEmail({
+                  email,
+                  code: vals.code
+                });
+                if (err) {
+                  return Toast.error(err);
+                }
+                user.info.email = email;
+                Toast.success(language.val("user_bind_success"));
+              },
+              children: [
+                /* @__PURE__ */ jsxDEV(
+                  Form.Input,
+                  {
+                    rules: [{ required: true, message: language.val("user_email_empty_tip") }],
+                    trigger: "blur",
+                    field: "code",
+                    label: language.val("user_email_code"),
+                    placeholder: language.val("user_email_code_tip2")
+                  },
+                  void 0,
+                  false,
+                  {
+                    fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+                    lineNumber: 105,
+                    columnNumber: 13
+                  },
+                  this
+                ),
+                /* @__PURE__ */ jsxDEV(Button, { className: styles.submit, block: true, theme: "solid", htmlType: "submit", children: language.val("user_submit") }, void 0, false, {
+                  fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+                  lineNumber: 112,
+                  columnNumber: 13
+                }, this)
+              ]
+            },
+            void 0,
+            true,
+            {
+              fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+              lineNumber: 90,
+              columnNumber: 9
+            },
+            this
+          ),
+          step === 2 && /* @__PURE__ */ jsxDEV(Fragment, {}, void 0, false, {
+            fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+            lineNumber: 117,
+            columnNumber: 24
+          }, this)
+        ]
+      },
+      void 0,
+      true,
+      {
+        fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+        lineNumber: 43,
+        columnNumber: 7
+      },
+      this
+    )
+  ] }, void 0, true, {
+    fileName: "C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx",
+    lineNumber: 35,
+    columnNumber: 5
+  }, this);
+}
+_s(BindEmail, "hVrIRRhyrKUPKF49oWbz2zlf4IA=");
+_c = BindEmail;
+export default _c2 = observer(BindEmail);
+var _c, _c2;
+$RefreshReg$(_c, "BindEmail");
+$RefreshReg$(_c2, "%default%");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports)
+        return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Admin/Documents/unicut/src/pages/user/account/BindEmail.tsx", currentExports, nextExports);
+      if (invalidateMessage)
+        import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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QTtBQUFBO0FBQUE7QUFBQSxZQXhCRjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsVUF5QkE7QUFBQSxVQUVESixTQUFTLEtBQUs7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFBRTtBQUFBO0FBQUE7QUFBQSxNQTFFbkI7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLElBMkVBO0FBQUEsT0FuRkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQW9GQTtBQUVKO0FBQUNILEdBNUZRRixXQUFTO0FBQUEsS0FBVEE7QUE4RlQsZUFBQTJCLE1BQWU3QixTQUFTRSxTQUFTO0FBQUUsSUFBQTRCLElBQUFEO0FBQUEsYUFBQUMsSUFBQTtBQUFBLGFBQUFELEtBQUEiLCJuYW1lcyI6WyJCdXR0b24iLCJNb2RhbCIsIkZvcm0iLCJTdGVwcyIsIlRvYXN0IiwidXNlU3RhdGUiLCJzdHlsZXMiLCJzZXJ2ZXIiLCJ1c2VyIiwib2JzZXJ2ZXIiLCJsYW5ndWFnZSIsIkJpbmRFbWFpbCIsInByb3BzIiwiX3MiLCJ2aXNpYmxlIiwic2V0VmlzaWJsZSIsInN0ZXAiLCJzZXRTdGVwIiwiZW1haWwiLCJzZXRFbWFpbCIsInZhbCIsImkiLCJjb25zb2xlIiwibG9nIiwiZm9ybSIsInZhbHMiLCJyZXMiLCJlcnIiLCJnZXRFbWFpbENvZGUiLCJlcnJvciIsInN1Y2Nlc3MiLCJyZXF1aXJlZCIsIm1lc3NhZ2UiLCJ0eXBlIiwic3VibWl0IiwiZ2V0QmluZEVtYWlsIiwiY29kZSIsImluZm8iLCJfYzIiLCJfYyJdLCJzb3VyY2VzIjpbIkJpbmRFbWFpbC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQnV0dG9uLCBNb2RhbCwgSW1hZ2UsIEZvcm0sIFN0ZXBzLCBTcGFjZSwgVG9hc3QgfSBmcm9tICdAZG91eWluZmUvc2VtaS11aSc7XHJcbmltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSAncmVhY3QnO1xyXG5pbXBvcnQgc3R5bGVzIGZyb20gJy4vYmluZE1vYmlsZS5tb2R1bGUubGVzcyc7XHJcbmltcG9ydCBzZXJ2ZXIgZnJvbSAnLi9zZXJ2ZXInO1xyXG5pbXBvcnQgeyB1c2VyIH0gZnJvbSAnQHN0b3Jlcy91c2VyJztcclxuaW1wb3J0IHsgb2JzZXJ2ZXIgfSBmcm9tICdtb2J4LXJlYWN0JztcclxuaW1wb3J0IHsgbGFuZ3VhZ2UgfSBmcm9tICdAbGFuZ3VhZ2UvbGFuZ3VhZ2UnO1xyXG5leHBvcnQgaW50ZXJmYWNlIElQcm9wcyB7fVxyXG5cclxuZnVuY3Rpb24gQmluZEVtYWlsKHByb3BzOiBJUHJvcHMpIHtcclxuICBjb25zdCBbdmlzaWJsZSwgc2V0VmlzaWJsZV0gPSB1c2VTdGF0ZShmYWxzZSk7XHJcbiAgY29uc3QgW3N0ZXAsIHNldFN0ZXBdID0gdXNlU3RhdGUoMCk7XHJcbiAgY29uc3QgW2VtYWlsLCBzZXRFbWFpbF0gPSB1c2VTdGF0ZSgnJyk7XHJcblxyXG4gIHJldHVybiAoXHJcbiAgICA8PlxyXG4gICAgICA8QnV0dG9uXHJcbiAgICAgICAgb25DbGljaz17KCkgPT4ge1xyXG4gICAgICAgICAgc2V0VmlzaWJsZSh0cnVlKTtcclxuICAgICAgICB9fVxyXG4gICAgICA+XHJcbiAgICAgICAge2xhbmd1YWdlLnZhbCgndXNlcl9iaW5kJyl9XHJcbiAgICAgIDwvQnV0dG9uPlxyXG4gICAgICA8TW9kYWxcclxuICAgICAgICBtYXNrQ2xvc2FibGU9e2ZhbHNlfVxyXG4gICAgICAgIHdpZHRoPXs0MDB9XHJcbiAgICAgICAgZm9vdGVyPXtudWxsfVxyXG4gICAgICAgIHRpdGxlPXtsYW5ndWFnZS52YWwoJ3VzZXJfYmluZF9lbWFpbCcpfVxyXG4gICAgICAgIHZpc2libGU9e3Zpc2libGV9XHJcbiAgICAgICAgb25DYW5jZWw9eygpID0+IHtcclxuICAgICAgICAgIHNldFZpc2libGUoZmFsc2UpO1xyXG4gICAgICAgICAgc2V0U3RlcCgwKTtcclxuICAgICAgICB9fVxyXG4gICAgICA+XHJcbiAgICAgICAgPFN0ZXBzIHR5cGU9XCJiYXNpY1wiIGN1cnJlbnQ9e3N0ZXB9IG9uQ2hhbmdlPXtpID0+IGNvbnNvbGUubG9nKGkpfT5cclxuICAgICAgICAgIDxTdGVwcy5TdGVwIHRpdGxlPXtsYW5ndWFnZS52YWwoJ3VzZXJfZ2V0X2NvZGVfdGlwJyl9IC8+XHJcbiAgICAgICAgICA8U3RlcHMuU3RlcCB0aXRsZT17bGFuZ3VhZ2UudmFsKCd1c2VyX2NvZGUnKX0gLz5cclxuICAgICAgICA8L1N0ZXBzPlxyXG4gICAgICAgIHtzdGVwID09PSAwICYmIChcclxuICAgICAgICAgIDxGb3JtXHJcbiAgICAgICAgICAgIGNsYXNzTmFtZT17c3R5bGVzLmZvcm19XHJcbiAgICAgICAgICAgIG9uU3VibWl0PXthc3luYyB2YWxzID0+IHtcclxuICAgICAgICAgICAgICBjb25zb2xlLmxvZyh2YWxzKTtcclxuICAgICAgICAgICAgICBjb25zdCBbcmVzLCBlcnJdID0gYXdhaXQgc2VydmVyLmdldEVtYWlsQ29kZSh7XHJcbiAgICAgICAgICAgICAgICBlbWFpbDogdmFscy5lbWFpbCxcclxuICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgICBpZiAoZXJyKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gVG9hc3QuZXJyb3IoZXJyKTtcclxuICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgc2V0RW1haWwodmFscy5lbWFpbCk7XHJcbiAgICAgICAgICAgICAgVG9hc3Quc3VjY2VzcyhsYW5ndWFnZS52YWwoJ3VzZXJfZW1haWxfY29kZV90aXAnKSk7XHJcbiAgICAgICAgICAgICAgc2V0U3RlcCgxKTtcclxuICAgICAgICAgICAgfX1cclxuICAgICAgICAgID5cclxuICAgICAgICAgICAgPEZvcm0uSW5wdXRcclxuICAgICAgICAgICAgICBmaWVsZD1cImVtYWlsXCJcclxuICAgICAgICAgICAgICBsYWJlbD17bGFuZ3VhZ2UudmFsKCd1c2VyX2VtYWlsJyl9XHJcbiAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9e2xhbmd1YWdlLnZhbCgndXNlcl9lbWFpbF90aXAnKX1cclxuICAgICAgICAgICAgICB0cmlnZ2VyPVwiYmx1clwiXHJcbiAgICAgICAgICAgICAgcnVsZXM9e1tcclxuICAgICAgICAgICAgICAgIHsgcmVxdWlyZWQ6IHRydWUsIG1lc3NhZ2U6IGxhbmd1YWdlLnZhbCgndXNlcl9lbWFpbF9lbXB0eV90aXAnKSB9LFxyXG4gICAgICAgICAgICAgICAgeyB0eXBlOiAnZW1haWwnLCBtZXNzYWdlOiBsYW5ndWFnZS52YWwoJ3VzZXJfZW1haWxfZm9ybWF0X3RpcCcpIH0sXHJcbiAgICAgICAgICAgICAgXX1cclxuICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgPEJ1dHRvbiBjbGFzc05hbWU9e3N0eWxlcy5zdWJtaXR9IGJsb2NrIHRoZW1lPVwic29saWRcIiBodG1sVHlwZT1cInN1Ym1pdFwiPlxyXG4gICAgICAgICAgICAgIHtsYW5ndWFnZS52YWwoJ3VzZXJfZW1haWxfc2VuZF9jb2RlX3RpcCcpfVxyXG4gICAgICAgICAgICA8L0J1dHRvbj5cclxuICAgICAgICAgIDwvRm9ybT5cclxuICAgICAgICApfVxyXG4gICAgICAgIHtzdGVwID09PSAxICYmIChcclxuICAgICAgICAgIDxGb3JtXHJcbiAgICAgICAgICAgIGNsYXNzTmFtZT17c3R5bGVzLmZvcm19XHJcbiAgICAgICAgICAgIG9uU3VibWl0PXthc3luYyB2YWxzID0+IHtcclxuICAgICAgICAgICAgICBjb25zb2xlLmxvZyh2YWxzKTtcclxuICAgICAgICAgICAgICBjb25zdCBbcmVzLCBlcnJdID0gYXdhaXQgc2VydmVyLmdldEJpbmRFbWFpbCh7XHJcbiAgICAgICAgICAgICAgICBlbWFpbCxcclxuICAgICAgICAgICAgICAgIGNvZGU6IHZhbHMuY29kZSxcclxuICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgICBpZiAoZXJyKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gVG9hc3QuZXJyb3IoZXJyKTtcclxuICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgdXNlci5pbmZvLmVtYWlsID0gZW1haWw7XHJcbiAgICAgICAgICAgICAgVG9hc3Quc3VjY2VzcyhsYW5ndWFnZS52YWwoJ3VzZXJfYmluZF9zdWNjZXNzJykpO1xyXG4gICAgICAgICAgICB9fVxyXG4gICAgICAgICAgPlxyXG4gICAgICAgICAgICA8Rm9ybS5JbnB1dFxyXG4gICAgICAgICAgICAgIHJ1bGVzPXtbeyByZXF1aXJlZDogdHJ1ZSwgbWVzc2FnZTogbGFuZ3VhZ2UudmFsKCd1c2VyX2VtYWlsX2VtcHR5X3RpcCcpIH1dfVxyXG4gICAgICAgICAgICAgIHRyaWdnZXI9XCJibHVyXCJcclxuICAgICAgICAgICAgICBmaWVsZD1cImNvZGVcIlxyXG4gICAgICAgICAgICAgIGxhYmVsPXtsYW5ndWFnZS52YWwoJ3VzZXJfZW1haWxfY29kZScpfVxyXG4gICAgICAgICAgICAgIHBsYWNlaG9sZGVyPXtsYW5ndWFnZS52YWwoJ3VzZXJfZW1haWxfY29kZV90aXAyJyl9XHJcbiAgICAgICAgICAgIC8+XHJcbiAgICAgICAgICAgIDxCdXR0b24gY2xhc3NOYW1lPXtzdHlsZXMuc3VibWl0fSBibG9jayB0aGVtZT1cInNvbGlkXCIgaHRtbFR5cGU9XCJzdWJtaXRcIj5cclxuICAgICAgICAgICAgICB7bGFuZ3VhZ2UudmFsKCd1c2VyX3N1Ym1pdCcpfVxyXG4gICAgICAgICAgICA8L0J1dHRvbj5cclxuICAgICAgICAgIDwvRm9ybT5cclxuICAgICAgICApfVxyXG4gICAgICAgIHtzdGVwID09PSAyICYmIDw+PC8+fVxyXG4gICAgICA8L01vZGFsPlxyXG4gICAgPC8+XHJcbiAgKTtcclxufVxyXG5cclxuZXhwb3J0IGRlZmF1bHQgb2JzZXJ2ZXIoQmluZEVtYWlsKTtcclxuIl0sImZpbGUiOiJDOi9Vc2Vycy9BZG1pbi9Eb2N1bWVudHMvdW5pY3V0L3NyYy9wYWdlcy91c2VyL2FjY291bnQvQmluZEVtYWlsLnRzeCJ9

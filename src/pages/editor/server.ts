@@ -137,11 +137,12 @@ class Server extends BasicService {
    * 获取模版的分类 (本地离线模式)
    */
   getTemplateTypes = async (): Promise<[any, null]> => {
-    return [[{ id: 'all', name: 'All' }], null];
+    const list = LOCAL_MATERIAL_TYPES.template || [{ id: 'all', name: 'All' }];
+    return [list, null];
   };
 
   /**
-   * 获取素材 (本地离线资源库：Audio, Filter, Effect, Transition, Text, Font)
+   * 获取素材 (本地离线资源库：Audio, Filter, Effect, Transition, Text, Font, Sticker)
    */
   getMaterials = async (params: st.MaterialParams): Promise<[any, null]> => {
     const result = queryLocalMaterials(params.type, params);
@@ -152,7 +153,8 @@ class Server extends BasicService {
    * 搜索模版 (本地离线模式)
    */
   getTemplates = async (params: st.TemplateParams): Promise<[any, null]> => {
-    return [{ data: [], total: 0 }, null];
+    const result = queryLocalMaterials('template', params as any);
+    return [result, null];
   };
 
   // 收藏元素 (本地持久化)

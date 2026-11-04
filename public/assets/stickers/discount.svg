@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="saleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+  </defs>
+  <!-- Starburst badge -->
+  <polygon points="50,6 59,19 75,15 78,31 93,36 88,51 98,62 86,72 89,88 73,89 67,103 52,96 40,103 35,88 19,87 23,71 10,61 21,50 16,34 31,30 35,15 50,20" fill="url(#saleGrad)" stroke="#fef08a" stroke-width="2.5"/>
+  <text x="50" y="48" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">SALE</text>
+  <text x="50" y="70" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="18" fill="#fef08a" text-anchor="middle">-50%</text>
+</svg>
+

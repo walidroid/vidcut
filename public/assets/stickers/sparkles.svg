@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="50%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <!-- Main central sparkle -->
+  <path d="M50 10 Q50 45 15 50 Q50 55 50 90 Q50 55 85 50 Q50 45 50 10 Z" fill="url(#sparkleGrad)" stroke="#FF8F00" stroke-width="2"/>
+  <!-- Top-right mini sparkle -->
+  <path d="M78 16 Q78 28 66 30 Q78 32 78 44 Q78 32 90 30 Q78 28 78 16 Z" fill="url(#sparkleGrad)"/>
+  <!-- Bottom-left mini sparkle -->
+  <path d="M22 64 Q22 74 12 76 Q22 78 22 88 Q22 78 32 76 Q22 74 22 64 Z" fill="url(#sparkleGrad)"/>
+</svg>
+

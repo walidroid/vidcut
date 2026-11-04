@@ -326,6 +326,31 @@ export default function List(props: IProps) {
     return { shouldUpload: false, autoRemove: true };
   };
 
+  useEffect(() => {
+    const unsub = pubsub.subscribe('importUserFiles', async (_msg, files: File[]) => {
+      if (!files || !files.length) return;
+      for (const file of files) {
+        try {
+          const uid = utils.createID();
+          await beforeUpload({
+            file: {
+              fileInstance: file,
+              uid,
+              name: file.name,
+              url: URL.createObjectURL(file),
+            },
+          });
+        } catch (err) {
+          console.error('Failed to import dropped user file:', err);
+        }
+      }
+    });
+
+    return () => {
+      pubsub.unsubscribe('importUserFiles');
+    };
+  }, [beforeUpload]);
+
   return (
     <>
       {checkboxs.length !== 0 && (

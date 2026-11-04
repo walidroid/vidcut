@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Add, Reduce, AutoWidthOne } from '@icon-park/react';
 import { Slider } from '@douyinfe/semi-ui';
 import { debounce } from 'lodash';
 import { stores } from '@stores/index';
+import { pubsub } from '@utils/pubsub';
 
 type Props = {};
 
@@ -11,32 +12,55 @@ const SetScale = (props: Props) => {
   const { editor } = stores;
   const [rscale, setRScale] = useState(editor.rulerScale);
 
+  useEffect(() => {
+    setRScale(editor.rulerScale);
+  }, [editor.rulerScale]);
+
   const autoFun = useCallback(() => {
     // 计算合适的scale值
-    const timelineWidth = document.getElementById('canvaTimelineRuler').clientWidth;
-    const scale = Number(((timelineWidth - 200) / editor.movie.getTotalTime()).toFixed(2));
+    const elem = document.getElementById('canvaTimelineRuler');
+    if (!elem || !editor.movie) return;
+    const timelineWidth = elem.clientWidth;
+    const totalTime = editor.movie.getTotalTime();
+    if (!totalTime) return;
+    const scale = Number(Math.max(1, Math.min(500, (timelineWidth - 200) / totalTime)).toFixed(2));
     editor.rulerScale = scale;
-  }, []);
+  }, [editor.movie]);
 
-  // 缩小
+  // 缩小 (Zoom out)
   const zoomInFun = useCallback(() => {
     let scale = editor.rulerScale;
     scale = scale - scale / 5;
     if (scale < 1) {
       scale = 1;
     }
-    editor.rulerScale = scale;
-  }, []);
+    editor.rulerScale = Math.round(scale * 100) / 100;
+  }, [editor.rulerScale]);
 
-  // 放大
+  // 放大 (Zoom in)
   const zoomOutFun = useCallback(() => {
     let scale = editor.rulerScale;
     scale = scale + scale / 5;
     if (scale > 500) {
       scale = 500;
     }
-    editor.rulerScale = scale;
-  }, []);
+    editor.rulerScale = Math.round(scale * 100) / 100;
+  }, [editor.rulerScale]);
+
+  useEffect(() => {
+    const unsub = pubsub.subscribe('keyboardScaleRuler', (_msg, action) => {
+      if (action === 'in' || action === 'zoomOut') {
+        zoomInFun();
+      } else if (action === 'out' || action === 'zoomIn') {
+        zoomOutFun();
+      } else if (action === 'auto') {
+        autoFun();
+      }
+    });
+    return () => {
+      pubsub.unsubscribe('keyboardScaleRuler');
+    };
+  }, [zoomInFun, zoomOutFun, autoFun]);
 
   const updateScale = useCallback(
     debounce(v => {

@@ -1,0 +1,164 @@
+{
+  "title": "Social Story Reel",
+  "width": 1080,
+  "height": 1920,
+  "background": {
+    "color": "#31103f"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_social_1",
+      "text": "NEW STORY ALERT!",
+      "startTime": 0.5,
+      "endTime": 3,
+      "duration": 2.5,
+      "style": {
+        "x": 540,
+        "y": 1600,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 56,
+        "fill": "#ffffff",
+        "stroke": "#db2777",
+        "strokeThickness": 6,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.55
+    },
+    {
+      "id": "cap_social_2",
+      "text": "TAP TO EXPLORE NOW",
+      "startTime": 3.2,
+      "endTime": 6,
+      "duration": 2.8,
+      "style": {
+        "x": 540,
+        "y": 1600,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 52,
+        "fill": "#f43f5e",
+        "stroke": "#ffffff",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.55
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_social_heart",
+      "name": "Neon Heart",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 6,
+      "duration": 5.8,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/heart.svg",
+        "thumb": "/assets/stickers/heart.svg"
+      },
+      "style": {
+        "x": 440,
+        "y": 700,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 440,
+        "y": 700,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_social_heart",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_social_sparkles",
+      "name": "Magic Sparkles",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1,
+      "endTime": 6,
+      "duration": 5,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/sparkles.svg",
+        "thumb": "/assets/stickers/sparkles.svg"
+      },
+      "style": {
+        "x": 620,
+        "y": 600,
+        "width": 160,
+        "height": 160,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 620,
+        "y": 600,
+        "width": 160,
+        "height": 160,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_social_sparkles",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_social_heart",
+      "originId": "sticker_heart",
+      "url": "/assets/stickers/heart.svg",
+      "name": "Neon Heart",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/heart.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_social_sparkles",
+      "originId": "sticker_sparkles",
+      "url": "/assets/stickers/sparkles.svg",
+      "name": "Magic Sparkles",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/sparkles.svg",
+      "duration": 6,
+      "styleSize": {
+        "width": 160,
+        "height": 160
+      }
+    }
+  ]
+}

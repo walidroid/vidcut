@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="musicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <!-- Beamed double notes -->
+  <path d="M38 68 C38 61 31 55 24 57 C17 59 13 67 15 74 C17 81 25 84 32 82 C37 80 39 74 39 68 L42 28 L78 20 L78 60 C78 53 71 47 64 49 C57 51 53 59 55 66 C57 73 65 76 72 74 C77 72 79 66 79 60 L80 14 L38 22 Z" fill="url(#musicGrad)" stroke="#fdf2f8" stroke-width="2"/>
+</svg>
+

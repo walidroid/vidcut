@@ -1,0 +1,164 @@
+{
+  "title": "Commercial Product Ad Promo",
+  "width": 1920,
+  "height": 1080,
+  "background": {
+    "color": "#042f2e"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_ad_1",
+      "text": "LIMITED TIME OFFER • UP TO 50% OFF TODAY",
+      "startTime": 0.5,
+      "endTime": 3.5,
+      "duration": 3,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 46,
+        "fill": "#fef08a",
+        "stroke": "#0f766e",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    },
+    {
+      "id": "cap_ad_2",
+      "text": "VISIT OUR OFFICIAL STORE • FREE SHIPPING WORLDWIDE",
+      "startTime": 3.8,
+      "endTime": 7,
+      "duration": 3.2,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 44,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "strokeThickness": 4,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_ad_discount",
+      "name": "Sale 50% Off",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 7,
+      "duration": 6.8,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/discount.svg",
+        "thumb": "/assets/stickers/discount.svg"
+      },
+      "style": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_ad_discount",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_ad_star",
+      "name": "Golden Star",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1,
+      "endTime": 7,
+      "duration": 6,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/star.svg",
+        "thumb": "/assets/stickers/star.svg"
+      },
+      "style": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_ad_star",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_ad_discount",
+      "originId": "sticker_discount",
+      "url": "/assets/stickers/discount.svg",
+      "name": "Sale 50% Off",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/discount.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_ad_star",
+      "originId": "sticker_star",
+      "url": "/assets/stickers/star.svg",
+      "name": "Golden Star",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/star.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 140,
+        "height": 140
+      }
+    }
+  ]
+}

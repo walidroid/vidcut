@@ -8,6 +8,8 @@ export interface LocalResourceItem {
   id: string;
   name: string;
   type: string;
+  url?: string;
+  thumb?: string;
   urls: {
     url: string;
     thumb: string;
@@ -475,6 +477,290 @@ export const LOCAL_TEXT_ITEMS: LocalResourceItem[] = [
     },
     attrs: { width: 500, height: 90 },
   },
+  {
+    id: 'text_subtitle_yellow',
+    name: 'Yellow Subtitle',
+    type: 'text',
+    category_id: 'subtitle',
+    text: 'Highlight subtitle in vivid yellow',
+    urls: { url: '', thumb: '/assets/text-images/outline_sub.svg' },
+    textStyle: {
+      fontSize: 42,
+      fontFamily: 'Arial, sans-serif',
+      fill: '#facc15',
+      stroke: '#000000',
+      strokeThickness: 5,
+      align: 'center',
+    },
+    attrs: { width: 600, height: 80 },
+  },
+  {
+    id: 'text_subtitle_box',
+    name: 'Cinema Box Subtitle',
+    type: 'text',
+    category_id: 'subtitle',
+    text: 'Cinematic box subtitle caption',
+    urls: { url: '', thumb: '/assets/text-images/outline_sub.svg' },
+    textStyle: {
+      fontSize: 38,
+      fontFamily: 'Helvetica, Arial, sans-serif',
+      fill: '#ffffff',
+      stroke: '#18181b',
+      strokeThickness: 3,
+      align: 'center',
+    },
+    attrs: { width: 620, height: 80 },
+  },
+];
+
+// 5b. Local Sticker Resources (SVGs / Badges / Reactions)
+export const LOCAL_STICKER_ITEMS: LocalResourceItem[] = [
+  {
+    id: 'sticker_like',
+    name: 'Thumbs Up',
+    type: 'sticker',
+    category_id: 'social',
+    urls: { url: '/assets/stickers/like.svg', thumb: '/assets/stickers/like.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_fire',
+    name: 'Fire Flame',
+    type: 'sticker',
+    category_id: 'reactions',
+    urls: { url: '/assets/stickers/fire.svg', thumb: '/assets/stickers/fire.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_star',
+    name: 'Golden Star',
+    type: 'sticker',
+    category_id: 'reactions',
+    urls: { url: '/assets/stickers/star.svg', thumb: '/assets/stickers/star.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_heart',
+    name: 'Neon Heart',
+    type: 'sticker',
+    category_id: 'social',
+    urls: { url: '/assets/stickers/heart.svg', thumb: '/assets/stickers/heart.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_bell',
+    name: 'Alert Bell',
+    type: 'sticker',
+    category_id: 'social',
+    urls: { url: '/assets/stickers/bell.svg', thumb: '/assets/stickers/bell.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_trophy',
+    name: 'Winner Trophy',
+    type: 'sticker',
+    category_id: 'badge',
+    urls: { url: '/assets/stickers/trophy.svg', thumb: '/assets/stickers/trophy.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_verified',
+    name: 'Verified Badge',
+    type: 'sticker',
+    category_id: 'badge',
+    urls: { url: '/assets/stickers/verified.svg', thumb: '/assets/stickers/verified.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_sparkles',
+    name: 'Magic Sparkles',
+    type: 'sticker',
+    category_id: 'reactions',
+    urls: { url: '/assets/stickers/sparkles.svg', thumb: '/assets/stickers/sparkles.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_mic',
+    name: 'Podcast Mic',
+    type: 'sticker',
+    category_id: 'tech',
+    urls: { url: '/assets/stickers/mic.svg', thumb: '/assets/stickers/mic.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_gamepad',
+    name: 'Gamepad Controller',
+    type: 'sticker',
+    category_id: 'gaming',
+    urls: { url: '/assets/stickers/gamepad.svg', thumb: '/assets/stickers/gamepad.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_discount',
+    name: 'Sale 50% Off',
+    type: 'sticker',
+    category_id: 'badge',
+    urls: { url: '/assets/stickers/discount.svg', thumb: '/assets/stickers/discount.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_lightning',
+    name: 'Lightning Bolt',
+    type: 'sticker',
+    category_id: 'reactions',
+    urls: { url: '/assets/stickers/lightning.svg', thumb: '/assets/stickers/lightning.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_code',
+    name: 'Code Window',
+    type: 'sticker',
+    category_id: 'tech',
+    urls: { url: '/assets/stickers/code.svg', thumb: '/assets/stickers/code.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+  {
+    id: 'sticker_music_note',
+    name: 'Musical Note',
+    type: 'sticker',
+    category_id: 'music',
+    urls: { url: '/assets/stickers/music_note.svg', thumb: '/assets/stickers/music_note.svg' },
+    attrs: { width: 200, height: 200, duration: 5 },
+  },
+];
+
+// 5c. Local Template Resources (Modèles de Projet)
+export const LOCAL_TEMPLATE_ITEMS: LocalResourceItem[] = [
+  {
+    id: 'template_vlog_intro',
+    name: 'Vlog Channel Intro',
+    type: 'template',
+    category_id: 'vlog',
+    url: '/assets/templates/template_vlog_intro.json',
+    thumb: '/assets/templates/thumb_vlog.svg',
+    urls: {
+      url: '/assets/templates/template_vlog_intro.json',
+      thumb: '/assets/templates/thumb_vlog.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 6 },
+  },
+  {
+    id: 'template_social_story',
+    name: 'Social Media Story',
+    type: 'template',
+    category_id: 'social',
+    url: '/assets/templates/template_social_story.json',
+    thumb: '/assets/templates/thumb_social.svg',
+    urls: {
+      url: '/assets/templates/template_social_story.json',
+      thumb: '/assets/templates/thumb_social.svg',
+    },
+    attrs: { width: 1080, height: 1920, duration: 6 },
+  },
+  {
+    id: 'template_cinematic_trailer',
+    name: 'Cinematic Trailer',
+    type: 'template',
+    category_id: 'cinema',
+    url: '/assets/templates/template_cinematic_trailer.json',
+    thumb: '/assets/templates/thumb_cinematic.svg',
+    urls: {
+      url: '/assets/templates/template_cinematic_trailer.json',
+      thumb: '/assets/templates/thumb_cinematic.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 7 },
+  },
+  {
+    id: 'template_podcast_show',
+    name: 'Daily Tech Podcast',
+    type: 'template',
+    category_id: 'podcast',
+    url: '/assets/templates/template_podcast_show.json',
+    thumb: '/assets/templates/thumb_podcast.svg',
+    urls: {
+      url: '/assets/templates/template_podcast_show.json',
+      thumb: '/assets/templates/thumb_podcast.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 7 },
+  },
+  {
+    id: 'template_gaming_stream',
+    name: 'Gaming Highlights',
+    type: 'template',
+    category_id: 'gaming',
+    url: '/assets/templates/template_gaming_stream.json',
+    thumb: '/assets/templates/thumb_gaming.svg',
+    urls: {
+      url: '/assets/templates/template_gaming_stream.json',
+      thumb: '/assets/templates/thumb_gaming.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 6.5 },
+  },
+  {
+    id: 'template_product_ad',
+    name: 'Product Ad Promo',
+    type: 'template',
+    category_id: 'business',
+    url: '/assets/templates/template_product_ad.json',
+    thumb: '/assets/templates/thumb_product.svg',
+    urls: {
+      url: '/assets/templates/template_product_ad.json',
+      thumb: '/assets/templates/thumb_product.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 7 },
+  },
+  {
+    id: 'template_quick_tips',
+    name: 'Quick Tips Reel (9:16)',
+    type: 'template',
+    category_id: 'social',
+    url: '/assets/templates/template_quick_tips.json',
+    thumb: '/assets/templates/thumb_quick_tips.svg',
+    urls: {
+      url: '/assets/templates/template_quick_tips.json',
+      thumb: '/assets/templates/thumb_quick_tips.svg',
+    },
+    attrs: { width: 1080, height: 1920, duration: 6 },
+  },
+  {
+    id: 'template_fitness_workout',
+    name: 'HIIT Workout (9:16)',
+    type: 'template',
+    category_id: 'lifestyle',
+    url: '/assets/templates/template_fitness_workout.json',
+    thumb: '/assets/templates/thumb_fitness.svg',
+    urls: {
+      url: '/assets/templates/template_fitness_workout.json',
+      thumb: '/assets/templates/thumb_fitness.svg',
+    },
+    attrs: { width: 1080, height: 1920, duration: 6 },
+  },
+  {
+    id: 'template_tech_tutorial',
+    name: 'Code Tech Tutorial',
+    type: 'template',
+    category_id: 'education',
+    url: '/assets/templates/template_tech_tutorial.json',
+    thumb: '/assets/templates/thumb_tech.svg',
+    urls: {
+      url: '/assets/templates/template_tech_tutorial.json',
+      thumb: '/assets/templates/thumb_tech.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 7 },
+  },
+  {
+    id: 'template_music_lyrics',
+    name: 'Music Lyrics Video',
+    type: 'template',
+    category_id: 'music',
+    url: '/assets/templates/template_music_lyrics.json',
+    thumb: '/assets/templates/thumb_music.svg',
+    urls: {
+      url: '/assets/templates/template_music_lyrics.json',
+      thumb: '/assets/templates/thumb_music.svg',
+    },
+    attrs: { width: 1920, height: 1080, duration: 7.5 },
+  },
 ];
 
 // 6. Local Font Families (for TextStyle font selector)
@@ -525,6 +811,36 @@ export const LOCAL_MATERIAL_TYPES: Record<string, Array<{ id: string; name: stri
     { id: 'subtitle', name: 'Subtitles' },
     { id: 'creative', name: 'Creative' },
   ],
+  sticker: [
+    { id: 'all', name: 'All' },
+    { id: 'social', name: 'Social' },
+    { id: 'reactions', name: 'Reactions' },
+    { id: 'badge', name: 'Badges' },
+    { id: 'tech', name: 'Tech & Code' },
+    { id: 'gaming', name: 'Gaming' },
+    { id: 'music', name: 'Music' },
+  ],
+  lottie: [
+    { id: 'all', name: 'All' },
+    { id: 'social', name: 'Social' },
+    { id: 'reactions', name: 'Reactions' },
+    { id: 'badge', name: 'Badges' },
+    { id: 'tech', name: 'Tech & Code' },
+    { id: 'gaming', name: 'Gaming' },
+    { id: 'music', name: 'Music' },
+  ],
+  template: [
+    { id: 'all', name: 'All' },
+    { id: 'vlog', name: 'Vlog' },
+    { id: 'social', name: 'Social & Reels' },
+    { id: 'cinema', name: 'Cinematic' },
+    { id: 'podcast', name: 'Podcast & Talk' },
+    { id: 'gaming', name: 'Gaming & Stream' },
+    { id: 'business', name: 'Business & Ads' },
+    { id: 'lifestyle', name: 'Fitness & Lifestyle' },
+    { id: 'education', name: 'Tech & Education' },
+    { id: 'music', name: 'Music & Lyrics' },
+  ],
 };
 
 /**
@@ -547,6 +863,8 @@ export function queryLocalMaterials(
   else if (type === 'effect') sourceList = LOCAL_EFFECT_ITEMS;
   else if (type === 'text') sourceList = LOCAL_TEXT_ITEMS;
   else if (type === 'font') sourceList = LOCAL_FONTS as any[];
+  else if (type === 'sticker' || type === 'lottie') sourceList = LOCAL_STICKER_ITEMS;
+  else if (type === 'template') sourceList = LOCAL_TEMPLATE_ITEMS;
 
   let filtered = [...sourceList];
 

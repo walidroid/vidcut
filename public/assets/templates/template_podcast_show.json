@@ -1,0 +1,164 @@
+{
+  "title": "The Daily Tech Podcast",
+  "width": 1920,
+  "height": 1080,
+  "background": {
+    "color": "#0f172a"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_pod_1",
+      "text": "HOST: Welcome back to episode 42 of The Tech Pulse!",
+      "startTime": 0.5,
+      "endTime": 3.5,
+      "duration": 3,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 44,
+        "fill": "#ffffff",
+        "stroke": "#0284c7",
+        "strokeThickness": 4,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    },
+    {
+      "id": "cap_pod_2",
+      "text": "GUEST: Today we are talking about the future of AI video tools.",
+      "startTime": 3.8,
+      "endTime": 7,
+      "duration": 3.2,
+      "style": {
+        "x": 960,
+        "y": 920,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 44,
+        "fill": "#38bdf8",
+        "stroke": "#000000",
+        "strokeThickness": 4,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_pod_mic",
+      "name": "Podcast Mic",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 7,
+      "duration": 6.8,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/mic.svg",
+        "thumb": "/assets/stickers/mic.svg"
+      },
+      "style": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_pod_mic",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_pod_verified",
+      "name": "Verified Badge",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1,
+      "endTime": 7,
+      "duration": 6,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/verified.svg",
+        "thumb": "/assets/stickers/verified.svg"
+      },
+      "style": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 1080,
+        "y": 340,
+        "width": 140,
+        "height": 140,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_pod_verified",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_pod_mic",
+      "originId": "sticker_mic",
+      "url": "/assets/stickers/mic.svg",
+      "name": "Podcast Mic",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/mic.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_pod_verified",
+      "originId": "sticker_verified",
+      "url": "/assets/stickers/verified.svg",
+      "name": "Verified Badge",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/verified.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 140,
+        "height": 140
+      }
+    }
+  ]
+}

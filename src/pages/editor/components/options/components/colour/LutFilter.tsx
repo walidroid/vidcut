@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Editor } from '@stores/editor';
 import type { ImageElement } from 'video-core-sdk';
 import { ResourceItem, utils } from 'video-core-sdk';
@@ -6,6 +6,7 @@ import { Pagination } from '@douyinfe/semi-ui';
 import Item from '../item';
 import SliderInput from '../slider-input';
 import styles from './colour.module.less';
+import { language } from '@language/index';
 import { remove } from 'lodash';
 
 export interface LutFilterProps {

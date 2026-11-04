@@ -1,0 +1,1791 @@
+import {
+  require_react
+} from "/node_modules/.vite/deps/chunk-Y6HYPMTH.js?v=fb12273d";
+import {
+  __commonJS,
+  __toESM
+} from "/node_modules/.vite/deps/chunk-MCCDO5NH.js?v=fb12273d";
+
+// node_modules/ignore/index.js
+var require_ignore = __commonJS({
+  "node_modules/ignore/index.js"(exports, module) {
+    function makeArray(subject) {
+      return Array.isArray(subject) ? subject : [subject];
+    }
+    var UNDEFINED = void 0;
+    var EMPTY = "";
+    var SPACE = " ";
+    var ESCAPE = "\\";
+    var REGEX_LITERAL_SPECIAL = /[.*+?()[\]{}^$|\\/]/;
+    var REGEX_TEST_BLANK_LINE = /^\uFEFF? *$/;
+    var REGEX_INVALID_TRAILING_BACKSLASH = /(?:[^\\]|^)\\$/;
+    var REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION = /^\\!/;
+    var REGEX_REPLACE_LEADING_EXCAPED_HASH = /^\\#/;
+    var REGEX_SPLITALL_CRLF = /\r?\n/g;
+    var DOUBLE_SLASH = "//";
+    var SLASH_CODE = 47;
+    var DOT_CODE = 46;
+    var SLASH = "/";
+    var TMP_KEY_IGNORE = "node-ignore";
+    if (typeof Symbol !== "undefined") {
+      TMP_KEY_IGNORE = Symbol.for("node-ignore");
+    }
+    var KEY_IGNORE = TMP_KEY_IGNORE;
+    var define = (object, key, value) => {
+      Object.defineProperty(object, key, { value });
+      return value;
+    };
+    var RETURN_FALSE = () => false;
+    var cleanRangeBackSlash = (slashes) => {
+      const { length } = slashes;
+      return slashes.slice(0, length - length % 2);
+    };
+    var POSIX_CLASSES = {
+      alnum: "0-9A-Za-z",
+      alpha: "A-Za-z",
+      blank: " \\t",
+      cntrl: "\\x00-\\x1f\\x7f",
+      digit: "0-9",
+      graph: "!-.0-~",
+      lower: "a-z",
+      print: " -.0-~",
+      punct: "!-.:-@\\[-`{-~",
+      // git's `sane-ctype.h` classifies \v and \f as control, not space,
+      //   unlike C's `isspace`
+      space: " \\t\\n\\r",
+      upper: "A-Z",
+      xdigit: "0-9A-Fa-f"
+    };
+    var CLASS_MEMBERS_TO_ESCAPE = "\\]^-[";
+    var escapeMember = (char) => CLASS_MEMBERS_TO_ESCAPE.indexOf(char) < 0 ? char : ESCAPE + char;
+    var NON_SLASH = "(?!\\/)";
+    var classSource = (negated, body) => {
+      if (negated) {
+        return `[^\\/${body}]`;
+      }
+      const source = `[${body}]`;
+      return new RegExp(source).test("/") ? NON_SLASH + source : source;
+    };
+    var scanBracket = (pattern, start) => {
+      const { length } = pattern;
+      let index = start + 1;
+      let negated = EMPTY;
+      const lead = pattern[index];
+      if (lead === "!" || lead === "^") {
+        negated = "^";
+        index++;
+      }
+      let body = EMPTY;
+      let prev = EMPTY;
+      for (; ; ) {
+        const char = pattern[index];
+        if (char === UNDEFINED) {
+          return null;
+        }
+        if (char === ESCAPE) {
+          const escaped = pattern[index + 1];
+          if (escaped === UNDEFINED) {
+            return null;
+          }
+          body += escapeMember(escaped);
+          prev = escaped;
+          index++;
+        } else if (char === "-" && prev && index + 1 < length && pattern[index + 1] !== "]") {
+          index++;
+          let to = pattern[index];
+          if (to === ESCAPE) {
+            to = pattern[index += 1];
+          }
+          if (prev <= to) {
+            body += `-${escapeMember(to)}`;
+          }
+          prev = EMPTY;
+        } else if (char === "[" && pattern[index + 1] === ":") {
+          const nameStart = index + 2;
+          let end = nameStart;
+          while (end < length && pattern[end] !== "]") {
+            end++;
+          }
+          if (end === length) {
+            return null;
+          }
+          if (end > nameStart && pattern[end - 1] === ":") {
+            const expanded = POSIX_CLASSES[pattern.slice(nameStart, end - 1)];
+            if (expanded === UNDEFINED) {
+              return null;
+            }
+            body += expanded;
+            prev = EMPTY;
+            index = end;
+          } else {
+            body += escapeMember("[");
+            prev = "[";
+            index = nameStart - 2;
+          }
+        } else {
+          body += escapeMember(char);
+          prev = char;
+        }
+        index++;
+        if (pattern[index] === "]") {
+          return {
+            end: index,
+            source: classSource(negated, body)
+          };
+        }
+      }
+    };
+    var NEVER_MATCH = "[]";
+    var PLACEHOLDER = "\0";
+    var REGEX_RESTORE_PLACEHOLDER = new RegExp(
+      `${PLACEHOLDER}(\\d+)${PLACEHOLDER}`,
+      "g"
+    );
+    var TRAILING_WILDCARD = "";
+    var extractBrackets = (pattern) => {
+      const sources = [];
+      const hold = (source) => `${PLACEHOLDER}${sources.push(source) - 1}${PLACEHOLDER}`;
+      const { length } = pattern;
+      let out = EMPTY;
+      let index = 0;
+      while (index < length) {
+        const char = pattern[index];
+        if (char === ESCAPE) {
+          const escaped = pattern[index + 1];
+          if (escaped === "*" || escaped === "[" || escaped === SPACE || escaped === ESCAPE) {
+            out += pattern.slice(index, index + 2);
+          } else {
+            out += hold(
+              REGEX_LITERAL_SPECIAL.test(escaped) ? ESCAPE + escaped : escaped
+            );
+          }
+          index += 2;
+        } else if (char === PLACEHOLDER) {
+          out += hold(`[${PLACEHOLDER}]`);
+          index++;
+        } else if (char === "[") {
+          const scanned = scanBracket(pattern, index);
+          if (scanned === null) {
+            out += hold(NEVER_MATCH);
+            index = length;
+          } else {
+            out += hold(scanned.source);
+            index = scanned.end + 1;
+          }
+        } else {
+          out += char;
+          index++;
+        }
+      }
+      return {
+        source: out,
+        sources
+      };
+    };
+    var DIRECT = null;
+    var REGEX_INNER_SLASH = /\/(?!$)/;
+    var REPLACERS = [
+      [
+        // Remove BOM
+        // TODO:
+        // Other similar zero-width characters?
+        /^\uFEFF/,
+        () => EMPTY,
+        "\uFEFF"
+      ],
+      [
+        // A trailing line terminator, left on when a whole file's contents are
+        //   added as one pattern rather than split into lines. git never sees one
+        //   -- it reads a `.gitignore` line by line -- so it is not part of the
+        //   pattern and is dropped here, apart from the trailing-space trimming,
+        //   which follows git in touching spaces and nothing else.
+        /[\r\n]+$/,
+        () => EMPTY
+      ],
+      // > Trailing spaces are ignored unless they are quoted with backslash ("\")
+      [
+        // Only spaces, never tabs or other whitespace: git trims a trailing run
+        //   of `' '` and nothing else (dir.c, `trim_trailing_spaces`, a single
+        //   `case ' '`), so a pattern ending in a tab keeps it as a literal.
+        // (a\ ) -> (a )
+        // (a  ) -> (a)
+        // (a ) -> (a)
+        // (a \ ) -> (a  )
+        /((?:\\\\)*?)(\\? +)$/,
+        (_, m1, m2) => m1 + (m2.indexOf("\\") === 0 ? SPACE : EMPTY)
+      ],
+      // Replace (\ ) with ' '
+      // Only a space: an escaped tab or other whitespace is already a literal by
+      //   the time it reaches here, and a bare tab must be left as one, not turned
+      //   into a space.
+      // (\ ) -> ' '
+      // (\\ ) -> '\\ '
+      // (\\\ ) -> '\\ '
+      [
+        /(\\+?) /g,
+        (_, m1) => {
+          const { length } = m1;
+          return m1.slice(0, length - length % 2) + SPACE;
+        }
+      ],
+      // Escape metacharacters
+      // which is written down by users but means special for regular expressions.
+      // > There are 12 characters with special meanings:
+      // > - the backslash \,
+      // > - the caret ^,
+      // > - the dollar sign $,
+      // > - the period or dot .,
+      // > - the vertical bar or pipe symbol |,
+      // > - the question mark ?,
+      // > - the asterisk or star *,
+      // > - the plus sign +,
+      // > - the opening parenthesis (,
+      // > - the closing parenthesis ),
+      // > - and the opening square bracket [,
+      // > - the opening curly brace {,
+      // > These special characters are often called "metacharacters".
+      [
+        /[\\$.|*+(){^]/g,
+        (match) => `\\${match}`
+      ],
+      [
+        // > a question mark (?) matches a single character
+        /(?!\\)\?/g,
+        () => "[^/]",
+        "?"
+      ],
+      // leading slash
+      [
+        // > A leading slash matches the beginning of the pathname.
+        // > For example, "/*.c" matches "cat-file.c" but not "mozilla-sha1/sha1.c".
+        // A leading slash matches the beginning of the pathname
+        /^\//,
+        () => "^",
+        SLASH
+      ],
+      // replace special metacharacter slash after the leading slash
+      [
+        /\//g,
+        () => "\\/",
+        SLASH
+      ],
+      [
+        // > A leading "**" followed by a slash means match in all directories.
+        // > For example, "**/foo" matches file or directory "foo" anywhere,
+        // > the same as pattern "foo".
+        // > "**/foo/bar" matches file or directory "bar" anywhere that is directly
+        // >   under directory "foo".
+        // Notice that the '*'s have been replaced as '\\*'
+        /^\^*(?:\\\*\\\*\\\/)+/,
+        // '**/foo' <-> 'foo'
+        () => "^(?:.*\\/)?",
+        "*"
+      ],
+      // starting
+      [
+        // there will be no leading '/'
+        //   (which has been replaced by section "leading slash")
+        // If starts with '**', adding a '^' to the regular expression also works
+        DIRECT,
+        (source, pattern) => {
+          if (!source || source[0] === "^") {
+            return source;
+          }
+          const anchor = !REGEX_INNER_SLASH.test(pattern) ? "(?:^|\\/)" : "^";
+          return anchor + source;
+        }
+      ],
+      // two globstars
+      [
+        // Use lookahead assertions so that we could match more than one `'/**'`
+        /\\\/\\\*\\\*(?=\\\/|$)/g,
+        // Zero, one or several directories
+        // should not use '*', or it will be replaced by the next replacer
+        // Check if it is not the last `'/**'`
+        (_, index, str) => index + 6 < str.length ? str.slice(index + 6) === "\\/" ? "(?:\\/[^\\/]+)+" : "(?:\\/[^\\/]+)*" : "\\/.+",
+        "*"
+      ],
+      // normal intermediate wildcards
+      [
+        // Never replace escaped '*'
+        // ignore rule '\*' will match the path '*'
+        // 'abc.*/' -> go
+        // 'abc.*'  -> skip this rule,
+        //    coz trailing single wildcard will be handed by [trailing wildcard]
+        /(^|[^\\]+)(\\\*)+(?=.+)/g,
+        // '*.js' matches '.js'
+        // '*.js' doesn't match 'abc'
+        (_, p1, p2) => {
+          const unescaped = p2.replace(/\\\*/g, "[^\\/]*");
+          return p1 + unescaped;
+        },
+        "*"
+      ],
+      // trailing wildcard, held apart from a literal star
+      [
+        // The step above leaves a trailing `*` alone, so a single `\*` is all that
+        //   can be left at the end here. Whether it is a wildcard or a literal
+        //   turns on the backslashes the user put in front of it: the escaper has
+        //   since doubled every one, so what stands here is those `2N` doubled
+        //   backslashes and then the star's own escape. An even number of the
+        //   original `N` leaves the star unescaped -- a wildcard -- and an odd
+        //   number escapes it -- a literal. This runs while the two are still
+        //   distinct, before the unescape steps below collapse the literal onto
+        //   the very `\*` a wildcard leaves behind.
+        /(^|[^\\])((?:\\\\)*)\\\*$/,
+        (match, p1, p2) => (
+          // `p2` holds the doubled user backslashes; half of them is `N`.
+          p2.length / 2 % 2 === 0 ? p1 + p2 + TRAILING_WILDCARD : match
+        ),
+        "*"
+      ],
+      [
+        // unescape, revert step 3 except for back slash
+        // For example, if a user escape a '\\*',
+        // after step 3, the result will be '\\\\\\*'
+        /\\\\\\(?=[$.|*+(){^])/g,
+        () => ESCAPE,
+        ESCAPE + ESCAPE
+      ],
+      [
+        // '\\\\' -> '\\'
+        /\\\\/g,
+        () => ESCAPE,
+        ESCAPE + ESCAPE
+      ],
+      [
+        // Every real bracket expression -- POSIX classes included -- has already
+        //   been held aside by `extractBrackets`, so the only `[` left in the
+        //   pattern is an escaped, literal one.
+        // `\` is escaped by step 3
+        /\\\[([^\]/]*?)(\\*)($|\])/g,
+        // '\\[bar]' -> '\\\\[bar\\]'
+        (match, range, endEscape, close) => `\\[${range}${cleanRangeBackSlash(endEscape)}${close}`,
+        "["
+      ],
+      // ending
+      [
+        // 'js' will not match 'js.'
+        // 'ab' will not match 'abc'
+        DIRECT,
+        // WTF!
+        // https://git-scm.com/docs/gitignore
+        // changes in [2.22.1](https://git-scm.com/docs/gitignore/2.22.1)
+        // which re-fixes #24, #38
+        // > If there is a separator at the end of the pattern then the pattern
+        // > will only match directories, otherwise the pattern can match both
+        // > files and directories.
+        // 'js*' will not match 'a.js'
+        // 'js/' will not match 'a.js'
+        // 'js' will match 'a.js' and 'a.js/'
+        (source) => {
+          const last = source[source.length - 1];
+          if (!last || last === TRAILING_WILDCARD) {
+            return source;
+          }
+          return last === SLASH ? `${source}$` : `${source}(?=$|\\/$)`;
+        }
+      ]
+    ];
+    var REGEX_REPLACE_TRAILING_WILDCARD = /(^|\\\/)?\uE000$/;
+    var MODE_IGNORE = "regex";
+    var MODE_CHECK_IGNORE = "checkRegex";
+    var UNDERSCORE = "_";
+    var TRAILING_WILD_CARD_REPLACERS = {
+      [MODE_IGNORE](_, p1) {
+        const prefix = p1 ? `${p1}[^/]+` : "[^/]*";
+        return `${prefix}(?=$|\\/$)`;
+      },
+      [MODE_CHECK_IGNORE](_, p1) {
+        const prefix = p1 ? `${p1}[^/]*` : "[^/]*";
+        return `${prefix}(?=$|\\/$)`;
+      }
+    };
+    var WILDCARD = "[^\\/]*";
+    var pinWildcards = (source) => {
+      if (source.indexOf(WILDCARD) < 0) {
+        return source;
+      }
+      const tokens = [];
+      const { length } = source;
+      let index = 0;
+      while (index < length) {
+        const char = source[index];
+        if (source.startsWith(WILDCARD, index)) {
+          tokens.push({ wildcard: true });
+          index += WILDCARD.length;
+        } else if (char === "[") {
+          let end = index + 1;
+          if (source[end] === "^") {
+            end++;
+          }
+          if (source[end] === "]") {
+            end++;
+          }
+          while (end < length && source[end] !== "]") {
+            end += source[end] === ESCAPE ? 2 : 1;
+          }
+          end++;
+          tokens.push({ single: source.slice(index, end) });
+          index = end;
+        } else if (char === ESCAPE) {
+          tokens.push({ single: source.slice(index, index + 2) });
+          index += 2;
+        } else if (char === "(") {
+          let depth = 0;
+          let end = index;
+          do {
+            if (source[end] === ESCAPE) {
+              end++;
+            } else if (source[end] === "(") {
+              depth++;
+            } else if (source[end] === ")") {
+              depth--;
+            }
+            end++;
+          } while (end < length && depth > 0);
+          if ("*+?".indexOf(source[end]) >= 0) {
+            end++;
+          }
+          tokens.push({ boundary: source.slice(index, end) });
+          index = end;
+        } else if (char === "^" || char === "$") {
+          tokens.push({ boundary: char });
+          index++;
+        } else {
+          tokens.push({ single: char });
+          index++;
+        }
+      }
+      let out = EMPTY;
+      let run = [];
+      const flush = () => {
+        let lastWildcard;
+        run.forEach((token, at) => {
+          if (token.wildcard) {
+            lastWildcard = at;
+          }
+        });
+        run.forEach((token, at) => {
+          if (!token.wildcard) {
+            out += token.single;
+            return;
+          }
+          out += at === lastWildcard ? WILDCARD : `(?:(?!${run[at + 1].single})[^\\/])*`;
+        });
+        run = [];
+      };
+      tokens.forEach((token) => {
+        if (token.boundary === void 0) {
+          run.push(token);
+          return;
+        }
+        flush();
+        out += token.boundary;
+      });
+      flush();
+      return out;
+    };
+    var makeRegexPrefix = (pattern) => {
+      const { source, sources } = extractBrackets(pattern);
+      const replaced = REPLACERS.reduce(
+        // A pass whose matcher finds nothing hands back the very string it was
+        //   given, so asking first costs a search and saves a rewrite. Ten of the
+        //   fifteen passes never fire for a typical .gitignore line, and between
+        //   them they were 45% of this chain.
+        (prev, [matcher, replacer, required]) => {
+          if (matcher === DIRECT) {
+            return replacer(prev, pattern);
+          }
+          if (required !== UNDEFINED && prev.indexOf(required) < 0) {
+            return prev;
+          }
+          return matcher.test(prev) ? prev.replace(matcher, replacer.bind(pattern)) : prev;
+        },
+        source
+      );
+      return sources.length ? replaced.replace(
+        REGEX_RESTORE_PLACEHOLDER,
+        (match, index) => sources[index]
+      ) : replaced;
+    };
+    var matchesBasename = (body) => {
+      const index = body.indexOf(SLASH);
+      return index < 0 || index === body.length - 1;
+    };
+    var basenameOf = (path) => {
+      const end = path.length - 1;
+      const index = path.lastIndexOf(
+        SLASH,
+        path[end] === SLASH ? end - 1 : end
+      );
+      return index < 0 ? path : path.slice(index + 1);
+    };
+    var parentOf = (path) => {
+      if (path.charCodeAt(0) === SLASH_CODE || path.indexOf(DOUBLE_SLASH) >= 0) {
+        const slices = path.split(SLASH).filter(Boolean);
+        slices.pop();
+        return slices.length ? slices.join(SLASH) + SLASH : EMPTY;
+      }
+      const end = path.length - 1;
+      const cut = path.lastIndexOf(
+        SLASH,
+        path.charCodeAt(end) === SLASH_CODE ? end - 1 : end
+      );
+      return cut < 0 ? EMPTY : path.slice(0, cut + 1);
+    };
+    var isString = (subject) => typeof subject === "string";
+    var checkPattern = (pattern) => pattern && isString(pattern) && !REGEX_TEST_BLANK_LINE.test(pattern) && !REGEX_INVALID_TRAILING_BACKSLASH.test(pattern) && pattern.indexOf("#") !== 0;
+    var splitPattern = (pattern) => pattern.split(REGEX_SPLITALL_CRLF).filter(Boolean);
+    var IgnoreRule = class {
+      constructor(pattern, mark, body, ignoreCase, negative, prefix) {
+        this.pattern = pattern;
+        this.mark = mark;
+        this.negative = negative;
+        define(this, "body", body);
+        define(this, "ignoreCase", ignoreCase);
+        define(this, "regexPrefix", prefix);
+      }
+      // Worked out on first use and kept behind an own property, the way `regex`
+      //   caches itself in `_regex`. Deciding it in the constructor instead would
+      //   add a fourth `defineProperty` to every rule ever built, which cost 4% of
+      //   every compile -- including the compiles of rules that are never matched
+      //   against anything.
+      get _basenameOnly() {
+        return define(this, "_basenameOnly", matchesBasename(this.body));
+      }
+      get regex() {
+        const key = UNDERSCORE + MODE_IGNORE;
+        if (this[key]) {
+          return this[key];
+        }
+        return this._make(MODE_IGNORE, key);
+      }
+      get checkRegex() {
+        const key = UNDERSCORE + MODE_CHECK_IGNORE;
+        if (this[key]) {
+          return this[key];
+        }
+        return this._make(MODE_CHECK_IGNORE, key);
+      }
+      _make(mode, key) {
+        const str = pinWildcards(this.regexPrefix.replace(
+          REGEX_REPLACE_TRAILING_WILDCARD,
+          // It does not need to bind pattern
+          TRAILING_WILD_CARD_REPLACERS[mode]
+        ));
+        const regex = this.ignoreCase ? new RegExp(str, "i") : new RegExp(str);
+        return define(this, key, regex);
+      }
+    };
+    var createRule = ({
+      pattern,
+      mark
+    }, ignoreCase) => {
+      let negative = false;
+      let body = pattern;
+      if (body.indexOf("!") === 0) {
+        negative = true;
+        body = body.substr(1);
+      }
+      body = body.replace(REGEX_REPLACE_LEADING_EXCAPED_EXCLAMATION, "!").replace(REGEX_REPLACE_LEADING_EXCAPED_HASH, "#");
+      const regexPrefix = makeRegexPrefix(body);
+      return new IgnoreRule(
+        pattern,
+        mark,
+        body,
+        ignoreCase,
+        negative,
+        regexPrefix
+      );
+    };
+    var RuleManager = class {
+      constructor(ignoreCase) {
+        this._ignoreCase = ignoreCase;
+        this._rules = [];
+        this._basenameCount = 0;
+      }
+      _add(pattern) {
+        if (pattern && pattern[KEY_IGNORE]) {
+          this._rules = this._rules.concat(pattern._rules._rules);
+          this._basenameCount += pattern._rules._basenameCount;
+          this._added = true;
+          return;
+        }
+        if (isString(pattern)) {
+          pattern = {
+            pattern
+          };
+        }
+        if (checkPattern(pattern.pattern)) {
+          const rule = createRule(pattern, this._ignoreCase);
+          this._added = true;
+          this._rules.push(rule);
+          if (matchesBasename(rule.body)) {
+            this._basenameCount++;
+          }
+        }
+      }
+      // @param {Array<string> | string | Ignore} pattern
+      add(pattern) {
+        this._added = false;
+        makeArray(
+          isString(pattern) ? splitPattern(pattern) : pattern
+        ).forEach(this._add, this);
+        return this._added;
+      }
+      // Test one single path without recursively checking parent directories
+      //
+      // - checkUnignored `boolean` whether should check if the path is unignored,
+      //   setting `checkUnignored` to `false` could reduce additional
+      //   path matching.
+      // - check `string` either `MODE_IGNORE` or `MODE_CHECK_IGNORE`
+      // @returns {TestResult} true if a file is ignored
+      test(path, checkUnignored, mode) {
+        let ignored = false;
+        let unignored = false;
+        let matchedRule;
+        const rules = this._rules;
+        const { length } = rules;
+        const shortcut = this._basenameCount * 2 >= length;
+        const basename = shortcut ? basenameOf(path) : path;
+        for (let index = 0; index < length; index++) {
+          const rule = rules[index];
+          const { negative } = rule;
+          const skip = unignored === negative && ignored !== unignored || negative && !ignored && !unignored && !checkUnignored;
+          if (!skip && rule[mode].test(
+            shortcut && rule._basenameOnly ? basename : path
+          )) {
+            ignored = !negative;
+            unignored = negative;
+            matchedRule = negative ? UNDEFINED : rule;
+          }
+        }
+        const ret = {
+          ignored,
+          unignored
+        };
+        if (matchedRule) {
+          ret.rule = matchedRule;
+        }
+        return ret;
+      }
+    };
+    var throwError = (message, Ctor) => {
+      throw new Ctor(message);
+    };
+    var checkPath = (path, originalPath, doThrow) => {
+      if (!isString(path)) {
+        return doThrow(
+          `path must be a string, but got \`${originalPath}\``,
+          TypeError
+        );
+      }
+      if (!path) {
+        return doThrow(`path must not be empty`, TypeError);
+      }
+      if (checkPath.isNotRelative(path)) {
+        const r = "`path.relative()`d";
+        return doThrow(
+          `path should be a ${r} string, but got "${originalPath}"`,
+          RangeError
+        );
+      }
+      return true;
+    };
+    var isNotRelative = (path) => {
+      const first = path.charCodeAt(0);
+      if (first === SLASH_CODE) {
+        return true;
+      }
+      if (first !== DOT_CODE) {
+        return false;
+      }
+      if (path.length === 1) {
+        return true;
+      }
+      const second = path.charCodeAt(1);
+      if (second === SLASH_CODE) {
+        return true;
+      }
+      if (second !== DOT_CODE) {
+        return false;
+      }
+      return path.length === 2 || path.charCodeAt(2) === SLASH_CODE;
+    };
+    checkPath.isNotRelative = isNotRelative;
+    checkPath.convert = (p) => p;
+    var Ignore = class {
+      constructor({
+        ignorecase = true,
+        ignoreCase = ignorecase,
+        allowRelativePaths = false
+      } = {}) {
+        define(this, KEY_IGNORE, true);
+        this._rules = new RuleManager(ignoreCase);
+        this._strictPathCheck = !allowRelativePaths;
+        this._initCache();
+      }
+      _initCache() {
+        this._ignoreCache = /* @__PURE__ */ Object.create(null);
+        this._testCache = /* @__PURE__ */ Object.create(null);
+      }
+      add(pattern) {
+        if (this._rules.add(pattern)) {
+          this._initCache();
+        }
+        return this;
+      }
+      // legacy
+      addPattern(pattern) {
+        return this.add(pattern);
+      }
+      // @returns {TestResult}
+      _test(originalPath, cache, checkUnignored) {
+        const path = originalPath && checkPath.convert(originalPath);
+        checkPath(
+          path,
+          originalPath,
+          this._strictPathCheck ? throwError : RETURN_FALSE
+        );
+        return this._t(path, cache, checkUnignored);
+      }
+      checkIgnore(path) {
+        if (path.charCodeAt(path.length - 1) !== SLASH_CODE) {
+          return this.test(path);
+        }
+        const parentPath = parentOf(path);
+        if (parentPath) {
+          const parent = this._t(parentPath, this._testCache, true);
+          if (parent.ignored) {
+            return parent;
+          }
+        }
+        return this._rules.test(path, false, MODE_CHECK_IGNORE);
+      }
+      _t(path, cache, checkUnignored) {
+        if (path in cache) {
+          return cache[path];
+        }
+        const parentPath = parentOf(path);
+        const parent = parentPath ? this._t(parentPath, cache, checkUnignored) : UNDEFINED;
+        return cache[path] = parent && parent.ignored ? parent : this._rules.test(path, checkUnignored, MODE_IGNORE);
+      }
+      ignores(path) {
+        return this._test(path, this._ignoreCache, false).ignored;
+      }
+      createFilter() {
+        return (path) => !this.ignores(path);
+      }
+      filter(paths) {
+        return makeArray(paths).filter(this.createFilter());
+      }
+      // @returns {TestResult}
+      test(path) {
+        return this._test(path, this._testCache, true);
+      }
+    };
+    var factory = (options) => new Ignore(options);
+    var isPathValid = (path) => checkPath(path && checkPath.convert(path), path, RETURN_FALSE);
+    var setupWindows = () => {
+      const makePosix = (str) => /^\\\\\?\\/.test(str) || /["<>|\u0000-\u001F]+/u.test(str) ? str : str.replace(/\\/g, "/");
+      checkPath.convert = makePosix;
+      const REGEX_TEST_WINDOWS_PATH_ABSOLUTE = /^[a-z]:\//i;
+      checkPath.isNotRelative = (path) => REGEX_TEST_WINDOWS_PATH_ABSOLUTE.test(path) || isNotRelative(path);
+    };
+    if (
+      // Detect `process` so that it can run in browsers.
+      typeof process !== "undefined" && process.platform === "win32"
+    ) {
+      setupWindows();
+    }
+    module.exports = factory;
+    factory.default = factory;
+    module.exports.isPathValid = isPathValid;
+    define(module.exports, Symbol.for("setupWindows"), setupWindows);
+  }
+});
+
+// node_modules/use-fs-access/dist/core/use-fs-access.js
+var import_react = __toESM(require_react());
+
+// node_modules/use-fs-access/dist/filters/git-filter.js
+var import_ignore = __toESM(require_ignore());
+var gitIgnoreFilter = async () => {
+  const ig = (0, import_ignore.default)({
+    allowRelativePaths: true
+  });
+  let isGitIgnoreLoaded = false;
+  return {
+    ignore: async (path, handle) => {
+      if (path.endsWith(".gitignore") && !isGitIgnoreLoaded && handle.kind === "file") {
+        const file = await handle.getFile();
+        const text = await file.text();
+        ig.add(text);
+        isGitIgnoreLoaded = true;
+        return false;
+      }
+      if (handle.kind === "directory" && (path.endsWith(".git") || path.endsWith(".git/"))) {
+        return false;
+      }
+      const { ignored } = ig.test(path);
+      return ignored;
+    }
+  };
+};
+var gitFolderFilter = async () => {
+  return {
+    ignore: async (path, handle) => {
+      if (handle.kind === "directory" && (path.endsWith(".git") || path.endsWith(".git/"))) {
+        return true;
+      }
+      return false;
+    }
+  };
+};
+
+// node_modules/use-fs-access/dist/filters/index.js
+var defaultFilters = [gitFolderFilter, gitIgnoreFilter];
+
+// node_modules/use-fs-access/dist/core/use-fs-access.js
+var DEFAULT_OPEN_DIRECTORY_MODE = "readwrite";
+var DEFAULT_FILTERS = defaultFilters;
+var DEFAULT_POLL_INTERVAL = 1e3;
+var DEFAULT_CACHE_TIME = 1e4;
+var DEFAULT_BATCH_SIZE = 50;
+var DEFAULT_LOAD_DEPTH = 2;
+var isApiSupported = window !== void 0 && "showDirectoryPicker" in window;
+var showDirectoryPicker = async (options = {}) => {
+  if (!isApiSupported)
+    return;
+  const { mode = DEFAULT_OPEN_DIRECTORY_MODE } = options;
+  try {
+    return await window.showDirectoryPicker({ ...options, mode });
+  } catch (err) {
+    console.warn("Unable to open directory:", err);
+  }
+};
+function useFileSystemAccess(props = {}) {
+  var _a, _b, _c, _d;
+  const { filters: filterFns = (props == null ? void 0 : props.filters) ?? DEFAULT_FILTERS, onFilesAdded: onAddFiles, onFilesDeleted: onDeleteFiles, onFilesModified: onChangeFiles } = props;
+  const enableFileWatcher = props.enableFileWatcher ?? false;
+  const batchSize = ((_a = props.fileWatcherOptions) == null ? void 0 : _a.batchSize) ?? DEFAULT_BATCH_SIZE;
+  const cacheTime = ((_b = props.fileWatcherOptions) == null ? void 0 : _b.cacheTime) ?? DEFAULT_CACHE_TIME;
+  const pollInterval = ((_c = props.fileWatcherOptions) == null ? void 0 : _c.pollInterval) ?? DEFAULT_POLL_INTERVAL;
+  const debugFileWatcher = ((_d = props.fileWatcherOptions) == null ? void 0 : _d.debug) ?? true;
+  const pauseFileWatcherRef = (0, import_react.useRef)(false);
+  const rootHandleRef = (0, import_react.useRef)(null);
+  const filtersRef = (0, import_react.useRef)([]);
+  const ignoredPathsRef = (0, import_react.useRef)(/* @__PURE__ */ new Set());
+  const filesRef = (0, import_react.useRef)(/* @__PURE__ */ new Map());
+  const previousFilesRef = (0, import_react.useRef)(/* @__PURE__ */ new Map());
+  const fileWatchRef = (0, import_react.useRef)(null);
+  const watchedDirectoriesRef = (0, import_react.useRef)(/* @__PURE__ */ new Map());
+  const fileCacheRef = (0, import_react.useRef)(/* @__PURE__ */ new Map());
+  const [files, setFiles] = (0, import_react.useState)(/* @__PURE__ */ new Map());
+  const memoFiltersRef = (0, import_react.useRef)([]);
+  const memoIgnoredPathsRef = (0, import_react.useRef)(/* @__PURE__ */ new Set());
+  (0, import_react.useEffect)(() => {
+    return () => {
+      unregisterFileWatcher();
+      clearOpenedDirectory();
+    };
+  }, []);
+  const initFileFilters = (0, import_react.useCallback)(async () => {
+    const filterPromises = [];
+    for (const filterFn of filterFns) {
+      filterPromises.push(filterFn());
+    }
+    filtersRef.current = await Promise.all(filterPromises);
+  }, [filterFns]);
+  const clearOpenedDirectory = () => {
+    if (!rootHandleRef.current)
+      return;
+    rootHandleRef.current = null;
+    filesRef.current.clear();
+    previousFilesRef.current.clear();
+    watchedDirectoriesRef.current.clear();
+    ignoredPathsRef.current.clear();
+    filtersRef.current = [];
+    fileCacheRef.current.clear();
+  };
+  const openDirectory = async (directory, depth = DEFAULT_LOAD_DEPTH) => {
+    if (!isApiSupported)
+      return;
+    if (await directory.requestPermission({ mode: "read" }) == "denied")
+      return;
+    try {
+      clearOpenedDirectory();
+      rootHandleRef.current = directory;
+      const rootPath = directory.name;
+      if (enableFileWatcher)
+        await registerFileWatcher();
+      await initFileFilters();
+      return await expandFileTree(directory, rootPath, depth);
+    } catch (err) {
+      console.warn("Directory opening failed:", err);
+    }
+  };
+  const expandDirectory = async (path) => {
+    const dirInfo = filesRef.current.get(path);
+    if (dirInfo && dirInfo.kind == "directory" && !dirInfo.loaded) {
+      return await expandFileTree(dirInfo.handle, path);
+    }
+  };
+  const writeFile = async (path, options = {}, data) => {
+    if (!path || typeof path !== "string" || isRootFilePath(path)) {
+      throw new Error(`Invalid file path: ${path}`);
+    }
+    const parentDirInfo = ensureGetParentDirInfo(path);
+    let name = path.substring(path.lastIndexOf("/") + 1);
+    if (!name || name.length === 0)
+      throw new Error(`Invalid file name: ${name}`);
+    const { create = true, open, keepData = true } = options;
+    if (create) {
+      name = getFileEntryName(path);
+      path = `${parentDirInfo.path}/${name}`;
+    }
+    if (!create && !filesRef.current.has(path))
+      throw new Error(`File not found: ${path}`);
+    try {
+      const fileHandle = await parentDirInfo.handle.getFileHandle(name, {
+        create
+      });
+      let fileInfo;
+      if (create) {
+        const file = await fileHandle.getFile();
+        fileInfo = {
+          name,
+          path,
+          handle: fileHandle,
+          kind: "file",
+          opened: open ?? false,
+          lastModified: file.lastModified,
+          size: file.size,
+          type: file.type,
+          content: void 0
+        };
+      } else {
+        fileInfo = filesRef.current.get(path);
+        if (open && fileInfo.opened !== open)
+          fileInfo.opened = open;
+      }
+      if (data != null) {
+        const writable = await fileHandle.createWritable({
+          keepExistingData: keepData
+        });
+        try {
+          await writable.write(data);
+          await writable.close();
+          const content = typeof data === "string" ? data : await new Response(data).text();
+          fileInfo.content = content;
+          const file = await fileHandle.getFile();
+          fileInfo.lastModified = file.lastModified;
+          fileInfo.size = file.size;
+          fileInfo.type = file.type;
+          fileInfo.content = content;
+          if (fileCacheRef.current.has(fileInfo.path))
+            fileCacheRef.current.set(fileInfo.path, {
+              content: fileInfo.content,
+              timestamp: Date.now()
+            });
+        } catch (err) {
+          await writable.abort();
+          throw err;
+        }
+      }
+      if (parentDirInfo.loaded) {
+        filesRef.current.set(path, fileInfo);
+        previousFilesRef.current.set(path, fileInfo);
+        setFiles(new Map(filesRef.current));
+      }
+      return fileInfo;
+    } catch (err) {
+      throw new Error(`Unable to create file: ${err}`);
+    }
+  };
+  const createDirectory = async (name, parentPath) => {
+    name = getFileEntryName(`${parentPath}/${name}`);
+    const dirPath = `${parentPath}/${name}`;
+    const parentInfo = filesRef.current.get(parentPath);
+    if (!parentInfo || parentInfo.kind !== "directory") {
+      throw new Error(`Parent directory not found: ${dirPath}`);
+    }
+    try {
+      const fileHandle = await parentInfo.handle.getDirectoryHandle(name, {
+        create: true
+      });
+      const dirInfo = {
+        name,
+        path: dirPath,
+        handle: fileHandle,
+        kind: "directory",
+        loaded: false
+      };
+      if (parentInfo.loaded) {
+        filesRef.current.set(dirPath, dirInfo);
+        previousFilesRef.current.set(dirPath, dirInfo);
+        setFiles(new Map(filesRef.current));
+      }
+      return dirInfo;
+    } catch (err) {
+      throw new Error(`Unable to create directory: ${err}`);
+    }
+  };
+  const deleteFile = async (path, recursive = false) => {
+    if (!path || typeof path !== "string") {
+      throw new Error(`Invalid path: ${path}`);
+    }
+    const entryInfo = filesRef.current.get(path);
+    if (!entryInfo)
+      throw new Error(`File or directory not found: ${path}`);
+    if (isRootFilePath(path))
+      throw new Error(`Root directory can't be deleted: ${path}`);
+    const isRecursive = entryInfo.kind === "directory" && recursive;
+    pauseFileWatcherRef.current = true;
+    try {
+      const parentDirInfo = ensureGetParentDirInfo(path);
+      await parentDirInfo.handle.removeEntry(entryInfo.name, {
+        recursive: isRecursive
+      });
+      filesRef.current.delete(entryInfo.path);
+      previousFilesRef.current.delete(entryInfo.path);
+      if (entryInfo.kind === "file" && entryInfo.opened)
+        fileCacheRef.current.delete(entryInfo.path);
+      if (entryInfo.kind === "directory" && entryInfo.loaded)
+        watchedDirectoriesRef.current.delete(entryInfo.path);
+      if (isRecursive)
+        await deleteSubDirectories(path);
+      setFiles(new Map(filesRef.current));
+    } catch {
+      throw new Error(`Unable to delete ${entryInfo.kind}: ${path}`);
+    } finally {
+      pauseFileWatcherRef.current = false;
+    }
+  };
+  const openFile = async (path) => {
+    if (!path || typeof path !== "string")
+      throw new Error(`Invalid file path: ${path}`);
+    return await toggleFileOpened(path, true);
+  };
+  const closeFile = async (path) => {
+    if (!path || typeof path !== "string")
+      throw new Error(`Invalid file path: ${path}`);
+    return await toggleFileOpened(path, false);
+  };
+  const toggleFileOpened = async (path, open) => {
+    const fileInfo = filesRef.current.get(path);
+    if (!fileInfo)
+      throw new Error(`File not found: ${path}`);
+    if (fileInfo.kind != "file")
+      throw new Error(`Entry is not a file: ${path}`);
+    if (open && fileInfo.opened == true)
+      return fileInfo;
+    const fileHandle = fileInfo.handle;
+    try {
+      if (open) {
+        const file = await fileHandle.getFile();
+        fileInfo.content = await file.text();
+        fileInfo.lastModified = file.lastModified;
+        fileInfo.size = file.size;
+        fileInfo.type = file.type;
+        fileInfo.name = file.name;
+        fileInfo.opened = true;
+      } else {
+        fileInfo.content = void 0;
+        if (fileInfo.opened) {
+          fileCacheRef.current.delete(fileInfo.path);
+          fileInfo.opened = false;
+        }
+      }
+      setFiles(new Map(filesRef.current));
+    } catch {
+      throw new Error(`Unable to ${open ? "open" : "close"} file: ${path}`);
+    }
+    return fileInfo;
+  };
+  const renameFile = async (path, newName) => {
+    if (!path || !path.includes("/"))
+      throw new Error(`Invalid path: ${path}`);
+    if (!newName)
+      throw new Error(`Invalid name: ${newName}`);
+    const oldEntryInfo = filesRef.current.get(path);
+    if (!oldEntryInfo)
+      throw new Error(`File or directory not found: ${path}`);
+    const parentDirInfo = ensureGetParentDirInfo(path);
+    newName = getFileEntryName(`${parentDirInfo.path}/${newName}`);
+    const newPath = `${parentDirInfo.path}/${newName}`;
+    if (filesRef.current.has(newPath))
+      throw new Error(`File or directory with this name already exists: ${newName}`);
+    const isDirectory = oldEntryInfo.kind === "directory";
+    pauseFileWatcherRef.current = true;
+    try {
+      if (!isDirectory)
+        return await doRenameFile(oldEntryInfo, parentDirInfo, newName, newPath);
+      return await doRenameDirectory(oldEntryInfo, parentDirInfo, newName, newPath);
+    } catch {
+      throw new Error(`Unable to rename entry: ${path}`);
+    } finally {
+      pauseFileWatcherRef.current = false;
+    }
+  };
+  const doRenameFile = async (oldFileInfo, parentDir, name, path) => {
+    const file = await oldFileInfo.handle.getFile();
+    const content = await file.text();
+    const newFileHandle = await parentDir.handle.getFileHandle(name, {
+      create: true
+    });
+    const writable = await newFileHandle.createWritable();
+    await writable.write(content);
+    await writable.close();
+    const deleteFile2 = oldFileInfo.name.toLowerCase() != name.toLowerCase();
+    if (deleteFile2)
+      await parentDir.handle.removeEntry(oldFileInfo.name);
+    const newFile = await newFileHandle.getFile();
+    const newFileInfo = {
+      handle: newFileHandle,
+      name: newFile.name,
+      lastModified: newFile.lastModified,
+      size: newFile.size,
+      type: newFile.type,
+      kind: "file",
+      path,
+      content,
+      opened: false
+    };
+    if (parentDir.loaded) {
+      filesRef.current.delete(oldFileInfo.path);
+      previousFilesRef.current.delete(oldFileInfo.path);
+      filesRef.current.set(newFileInfo.path, newFileInfo);
+      previousFilesRef.current.set(newFileInfo.path, newFileInfo);
+    }
+    setFiles(new Map(filesRef.current));
+    return newFileInfo;
+  };
+  const doRenameDirectory = async (oldDirInfo, parentDir, name, path) => {
+    try {
+      const newDirHandle = await parentDir.handle.getDirectoryHandle(name, {
+        create: true
+      });
+      filesRef.current.delete(oldDirInfo.path);
+      if (oldDirInfo.loaded)
+        watchedDirectoriesRef.current.delete(oldDirInfo.path);
+      const newFilesMap = new Map(filesRef.current);
+      const newWatchedDirectories = new Map(watchedDirectoriesRef.current);
+      const newDirInfo = {
+        handle: newDirHandle,
+        name: newDirHandle.name,
+        path,
+        kind: "directory",
+        loaded: oldDirInfo.loaded
+      };
+      newFilesMap.set(newDirInfo.path, newDirInfo);
+      if (newDirInfo.loaded)
+        newWatchedDirectories.set(newDirInfo.path, { handle: newDirHandle });
+      await updateDirectoryContents(oldDirInfo.handle, newDirHandle, newFilesMap, newWatchedDirectories, oldDirInfo.path, path);
+      const deleteDir = oldDirInfo.name.toLowerCase() != name.toLowerCase();
+      if (deleteDir) {
+        await parentDir.handle.removeEntry(oldDirInfo.name, {
+          recursive: true
+        });
+      }
+      filesRef.current = new Map(newFilesMap);
+      previousFilesRef.current = new Map(newFilesMap);
+      watchedDirectoriesRef.current = new Map(newWatchedDirectories);
+      setFiles(new Map(filesRef.current));
+      return newDirInfo;
+    } catch {
+      await parentDir.handle.removeEntry(name, {
+        recursive: true
+      });
+      throw new Error(`Unable to rename directory: ${path}`);
+    }
+  };
+  const copyFile = async (path, destination, replace = false) => {
+    if (!path || !path.includes("/"))
+      throw new Error(`Invalid path: ${path}`);
+    if (destination.startsWith(path))
+      throw new Error(`Destination directory is the subdirectory of the source: ${path}`);
+    const destDirInfo = filesRef.current.get(destination);
+    if (!destDirInfo || destDirInfo.kind !== "directory")
+      throw new Error(`Destination directory not found: ${path}`);
+    const oldEntryInfo = filesRef.current.get(path);
+    if (!oldEntryInfo)
+      throw new Error(`Source file or directory not found: ${path}`);
+    const fileName = oldEntryInfo.name;
+    const newName = getFileEntryName(`${destDirInfo.path}/${fileName}`);
+    const newPath = `${destDirInfo.path}/${newName}`;
+    if (oldEntryInfo.kind === "directory" && destDirInfo.path.startsWith(oldEntryInfo.path))
+      throw new Error("The destination folder is a subdirectory of the source directory.");
+    const destHandle = destDirInfo.handle;
+    const isDirectory = oldEntryInfo.kind === "directory";
+    const parentDirInfo = ensureGetParentDirInfo(path);
+    const parentDirHandle = parentDirInfo.handle;
+    pauseFileWatcherRef.current = true;
+    try {
+      if (!isDirectory) {
+        return await doCopyFile(oldEntryInfo, destHandle, parentDirHandle, newName, newPath, replace);
+      }
+      await doCopyDirectory(oldEntryInfo, destHandle, parentDirHandle, newName, newPath, replace);
+    } catch {
+      throw new Error(`Unable to copy ${oldEntryInfo.kind} to ${destination}`);
+    } finally {
+      pauseFileWatcherRef.current = false;
+    }
+  };
+  const doCopyFile = async (source, destination, parentDirHandle, newName, newPath, replace) => {
+    const file = await source.handle.getFile();
+    const content = await file.text();
+    const newFileHandle = await destination.getFileHandle(newName, {
+      create: true
+    });
+    const writable = await newFileHandle.createWritable();
+    await writable.write(content);
+    await writable.close();
+    const newFile = await newFileHandle.getFile();
+    const newFileInfo = {
+      handle: newFileHandle,
+      name: newFile.name,
+      lastModified: newFile.lastModified,
+      size: newFile.size,
+      type: newFile.type,
+      kind: "file",
+      path: newPath,
+      content,
+      opened: false
+    };
+    if (replace) {
+      await parentDirHandle.removeEntry(source.name);
+      filesRef.current.delete(source.path);
+      previousFilesRef.current.delete(source.path);
+      if (source.opened)
+        fileCacheRef.current.delete(source.path);
+    }
+    filesRef.current.set(newFileInfo.path, newFileInfo);
+    previousFilesRef.current.set(newFileInfo.path, newFileInfo);
+    setFiles(new Map(filesRef.current));
+    return;
+  };
+  const doCopyDirectory = async (source, destination, parentDirHandle, newName, newPath, replace) => {
+    const newFilesMap = new Map(filesRef.current);
+    const newWatchedDirectories = new Map(watchedDirectoriesRef.current);
+    const newDirHandle = await destination.getDirectoryHandle(newName, {
+      create: true
+    });
+    const newDirInfo = {
+      handle: newDirHandle,
+      name: newDirHandle.name,
+      path: newPath,
+      kind: "directory",
+      loaded: source.loaded
+    };
+    newFilesMap.set(newDirInfo.path, newDirInfo);
+    if (newDirInfo.loaded)
+      newWatchedDirectories.set(newDirInfo.path, { handle: newDirHandle });
+    await updateDirectoryContents(source.handle, newDirHandle, newFilesMap, newWatchedDirectories, source.path, newPath, replace);
+    if (replace) {
+      await parentDirHandle.removeEntry(source.name, {
+        recursive: true
+      });
+      filesRef.current.delete(source.path);
+      previousFilesRef.current.delete(source.path);
+      if (source.loaded)
+        watchedDirectoriesRef.current.delete(source.path);
+    }
+    filesRef.current = new Map(newFilesMap);
+    previousFilesRef.current = new Map(newFilesMap);
+    watchedDirectoriesRef.current = new Map(newWatchedDirectories);
+    setFiles(new Map(filesRef.current));
+  };
+  const expandFileTree = async (dirHandle, basePath, depth = 1) => {
+    try {
+      await loadDirectories(dirHandle, basePath, depth);
+      await loadDirectoryNodes(dirHandle, basePath, depth);
+      const filterTasks = [];
+      for (const entry of filesRef.current) {
+        filterTasks.push((async ([path, info]) => {
+          if (await ignoreFilePath(filtersRef.current, path, info.handle)) {
+            filesRef.current.delete(path);
+          }
+        })(entry));
+      }
+      await Promise.all(filterTasks);
+      previousFilesRef.current = filesRef.current;
+      setFiles(new Map(filesRef.current));
+      return filesRef.current;
+    } catch (err) {
+      console.warn("Directory processing failed:", err);
+      return /* @__PURE__ */ new Map();
+    }
+  };
+  const loadDirectories = async (dirHandle, dirPath, depth = 1) => {
+    if (await ignoreFilePath(filtersRef.current, dirPath, dirHandle)) {
+      ignoredPathsRef.current.add(dirPath);
+      return;
+    }
+    const isNode = depth > 1;
+    const prevEntry = filesRef.current.get(dirPath);
+    const entry = prevEntry ?? {
+      name: dirHandle.name,
+      handle: dirHandle,
+      kind: dirHandle.kind,
+      path: dirPath,
+      loaded: !isNode
+    };
+    filesRef.current.set(dirPath, entry);
+    const dirEntries = [];
+    const fileEntries = [];
+    for await (const [name, handle] of dirHandle.entries()) {
+      if (handle.kind == "directory")
+        dirEntries.push([name, handle]);
+      else
+        fileEntries.push([name, handle]);
+    }
+    const fileTasks = fileEntries.map(async ([name, handle]) => {
+      const fullPath = `${dirPath}/${name}`;
+      if (await ignoreFilePath(filtersRef.current, fullPath, handle)) {
+        ignoredPathsRef.current.add(fullPath);
+        return;
+      }
+      const file = await handle.getFile();
+      filesRef.current.set(fullPath, {
+        name: file.name,
+        handle,
+        path: fullPath,
+        kind: "file",
+        lastModified: file.lastModified,
+        size: file.size,
+        type: file.type,
+        opened: false
+      });
+    });
+    await Promise.all(fileTasks);
+    const dirTasks = dirEntries.map(async ([name, handle]) => {
+      const fullPath = `${dirPath}/${name}`;
+      if (isNode) {
+        await loadDirectories(handle, fullPath, depth - 1);
+      } else {
+        if (await ignoreFilePath(filtersRef.current, fullPath, handle)) {
+          ignoredPathsRef.current.add(fullPath);
+          return;
+        }
+        filesRef.current.set(fullPath, {
+          name: handle.name,
+          handle,
+          path: fullPath,
+          kind: "directory",
+          loaded: false
+        });
+      }
+    });
+    await Promise.all(dirTasks);
+    entry.loaded = true;
+  };
+  const loadDirectoryNodes = async (dirHandle, dirPath, depth = 1) => {
+    const isNode = depth > 1;
+    const directoryNode = watchedDirectoriesRef.current.get(dirPath) ?? {
+      handle: dirHandle
+    };
+    watchedDirectoriesRef.current.set(dirPath, directoryNode);
+    const subDirs = [];
+    for await (const [name, handle] of dirHandle.entries()) {
+      if (handle.kind === "directory") {
+        subDirs.push([name, handle]);
+      }
+    }
+    const dirTasks = subDirs.map(async ([name, handle]) => {
+      const fullPath = `${dirPath}/${name}`;
+      if (isNode) {
+        await loadDirectoryNodes(handle, fullPath, depth - 1);
+      }
+    });
+    await Promise.all(dirTasks);
+  };
+  const updateDirectoryContents = async (src, dest, filesMap, watchedDirectories, oldBasePath, newBasePath, replace = true) => {
+    for await (const [name, handle] of src.entries()) {
+      const oldPath = `${oldBasePath}/${name}`;
+      const newPath = `${newBasePath}/${name}`;
+      if (handle.kind === "file") {
+        const file = await handle.getFile();
+        const newFileHandle = await dest.getFileHandle(name, { create: true });
+        const writable = await newFileHandle.createWritable();
+        const content = await file.text();
+        await writable.write(content);
+        await writable.close();
+        const oldFileInfo = filesMap.get(oldPath);
+        if (!oldFileInfo || oldFileInfo.kind !== "file")
+          continue;
+        const newFileInfo = {
+          name,
+          path: newPath,
+          kind: "file",
+          handle: newFileHandle,
+          size: file.size,
+          lastModified: file.lastModified,
+          type: file.type,
+          opened: oldFileInfo.opened,
+          content: oldFileInfo.opened ? content : void 0
+        };
+        if (replace) {
+          filesMap.delete(oldPath);
+          fileCacheRef.current.delete(oldPath);
+        }
+        filesMap.set(newPath, newFileInfo);
+      } else if (handle.kind === "directory") {
+        const newDirHandle = await dest.getDirectoryHandle(name, {
+          create: true
+        });
+        const oldDirInfo = filesMap.get(oldPath);
+        if (oldDirInfo != null && oldDirInfo.kind === "directory") {
+          const newDirInfo = {
+            name,
+            path: newPath,
+            kind: "directory",
+            handle: newDirHandle,
+            loaded: oldDirInfo.loaded
+          };
+          if (replace) {
+            filesMap.delete(oldPath);
+            filesMap.set(newPath, newDirInfo);
+            if (oldDirInfo.loaded)
+              watchedDirectories.delete(oldDirInfo.path);
+          }
+          if (oldDirInfo.loaded) {
+            watchedDirectories.set(newPath, { handle: newDirHandle });
+          }
+        }
+        await updateDirectoryContents(handle, newDirHandle, filesMap, watchedDirectories, oldPath, newPath);
+      }
+    }
+  };
+  const deleteSubDirectories = async (path) => {
+    for (const [key, entry] of filesRef.current.entries()) {
+      if (key !== path && !key.startsWith(path))
+        continue;
+      if (entry.kind == "directory" && entry.loaded)
+        watchedDirectoriesRef.current.delete(key);
+      filesRef.current.delete(key);
+      previousFilesRef.current.delete(key);
+    }
+  };
+  const ensureGetParentDirInfo = (path) => {
+    const parentPath = getParentFilePath(path);
+    const parentDirInfo = filesRef.current.get(parentPath);
+    if (!parentDirInfo || parentDirInfo.kind !== "directory")
+      throw new Error(`Parent directory not found: ${parentPath}`);
+    return parentDirInfo;
+  };
+  const getFileEntryName = (path) => {
+    const filesMap = filesRef.current;
+    const parentPath = path.substring(0, path.lastIndexOf("/") + 1);
+    const fileName = path.substring(path.lastIndexOf("/") + 1);
+    let base = fileName;
+    let ext = "";
+    const lastDotIndex = fileName.lastIndexOf(".");
+    if (lastDotIndex !== -1) {
+      base = fileName.slice(0, lastDotIndex);
+      ext = fileName.slice(lastDotIndex);
+    }
+    let counter = 1;
+    let candidate = fileName;
+    let currentPath = path;
+    const existingPaths = new Set(Array.from(filesMap.keys()).map((k) => k.toLowerCase()));
+    while (existingPaths.has(currentPath.toLowerCase())) {
+      counter++;
+      const newFileName = `${base} (${counter})${ext}`;
+      candidate = `${newFileName}`;
+      currentPath = `${parentPath}${newFileName}`;
+    }
+    return candidate;
+  };
+  const registerFileWatcher = async () => {
+    if (fileWatchRef.current || !rootHandleRef.current)
+      return;
+    let processingTask = null;
+    fileWatchRef.current = window.setInterval(() => {
+      if (processingTask || pauseFileWatcherRef.current == true)
+        return;
+      processingTask = (async () => {
+        try {
+          const entries = await filterWatchedDirectories();
+          await processFilteredEntries(entries);
+        } catch (err) {
+          if (debugFileWatcher)
+            console.log("DEBUG(ERROR)", err);
+        } finally {
+          processingTask = null;
+        }
+      })();
+    }, pollInterval);
+    if (debugFileWatcher)
+      console.log("DEBUG: File Watcher registered");
+  };
+  const unregisterFileWatcher = () => {
+    if (!fileWatchRef.current)
+      return;
+    clearInterval(fileWatchRef.current);
+    memoFiltersRef.current = [];
+    memoIgnoredPathsRef.current.clear();
+  };
+  const processFileNode = (0, import_react.useCallback)(async (path, node, files2, timestamp, addedEntries, modifiedEntries) => {
+    const prevEntry = previousFilesRef.current.get(path);
+    const isNew = !prevEntry;
+    if (node.kind === "directory") {
+      const prevDir = (prevEntry == null ? void 0 : prevEntry.kind) == "directory" ? prevEntry : void 0;
+      const isLoaded = (prevDir == null ? void 0 : prevDir.kind) === "directory" ? prevDir.loaded : false;
+      const dirInfo = {
+        name: node.handle.name,
+        path,
+        kind: "directory",
+        handle: node.handle,
+        loaded: isLoaded
+      };
+      if (isNew)
+        addedEntries.set(path, dirInfo);
+      files2.set(path, dirInfo);
+      return;
+    }
+    const fileHandle = node.handle;
+    const file = await fileHandle.getFile();
+    const cached = fileCacheRef.current.get(path);
+    const isCached = cached && timestamp - cached.timestamp < cacheTime;
+    const prevFile = (prevEntry == null ? void 0 : prevEntry.kind) === "file" ? prevEntry : void 0;
+    const isModified = prevFile && prevFile.lastModified !== file.lastModified;
+    const isOpened = prevFile != void 0 && prevFile.opened;
+    const baseFileInfo = {
+      name: file.name,
+      path,
+      kind: "file",
+      handle: fileHandle,
+      opened: isOpened
+    };
+    let content;
+    if (isOpened) {
+      if (!isCached || isModified) {
+        content = await file.text();
+        fileCacheRef.current.set(path, {
+          content,
+          timestamp
+        });
+      } else {
+        content = cached.content;
+      }
+    }
+    const fileInfo = {
+      ...baseFileInfo,
+      lastModified: file.lastModified,
+      size: file.size,
+      type: file.type,
+      content,
+      opened: isOpened
+    };
+    if (isNew)
+      addedEntries.set(path, fileInfo);
+    if (prevFile != null && isModified) {
+      modifiedEntries.set(path, fileInfo);
+    }
+    files2.set(path, fileInfo);
+  }, [cacheTime]);
+  const processFilteredEntries = (0, import_react.useCallback)(async (fileEntries) => {
+    const addedEntries = /* @__PURE__ */ new Map();
+    const deletedEntries = /* @__PURE__ */ new Map();
+    const modifiedEntries = /* @__PURE__ */ new Map();
+    const timestamp = Date.now();
+    const seenEntries = /* @__PURE__ */ new Set();
+    const files2 = /* @__PURE__ */ new Map();
+    const filteredEntries = Array.from(fileEntries.entries());
+    for (let i = 0; i < filteredEntries.length; i += batchSize) {
+      const batch = filteredEntries.slice(i, i + batchSize);
+      await Promise.all(batch.map(async ([path, node]) => {
+        seenEntries.add(path);
+        return processFileNode(path, node, files2, timestamp, addedEntries, modifiedEntries);
+      }));
+    }
+    for (const [path, info] of previousFilesRef.current) {
+      if (!seenEntries.has(path)) {
+        if (info.kind === "directory") {
+          deletedEntries.set(path, info);
+          const prefix = path.endsWith("/") ? path : path + "/";
+          for (const key of watchedDirectoriesRef.current.keys()) {
+            if (key === path || key.startsWith(prefix)) {
+              watchedDirectoriesRef.current.delete(key);
+            }
+          }
+        } else {
+          deletedEntries.set(path, info);
+        }
+      }
+    }
+    const hasChanges = addedEntries.size > 0 || deletedEntries.size > 0 || modifiedEntries.size > 0;
+    if (hasChanges) {
+      if (addedEntries.size > 0) {
+        onAddFiles == null ? void 0 : onAddFiles(addedEntries);
+        if (debugFileWatcher)
+          console.log("DEBUG: Added entries", addedEntries);
+      }
+      if (deletedEntries.size > 0) {
+        onDeleteFiles == null ? void 0 : onDeleteFiles(deletedEntries);
+        if (debugFileWatcher)
+          console.log("DEBUG: Deleted entries", deletedEntries);
+      }
+      if (modifiedEntries.size > 0) {
+        onChangeFiles == null ? void 0 : onChangeFiles(modifiedEntries);
+        if (debugFileWatcher)
+          console.log("DEBUG: Modified entries", modifiedEntries);
+      }
+      previousFilesRef.current = filesRef.current;
+      filesRef.current = files2;
+      filtersRef.current = memoFiltersRef.current;
+      ignoredPathsRef.current = memoIgnoredPathsRef.current;
+      setFiles(new Map(files2));
+    }
+  }, [
+    processFileNode,
+    onAddFiles,
+    onDeleteFiles,
+    onChangeFiles,
+    batchSize,
+    debugFileWatcher
+  ]);
+  const filterDirectory = (0, import_react.useCallback)(async (dirPath, dirNode, filters, filteredNodes, ignoredEntries) => {
+    if (ignoredEntries.has(dirPath))
+      return;
+    if (await ignoreFilePath(filters, dirPath, dirNode.handle)) {
+      ignoredEntries.add(dirPath);
+      return;
+    }
+    const dirHandles = [];
+    const fileHandles = [];
+    try {
+      for await (const handle of dirNode.handle.values()) {
+        if (handle.kind == "directory")
+          dirHandles.push(handle);
+        else
+          fileHandles.push(handle);
+      }
+    } catch (err) {
+      console.warn(`Error reading directory ${dirPath}:`, err);
+      return;
+    }
+    if (fileHandles.length > 1e3) {
+      return;
+    }
+    const fileTasks = [];
+    for (const handle of fileHandles) {
+      fileTasks.push((async () => {
+        const fullPath = `${dirPath}/${handle.name}`;
+        if (ignoredEntries.has(fullPath))
+          return;
+        if (await ignoreFilePath(filters, fullPath, handle)) {
+          ignoredEntries.add(fullPath);
+          return;
+        }
+        filteredNodes.set(fullPath, {
+          handle,
+          kind: "file"
+        });
+      })());
+    }
+    await Promise.all(fileTasks);
+    const dirTasks = [];
+    for (const handle of dirHandles) {
+      dirTasks.push((async () => {
+        const fullPath = `${dirPath}/${handle.name}`;
+        if (ignoredEntries.has(fullPath))
+          return;
+        if (await ignoreFilePath(filters, fullPath, handle)) {
+          ignoredEntries.add(fullPath);
+          return;
+        }
+        filteredNodes.set(fullPath, { handle, kind: "directory" });
+      })());
+    }
+    await Promise.all(dirTasks);
+  }, []);
+  const filterWatchedDirectories = (0, import_react.useCallback)(async () => {
+    const rootHandle = rootHandleRef.current;
+    const rootPath = rootHandle.name;
+    const filteredNodes = /* @__PURE__ */ new Map();
+    filteredNodes.set(rootPath, {
+      handle: rootHandle,
+      kind: "directory"
+    });
+    const ignoredEntries = /* @__PURE__ */ new Set();
+    const filters = [];
+    for (const filterFn of filterFns) {
+      filters.push(await filterFn());
+    }
+    for (const [dirPath, dirNode] of watchedDirectoriesRef.current.entries()) {
+      await filterDirectory(dirPath, dirNode, filters, filteredNodes, ignoredEntries);
+    }
+    const filterTasks = [];
+    for (const [path, node] of filteredNodes.entries()) {
+      filterTasks.push((async () => {
+        if (await ignoreFilePath(filters, path, node.handle)) {
+          filteredNodes.delete(path);
+          ignoredEntries.add(path);
+        }
+        if (node.kind == "file" && path.endsWith(".crswap")) {
+          filteredNodes.delete(path);
+          ignoredEntries.add(path);
+        }
+      })());
+    }
+    await Promise.all(filterTasks);
+    if (ignoredEntries.size > 0) {
+      filtersRef.current = filters;
+      ignoredPathsRef.current = ignoredEntries;
+    }
+    memoFiltersRef.current = filters;
+    memoIgnoredPathsRef.current = ignoredEntries;
+    return filteredNodes;
+  }, [filterDirectory, filterFns]);
+  const debouncedFiles = useDebounce(files, 50);
+  return {
+    files: debouncedFiles,
+    openDirectory,
+    expandDirectory,
+    openFile,
+    closeFile,
+    writeFile,
+    createDirectory,
+    deleteFile,
+    renameFile,
+    copyFile
+  };
+}
+var ignoreFilePath = async (filters, path, handle) => {
+  for (const filter of filters) {
+    if (await filter.ignore(path, handle) === true) {
+      return true;
+    }
+  }
+  return false;
+};
+var isRootFilePath = (path) => {
+  return !path.includes("/");
+};
+var getParentFilePath = (path) => {
+  return path.includes("/") ? path.substring(0, path.lastIndexOf("/")) : path;
+};
+var useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = (0, import_react.useState)(value);
+  (0, import_react.useEffect)(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+};
+
+// node_modules/use-fs-access/dist/index.js
+var dist_default = useFileSystemAccess;
+export {
+  dist_default as default,
+  isApiSupported,
+  showDirectoryPicker
+};
+//# sourceMappingURL=use-fs-access.js.map

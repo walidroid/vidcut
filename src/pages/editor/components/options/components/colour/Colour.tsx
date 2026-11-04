@@ -1,4 +1,4 @@
-﻿import styles from './colour.module.less';
+import styles from './colour.module.less';
 import { useCallback, useState } from 'react';
 import { useReducer } from 'react';
 import { observer } from 'mobx-react';
@@ -6,6 +6,7 @@ import { utils } from 'video-core-sdk';
 import type { ImageElement } from 'video-core-sdk';
 import { RadioGroup, Radio } from '@douyinfe/semi-ui';
 import { stores } from '@stores/index';
+import { language } from '@language/index';
 import BasicFilter from './BasicFilter';
 import LutFilter from './LutFilter';
 

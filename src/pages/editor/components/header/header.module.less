@@ -1,26 +1,40 @@
 .header {
   // padding: 0 20px;
   padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  -webkit-app-region: drag;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &.electronHeader {
+    padding-right: 140px;
+  }
+
   section {
     display: flex;
     align-items: center;
+    -webkit-app-region: no-drag;
   }
   .left {
     position: relative;
     z-index: 300;
+    -webkit-app-region: no-drag;
     a {
       margin-right: 20px;
+      -webkit-app-region: no-drag;
     }
   }
   .right {
     position: relative;
     z-index: 300;
+    -webkit-app-region: no-drag;
     button {
       margin-right: 10px;
+      -webkit-app-region: no-drag;
     }
   }
 
@@ -28,6 +42,8 @@
     margin-right: 10px;
     font-size: 12px;
     color: var(--theme-text);
+    -webkit-app-region: no-drag;
+    cursor: pointer;
   }
 
   // .center {

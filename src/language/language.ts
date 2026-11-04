@@ -11,17 +11,21 @@ export const locals: Record<ValueType, any> = {
   'ar-SA': arSA,
 };
 
-const _window = window as any;
+const _window = typeof window !== 'undefined' ? (window as any) : ({} as any);
 
 /**
  * Internationalization handler (EN, FR & AR)
  */
 class Language {
+  private _currentLang: ValueType = 'en-US';
+
   constructor() {
     const saved = storage.local.get('language');
-    _window.language = (saved === 'fr-FR' || saved === 'ar-SA' || saved === 'en-US') ? saved : 'en-US';
-    storage.local.set('language', _window.language);
-    this.applyDir(_window.language);
+    this._currentLang = (saved === 'fr-FR' || saved === 'ar-SA' || saved === 'en-US') ? saved : 'en-US';
+    storage.local.set('language', this._currentLang);
+    _window.language = this;
+    _window.__languageCode = this._currentLang;
+    this.applyDir(this._currentLang);
   }
 
   private applyDir(lang: ValueType) {
@@ -42,10 +46,7 @@ class Language {
    * @param {string} type language type
    */
   val(name: string, data?: any, type?: ValueType): string {
-    if (!_window.language) {
-      _window.language = this.getLanguage();
-    }
-    const targetType = type || _window.language || 'en-US';
+    const targetType = type || this._currentLang || 'en-US';
     let str = locals[targetType as ValueType]?.[name] || locals['en-US']?.[name] || name;
     if (data) {
       for (const key in data) {
@@ -59,29 +60,30 @@ class Language {
    * Reverse lookup
    */
   findVal(value: string, valueType: ValueType = 'en-US'): string {
-    if (!_window.language) {
-      _window.language = this.getLanguage();
-    }
     const source = locals[valueType] || locals['en-US'];
     for (const key in source) {
       if (source[key] === value) {
-        return locals[_window.language as ValueType]?.[key] || value;
+        return locals[this._currentLang as ValueType]?.[key] || value;
       }
     }
     return value;
   }
 
   getLanguage(): ValueType {
-    const lang = _window.language || storage.local.get('language');
+    const lang = this._currentLang || storage.local.get('language');
     return (lang === 'fr-FR' || lang === 'ar-SA' || lang === 'en-US') ? lang : 'en-US';
   }
 
   setLanguage(type: ValueType) {
     storage.local.set('language', type);
-    _window.language = type;
+    this._currentLang = type;
+    _window.__languageCode = type;
     this.applyDir(type);
     location.reload();
   }
 }
 
 export const language = new Language();
+if (typeof window !== 'undefined') {
+  (window as any).language = language;
+}

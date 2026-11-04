@@ -13,6 +13,7 @@ import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi
 
 import type { CaptionElement } from 'video-core-sdk';
 import Intl from '@language/Intl';
+import { language } from '@language/index';
 import { stores } from '@stores/index';
 import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
 

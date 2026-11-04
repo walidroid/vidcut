@@ -1,9 +1,10 @@
-﻿import styles from './menus.module.less';
+import styles from './menus.module.less';
 // import { SettingConfig, Performance, SpeedOne, WindmillTwo, MagicWand } from '@icon-park/react';
 import { observer } from 'mobx-react';
 import type * as ctypes from '@config/types';
 import type { BaseElement } from 'video-core-sdk';
 import { stores } from '@stores/index';
+import { language } from '@language/index';
 
 export interface IProps {
   elements: BaseElement[];

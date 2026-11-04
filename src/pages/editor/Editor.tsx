@@ -11,7 +11,7 @@ import Sources from './components/sources';
 // import Timeline2 from './components/timeline';
 import Timeline2 from './components/timeline2';
 import ColorBg from './ColorBg';
-import { Left, Right } from '@icon-park/react';
+import { Left, Right, UploadOne } from '@icon-park/react';
 import { observer } from 'mobx-react';
 
 // Mock数据
@@ -253,6 +253,99 @@ function EditorPage(props: IProps) {
   const showPanel = (type: 'options' | 'sources', v: boolean) => {
     setShow({ ...show, [type]: v });
   };
+
+  const [isDraggingFiles, setIsDraggingFiles] = useState(false);
+
+  // Desktop Global Drag & Drop from Windows Explorer
+  useEffect(() => {
+    let dragCounter = 0;
+
+    const handleDragEnter = (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer && Array.from(e.dataTransfer.types).includes('Files')) {
+        dragCounter++;
+        setIsDraggingFiles(true);
+      }
+    };
+
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer && Array.from(e.dataTransfer.types).includes('Files')) {
+        e.dataTransfer.dropEffect = 'copy';
+        setIsDraggingFiles(true);
+      }
+    };
+
+    const handleDragLeave = (e: DragEvent) => {
+      e.preventDefault();
+      dragCounter--;
+      if (dragCounter <= 0) {
+        dragCounter = 0;
+        setIsDraggingFiles(false);
+      }
+    };
+
+    const handleDrop = (e: DragEvent) => {
+      e.preventDefault();
+      dragCounter = 0;
+      setIsDraggingFiles(false);
+
+      const files = Array.from(e.dataTransfer?.files || []);
+      if (files.length > 0) {
+        editor.setSourceType('my');
+        pubsub.publish('importUserFiles', files);
+        Toast.info(language.val('desktop_drop_files_title') + ` (${files.length})`);
+      }
+    };
+
+    const handleContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as any).isContentEditable)) {
+        return;
+      }
+      if (!target.closest?.('.canvas-context-menu') && !target.closest?.('.element-item')) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('dragenter', handleDragEnter);
+    window.addEventListener('dragover', handleDragOver);
+    window.addEventListener('dragleave', handleDragLeave);
+    window.addEventListener('drop', handleDrop);
+    window.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      window.removeEventListener('dragenter', handleDragEnter);
+      window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('dragleave', handleDragLeave);
+      window.removeEventListener('drop', handleDrop);
+      window.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, [editor]);
+
+  // Desktop Keyboard Selection Shortcuts (Ctrl+A / Escape)
+  useEffect(() => {
+    const unsubSelectAll = pubsub.subscribe('keyboardSelectAll', () => {
+      const ids: string[] = [];
+      editor.data?.tracks?.forEach((t: any) => {
+        t.elements?.forEach((e: any) => {
+          if (e && e.id) ids.push(e.id);
+        });
+      });
+      if (ids.length > 0) {
+        editor.setContorlAndSelectedElemenent(ids);
+      }
+    });
+
+    const unsubDeselect = pubsub.subscribe('keyboardDeselect', () => {
+      editor.setContorlAndSelectedElemenent([]);
+    });
+
+    return () => {
+      pubsub.unsubscribe('keyboardSelectAll');
+      pubsub.unsubscribe('keyboardDeselect');
+    };
+  }, [editor]);
 
   useEffect(() => {
     pubsub.subscribe('showLayoutPanel', (_msg, params: { type: 'options' | 'sources'; visible: boolean }) => {
@@ -514,6 +607,15 @@ function EditorPage(props: IProps) {
         <ColorBg style={{ bottom: 400, left: 300 }} />
         <ColorBg style={{ top: 100, right: 400 }} />
         {editor.movieCreateSuccess && <DragItem />}
+        {isDraggingFiles && (
+          <div className={styles.fileDropOverlay}>
+            <div className={styles.dropZoneBox}>
+              <UploadOne theme="outline" size="48" fill="#3b82f6" />
+              <h3>{language.val('desktop_drop_files_title')}</h3>
+              <p>{language.val('desktop_drop_files_desc')}</p>
+            </div>
+          </div>
+        )}
         <WinLoading />
       </div>
     </LocaleProvider>

@@ -9,6 +9,7 @@ import { Close } from '@icon-park/react';
 import { stores } from '@stores/index';
 import { observer } from 'mobx-react';
 import Color from '../color';
+import { language } from '@language/index';
 // import ErrorBoundary from '@components/error-boundary';
 
 export interface IProps {}

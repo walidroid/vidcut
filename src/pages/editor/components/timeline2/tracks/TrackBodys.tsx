@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import styles from './tracks.module.less';
 import { observer } from 'mobx-react';
 import { helper, speedHelper, utils } from 'video-core-sdk';
@@ -118,30 +118,36 @@ const Trackbody = (props: Props) => {
       }
     });
 
-    $h5dsVideoTracksBody.on('mousewheel', (e: any) => {
+    const tracksBodyElem = document.getElementById('h5dsVideoTracksBody');
+    const onWheelHandler = (e: WheelEvent) => {
       if (e.ctrlKey) {
         e.preventDefault();
-        const delta = e.originalEvent.wheelDelta;
+        const zoomIn = e.deltaY < 0;
         let scale = editor.rulerScale;
-        if (delta > 0) {
-          scale += 10;
+        if (zoomIn) {
+          scale = Math.min(500, Math.round((scale + Math.max(1, scale * 0.15)) * 100) / 100);
         } else {
-          scale -= 10;
-        }
-        if (scale < 1) {
-          scale = 1;
-        }
-        if (scale > 500) {
-          scale = 500;
+          scale = Math.max(1, Math.round((scale - Math.max(1, scale * 0.15)) * 100) / 100);
         }
         editor.rulerScale = scale;
+      } else if (e.shiftKey && !e.ctrlKey) {
+        e.preventDefault();
+        if (tracksBodyElem) {
+          tracksBodyElem.scrollLeft += (e.deltaY || e.deltaX) * 1.5;
+        }
       }
-    });
+    };
+
+    if (tracksBodyElem) {
+      tracksBodyElem.addEventListener('wheel', onWheelHandler, { passive: false });
+    }
 
     return () => {
       pubsub.unsubscribe('timelineUpdateTracks');
       $h5dsVideoTracksBody.off('mousedown.groupSelected');
-      $h5dsVideoTracksBody.off('mousewheel');
+      if (tracksBodyElem) {
+        tracksBodyElem.removeEventListener('wheel', onWheelHandler);
+      }
     };
   }, []);
 

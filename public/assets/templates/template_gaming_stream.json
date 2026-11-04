@@ -1,0 +1,164 @@
+{
+  "title": "Gaming Stream Highlights",
+  "width": 1920,
+  "height": 1080,
+  "background": {
+    "color": "#180d2b"
+  },
+  "transitions": [],
+  "cameras": [],
+  "captions": [
+    {
+      "id": "cap_game_1",
+      "text": "INSANE 1v4 CLUTCH MOMENT!",
+      "startTime": 0.5,
+      "endTime": 3,
+      "duration": 2.5,
+      "style": {
+        "x": 960,
+        "y": 900,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 52,
+        "fill": "#22d3ee",
+        "stroke": "#a855f7",
+        "strokeThickness": 6,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.55
+    },
+    {
+      "id": "cap_game_2",
+      "text": "DROP A LIKE & FOLLOW FOR MORE HIGHLIGHTS",
+      "startTime": 3.2,
+      "endTime": 6.5,
+      "duration": 3.3,
+      "style": {
+        "x": 960,
+        "y": 900,
+        "alpha": 1
+      },
+      "textStyle": {
+        "fontSize": 48,
+        "fill": "#f43f5e",
+        "stroke": "#ffffff",
+        "strokeThickness": 5,
+        "fontFamily": "siYuanHeiTi",
+        "align": "center"
+      },
+      "textScale": 0.5
+    }
+  ],
+  "elements": [
+    {
+      "id": "elem_game_pad",
+      "name": "Gamepad Controller",
+      "type": "image",
+      "trackIndex": 1,
+      "startTime": 0.2,
+      "endTime": 6.5,
+      "duration": 6.3,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/gamepad.svg",
+        "thumb": "/assets/stickers/gamepad.svg"
+      },
+      "style": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 860,
+        "y": 320,
+        "width": 200,
+        "height": 200,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_game_pad",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    },
+    {
+      "id": "elem_game_fire",
+      "name": "Fire Flame",
+      "type": "image",
+      "trackIndex": 2,
+      "startTime": 1.5,
+      "endTime": 6.5,
+      "duration": 5,
+      "speed": 1,
+      "filters": [],
+      "effects": [],
+      "urls": {
+        "url": "/assets/stickers/fire.svg",
+        "thumb": "/assets/stickers/fire.svg"
+      },
+      "style": {
+        "x": 1080,
+        "y": 330,
+        "width": 160,
+        "height": 160,
+        "alpha": 1,
+        "rotation": 0
+      },
+      "attrs": {
+        "x": 1080,
+        "y": 330,
+        "width": 160,
+        "height": 160,
+        "scaleX": 1,
+        "scaleY": 1,
+        "opacity": 100,
+        "rotation": 0
+      },
+      "resourceId": "res_game_fire",
+      "blendMode": 0,
+      "flipx": false,
+      "_dirty": "1"
+    }
+  ],
+  "resouces": [
+    {
+      "id": "res_game_pad",
+      "originId": "sticker_gamepad",
+      "url": "/assets/stickers/gamepad.svg",
+      "name": "Gamepad Controller",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/gamepad.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "id": "res_game_fire",
+      "originId": "sticker_fire",
+      "url": "/assets/stickers/fire.svg",
+      "name": "Fire Flame",
+      "fileType": "svg",
+      "type": "image",
+      "mustFetch": true,
+      "thumb": "/assets/stickers/fire.svg",
+      "duration": 7,
+      "styleSize": {
+        "width": 160,
+        "height": 160
+      }
+    }
+  ]
+}

@@ -487,7 +487,7 @@ export function itemDuration(item: any): number {
       return util.timeToNum(20);
     case 'lottie':
     case 'sticker':
-      return util.timeToNum(item.attrs.totalFrames / item.attrs.frameRate);
+      return util.timeToNum((item.attrs?.totalFrames && item.attrs?.frameRate) ? item.attrs.totalFrames / item.attrs.frameRate : (item.attrs?.duration || 5));
     case 'image':
     case 'video':
     case 'audio':
@@ -543,7 +543,21 @@ export async function addItem(item: any, insertTime: number, trackIndex: number)
     //   break;
     case 'lottie':
     case 'sticker':
-      elem = await addLottieItem(item, insertTime, trackIndex);
+      if (item.urls?.url?.endsWith('.json')) {
+        elem = await addLottieItem(item, insertTime, trackIndex);
+      } else {
+        const imageItem = {
+          ...item,
+          type: 'image',
+          attrs: {
+            width: item.attrs?.width || 200,
+            height: item.attrs?.height || 200,
+            duration: item.attrs?.duration || 5,
+            ...item.attrs,
+          },
+        };
+        elem = await addImageVideoAudioItem(imageItem, insertTime, trackIndex);
+      }
       break;
     case 'image':
     case 'video':

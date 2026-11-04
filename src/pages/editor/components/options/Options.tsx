@@ -2,6 +2,7 @@ import styles from './options.module.less';
 // import OptionMenus from './Menus';
 import { observer } from 'mobx-react';
 import OptionsInner from './OptionsInner';
+import ErrorBoundary from '@components/error-boundary';
 import { Background } from './components';
 import { Empty } from '@douyinfe/semi-ui';
 import { IllustrationNoContent, IllustrationNoContentDark } from '@douyinfe/semi-illustrations';
@@ -38,7 +39,9 @@ function Options(props: IProps) {
   return (
     <>
       <div className={styles.optionbody}>
-        <OptionsInner elements={elements} />
+        <ErrorBoundary name="Options Panel">
+          <OptionsInner elements={elements} />
+        </ErrorBoundary>
       </div>
     </>
   );

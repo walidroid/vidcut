@@ -206,9 +206,11 @@ function Header(props: IProps) {
     };
   }, []);
 
+  const isElectron = Boolean((window as any)?.electronAPI?.isElectron);
+
   return (
     <>
-      <div className={styles.header}>
+      <div className={`${styles.header} ${isElectron ? styles.electronHeader : ''}`}>
         <section className={styles.left}>
           <KeyboardModal />
           <a style={{ pointerEvents: saveLoading ? 'none' : 'initial' }} onClick={() => saveApp(() => {})}>

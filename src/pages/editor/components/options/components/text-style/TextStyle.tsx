@@ -266,13 +266,19 @@ function TextStyle(props: IProps) {
             value={elementData.textStyle.fontFamily}
           >
             {fontFamilys.map(item => {
+              const thumb = item.urls?.thumb || item.thumb || '';
               return (
                 <Select.Option className={styles.fontFamilyOption} key={item.name} value={item.name}>
-                  <FontImage
-                    name={item.name}
-                    src={editor.movie.reURL(item.urls.thumb)}
-                    // src={`/assets/font-thumbs/${item.name + (editor.themeUpdateKey === 'dark' ? '_2' : '')}.png`}
-                  />
+                  {thumb ? (
+                    <FontImage
+                      name={item.name}
+                      src={editor.movie.reURL(thumb)}
+                    />
+                  ) : (
+                    <span style={{ fontFamily: item.fontFamily || item.name, fontSize: '14px' }}>
+                      {item.name}
+                    </span>
+                  )}
                 </Select.Option>
               );
             })}

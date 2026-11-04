@@ -11,17 +11,8 @@
   <a href="#العربية">العربية</a>
 </p>
 
-<p>
-  <a href="https://github.com/walidroid/vidcut"><img src="https://img.shields.io/badge/GitHub-walidroid%2Fvidcut-blue?style=flat-square&logo=github" alt="Repository" /></a>
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 18" />
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 5" />
-  <img src="https://img.shields.io/badge/Vite-4-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 4" />
-  <img src="https://img.shields.io/badge/PixiJS-WebGL-E72264?style=flat-square&logo=pixijs&logoColor=white" alt="PixiJS WebGL" />
-  <img src="https://img.shields.io/badge/FFmpeg-WASM-007808?style=flat-square&logo=ffmpeg&logoColor=white" alt="FFmpeg WASM" />
-  <img src="https://img.shields.io/badge/UI-English%20%7C%20French-4CAF50?style=flat-square" alt="Languages" />
-</p>
 
-![VidCut Editor Interface](./editor.png)
+
 
 </div>
 
@@ -66,21 +57,7 @@ Unlike heavy, bloated alternatives, **VidCut is completely stripped of artificia
 - Yarn package manager (`npm install -g yarn` or `npx yarn`)
 - Chromium-based browser (Google Chrome, Microsoft Edge, Brave, Opera) for File System Access API & WebCodecs support
 
-#### Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/walidroid/vidcut.git
-cd vidcut
-
-# Install dependencies
-yarn install
-
-# Start development server
-yarn dev
-```
-
-Visit the local server in your browser (usually `http://localhost:3005`).
 
 #### Production Build
 
@@ -139,21 +116,7 @@ Contrairement aux alternatives surchargées, **VidCut a été entièrement épur
 - Gestionnaire de paquets Yarn (`npm install -g yarn` ou `npx yarn`)
 - Navigateur basé sur Chromium (Google Chrome, Microsoft Edge, Brave) pour le support complet de la File System Access API
 
-#### Installation et Exécution
 
-```bash
-# Cloner le dépôt
-git clone https://github.com/walidroid/vidcut.git
-cd vidcut
-
-# Installer les dépendances
-yarn install
-
-# Lancer le serveur de développement
-yarn dev
-```
-
-Ouvrez l'adresse indiquée par votre terminal (par défaut `http://localhost:3005`).
 
 #### Compilation pour la Production
 
@@ -214,21 +177,7 @@ yarn dist:win
 - مدير الحزم Yarn (`npm install -g yarn` أو تشغيله عبر `npx yarn`).
 - متصفح ويب حديث يعتمد على محرك Chromium (مثل Google Chrome، Microsoft Edge، Brave) لدعم واجهة File System Access و WebCodecs.
 
-#### التثبيت والتشغيل
 
-```bash
-# استنساخ المستودع
-git clone https://github.com/walidroid/vidcut.git
-cd vidcut
-
-# تثبيت الحزم والاعتماديات
-yarn install
-
-# تشغيل خادم التطوير المحلي
-yarn dev
-```
-
-افتح الرابط الظاهر في الطرفية داخل متصفحك (غالباً `http://localhost:3005`).
 
 #### بناء النسخة الإنتاجية (Production Build)
 

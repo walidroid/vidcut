@@ -117,6 +117,13 @@ export const enUS = {
   shortcut_key_timeline_zoomout: 'Timeline Zoom Out',
   shortcut_key_save: 'Save',
   shortcut_key_space: 'Space',
+  shortcut_key_timeline_fit: 'Fit Timeline',
+  shortcut_key_export: 'Export Video',
+  shortcut_key_select_all: 'Select All',
+  shortcut_key_deselect: 'Deselect',
+  shortcut_key_fullscreen: 'Toggle Fullscreen',
+  desktop_drop_files_title: 'Drop Media Files to Import',
+  desktop_drop_files_desc: 'Drop videos, audio, or images from File Explorer directly into VidCut',
 
   // 时间轴
   timeline_top_redo: 'Undo',
@@ -445,6 +452,8 @@ export const enUS = {
   common_move: 'Move',
   common_cancel: 'Cancel',
   common_confirm: 'Confirm',
+  ok: 'OK',
+  cancel: 'Cancel',
   common_edit: 'Edit',
   common_material: 'My Material',
   common_draft: 'My Draft',

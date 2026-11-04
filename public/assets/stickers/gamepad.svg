@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="gamepadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <!-- Gamepad body -->
+  <path d="M22 34 C12 34 8 46 12 68 C14 78 24 82 30 76 L40 66 L60 66 L70 76 C76 82 86 78 88 68 C92 46 88 34 78 34 Z" fill="url(#gamepadGrad)" stroke="#c4b5fd" stroke-width="2.5"/>
+  <!-- D-Pad -->
+  <rect x="25" y="46" width="6" height="16" rx="2" fill="#ffffff"/>
+  <rect x="20" y="51" width="16" height="6" rx="2" fill="#ffffff"/>
+  <!-- Action buttons -->
+  <circle cx="71" cy="48" r="3" fill="#ec4899"/>
+  <circle cx="79" cy="54" r="3" fill="#10b981"/>
+  <circle cx="71" cy="60" r="3" fill="#3b82f6"/>
+  <circle cx="63" cy="54" r="3" fill="#f59e0b"/>
+</svg>
+
